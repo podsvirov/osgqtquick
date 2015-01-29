@@ -1,5 +1,5 @@
 # OpenSceneGraph
-find_package(OpenSceneGraph 3.2.0 REQUIRED
+find_package(OpenSceneGraph 3.0 REQUIRED
   osg
   osgDB
   osgGA
