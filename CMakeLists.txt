@@ -13,3 +13,22 @@ set(osgQtQuick_VERSION
   ${osgQtQuick_VERSION_PATCH}
   ${osgQtQuick_VERSION_TWEAK})
 string(REPLACE ";" "." osgQtQuick_VERSION "${osgQtQuick_VERSION}")
+
+configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/version.hpp.in"
+    "${CMAKE_BINARY_DIR}/include/osgQtQuick/Version" @ONLY)
+
+include_directories("${CMAKE_BINARY_DIR}/include")
+
+if(DEFINED DYNAMIC_OPENSCENEGRAPH)
+  set(DYNAMIC_OSGQTQUICK ${DYNAMIC_OPENSCENEGRAPH})
+else()
+  set(DYNAMIC_OSGQTQUICK ON)
+endif()
+
+if(DYNAMIC_OSGQTQUICK)
+  set(OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC "SHARED")
+else()
+  set(OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC "STATIC")
+endif()
+
+add_subdirectory(src)

@@ -1,0 +1,11 @@
+#ifndef _OSGQTQUICK_VERSION_
+#define _OSGQTQUICK_VERSION_ 1
+
+#define osgQtQuick_VERSION "@osgQtQuick_VERSION@"
+
+#define osgQtQuick_VERSION_MAJOR @osgQtQuick_VERSION_MAJOR@
+#define osgQtQuick_VERSION_MINOR @osgQtQuick_VERSION_MINOR@
+#define osgQtQuick_VERSION_PATCH @osgQtQuick_VERSION_PATCH@
+#define osgQtQuick_VERSION_TWEAK @osgQtQuick_VERSION_TWEAK@
+
+#endif // _OSGQTQUICK_VERSION_
