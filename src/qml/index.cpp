@@ -17,6 +17,13 @@ Index::Index(osg::Object *o) :
 
 Index::~Index()
 {
+    storage.qtIndexes.erase(qthis);
+    storage.osgIndexes.erase(othis);
+
+    if(storage.osgIndexes.empty() && storage.qtIndexes.empty())
+    {
+        qDebug() << "[osgQtQuick] Index cleared";
+    }
 }
 
 void Index::classBegin()

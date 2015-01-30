@@ -33,13 +33,13 @@ void Object::classBegin()
         i->classBegin();
     }
     QQuickItem::classBegin();
-    qDebug() << "Component" << metaObject()->className() << "begining";
+    qDebug() << "Component" << this << "begun";
 }
 
 void Object::componentComplete()
 {
     // do nothing
-    qDebug() << "Component" << metaObject()->className() << "completed";
+    qDebug() << "Component" << this << "completed";
     QQuickItem::componentComplete();
 }
 

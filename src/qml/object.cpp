@@ -28,13 +28,13 @@ void osgQtQml::Object::classBegin()
     {
         i->classBegin();
     }
-    qDebug() << "Component" << metaObject()->className() << "begining";
+    qDebug() << "Component" << this << "begun";
 }
 
 void osgQtQml::Object::componentComplete()
 {
     // do nothing
-    qDebug() << "Component" << metaObject()->className() << "completed";
+    qDebug() << "Component" << this << "completed";
 }
 
 osgQtQml::Index *osgQtQml::Object::index()
