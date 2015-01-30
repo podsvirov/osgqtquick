@@ -1,13 +1,13 @@
 #ifndef _OSG_NODE_QTQML_
 #define _OSG_NODE_QTQML_ 1
 
-#include <osgQtQml/Object>
+#include <osg/ObjectQtQml>
 
 namespace osg {
 
 class Node;
 
-class OSGQTQML_EXPORT NodeQtQml : public osgQtQml::Object
+class OSGQTQML_EXPORT NodeQtQml : public osg::ObjectQtQml
 {
   Q_OBJECT
 

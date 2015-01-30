@@ -5,9 +5,10 @@ else()
 endif()
 
 qt5_wrap_cpp(_mocs
-    object.hpp
-    osg/node.hpp
-    osg/group.hpp)
+  object.hpp
+  osg/object.hpp
+  osg/node.hpp
+  osg/group.hpp)
 
 message("moc: ${_mocs}")
 
@@ -16,6 +17,7 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   object.cpp
   ${_mocs}
 # osg
+  osg/object.cpp
   osg/node.cpp
   osg/group.cpp
   osg/module.cpp
@@ -35,10 +37,17 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osgQtQml/Object"
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/ModuleQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/module.hpp\"\n")
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/ObjectQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/object.hpp\"\n")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/ObjectQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/Objectindex.hpp\"\n")
+
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NodeQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/node.hpp\"\n")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NodeQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/nodeindex.hpp\"\n")
+
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GroupQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/group.hpp\"\n")
 

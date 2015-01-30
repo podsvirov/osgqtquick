@@ -8,7 +8,7 @@
 namespace osg {
 
 NodeQtQml::Index::Index(Node *node) :
-    osgQtQml::Index(node),
+    ObjectQtQml::Index(node),
     qthis(0)
 {
     othis = node;
@@ -24,12 +24,12 @@ void NodeQtQml::Index::classBegin()
 }
 
 NodeQtQml::NodeQtQml(QObject *parent) :
-  Object(parent)
+  ObjectQtQml(parent)
 {
 }
 
 NodeQtQml::NodeQtQml(NodeQtQml::Index *index, QObject *parent) :
-  Object(index, parent)
+  ObjectQtQml(index, parent)
 {
 }
 
