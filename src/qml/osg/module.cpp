@@ -1,7 +1,9 @@
 #include "module.hpp"
 
+#include "objectindex.hpp"
 #include "nodeindex.hpp"
 #include "groupindex.hpp"
+#include "graphicscontextindex.hpp"
 
 #include <osg/Group>
 
@@ -16,6 +18,10 @@ namespace osg {
 
 void regisgerQtQmlTypes(const char *uri)
 {
+    qmlRegisterUncreatableType<osg::ObjectQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "Object", "[osgQtQuick] Object is Uncreatable");
+
     qmlRegisterType<osg::NodeQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Node");
@@ -23,6 +29,10 @@ void regisgerQtQmlTypes(const char *uri)
     qmlRegisterType<osg::GroupQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Group");
+
+    qmlRegisterUncreatableType<osg::GraphicsContextQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "GraphicsContext", "[osgQtQuick] GraphicsContext is Uncreatable");
 
     osgQtQml::Index::insertMake(&qtMakeIndex);
     osgQtQml::Index::insertMake(&osgMakeIndex);

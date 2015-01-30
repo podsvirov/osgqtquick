@@ -8,7 +8,8 @@ qt5_wrap_cpp(_mocs
   object.hpp
   osg/object.hpp
   osg/node.hpp
-  osg/group.hpp)
+  osg/group.hpp
+  osg/graphicscontext.hpp)
 
 message("moc: ${_mocs}")
 
@@ -20,6 +21,7 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   osg/object.cpp
   osg/node.cpp
   osg/group.cpp
+  osg/graphicscontext.cpp
   osg/module.cpp
 )
 
@@ -50,6 +52,13 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NodeQtQmlIndex"
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GroupQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/group.hpp\"\n")
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GraphicsContextQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontext.hpp\"\n")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GraphicsContextQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontextindex.hpp\"\n")
+
+
 
 install(TARGETS osgQtQml
   RUNTIME DESTINATION "bin"
