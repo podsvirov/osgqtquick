@@ -11,11 +11,19 @@ class Group;
 
 class OSGQTQML_EXPORT GroupQtQml::Index : public NodeQtQml::Index
 {
+    friend class GroupQtQml;
+
 public:
     Index(Group *o = 0);
 
+    void classBegin();
+
     bool addChild(NodeQtQml *child);
     bool removeChild(NodeQtQml *child);
+
+protected:
+    Group *othis;
+    GroupQtQml *qthis;
 };
 
 }

@@ -7,6 +7,9 @@ namespace osgQtQml {
 Storage Index::storage = Storage();
 
 Index::Index(osg::Object *o) :
+    othis(0),
+    qthis(0),
+    is_begin(false),
     o_ptr(o),
     q_ptr(0)
 {
@@ -16,11 +19,45 @@ Index::~Index()
 {
 }
 
+void Index::classBegin()
+{
+    if(!othis || !qthis)
+    {
+        qDebug() << "[osgQtQuick] Component initialization error";
+    }
+
+    o_ptr = othis;
+    q_ptr = qthis;
+
+    storage.qtIndexes.insert(std::pair<QObject*, Index*>(q_ptr.data(), this));
+    storage.osgIndexes.insert(std::pair<osg::Object*, Index*>(o_ptr.get(), this));
+
+    is_begin = true;
+}
+
+Index *Index::checkIndex(osg::Object *o)
+{
+    std::map<osg::Object*, Index*>::iterator it = storage.osgIndexes.find(o);
+
+    if (it != storage.osgIndexes.end()) return it->second;
+
+    return 0;
+}
+
+Index *Index::checkIndex(QObject *o)
+{
+    std::map<QObject*, Index*>::iterator it = storage.qtIndexes.find(o);
+
+    if (it != storage.qtIndexes.end()) return it->second;
+
+    return 0;
+}
+
 Index *Index::fromObject(osg::Object *o)
 {
-    std::map<osg::Object*, Index*>::iterator it = storage.osgIndexs.find(o);
+    std::map<osg::Object*, Index*>::iterator it = storage.osgIndexes.find(o);
 
-    if (it != storage.osgIndexs.end()) return it->second;
+    if (it != storage.osgIndexes.end()) return it->second;
 
     for(std::set<osgMakeIndex>::iterator it = storage.osgMakers.begin();
         it != storage.osgMakers.end(); ++ it)
@@ -33,9 +70,9 @@ Index *Index::fromObject(osg::Object *o)
 
 Index *Index::fromObject(QObject *o)
 {
-    std::map<QObject*, Index*>::iterator it = storage.qtIndexs.find(o);
+    std::map<QObject*, Index*>::iterator it = storage.qtIndexes.find(o);
 
-    if (it != storage.qtIndexs.end()) return it->second;
+    if (it != storage.qtIndexes.end()) return it->second;
 
     for(std::set<qtMakeIndex>::iterator it = storage.qtMakers.begin();
         it != storage.qtMakers.end(); ++ it)
@@ -98,14 +135,6 @@ bool Index::eraseMake(qtMakeIndex make)
     storage.qtMakers.erase(it);
 
     return true;
-}
-
-bool Index::registrate()
-{
-    if(!o_ptr.valid() && q_ptr.isNull()) return false;
-
-    storage.qtIndexs.insert(std::pair<QObject*, Index*>(q_ptr.data(), this));
-    storage.osgIndexs.insert(std::pair<osg::Object*, Index*>(o_ptr.get(), this));
 }
 
 }

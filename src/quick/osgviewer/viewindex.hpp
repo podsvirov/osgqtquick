@@ -7,15 +7,21 @@
 
 namespace osgViewer {
 
-class View;
-
 class OSGQTQUICK_EXPORT ViewQtQuick::Index : public osgQtQml::Index
 {
+    friend class ViewQtQuick;
+
 public:
     Index(View *o = 0);
 
     osg::NodeQtQml* getSceneData();
-    void setSeceneData(osg::NodeQtQml *node);
+    void setSceneData(osg::NodeQtQml *node);
+
+    void classBegin();
+
+private:
+    View *othis;
+    ViewQtQuick *qthis;
 };
 
 }

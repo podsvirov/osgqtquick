@@ -7,33 +7,54 @@
 
 namespace osg {
 
-NodeQtQml::Index::Index(Node *o) :
-    osgQtQml::Index(o ? o : new osg::Node())
+NodeQtQml::Index::Index(Node *node) :
+    osgQtQml::Index(node),
+    qthis(0)
 {
+    othis = node;
+}
+
+void NodeQtQml::Index::classBegin()
+{
+    if(!othis) othis = new Node();
+    osgQtQml::Index::othis = othis;
+    osgQtQml::Index::qthis = qthis;
+
+    osgQtQml::Index::classBegin();
 }
 
 NodeQtQml::NodeQtQml(QObject *parent) :
-  Object(new osgQtQml::Index(new osg::Node()), parent)
-  //Object(parent)
+  Object(parent)
 {
-    //i = new Index(new osg::Node(), this);
 }
 
 NodeQtQml::NodeQtQml(NodeQtQml::Index *index, QObject *parent) :
   Object(index, parent)
 {
+}
 
+void NodeQtQml::classBegin()
+{
+    if(!i) i = new Index();
+    static_cast<Index*>(i)->qthis = this;
+    osgQtQml::Object::classBegin();
+}
+
+Node *NodeQtQml::node()
+{
+    return static_cast<Index*>(i)->othis;
 }
 
 NodeQtQml *NodeQtQml::fromNode(Node *node, QObject *parent)
 {
-    if(NodeQtQml *qtNode = static_cast<NodeQtQml*>(osgQtQml::Index::fromObject(node)->qtObject()))
+    if(!node) return 0;
+
+    if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(node))
     {
-        if(!qtNode->parent()) qtNode->setParent(parent);
-        return qtNode;
+        return static_cast<Index*>(index)->qthis;
     }
 
-    return 0;
+    return new NodeQtQml(new Index(node), parent);
 }
 
 }

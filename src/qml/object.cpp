@@ -6,7 +6,6 @@
 osgQtQml::Object::Object(QObject *parent) :
   QObject(parent), i(0)
 {
-
 }
 
 osgQtQml::Object::Object(osgQtQml::Index *i, QObject *parent) :
@@ -25,7 +24,11 @@ osgQtQml::Object::~Object()
 
 void osgQtQml::Object::classBegin()
 {
-    // do nothing
+    if(i)
+    {
+        i->classBegin();
+    }
+    qDebug() << "Component" << metaObject()->className() << "begining";
 }
 
 void osgQtQml::Object::componentComplete()

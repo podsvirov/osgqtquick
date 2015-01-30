@@ -9,9 +9,20 @@
 
 namespace osg {
 
-GroupQtQml::Index::Index(Group *o) :
-    NodeQtQml::Index(o ? o : new osg::Group())
+GroupQtQml::Index::Index(Group *group) :
+    NodeQtQml::Index(group),
+    qthis(0)
 {
+    othis = group;
+}
+
+void GroupQtQml::Index::classBegin()
+{
+    if(!othis) othis = new Group();
+    NodeQtQml::Index::othis = othis;
+    NodeQtQml::Index::qthis = qthis;
+
+    NodeQtQml::Index::classBegin();
 }
 
 bool GroupQtQml::Index::addChild(NodeQtQml *child)
@@ -37,14 +48,20 @@ bool GroupQtQml::Index::removeChild(NodeQtQml *child)
 }
 
 GroupQtQml::GroupQtQml(QObject *parent) :
-  NodeQtQml(new GroupQtQml::Index(), parent)
+  NodeQtQml(parent)
 {
 }
 
 GroupQtQml::GroupQtQml(GroupQtQml::Index *index, QObject *parent) :
   NodeQtQml(index, parent)
 {
+}
 
+void GroupQtQml::classBegin()
+{
+    if(!i) i = new Index();
+    static_cast<Index*>(i)->qthis = this;
+    NodeQtQml::classBegin();
 }
 
 bool GroupQtQml::addChild(NodeQtQml *child)

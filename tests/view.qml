@@ -7,13 +7,33 @@ Rectangle {
 
     OSG.Node {
         id: node
+        Component.onCompleted: {
+            console.log("node: " + node)
+        }
+    }
+
+    OSG.Group {
+        id: group
+        Component.onCompleted: {
+            //addChild(node)
+            console.log("group: " + group)
+        }
     }
 
     OSGViewer.View {
         id: view
         anchors.fill: parent
         Component.onCompleted: {
-            console.log("OSG: " + view)
+            setSceneData(group)
+            sceneData.addChild(node)
+            console.log("view: " + view)
+            console.log("view.sceneData: " + view.sceneData)
         }
+    }
+
+    Text {
+        //text: "" + view.sceneData//.numChildren
+        text: group.numChildren
+        anchors.centerIn: parent
     }
 }

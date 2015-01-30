@@ -17,6 +17,10 @@ public:
   NodeQtQml(QObject *parent = 0);
   NodeQtQml(Index *index, QObject *parent = 0);
 
+  void classBegin();
+
+  Node* node();
+
   static NodeQtQml* fromNode(Node *node, QObject *parent = 0);
 };
 

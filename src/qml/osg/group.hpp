@@ -17,6 +17,8 @@ public:
   GroupQtQml(QObject *parent = 0);
   GroupQtQml(Index *, QObject *parent = 0);
 
+  void classBegin();
+
   Q_INVOKABLE bool addChild(NodeQtQml *child);
   Q_INVOKABLE bool removeChild(NodeQtQml *child);
 

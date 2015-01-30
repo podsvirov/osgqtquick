@@ -28,8 +28,12 @@ Object::~Object()
 
 void Object::classBegin()
 {
-    // do nothing
+    if(i)
+    {
+        i->classBegin();
+    }
     QQuickItem::classBegin();
+    qDebug() << "Component" << metaObject()->className() << "begining";
 }
 
 void Object::componentComplete()

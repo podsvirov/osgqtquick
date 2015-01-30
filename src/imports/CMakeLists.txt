@@ -1,2 +1,2 @@
 add_subdirectory(osg)
-#add_subdirectory(osgviewer)
+add_subdirectory(osgviewer)

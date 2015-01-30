@@ -7,53 +7,68 @@
 
 namespace osgViewer {
 
-ViewQtQuick::Index::Index(View *o) :
-    osgQtQml::Index(o ? o : new osgViewer::View())
+ViewQtQuick::Index::Index(View *view) :
+    osgQtQml::Index(view)
 {
+    othis = view;
 }
 
 osg::NodeQtQml *ViewQtQuick::Index::getSceneData()
 {
-    // TODO: Implement
-
-    //View *that = static_cast<View*>(osgObject());
-
-    //return osg::NodeQtQml::fromNode(that->getSceneData(), qtObject());
-
-    return 0;
+    return osg::NodeQtQml::fromNode(othis->getSceneData(), qthis);
 }
 
-void ViewQtQuick::Index::setSeceneData(osg::NodeQtQml *node)
+void ViewQtQuick::Index::setSceneData(osg::NodeQtQml *node)
 {
-    osg::Node *osgNode = static_cast<osg::Node*>(node->index()->osgObject());
+    othis->setSceneData(node->node());
+}
 
-    if(!osgNode) return;
+void ViewQtQuick::Index::classBegin()
+{
+    if(!othis) othis = new View();
+    osgQtQml::Index::othis = othis;
+    osgQtQml::Index::qthis = qthis;
 
-    // TODO: Implement
+    osgQtQml::Index::classBegin();
+}
 
-    //View *that = static_cast<osg::Group*>(osgObject());
+ViewQtQuick *ViewQtQuick::fromView(View *view, QQuickItem *parent)
+{
+    if(!view) return 0;
 
-    //that->setSceneData(osgNode);
+    if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(view))
+    {
+        return static_cast<Index*>(index)->qthis;
+    }
+
+    return new ViewQtQuick(new Index(view), parent);
 }
 
 osg::NodeQtQml *ViewQtQuick::getSceneData()
 {
-
+    return static_cast<Index*>(i)->getSceneData();
 }
 
-void ViewQtQuick::setSeceneData(osg::NodeQtQml *node)
+void ViewQtQuick::setSceneData(osg::NodeQtQml *node)
 {
-
+    static_cast<Index*>(i)->setSceneData(node);
 }
 
 ViewQtQuick::ViewQtQuick(QQuickItem *parent) :
-  osgQtQuick::Object(new ViewQtQuick::Index(), parent)
+  osgQtQuick::Object(parent)
 {    
 }
 
 ViewQtQuick::ViewQtQuick(ViewQtQuick::Index *index, QQuickItem *parent) :
   osgQtQuick::Object(index, parent)
 {
+}
+
+void ViewQtQuick::classBegin()
+{
+    if(!i) i = new Index();
+    static_cast<Index*>(i)->qthis = this;
+    osgQtQuick::Object::classBegin();
 }
 
 }
