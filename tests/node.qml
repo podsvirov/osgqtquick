@@ -20,6 +20,7 @@ Rectangle {
             console.log("removeChild(node) = " + removeChild(node))
             console.log("removeChild(node) = " + removeChild(node))
             console.log("OSG: " + group)
+            console.log("OSG: " + OSG)
         }
     }
 

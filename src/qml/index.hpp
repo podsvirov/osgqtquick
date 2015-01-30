@@ -53,6 +53,8 @@ public: // static methods
     static bool eraseMake(qtMakeIndex make);
 
 private:
+    bool registrate();
+
     friend class ::osgQtQml::Object;
     friend class ::osgQtQuick::Object;
 

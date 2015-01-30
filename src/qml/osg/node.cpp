@@ -25,4 +25,15 @@ NodeQtQml::NodeQtQml(NodeQtQml::Index *index, QObject *parent) :
 
 }
 
+NodeQtQml *NodeQtQml::fromNode(Node *node, QObject *parent)
+{
+    if(NodeQtQml *qtNode = static_cast<NodeQtQml*>(osgQtQml::Index::fromObject(node)->qtObject()))
+    {
+        if(!qtNode->parent()) qtNode->setParent(parent);
+        return qtNode;
+    }
+
+    return 0;
+}
+
 }

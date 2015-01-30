@@ -13,7 +13,10 @@ find_package(Qt5 CONFIG
 
 include_directories(
   ${OPENSCENEGRAPH_INCLUDE_DIRS}
-  ${Qt5Qml_INCLUDE_DIRS})
+  ${Qt5Qml_INCLUDE_DIRS}
+  ${Qt5Quick_INCLUDE_DIRS})
+
+message(STATUS "Quick: ${Qt5Quick_INCLUDE_DIRS}")
 
 add_subdirectory(qml)
 add_subdirectory(quick)

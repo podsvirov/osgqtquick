@@ -100,4 +100,12 @@ bool Index::eraseMake(qtMakeIndex make)
     return true;
 }
 
+bool Index::registrate()
+{
+    if(!o_ptr.valid() && q_ptr.isNull()) return false;
+
+    storage.qtIndexs.insert(std::pair<QObject*, Index*>(q_ptr.data(), this));
+    storage.osgIndexs.insert(std::pair<osg::Object*, Index*>(o_ptr.get(), this));
+}
+
 }

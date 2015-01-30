@@ -2,7 +2,7 @@
 
 #include <osg/ModuleQtQml>
 
-class osgQtQmlPlugin : public QQmlExtensionPlugin
+class osgQtPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
