@@ -4,13 +4,9 @@
 #include <osgQtQuick/Export>
 #include <QQuickItem>
 
-namespace osgQtQml {
+namespace osgQtQuick {
 
 class Index;
-
-}
-
-namespace osgQtQuick {
 
 class OSGQTQUICK_EXPORT Object : public QQuickItem
 {
@@ -23,11 +19,11 @@ public:
   void classBegin();
   void componentComplete();
 
-  osgQtQml::Index* index();
+  Index* index();
 
 protected:
-  Object(osgQtQml::Index *i, QQuickItem *parent = 0);
-  osgQtQml::Index *i;
+  Object(Index *i, QQuickItem *parent = 0);
+  Index *i;
 };
 
 }

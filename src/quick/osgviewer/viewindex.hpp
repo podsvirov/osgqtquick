@@ -1,13 +1,13 @@
 #ifndef _OSGVIEWER_VIEW_QTQUICK_INDEX_
 #define _OSGVIEWER_VIEW_QTQUICK_INDEX_ 1
 
-#include <osgQtQml/Index>
+#include <osgQtQuick/Index>
 
 #include <osgViewer/ViewQtQuick>
 
 namespace osgViewer {
 
-class OSGQTQUICK_EXPORT ViewQtQuick::Index : public osgQtQml::Index
+class OSGQTQUICK_EXPORT ViewQtQuick::Index : public osgQtQuick::Index
 {
     friend class ViewQtQuick;
 

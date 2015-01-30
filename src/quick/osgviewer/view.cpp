@@ -1,14 +1,12 @@
 #include "view.hpp"
 #include "viewindex.hpp"
 
-#include <osgQtQml/Index>
-
 #include <osgViewer/View>
 
 namespace osgViewer {
 
 ViewQtQuick::Index::Index(View *view) :
-    osgQtQml::Index(view)
+    osgQtQuick::Index(view)
 {
     othis = view;
 }

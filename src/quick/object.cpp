@@ -1,4 +1,5 @@
 #include "object.hpp"
+#include "index.hpp"
 
 #include <osgQtQml/Index>
 
@@ -12,7 +13,7 @@ Object::Object(QQuickItem *parent) :
 
 }
 
-Object::Object(osgQtQml::Index *i, QQuickItem *parent) :
+Object::Object(Index *i, QQuickItem *parent) :
   QQuickItem(parent), i(i)
 {
 }
@@ -43,7 +44,7 @@ void Object::componentComplete()
     QQuickItem::componentComplete();
 }
 
-osgQtQml::Index *Object::index()
+Index *Object::index()
 {
     return i;
 }

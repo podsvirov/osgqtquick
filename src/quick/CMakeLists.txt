@@ -11,6 +11,7 @@ qt5_wrap_cpp(_mocs
 message("moc: ${_mocs}")
 
 add_library(osgQtQuick ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+  index.cpp
   object.cpp
   ${_mocs}
 # osgViewer
@@ -28,6 +29,8 @@ target_link_libraries(osgQtQuick
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgQtQuick/Export"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/export.hpp\"\n")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgQtQuick/Index"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/index.hpp\"\n")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgQtQuick/Object"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/object.hpp\"\n")
 
