@@ -9,7 +9,8 @@ qt5_wrap_cpp(_mocs
   osg/object.hpp
   osg/node.hpp
   osg/group.hpp
-  osg/graphicscontext.hpp)
+  osg/graphicscontext.hpp
+  osgviewer/compositeviewer.hpp)
 
 message("moc: ${_mocs}")
 
@@ -23,11 +24,15 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   osg/group.cpp
   osg/graphicscontext.cpp
   osg/module.cpp
+# osgViewer
+  osgviewer/compositeviewer.cpp
+  osgviewer/module.cpp
 )
 
 target_link_libraries(osgQtQml
     ${OPENTHREADS_LIBRARIES}
     ${OSG_LIBRARIES}
+    ${OSGVIEWER_LIBRARIES}
     Qt5::Qml)
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgQtQml/Export"
@@ -58,6 +63,13 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GraphicsContextQtQml"
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GraphicsContextQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontextindex.hpp\"\n")
 
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/ModuleQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgviewer/module.hpp\"\n")
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/CompositeViewerQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgviewer/compositeviewer.hpp\"\n")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/CompositeViewerQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgviewer/compositeviewerindex.hpp\"\n")
 
 
 install(TARGETS osgQtQml

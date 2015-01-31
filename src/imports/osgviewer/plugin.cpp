@@ -1,5 +1,6 @@
 #include <QtQml>
 
+#include <osgViewer/ModuleQtQml>
 #include <osgViewer/ModuleQtQuick>
 
 class osgViewerQtPlugin : public QQmlExtensionPlugin
@@ -11,6 +12,8 @@ public:
     void registerTypes(const char *uri)
     {
         Q_ASSERT(uri == QLatin1String("osgViewer"));
+        // osgViewer types from osgQtQml library
+        osgViewer::regisgerQtQmlTypes(uri);
         // osgViewer types from osgQtQuick library
         osgViewer::regisgerQtQuickTypes(uri);
     }
