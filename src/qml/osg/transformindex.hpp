@@ -18,9 +18,6 @@ public:
 
     void classBegin();
 
-    bool addChild(NodeQtQml *child);
-    bool removeChild(NodeQtQml *child);
-
 protected:
     Transform *othis;
     TransformQtQml *qthis;

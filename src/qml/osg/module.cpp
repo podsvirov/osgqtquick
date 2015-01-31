@@ -4,6 +4,7 @@
 #include "nodeindex.hpp"
 #include "groupindex.hpp"
 #include "transformindex.hpp"
+#include "cameraindex.hpp"
 #include "graphicscontextindex.hpp"
 
 #include <osg/Group>
@@ -34,6 +35,10 @@ void regisgerQtQmlTypes(const char *uri)
     qmlRegisterType<TransformQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Transform");
+
+    qmlRegisterType<CameraQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "Camera");
 
     qmlRegisterUncreatableType<osg::GraphicsContextQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
