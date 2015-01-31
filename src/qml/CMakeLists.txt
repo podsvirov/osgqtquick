@@ -9,6 +9,7 @@ qt5_wrap_cpp(_mocs
   osg/object.hpp
   osg/node.hpp
   osg/group.hpp
+  osg/transform.hpp
   osg/graphicscontext.hpp
   osgviewer/compositeviewer.hpp)
 
@@ -22,6 +23,7 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   osg/object.cpp
   osg/node.cpp
   osg/group.cpp
+  osg/transform.cpp
   osg/graphicscontext.cpp
   osg/module.cpp
 # osgViewer
@@ -57,6 +59,13 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NodeQtQmlIndex"
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GroupQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/group.hpp\"\n")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GroupQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/groupindex.hpp\"\n")
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/TransformQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/transform.hpp\"\n")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/TransformQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/transformindex.hpp\"\n")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GraphicsContextQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontext.hpp\"\n")

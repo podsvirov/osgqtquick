@@ -7,8 +7,6 @@
 
 namespace osg {
 
-class Group;
-
 class OSGQTQML_EXPORT GroupQtQml::Index : public NodeQtQml::Index
 {
     friend class GroupQtQml;

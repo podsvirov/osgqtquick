@@ -5,6 +5,8 @@
 
 namespace osg {
 
+class Group;
+
 class OSGQTQML_EXPORT GroupQtQml : public NodeQtQml
 {
   Q_OBJECT
@@ -23,6 +25,10 @@ public:
   Q_INVOKABLE bool removeChild(NodeQtQml *child);
 
   Q_INVOKABLE int getNumChildren() const;
+
+  Group* group();
+
+  static GroupQtQml* fromGroup(Group *group, QObject *parent = 0);
 
 signals:
   void numChildrenChanged(int num);

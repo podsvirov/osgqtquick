@@ -3,6 +3,7 @@
 #include "objectindex.hpp"
 #include "nodeindex.hpp"
 #include "groupindex.hpp"
+#include "transformindex.hpp"
 #include "graphicscontextindex.hpp"
 
 #include <osg/Group>
@@ -22,13 +23,17 @@ void regisgerQtQmlTypes(const char *uri)
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Object", "[osgQtQuick] Object is Uncreatable");
 
-    qmlRegisterType<osg::NodeQtQml>(
+    qmlRegisterType<NodeQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Node");
 
-    qmlRegisterType<osg::GroupQtQml>(
+    qmlRegisterType<GroupQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Group");
+
+    qmlRegisterType<TransformQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "Transform");
 
     qmlRegisterUncreatableType<osg::GraphicsContextQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,

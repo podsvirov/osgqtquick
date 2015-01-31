@@ -91,4 +91,21 @@ int GroupQtQml::getNumChildren() const
     return static_cast<osg::Group*>(i->osgObject())->getNumChildren();
 }
 
+Group *GroupQtQml::group()
+{
+    return static_cast<Index*>(i)->othis;
+}
+
+GroupQtQml *GroupQtQml::fromGroup(Group *group, QObject *parent)
+{
+    if(!group) return 0;
+
+    if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(group))
+    {
+        return static_cast<Index*>(index)->qthis;
+    }
+
+    return new GroupQtQml(new Index(group), parent);
+}
+
 }
