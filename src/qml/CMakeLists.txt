@@ -48,64 +48,118 @@ target_link_libraries(osgQtQml
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgQtQml/Export"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/export.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/export.hpp"
+  DESTINATION "include/osgQtQml" RENAME "Export")
+
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgQtQml/Index"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/index.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/index.hpp"
+  DESTINATION "include/osgQtQml" RENAME "Index")
+
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgQtQml/Object"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/object.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/object.hpp"
+  DESTINATION "include/osgQtQml" RENAME "Object")
+
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/ModuleQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/module.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/module.hpp"
+  DESTINATION "include/osg" RENAME "ModuleQtQml")
+
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/ObjectQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/object.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/object.hpp"
+  DESTINATION "include/osg" RENAME "ObjectQtQml")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/ObjectQtQmlIndex"
-  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/Objectindex.hpp\"\n")
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/objectindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/objectindex.hpp"
+  DESTINATION "include/osg" RENAME "ObjectQtQmlIndex")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NodeQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/node.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/node.hpp"
+  DESTINATION "include/osg" RENAME "NodeQtQml")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NodeQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/nodeindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/nodeindex.hpp"
+  DESTINATION "include/osg" RENAME "NodeQtQmlIndex")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GroupQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/group.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/group.hpp"
+  DESTINATION "include/osg" RENAME "GroupQtQml")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GroupQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/groupindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/groupindex.hpp"
+  DESTINATION "include/osg" RENAME "GroupQtQmlIndex")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/TransformQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/transform.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/transform.hpp"
+  DESTINATION "include/osg" RENAME "TransformQtQml")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/TransformQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/transformindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/transformindex.hpp"
+  DESTINATION "include/osg" RENAME "TransformQtQmlIndex")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/CameraQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/camera.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/camera.hpp"
+  DESTINATION "include/osg" RENAME "CameraQtQml")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/CameraQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/cameraindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/cameraindex.hpp"
+  DESTINATION "include/osg" RENAME "CameraQtQmlIndex")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GraphicsContextQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontext.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontext.hpp"
+  DESTINATION "include/osg" RENAME "GraphicsContextQtQml")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GraphicsContextQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontextindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontextindex.hpp"
+  DESTINATION "include/osg" RENAME "GraphicsContextQtQmlIndex")
+
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/ModuleQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/module.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/module.hpp"
+  DESTINATION "include/osgGA" RENAME "ModuleQtQml")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/CameraManipulatorQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulator.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulator.hpp"
+  DESTINATION "include/osgGA" RENAME "CameraManipulatorQtQml")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/CameraManipulatorQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulatorindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulatorindex.hpp"
+  DESTINATION "include/osgGA" RENAME "CameraManipulatorQtQml")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/TrackballManipulatorQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulator.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulator.hpp"
+  DESTINATION "include/osgGA" RENAME "TrackballManipulatorQtQml")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/TrackballManipulatorQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulatorindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulatorindex.hpp"
+  DESTINATION "include/osgGA" RENAME "TrackballManipulatorQtQmlIndex")
+
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/ModuleQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgviewer/module.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgviewer/module.hpp"
+  DESTINATION "include/osgViewer" RENAME "ModuleQtQml")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/CompositeViewerQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgviewer/compositeviewer.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgviewer/compositeviewer.hpp"
+  DESTINATION "include/osgViewer" RENAME "CompositeViewerQtQml")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/CompositeViewerQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgviewer/compositeviewerindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgviewer/compositeviewerindex.hpp"
+  DESTINATION "include/osgViewer" RENAME "CompositeViewerQtQmlIndex")
 
 
 install(TARGETS osgQtQml
