@@ -4,6 +4,7 @@
 #include <osgQtQuick/Object>
 
 #include <osg/NodeQtQml>
+#include <osgGA/CameraManipulatorQtQml>
 
 namespace osgViewer {
 
@@ -14,12 +15,16 @@ class OSGQTQUICK_EXPORT ViewQtQuick : public osgQtQuick::Object
   Q_OBJECT
 
   Q_PROPERTY(osg::NodeQtQml* sceneData READ getSceneData WRITE setSceneData NOTIFY sceneDataChanged)
+  Q_PROPERTY(osgGA::CameraManipulatorQtQml* cameraManipulator READ getCameraManipulator WRITE setCameraManipulator NOTIFY cameraManipulatorChanged)
 
 public:
   class Index;
 
   Q_INVOKABLE osg::NodeQtQml* getSceneData();
   Q_INVOKABLE void setSceneData(osg::NodeQtQml *node);
+
+  Q_INVOKABLE osgGA::CameraManipulatorQtQml* getCameraManipulator();
+  Q_INVOKABLE void setCameraManipulator(osgGA::CameraManipulatorQtQml *manipulator);
 
   ViewQtQuick(QQuickItem *parent = 0);
   ViewQtQuick(Index *index, QQuickItem *parent = 0);
@@ -31,6 +36,7 @@ public:
 
 signals:
   void sceneDataChanged(osg::NodeQtQml *node);
+  void cameraManipulatorChanged(osgGA::CameraManipulatorQtQml *manipulator);
 
 protected:
   void mousePressEvent(QMouseEvent *event);

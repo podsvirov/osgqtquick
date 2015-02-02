@@ -56,6 +56,16 @@ void ViewQtQuick::Index::setSceneData(osg::NodeQtQml *node)
     othis->setSceneData(node->node());
 }
 
+osgGA::CameraManipulatorQtQml *ViewQtQuick::Index::getCameraManipulator()
+{
+    return osgGA::CameraManipulatorQtQml::fromCameraManipulator(othis->getCameraManipulator(), qthis);
+}
+
+void ViewQtQuick::Index::setCameraManipulator(osgGA::CameraManipulatorQtQml *manipulator)
+{
+    othis->setCameraManipulator(manipulator->cameraManipulator());
+}
+
 void ViewQtQuick::Index::classBegin()
 {
     if(!othis) othis = new View();
@@ -253,6 +263,16 @@ osg::NodeQtQml *ViewQtQuick::getSceneData()
 void ViewQtQuick::setSceneData(osg::NodeQtQml *node)
 {
     static_cast<Index*>(i)->setSceneData(node);
+}
+
+osgGA::CameraManipulatorQtQml *ViewQtQuick::getCameraManipulator()
+{
+    return static_cast<Index*>(i)->getCameraManipulator();
+}
+
+void ViewQtQuick::setCameraManipulator(osgGA::CameraManipulatorQtQml *manipulator)
+{
+    static_cast<Index*>(i)->setCameraManipulator(manipulator);
 }
 
 ViewQtQuick::ViewQtQuick(QQuickItem *parent) :
