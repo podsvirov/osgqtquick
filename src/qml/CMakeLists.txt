@@ -12,6 +12,7 @@ qt5_wrap_cpp(_mocs
   osg/transform.hpp
   osg/camera.hpp
   osg/graphicscontext.hpp
+  osgga/cameramanipulator.hpp
   osgviewer/compositeviewer.hpp)
 
 message("moc: ${_mocs}")
@@ -28,6 +29,9 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   osg/camera.cpp
   osg/graphicscontext.cpp
   osg/module.cpp
+# osgGA
+  osgga/cameramanipulator.cpp
+  osgga/module.cpp
 # osgViewer
   osgviewer/compositeviewer.cpp
   osgviewer/module.cpp
@@ -78,6 +82,14 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GraphicsContextQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontext.hpp\"\n")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GraphicsContextQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontextindex.hpp\"\n")
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/ModuleQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/module.hpp\"\n")
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/CameraManipulatorQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulator.hpp\"\n")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/CameraManipulatorQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulatorindex.hpp\"\n")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/ModuleQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgviewer/module.hpp\"\n")
