@@ -17,7 +17,6 @@ osgQtQml::Object::~Object()
 {
     if(i)
     {
-        qDebug() << "Component" << metaObject()->className() << "destroy; qt:" << (void*)this << "osg:" << i->o_ptr.get();
         delete i;
     }
 }
@@ -28,13 +27,11 @@ void osgQtQml::Object::classBegin()
     {
         i->classBegin();
     }
-    qDebug() << "Component" << this << "begun";
 }
 
 void osgQtQml::Object::componentComplete()
 {
     // do nothing
-    qDebug() << "Component" << this << "completed";
 }
 
 osgQtQml::Index *osgQtQml::Object::index()

@@ -245,7 +245,6 @@ void ViewQtQuick::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
 {
     if(change == QQuickItem::ItemSceneChange)
     {
-        qDebug() << "View window changed = " << value.window;
         if(osgQtQuick::Window *window =
                 osgQtQuick::Window::fromWindow(value.window))
         {
@@ -290,14 +289,11 @@ void ViewQtQuick::classBegin()
     if(!i) i = new Index();
     static_cast<Index*>(i)->qthis = this;
     osgQtQuick::Object::classBegin();
-
-    qDebug() << "View Begin; window = " << window();
 }
 
 void ViewQtQuick::componentComplete()
 {
     osgQtQuick::Object::componentComplete();
-    qDebug() << "View Complete; window = " << window();
 }
 
 }

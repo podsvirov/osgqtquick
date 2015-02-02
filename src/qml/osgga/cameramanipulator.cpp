@@ -43,7 +43,6 @@ void CameraManipulatorQtQml::classBegin()
 
 void CameraManipulatorQtQml::home(qreal duration)
 {
-    qDebug() << "Home duration = " << duration;
     static_cast<Index*>(i)->othis->home(static_cast<double>(duration));
 }
 

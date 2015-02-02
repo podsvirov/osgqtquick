@@ -22,7 +22,6 @@ Object::~Object()
 {
     if(i)
     {
-        qDebug() << "Component" << metaObject()->className() << "destroy; qt:" << (void*)this << "osg:" << i->o_ptr.get();
         delete i;
     }
 }
@@ -34,13 +33,11 @@ void Object::classBegin()
         i->classBegin();
     }
     QQuickItem::classBegin();
-    qDebug() << "Component" << this << "begun";
 }
 
 void Object::componentComplete()
 {
     // do nothing
-    qDebug() << "Component" << this << "completed";
     QQuickItem::componentComplete();
 }
 
