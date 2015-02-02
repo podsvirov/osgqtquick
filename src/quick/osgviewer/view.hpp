@@ -25,11 +25,25 @@ public:
   ViewQtQuick(Index *index, QQuickItem *parent = 0);
 
   void classBegin();
+  void componentComplete();
 
   static ViewQtQuick* fromView(View *view, QQuickItem *parent = 0);
 
 signals:
   void sceneDataChanged(osg::NodeQtQml *node);
+
+protected:
+  void mousePressEvent(QMouseEvent *event);
+  void mouseMoveEvent(QMouseEvent *event);
+  void mouseReleaseEvent(QMouseEvent *event);
+  void wheelEvent(QWheelEvent *event);
+
+  void	geometryChanged(const QRectF & newGeometry, const QRectF & oldGeometry);
+
+  QSGNode* updatePaintNode(QSGNode *oldNode,
+                           QQuickItem::UpdatePaintNodeData *updatePaintNodeData);
+
+  void itemChange(ItemChange change, const ItemChangeData & value);
 };
 
 }

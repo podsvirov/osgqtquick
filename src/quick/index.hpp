@@ -6,10 +6,19 @@
 #include <osgQtQml/Index>
 
 #include <QQuickItem>
+#include <QQuickWindow>
+
+#include <map>
 
 namespace osgQtQuick {
 
 class Object;
+class Window;
+
+struct Storage
+{
+    std::map<QQuickWindow*, Window*> windows;
+};
 
 class OSGQTQUICK_EXPORT Index : public osgQtQml::Index
 {
@@ -24,6 +33,9 @@ protected:
 
 private:
     friend class Object;
+    friend class Window;
+
+    static Storage storage;
 };
 
 } // namespace osgQtQuick
