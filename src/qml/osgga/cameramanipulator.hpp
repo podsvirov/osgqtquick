@@ -19,6 +19,8 @@ public:
 
   void classBegin();
 
+  Q_INVOKABLE void home(qreal duration = 0.0);
+
   CameraManipulator* cameraManipulator();
 
   static CameraManipulatorQtQml* fromCameraManipulator(CameraManipulator *cameraManipulator, QObject *parent = 0);

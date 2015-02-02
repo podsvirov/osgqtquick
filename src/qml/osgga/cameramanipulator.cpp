@@ -5,6 +5,8 @@
 
 #include <osgGA/CameraManipulator>
 
+#include <QDebug>
+
 namespace osgGA {
 
 CameraManipulatorQtQml::Index::Index(CameraManipulator *cameraManipulator) :
@@ -37,6 +39,12 @@ void CameraManipulatorQtQml::classBegin()
     if(!i) i = new Index();
     static_cast<Index*>(i)->qthis = this;
     osgQtQml::Object::classBegin();
+}
+
+void CameraManipulatorQtQml::home(qreal duration)
+{
+    qDebug() << "Home duration = " << duration;
+    static_cast<Index*>(i)->othis->home(static_cast<double>(duration));
 }
 
 CameraManipulator *CameraManipulatorQtQml::cameraManipulator()

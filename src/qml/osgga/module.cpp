@@ -1,6 +1,7 @@
 #include "module.hpp"
 
 #include "cameramanipulatorindex.hpp"
+#include "trackballmanipulatorindex.hpp"
 
 #include <osgQtQuick/Version>
 #include <QtQml>
@@ -11,9 +12,13 @@ namespace osgGA {
 
 void regisgerQtQmlTypes(const char *uri)
 {
-    qmlRegisterUncreatableType<osgGA::CameraManipulatorQtQml>(
+    qmlRegisterUncreatableType<CameraManipulatorQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "CameraManipulator", "[osgQtQuick] CameraManipulator is Uncreatable");
+
+    qmlRegisterType<TrackballManipulatorQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "TrackballManipulator");
 }
 
 }

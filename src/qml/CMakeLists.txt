@@ -13,6 +13,7 @@ qt5_wrap_cpp(_mocs
   osg/camera.hpp
   osg/graphicscontext.hpp
   osgga/cameramanipulator.hpp
+  osgga/trackballmanipulator.hpp
   osgviewer/compositeviewer.hpp)
 
 message("moc: ${_mocs}")
@@ -31,6 +32,7 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   osg/module.cpp
 # osgGA
   osgga/cameramanipulator.cpp
+  osgga/trackballmanipulator.cpp
   osgga/module.cpp
 # osgViewer
   osgviewer/compositeviewer.cpp
@@ -40,6 +42,7 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
 target_link_libraries(osgQtQml
     ${OPENTHREADS_LIBRARIES}
     ${OSG_LIBRARIES}
+    ${OSGGA_LIBRARIES}
     ${OSGVIEWER_LIBRARIES}
     Qt5::Qml)
 
@@ -90,6 +93,11 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/CameraManipulatorQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulator.hpp\"\n")
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/CameraManipulatorQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulatorindex.hpp\"\n")
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/TrackballManipulatorQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulator.hpp\"\n")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/TrackballManipulatorQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulatorindex.hpp\"\n")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/ModuleQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgviewer/module.hpp\"\n")
