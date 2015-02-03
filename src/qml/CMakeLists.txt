@@ -12,6 +12,8 @@ qt5_wrap_cpp(_mocs
   osg/transform.hpp
   osg/camera.hpp
   osg/graphicscontext.hpp
+  osgdb/loader.hpp
+  osgdb/loaderindex.hpp
   osgga/cameramanipulator.hpp
   osgga/trackballmanipulator.hpp
   osgviewer/compositeviewer.hpp)
@@ -30,6 +32,9 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   osg/camera.cpp
   osg/graphicscontext.cpp
   osg/module.cpp
+# osgDB
+  osgdb/loader.cpp
+  osgdb/module.cpp
 # osgGA
   osgga/cameramanipulator.cpp
   osgga/trackballmanipulator.cpp
@@ -42,6 +47,7 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
 target_link_libraries(osgQtQml
     ${OPENTHREADS_LIBRARIES}
     ${OSG_LIBRARIES}
+    ${OSGDB_LIBRARIES}
     ${OSGGA_LIBRARIES}
     ${OSGVIEWER_LIBRARIES}
     Qt5::Qml)
@@ -121,6 +127,21 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GraphicsContextQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontextindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontextindex.hpp"
   DESTINATION "include/osg" RENAME "GraphicsContextQtQmlIndex")
+
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgDB/ModuleQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgdb/module.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgdb/module.hpp"
+  DESTINATION "include/osgDB" RENAME "ModuleQtQml")
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgDB/LoaderQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgdb/loader.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgdb/loader.hpp"
+  DESTINATION "include/osgDB" RENAME "LoaderQtQml")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgDB/LoaderQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgdb/loaderindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgdb/loaderindex.hpp"
+  DESTINATION "include/osgDB" RENAME "LoaderQtQmlIndex")
 
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/ModuleQtQml"
