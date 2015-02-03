@@ -1,13 +1,7 @@
-set(osgQtQuick_VERSION "@osgQtQuick_VERSION@")
-
-set(osgQtQuick_VERSION_MAJOR @osgQtQuick_VERSION_MAJOR@)
-set(osgQtQuick_VERSION_MINOR @osgQtQuick_VERSION_MINOR@)
-set(osgQtQuick_VERSION_PATCH @osgQtQuick_VERSION_PATCH@)
-set(osgQtQuick_VERSION_TWEAK @osgQtQuick_VERSION_TWEAK@)
-
 get_filename_component(osgQtQuick_INSTALL_PREFIX
     "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 
-set(osgQtQuick_INCLUDE_DIRS "${osgQtQuick_INSTALL_PREFIX}/include")
-
 include("${CMAKE_CURRENT_LIST_DIR}/osgQtQuickTargets.cmake")
+
+set(osgQtQuick_INCLUDE_DIRS "${osgQtQuick_INSTALL_PREFIX}/include")
+set(osgQtQuick_LIBRARIES osgQtQml osgQtQuick)

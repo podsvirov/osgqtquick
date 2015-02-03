@@ -24,9 +24,9 @@ configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/osgQtQuickConfig.cmake.in"
 install(FILES "${CMAKE_BINARY_DIR}/lib/cmake/osgQtQuick/osgQtQuickConfig.cmake"
   DESTINATION "lib/cmake/osgQtQuick")
 
-configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/osgQtQuickVersion.cmake.in"
-    "${CMAKE_BINARY_DIR}/lib/cmake/osgQtQuick/osgQtQuickVersion.cmake" @ONLY)
-install(FILES "${CMAKE_BINARY_DIR}/lib/cmake/osgQtQuick/osgQtQuickVersion.cmake"
+configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/osgQtQuickConfigVersion.cmake.in"
+    "${CMAKE_BINARY_DIR}/lib/cmake/osgQtQuick/osgQtQuickConfigVersion.cmake" @ONLY)
+install(FILES "${CMAKE_BINARY_DIR}/lib/cmake/osgQtQuick/osgQtQuickConfigVersion.cmake"
   DESTINATION "lib/cmake/osgQtQuick")
 
 include_directories("${CMAKE_BINARY_DIR}/include")
