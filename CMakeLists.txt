@@ -16,6 +16,18 @@ string(REPLACE ";" "." osgQtQuick_VERSION "${osgQtQuick_VERSION}")
 
 configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/version.hpp.in"
     "${CMAKE_BINARY_DIR}/include/osgQtQuick/Version" @ONLY)
+install(FILES "${CMAKE_BINARY_DIR}/include/osgQtQuick/Version"
+  DESTINATION "include/osgQtQuick")
+
+configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/osgQtQuickConfig.cmake.in"
+    "${CMAKE_BINARY_DIR}/lib/cmake/osgQtQuick/osgQtQuickConfig.cmake" @ONLY)
+install(FILES "${CMAKE_BINARY_DIR}/lib/cmake/osgQtQuick/osgQtQuickConfig.cmake"
+  DESTINATION "lib/cmake/osgQtQuick")
+
+configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/osgQtQuickVersion.cmake.in"
+    "${CMAKE_BINARY_DIR}/lib/cmake/osgQtQuick/osgQtQuickVersion.cmake" @ONLY)
+install(FILES "${CMAKE_BINARY_DIR}/lib/cmake/osgQtQuick/osgQtQuickVersion.cmake"
+  DESTINATION "lib/cmake/osgQtQuick")
 
 include_directories("${CMAKE_BINARY_DIR}/include")
 

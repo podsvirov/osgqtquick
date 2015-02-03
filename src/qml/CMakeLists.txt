@@ -183,7 +183,7 @@ install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgviewer/compositeviewerindex.hpp"
   DESTINATION "include/osgViewer" RENAME "CompositeViewerQtQmlIndex")
 
 
-install(TARGETS osgQtQml
+install(TARGETS osgQtQml EXPORT osgQtQuick
   RUNTIME DESTINATION "bin"
   ARCHIVE DESTINATION "lib"
   LIBRARY DESTINATION "lib")

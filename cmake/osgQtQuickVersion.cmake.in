@@ -1,0 +1,1 @@
+set(PACKAGE_VERSION @osgQtQuick_VERSION@)
