@@ -18,7 +18,13 @@ qt5_wrap_cpp(_mocs
   osgga/trackballmanipulator.hpp
   osgviewer/compositeviewer.hpp)
 
-message("moc: ${_mocs}")
+if(osgQtQuick_WITH_EARTH)
+  qt5_wrap_cpp(_mocs_earth
+    osgearthutil/earthmanipulator.hpp)
+  set(osgQtQml_OSGEARTH_SRCS
+    osgearthutil/module.cpp
+    osgearthutil/earthmanipulator.cpp)
+endif()
 
 add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   index.cpp
@@ -42,15 +48,19 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
 # osgViewer
   osgviewer/compositeviewer.cpp
   osgviewer/module.cpp
+# osgEarth
+  ${osgQtQml_OSGEARTH_SRCS}
+  ${_mocs_earth}
 )
 
 target_link_libraries(osgQtQml
-    ${OPENTHREADS_LIBRARIES}
-    ${OSG_LIBRARIES}
-    ${OSGDB_LIBRARIES}
-    ${OSGGA_LIBRARIES}
-    ${OSGVIEWER_LIBRARIES}
-    Qt5::Qml)
+  ${OPENTHREADS_LIBRARIES}
+  ${OSG_LIBRARIES}
+  ${OSGDB_LIBRARIES}
+  ${OSGGA_LIBRARIES}
+  ${OSGVIEWER_LIBRARIES}
+  ${OSGEARTHUTIL_LIBRARY}
+  Qt5::Qml)
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgQtQml/Export"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/export.hpp\"\n")
@@ -149,20 +159,20 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/ModuleQtQml"
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/module.hpp"
   DESTINATION "include/osgGA" RENAME "ModuleQtQml")
 
-file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/CameraManipulatorQtQml"
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/CameraManipulatorQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulator.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulator.hpp"
   DESTINATION "include/osgGA" RENAME "CameraManipulatorQtQml")
-file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/CameraManipulatorQtQmlIndex"
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/CameraManipulatorQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulatorindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulatorindex.hpp"
   DESTINATION "include/osgGA" RENAME "CameraManipulatorQtQml")
 
-file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/TrackballManipulatorQtQml"
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/TrackballManipulatorQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulator.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulator.hpp"
   DESTINATION "include/osgGA" RENAME "TrackballManipulatorQtQml")
-file(WRITE "${CMAKE_BINARY_DIR}/include/osgga/TrackballManipulatorQtQmlIndex"
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/TrackballManipulatorQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulatorindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulatorindex.hpp"
   DESTINATION "include/osgGA" RENAME "TrackballManipulatorQtQmlIndex")
@@ -181,6 +191,24 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/CompositeViewerQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgviewer/compositeviewerindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgviewer/compositeviewerindex.hpp"
   DESTINATION "include/osgViewer" RENAME "CompositeViewerQtQmlIndex")
+
+if(osgQtQuick_WITH_EARTH)
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgEarthUtil/ModuleQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgearthutil/module.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgearthutil/module.hpp"
+  DESTINATION "include/osgEarthUtil" RENAME "ModuleQtQml")
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgEarthUtil/EarthManipulatorQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgearthutil/earthmanipulator.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgearthutil/earthmanipulator.hpp"
+  DESTINATION "include/osgEarthUtil" RENAME "EarthManipulatorQtQml")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgEarthUtil/EarthManipulatorQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgearthutil/earthmanipulatorindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgearthutil/earthmanipulatorindex.hpp"
+  DESTINATION "include/osgEarthUtil" RENAME "EarthManipulatorQtQmlIndex")
+
+endif() # osgQtQuick_WITH_EARTH
 
 
 install(TARGETS osgQtQml EXPORT osgQtQuick

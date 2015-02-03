@@ -7,12 +7,17 @@ set(osgQtQuick_VERSION_MINOR 0)
 set(osgQtQuick_VERSION_PATCH 0)
 set(osgQtQuick_VERSION_TWEAK 0)
 
+set(osgQtQuick_WITH_EARTH OFF
+  CACHE BOOL "Set to ON to build with osgEarth library support (By default is OFF)")
+
 set(osgQtQuick_VERSION
   ${osgQtQuick_VERSION_MAJOR}
   ${osgQtQuick_VERSION_MINOR}
   ${osgQtQuick_VERSION_PATCH}
   ${osgQtQuick_VERSION_TWEAK})
 string(REPLACE ";" "." osgQtQuick_VERSION "${osgQtQuick_VERSION}")
+
+set(osgQtQuick_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}")
 
 configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/version.hpp.in"
     "${CMAKE_BINARY_DIR}/include/osgQtQuick/Version" @ONLY)

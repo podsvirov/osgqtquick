@@ -9,8 +9,6 @@ qt5_wrap_cpp(_mocs
   window.hpp
   osgviewer/view.hpp)
 
-message("moc: ${_mocs}")
-
 add_library(osgQtQuick ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   index.cpp
   object.cpp
