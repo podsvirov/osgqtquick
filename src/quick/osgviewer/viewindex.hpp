@@ -54,6 +54,7 @@ protected:
     void mouseButtonPress(QMouseEvent *event);
     void mouseMotion(QMouseEvent *event);
     void mouseButtonRelease(QMouseEvent *event);
+    void mouseDoubleButtonPress(QMouseEvent *event);
 
 
     void initFBO();

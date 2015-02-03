@@ -114,6 +114,7 @@ QPointF ViewQtQuick::Index::mousePoint(QMouseEvent *event)
 {
     qreal x = 2.0 * (event->x() - qthis->width() / 2) / qthis->width();
     qreal y = 2.0 * (event->y() - qthis->height() / 2) / qthis->height();
+
     return QPointF(x, y);
 }
 
@@ -138,6 +139,15 @@ void ViewQtQuick::Index::mouseButtonRelease(QMouseEvent *event)
     setKeyboardModifiers(event);
     QPointF pos = mousePoint(event);
     othis->getEventQueue()->mouseButtonRelease(pos.x(), pos.y(), button);
+}
+
+void ViewQtQuick::Index::mouseDoubleButtonPress(QMouseEvent *event)
+{
+    int button = mouseButton(event);
+    setKeyboardModifiers(event);
+    QPointF pos = mousePoint(event);
+    qDebug() << "DoubleClick: " << pos;
+    othis->getEventQueue()->mouseDoubleButtonPress(pos.x(), pos.y(), button);
 }
 
 void ViewQtQuick::Index::initFBO()
@@ -214,6 +224,12 @@ void ViewQtQuick::mouseMoveEvent(QMouseEvent *event)
 void ViewQtQuick::mouseReleaseEvent(QMouseEvent *event)
 {
     static_cast<Index*>(i)->mouseButtonRelease(event);
+}
+
+void ViewQtQuick::mouseDoubleClickEvent(QMouseEvent *event)
+{
+
+    static_cast<Index*>(i)->mouseDoubleButtonPress(event);
 }
 
 void ViewQtQuick::wheelEvent(QWheelEvent *event)
