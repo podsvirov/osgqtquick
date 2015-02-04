@@ -60,7 +60,9 @@ CameraManipulatorQtQml *CameraManipulatorQtQml::fromCameraManipulator(CameraMani
         return static_cast<Index*>(index)->qthis;
     }
 
-    return new CameraManipulatorQtQml(new Index(cameraManipulator), parent);
+    CameraManipulatorQtQml *result = new CameraManipulatorQtQml(new Index(cameraManipulator), parent);
+    result->classBegin();
+    return result;
 }
 
 }
