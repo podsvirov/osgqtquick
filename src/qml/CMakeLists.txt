@@ -167,7 +167,7 @@ install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulator.hpp"
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/CameraManipulatorQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulatorindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/cameramanipulatorindex.hpp"
-  DESTINATION "include/osgGA" RENAME "CameraManipulatorQtQml")
+  DESTINATION "include/osgGA" RENAME "CameraManipulatorQtQmlIndex")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/TrackballManipulatorQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulator.hpp\"\n")
