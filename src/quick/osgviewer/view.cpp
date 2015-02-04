@@ -56,6 +56,16 @@ void ViewQtQuick::Index::setSceneData(osg::NodeQtQml *node)
     othis->setSceneData(node->node());
 }
 
+osg::CameraQtQml *ViewQtQuick::Index::getCamera()
+{
+    return osg::CameraQtQml::fromCamera(othis->getCamera(), qthis);
+}
+
+void ViewQtQuick::Index::setCamera(osg::CameraQtQml *camera)
+{
+    othis->setCamera(camera->camera());
+}
+
 osgGA::CameraManipulatorQtQml *ViewQtQuick::Index::getCameraManipulator()
 {
     return osgGA::CameraManipulatorQtQml::fromCameraManipulator(othis->getCameraManipulator(), qthis);
@@ -145,8 +155,7 @@ void ViewQtQuick::Index::mouseDoubleButtonPress(QMouseEvent *event)
 {
     int button = mouseButton(event);
     setKeyboardModifiers(event);
-    QPointF pos = mousePoint(event);
-    qDebug() << "DoubleClick: " << pos;
+    QPointF pos(event->x(), qthis->height() - event->y());
     othis->getEventQueue()->mouseDoubleButtonPress(pos.x(), pos.y(), button);
 }
 
@@ -279,6 +288,17 @@ void ViewQtQuick::setSceneData(osg::NodeQtQml *node)
 {
     static_cast<Index*>(i)->setSceneData(node);
 }
+
+osg::CameraQtQml *ViewQtQuick::getCamera()
+{
+    return static_cast<Index*>(i)->getCamera();
+}
+
+void ViewQtQuick::setCamera(osg::CameraQtQml *camera)
+{
+    static_cast<Index*>(i)->setCamera(camera);
+}
+
 
 osgGA::CameraManipulatorQtQml *ViewQtQuick::getCameraManipulator()
 {

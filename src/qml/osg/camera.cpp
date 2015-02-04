@@ -23,6 +23,17 @@ void CameraQtQml::Index::classBegin()
     GroupQtQml::Index::classBegin();
 }
 
+void CameraQtQml::Index::setClearColor(const QColor &color)
+{
+    osg::Vec4 c = osgQt::swapColor(color);
+
+    if(othis->getClearColor() == c) return;
+
+    othis->setClearColor(c);
+
+    emit qthis->clearColorChanged(color);
+}
+
 CameraQtQml::CameraQtQml(QObject *parent) :
   GroupQtQml(parent)
 {
@@ -40,6 +51,16 @@ void CameraQtQml::classBegin()
     GroupQtQml::classBegin();
 }
 
+QColor CameraQtQml::getClearColor() const
+{
+    return osgQt::swapColor(static_cast<Index*>(i)->othis->getClearColor());
+}
+
+void CameraQtQml::setClearColor(const QColor &color)
+{
+    static_cast<Index*>(i)->setClearColor(color);
+}
+
 Camera *CameraQtQml::camera()
 {
     return static_cast<Index*>(i)->othis;
@@ -54,7 +75,9 @@ CameraQtQml *CameraQtQml::fromCamera(Camera *camera, QObject *parent)
         return static_cast<Index*>(index)->qthis;
     }
 
-    return new CameraQtQml(new Index(camera), parent);
+    CameraQtQml *result = new CameraQtQml(new Index(camera), parent);
+    result->classBegin();
+    return result;
 }
 
 }

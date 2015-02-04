@@ -60,6 +60,7 @@ target_link_libraries(osgQtQml
   ${OSGGA_LIBRARIES}
   ${OSGVIEWER_LIBRARIES}
   ${OSGEARTHUTIL_LIBRARY}
+  Qt5::Gui
   Qt5::Qml)
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgQtQml/Export"

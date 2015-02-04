@@ -4,12 +4,34 @@
 #include <osgQtQml/Export>
 
 #include <osg/Object>
+#include <osg/Vec4>
 
 #include <QObject>
 #include <QPointer>
+#include <QColor>
 
 #include <list>
 #include <set>
+
+namespace osgQt {
+
+inline osg::Vec4 swapColor(const QColor& color)
+{
+    return osg::Vec4(color.redF(),
+                     color.greenF(),
+                     color.blueF(),
+                     color.alphaF());
+}
+
+inline QColor swapColor(const osg::Vec4& color)
+{
+    return QColor::fromRgbF(color.r(),
+                            color.g(),
+                            color.b(),
+                            color.a());
+}
+
+}
 
 namespace osgQtQuick {
 

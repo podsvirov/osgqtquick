@@ -41,6 +41,9 @@ public:
     osg::NodeQtQml* getSceneData();
     void setSceneData(osg::NodeQtQml *node);
 
+    osg::CameraQtQml* getCamera();
+    void setCamera(osg::CameraQtQml *camera);
+
     osgGA::CameraManipulatorQtQml* getCameraManipulator();
     void setCameraManipulator(osgGA::CameraManipulatorQtQml *manipulator);
 

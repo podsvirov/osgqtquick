@@ -54,7 +54,9 @@ NodeQtQml *NodeQtQml::fromNode(Node *node, QObject *parent)
         return static_cast<Index*>(index)->qthis;
     }
 
-    return new NodeQtQml(new Index(node), parent);
+    NodeQtQml *result = new NodeQtQml(new Index(node), parent);
+    result->classBegin();
+    return result;
 }
 
 }

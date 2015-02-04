@@ -3,7 +3,7 @@
 
 #include <osgQtQuick/Object>
 
-#include <osg/NodeQtQml>
+#include <osg/CameraQtQml>
 #include <osgGA/CameraManipulatorQtQml>
 
 namespace osgViewer {
@@ -15,6 +15,7 @@ class OSGQTQUICK_EXPORT ViewQtQuick : public osgQtQuick::Object
   Q_OBJECT
 
   Q_PROPERTY(osg::NodeQtQml* sceneData READ getSceneData WRITE setSceneData NOTIFY sceneDataChanged)
+  Q_PROPERTY(osg::CameraQtQml* camera READ getCamera WRITE setCamera NOTIFY cameraChanged)
   Q_PROPERTY(osgGA::CameraManipulatorQtQml* cameraManipulator READ getCameraManipulator WRITE setCameraManipulator NOTIFY cameraManipulatorChanged)
 
 public:
@@ -22,6 +23,9 @@ public:
 
   Q_INVOKABLE osg::NodeQtQml* getSceneData();
   Q_INVOKABLE void setSceneData(osg::NodeQtQml *node);
+
+  Q_INVOKABLE osg::CameraQtQml* getCamera();
+  Q_INVOKABLE void setCamera(osg::CameraQtQml *camera);
 
   Q_INVOKABLE osgGA::CameraManipulatorQtQml* getCameraManipulator();
   Q_INVOKABLE void setCameraManipulator(osgGA::CameraManipulatorQtQml *manipulator);
@@ -36,6 +40,7 @@ public:
 
 signals:
   void sceneDataChanged(osg::NodeQtQml *node);
+  void cameraChanged(osg::CameraQtQml *camera);
   void cameraManipulatorChanged(osgGA::CameraManipulatorQtQml *manipulator);
 
 protected:

@@ -29,8 +29,11 @@ Rectangle {
     OSGViewer.View {
         id: view
         anchors.fill: parent
+        camera.clearColor: "gray"
+        opacity: 0.999
         cameraManipulator: OSGGA.TrackballManipulator {}
         Component.onCompleted: {
+            //camera.clearColor = "black"
             setSceneData(group)
             sceneData.addChild(loader)
             console.log("view.cameraManipulator: " + view.cameraManipulator)
@@ -40,6 +43,7 @@ Rectangle {
 
     OSGViewer.View {
         id: cowView
+        visible: false
         sceneData: OSGDB.Loader {
             id: cowLoader
             source: "cow.osg"

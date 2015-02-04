@@ -16,6 +16,8 @@ public:
 
     void classBegin();
 
+    void setClearColor(const QColor &color);
+
 protected:
     Camera *othis;
     CameraQtQml *qthis;
