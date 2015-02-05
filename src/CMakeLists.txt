@@ -1,4 +1,5 @@
 cmake_policy(SET CMP0020 NEW)
+cmake_policy(SET CMP0022 NEW)
 
 # OpenSceneGraph
 find_package(OpenSceneGraph 3.0 REQUIRED
