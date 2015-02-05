@@ -211,6 +211,8 @@ install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgearthutil/earthmanipulatorindex.hpp"
 
 endif() # osgQtQuick_WITH_EARTH
 
+set_target_properties(osgQtQml PROPERTIES
+  INTERFACE_LINK_LIBRARIES "")
 
 install(TARGETS osgQtQml EXPORT osgQtQuick
   RUNTIME DESTINATION "bin"

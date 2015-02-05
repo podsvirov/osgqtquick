@@ -57,6 +57,9 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/ViewQtQuick"
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgviewer/view.hpp"
   DESTINATION "include/osgViewer" RENAME "ViewQtQuick")
 
+set_target_properties(osgQtQuick PROPERTIES
+  INTERFACE_LINK_LIBRARIES "")
+
 install(TARGETS osgQtQuick EXPORT osgQtQuick
   RUNTIME DESTINATION "bin"
   ARCHIVE DESTINATION "lib"
