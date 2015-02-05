@@ -13,6 +13,7 @@ qt5_wrap_cpp(_mocs
   osg/positionattitudetransform.hpp
   osg/camera.hpp
   osg/drawable.hpp
+  osg/shapedrawable.hpp
   osg/graphicscontext.hpp
   osgdb/loader.hpp
   osgdb/loaderindex.hpp
@@ -40,6 +41,7 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   osg/positionattitudetransform.cpp
   osg/camera.cpp
   osg/drawable.cpp
+  osg/shapedrawable.cpp
   osg/graphicscontext.cpp
   osg/module.cpp
 # osgDB
@@ -151,6 +153,15 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/DrawableQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/drawableindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/drawableindex.hpp"
   DESTINATION "include/osg" RENAME "DrawableQtQmlIndex")
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/ShapeDrawableQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/shapedrawable.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/shapedrawable.hpp"
+  DESTINATION "include/osg" RENAME "ShapeDrawableQtQml")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/ShapeDrawableQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/shapedrawableindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/shapedrawableindex.hpp"
+  DESTINATION "include/osg" RENAME "ShapeDrawableQtQmlIndex")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GraphicsContextQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/graphicscontext.hpp\"\n")

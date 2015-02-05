@@ -6,6 +6,7 @@
 #include "transformindex.hpp"
 #include "cameraindex.hpp"
 #include "drawableindex.hpp"
+#include "shapedrawableindex.hpp"
 #include "graphicscontextindex.hpp"
 #include "positionattitudetransformindex.hpp"
 
@@ -49,6 +50,10 @@ void regisgerQtQmlTypes(const char *uri)
     qmlRegisterUncreatableType<osg::DrawableQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Drawable", "[osgQtQuick] Drawable is Uncreatable");
+
+    qmlRegisterType<ShapeDrawableQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "ShapeDrawable");
 
     qmlRegisterUncreatableType<osg::GraphicsContextQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
