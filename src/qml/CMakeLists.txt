@@ -10,6 +10,7 @@ qt5_wrap_cpp(_mocs
   osg/node.hpp
   osg/group.hpp
   osg/transform.hpp
+  osg/positionattitudetransform.hpp
   osg/camera.hpp
   osg/graphicscontext.hpp
   osgdb/loader.hpp
@@ -35,6 +36,7 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   osg/node.cpp
   osg/group.cpp
   osg/transform.cpp
+  osg/positionattitudetransform.cpp
   osg/camera.cpp
   osg/graphicscontext.cpp
   osg/module.cpp
@@ -120,6 +122,15 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/TransformQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/transformindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/transformindex.hpp"
   DESTINATION "include/osg" RENAME "TransformQtQmlIndex")
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/PositionAttitudeTransformQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/positionattitudetransform.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/positionattitudetransform.hpp"
+  DESTINATION "include/osg" RENAME "PositionAttitudeTransformQtQml")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/PositionAttitudeTransformQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/positionattitudetransformindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/positionattitudetransformindex.hpp"
+  DESTINATION "include/osg" RENAME "PositionAttitudeTransformQtQmlIndex")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/CameraQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/camera.hpp\"\n")

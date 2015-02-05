@@ -5,10 +5,14 @@
 
 #include <osg/Object>
 #include <osg/Vec4>
+#include <osg/Vec3d>
+#include <osg/Quat>
 
 #include <QObject>
 #include <QPointer>
 #include <QColor>
+#include <QVector3D>
+#include <QQuaternion>
 
 #include <list>
 #include <set>
@@ -29,6 +33,36 @@ inline QColor swapColor(const osg::Vec4& color)
                             color.g(),
                             color.b(),
                             color.a());
+}
+
+inline osg::Vec3d vec3d(const QVector3D& v)
+{
+    return osg::Vec3d(static_cast<osg::Vec3d::value_type>(v.x()),
+                      static_cast<osg::Vec3d::value_type>(v.y()),
+                      static_cast<osg::Vec3d::value_type>(v.z()));
+}
+
+inline QVector3D qVector3D(const osg::Vec3d& v)
+{
+    return QVector3D(static_cast<float>(v.x()),
+                     static_cast<float>(v.y()),
+                     static_cast<float>(v.z()));
+}
+
+inline osg::Quat quat(const QQuaternion& q)
+{
+    return osg::Quat(static_cast<osg::Quat::value_type>(q.x()),
+                     static_cast<osg::Quat::value_type>(q.y()),
+                     static_cast<osg::Quat::value_type>(q.z()),
+                     static_cast<osg::Quat::value_type>(q.scalar()));
+}
+
+inline QQuaternion qQuaternion(const osg::Quat& q)
+{
+    return QQuaternion(static_cast<float>(q.w()),
+                       static_cast<float>(q.x()),
+                       static_cast<float>(q.y()),
+                       static_cast<float>(q.z()));
 }
 
 }

@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Layouts 1.0
 import QtQuick.Controls 1.0
 import osg 2.0 as OSG
 import osgDB 2.0  as OSGDB
@@ -8,20 +9,20 @@ import osgViewer 2.0 as OSGViewer
 Rectangle {
     width: 500; height: 500
 
-    OSGDB.Loader
-    {
+    OSGDB.Loader {
         id: loader
-        source: "cessnafire.osg"
+        source: "axes.osgt"
         onNodeChanged: {
             console.log("loader: " + getNode())
             view.cameraManipulator.home()
         }
     }
 
-    OSG.Group {
+    OSG.PositionAttitudeTransform {
         id: group
+        position: Qt.vector3d(xSlider.value, ySlider.value, zSlider.value)
         Component.onCompleted: {
-            //addChild(node)
+            addChild(loader)
             console.log("group: " + group)
         }
     }
@@ -29,36 +30,20 @@ Rectangle {
     OSGViewer.View {
         id: view
         anchors.fill: parent
-        camera.clearColor: "gray"
-        opacity: 0.999
+        sceneData: group
         cameraManipulator: OSGGA.TrackballManipulator {}
-        Component.onCompleted: {
-            //camera.clearColor = "black"
-            setSceneData(group)
-            sceneData.addChild(loader)
-            console.log("view.cameraManipulator: " + view.cameraManipulator)
-            console.log("view.sceneData: " + view.sceneData)
-        }
-    }
-
-    OSGViewer.View {
-        id: cowView
-        visible: false
-        sceneData: OSGDB.Loader {
-            id: cowLoader
-            source: "cow.osg"
-            onNodeChanged: cowView.cameraManipulator.home()
-        }
-        cameraManipulator: OSGGA.TrackballManipulator {}
-
-        width: parent.width / 2
-        height: parent.height / 2
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
     }
 
     Button {
         text: "Home"
         onClicked: view.cameraManipulator.home()
+    }
+
+    ColumnLayout {
+        Slider { id: xSlider; minimumValue: -1; maximumValue: 1; Layout.fillWidth: true }
+        Slider { id: ySlider; minimumValue: -1; maximumValue: 1; Layout.fillWidth: true }
+        Slider { id: zSlider; minimumValue: -1; maximumValue: 1; Layout.fillWidth: true }
+        width: parent.width
+        anchors.bottom: parent.bottom
     }
 }

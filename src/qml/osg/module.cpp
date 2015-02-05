@@ -6,6 +6,7 @@
 #include "transformindex.hpp"
 #include "cameraindex.hpp"
 #include "graphicscontextindex.hpp"
+#include "positionattitudetransformindex.hpp"
 
 #include <osg/Group>
 
@@ -35,6 +36,10 @@ void regisgerQtQmlTypes(const char *uri)
     qmlRegisterType<TransformQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Transform");
+
+    qmlRegisterType<PositionAttitudeTransformQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "PositionAttitudeTransform");
 
     qmlRegisterType<CameraQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
