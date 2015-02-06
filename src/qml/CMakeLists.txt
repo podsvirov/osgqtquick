@@ -4,6 +4,28 @@ else()
     add_definitions(-DOSGQTQML_LIBRARY_STATIC)
 endif()
 
+macro(META_Node _library _class)
+  string(TOLOWER ${_library} _library_l)
+  string(TOLOWER ${_class} _class_l)
+  file(WRITE "${CMAKE_BINARY_DsIR}/include/${_library}/${_class}QtQml"
+    "#include \"${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp\"\n")
+  install(FILES "${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp"
+    DESTINATION "include/${_library}" RENAME "${_class}QtQml")
+  file(WRITE "${CMAKE_BINARY_DIR}/include/${_library}/${_class}QtQmlIndex"
+    "#include \"${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}index.hpp\"\n")
+  install(FILES "${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}index.hpp"
+    DESTINATION "include/${_library}" RENAME "${_class}QtQmlIndex")
+  list(APPEND _srcs "${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.cpp")
+  list(APPEND _moc_hdrs "${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp")
+endmacro(META_Node)
+
+set(_srcs)
+set(_moc_hdrs)
+
+META_Node(osg Shape)
+
+message("MH: ${_moc_hdrs}")
+
 qt5_wrap_cpp(_mocs
   object.hpp
   osg/object.hpp
@@ -19,7 +41,8 @@ qt5_wrap_cpp(_mocs
   osgdb/loaderindex.hpp
   osgga/cameramanipulator.hpp
   osgga/trackballmanipulator.hpp
-  osgviewer/compositeviewer.hpp)
+  osgviewer/compositeviewer.hpp
+  ${_moc_hdrs})
 
 if(osgQtQuick_WITH_EARTH)
   qt5_wrap_cpp(_mocs_earth
@@ -57,6 +80,7 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
 # osgEarth
   ${osgQtQml_OSGEARTH_SRCS}
   ${_mocs_earth}
+  ${_srcs}
 )
 
 target_link_libraries(osgQtQml

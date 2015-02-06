@@ -9,6 +9,7 @@
 #include "shapedrawableindex.hpp"
 #include "graphicscontextindex.hpp"
 #include "positionattitudetransformindex.hpp"
+#include "shapeindex.hpp"
 
 #include <osg/Group>
 
@@ -47,7 +48,7 @@ void regisgerQtQmlTypes(const char *uri)
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Camera");
 
-    qmlRegisterUncreatableType<osg::DrawableQtQml>(
+    qmlRegisterUncreatableType<DrawableQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Drawable", "[osgQtQuick] Drawable is Uncreatable");
 
@@ -55,9 +56,13 @@ void regisgerQtQmlTypes(const char *uri)
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "ShapeDrawable");
 
-    qmlRegisterUncreatableType<osg::GraphicsContextQtQml>(
+    qmlRegisterUncreatableType<GraphicsContextQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "GraphicsContext", "[osgQtQuick] GraphicsContext is Uncreatable");
+
+    qmlRegisterUncreatableType<ShapeQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "Shape", "[osgQtQuick] Shape is Uncreatable");
 
     osgQtQml::Index::insertMake(&qtMakeIndex);
     osgQtQml::Index::insertMake(&osgMakeIndex);
