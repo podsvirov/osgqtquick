@@ -26,6 +26,8 @@ META_Node(osg Geode)
 META_Node(osg Shape)
 META_Node(osg Box)
 
+META_Node(osgGA StandardManipulator)
+
 qt5_wrap_cpp(_mocs
   object.hpp
   osg/object.hpp

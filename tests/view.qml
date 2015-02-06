@@ -11,7 +11,7 @@ Rectangle {
 
     OSG.ShapeDrawable {
         id: sd
-        color: "yellow"
+        color: Qt.rgba(1, 1, 1, 0.5)
         shape: OSG.Box {
             halfLengths: Qt.vector3d(0.5, 0.5, 0.05)
         }
@@ -60,6 +60,7 @@ Rectangle {
         anchors.fill: parent
         sceneData: group
         cameraManipulator: OSGGA.TrackballManipulator {}
+        smooth: true
     }
 
     Button {
