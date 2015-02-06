@@ -7,7 +7,7 @@ endif()
 macro(META_Node _library _class)
   string(TOLOWER ${_library} _library_l)
   string(TOLOWER ${_class} _class_l)
-  file(WRITE "${CMAKE_BINARY_DsIR}/include/${_library}/${_class}QtQml"
+  file(WRITE "${CMAKE_BINARY_DIR}/include/${_library}/${_class}QtQml"
     "#include \"${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp\"\n")
   install(FILES "${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp"
     DESTINATION "include/${_library}" RENAME "${_class}QtQml")
@@ -23,8 +23,7 @@ set(_srcs)
 set(_moc_hdrs)
 
 META_Node(osg Shape)
-
-message("MH: ${_moc_hdrs}")
+META_Node(osg Box)
 
 qt5_wrap_cpp(_mocs
   object.hpp

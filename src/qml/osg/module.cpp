@@ -10,6 +10,7 @@
 #include "graphicscontextindex.hpp"
 #include "positionattitudetransformindex.hpp"
 #include "shapeindex.hpp"
+#include "boxindex.hpp"
 
 #include <osg/Group>
 
@@ -24,7 +25,7 @@ namespace osg {
 
 void regisgerQtQmlTypes(const char *uri)
 {
-    qmlRegisterUncreatableType<osg::ObjectQtQml>(
+    qmlRegisterUncreatableType<ObjectQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Object", "[osgQtQuick] Object is Uncreatable");
 
@@ -63,6 +64,10 @@ void regisgerQtQmlTypes(const char *uri)
     qmlRegisterUncreatableType<ShapeQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Shape", "[osgQtQuick] Shape is Uncreatable");
+
+    qmlRegisterType<BoxQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "Box");
 
     osgQtQml::Index::insertMake(&qtMakeIndex);
     osgQtQml::Index::insertMake(&osgMakeIndex);
