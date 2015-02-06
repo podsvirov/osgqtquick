@@ -31,7 +31,10 @@ void osgQtQml::Object::classBegin()
 
 void osgQtQml::Object::componentComplete()
 {
-    // do nothing
+    if(i)
+    {
+        i->componentComplete();
+    }
 }
 
 osgQtQml::Index *osgQtQml::Object::index()

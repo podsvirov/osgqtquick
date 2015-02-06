@@ -22,6 +22,14 @@ void DrawableQtQml::Index::classBegin()
     osgQtQml::Index::classBegin();
 }
 
+void DrawableQtQml::Index::componentComplete()
+{
+    osgQtQml::Index::othis = othis;
+    osgQtQml::Index::qthis = qthis;
+
+    osgQtQml::Index::componentComplete();
+}
+
 DrawableQtQml::DrawableQtQml(QObject *parent) :
   ObjectQtQml(parent)
 {

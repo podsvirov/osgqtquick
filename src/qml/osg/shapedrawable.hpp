@@ -3,6 +3,8 @@
 
 #include <osg/DrawableQtQml>
 
+#include <osg/ShapeQtQml>
+
 namespace osg {
 
 class ShapeDrawable;
@@ -10,6 +12,8 @@ class ShapeDrawable;
 class OSGQTQML_EXPORT ShapeDrawableQtQml : public DrawableQtQml
 {
   Q_OBJECT
+
+  Q_PROPERTY(osg::ShapeQtQml* shape READ getShape WRITE setShape NOTIFY shapeChanged)
 
 public:
   class Index;
@@ -19,9 +23,15 @@ public:
 
   void classBegin();
 
+  Q_INVOKABLE ShapeQtQml *getShape() const;
+  Q_INVOKABLE void setShape(ShapeQtQml *shape);
+
   ShapeDrawable* shapeDrawable();
 
   static ShapeDrawableQtQml* fromShapeDrawable(ShapeDrawable *drawable, QObject *parent = 0);
+
+signals:
+  void shapeChanged(ShapeQtQml *shape);
 };
 
 }

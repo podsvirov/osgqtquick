@@ -99,8 +99,10 @@ public: // methods
     osg::Object *osgObject();
 
     bool isBegin() const;
+    bool isComplete() const;
 
     virtual void classBegin();
+    virtual void componentComplete();
 
 public: // static methods
     static Index *checkIndex(osg::Object *o_ptr);
@@ -127,6 +129,7 @@ private:
     friend class ::osgQtQuick::Object;
 
     bool is_begin;
+    bool is_complete;
 
     osg::ref_ptr<osg::Object> o_ptr;
     QPointer<QObject> q_ptr;
@@ -147,6 +150,11 @@ inline osg::Object *Index::osgObject()
 inline bool Index::isBegin() const
 {
     return is_begin;
+}
+
+inline bool Index::isComplete() const
+{
+    return is_complete;
 }
 
 inline void Index::setQtObject(QObject *object)

@@ -9,6 +9,16 @@ import osgViewer 2.0 as OSGViewer
 Rectangle {
     width: 500; height: 500
 
+    OSG.ShapeDrawable {
+        id: sd
+        shape: OSG.Box {
+        }
+        Component.onCompleted: {
+            console.log("sd: " + sd)
+            console.log("sd.shape: " + sd.shape)
+        }
+    }
+
     OSGDB.Loader {
         id: loader
         source: "axes.osgt"

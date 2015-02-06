@@ -9,7 +9,7 @@ Storage Index::storage = Storage();
 Index::Index(osg::Object *o) :
     othis(0),
     qthis(0),
-    is_begin(false),
+    is_begin(false), is_complete(false),
     o_ptr(o),
     q_ptr(0)
 {
@@ -26,7 +26,14 @@ Index::~Index()
     }
 }
 
+
+
 void Index::classBegin()
+{
+    is_begin = true;
+}
+
+void Index::componentComplete()
 {
     if(!othis || !qthis)
     {
@@ -39,7 +46,7 @@ void Index::classBegin()
     storage.qtIndexes.insert(std::pair<QObject*, Index*>(q_ptr.data(), this));
     storage.osgIndexes.insert(std::pair<osg::Object*, Index*>(o_ptr.get(), this));
 
-    is_begin = true;
+    is_complete = true;
 }
 
 Index *Index::checkIndex(osg::Object *o)

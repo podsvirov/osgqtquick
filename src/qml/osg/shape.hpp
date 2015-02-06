@@ -21,7 +21,7 @@ public:
 
   Shape* shape();
 
-  static ShapeQtQml* fromDrawable(Shape *shape, QObject *parent = 0);
+  static ShapeQtQml* fromShape(Shape *shape, QObject *parent = 0);
 };
 
 }

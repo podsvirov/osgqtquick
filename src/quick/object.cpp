@@ -37,7 +37,10 @@ void Object::classBegin()
 
 void Object::componentComplete()
 {
-    // do nothing
+    if(i)
+    {
+        i->componentComplete();
+    }
     QQuickItem::componentComplete();
 }
 

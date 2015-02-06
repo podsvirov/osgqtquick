@@ -44,7 +44,7 @@ Shape *ShapeQtQml::shape()
     return static_cast<Index*>(i)->othis;
 }
 
-ShapeQtQml *ShapeQtQml::fromDrawable(Shape *shape, QObject *parent)
+ShapeQtQml *ShapeQtQml::fromShape(Shape *shape, QObject *parent)
 {
     if(!shape) return 0;
 

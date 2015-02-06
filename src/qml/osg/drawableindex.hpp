@@ -13,7 +13,9 @@ class OSGQTQML_EXPORT DrawableQtQml::Index : public ObjectQtQml::Index
 
 public:
     Index(Drawable *o = 0);
+
     void classBegin();
+    void componentComplete();
 
 protected:
     Drawable *othis;
