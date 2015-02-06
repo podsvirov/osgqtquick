@@ -37,11 +37,19 @@ Rectangle {
     }
 
     OSG.PositionAttitudeTransform {
-        id: group
+        id: transform
         position: Qt.vector3d(xSlider.value, ySlider.value, zSlider.value)
         Component.onCompleted: {
-            addChild(loader)
             addChild(geode)
+            console.log("group: " + group)
+        }
+    }
+
+    OSG.Group {
+        id: group
+        Component.onCompleted: {
+            addChild(loader)
+            addChild(transform)
             console.log("group: " + group)
         }
     }
