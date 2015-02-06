@@ -16,6 +16,8 @@ public:
 
     void classBegin();
 
+    void setHalfLengths(const QVector3D &halfLengths);
+
 protected:
     Box *othis;
     BoxQtQml *qthis;

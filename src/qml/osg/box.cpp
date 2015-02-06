@@ -25,6 +25,17 @@ void BoxQtQml::Index::classBegin()
     ShapeQtQml::Index::classBegin();
 }
 
+void BoxQtQml::Index::setHalfLengths(const QVector3D &halfLengths)
+{
+    osg::Vec3d a = osgQt::vec3d(halfLengths);
+
+    if(othis->getHalfLengths() == a) return;
+
+    othis->setHalfLengths(a);
+
+    emit qthis->halfLengthsChanged(halfLengths);
+}
+
 BoxQtQml::BoxQtQml(QObject *parent) :
   ShapeQtQml(parent)
 {
@@ -40,6 +51,16 @@ void BoxQtQml::classBegin()
     if(!i) i = new Index();
     static_cast<Index*>(i)->qthis = this;
     ShapeQtQml::classBegin();
+}
+
+QVector3D BoxQtQml::getHalfLengths() const
+{
+    return osgQt::qVector3D(static_cast<Index*>(i)->othis->getHalfLengths());
+}
+
+void BoxQtQml::setHalfLengths(const QVector3D &halfLengths)
+{
+    static_cast<Index*>(i)->setHalfLengths(halfLengths);
 }
 
 Box *BoxQtQml::box()

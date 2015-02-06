@@ -13,6 +13,7 @@ Rectangle {
         id: sd
         color: "yellow"
         shape: OSG.Box {
+            halfLengths: Qt.vector3d(0.5, 0.5, 0.05)
         }
         Component.onCompleted: {
             console.log("sd: " + sd)
