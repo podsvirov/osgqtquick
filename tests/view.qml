@@ -59,8 +59,7 @@ Rectangle {
         id: view
         anchors.fill: parent
         sceneData: group
-        //cameraManipulator: OSGGA.TrackballManipulator {}
-        cameraManipulator: OSGGA.OrbitManipulator {}
+        cameraManipulator: OSGGA.TrackballManipulator {}
         smooth: true
     }
 

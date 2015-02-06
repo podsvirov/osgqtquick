@@ -9,29 +9,29 @@
 
 namespace osgGA {
 
-TrackballManipulatorQtQml::Index::Index(TrackballManipulator *trackballManipulator) :
-    CameraManipulatorQtQml::Index(),
+TrackballManipulatorQtQml::Index::Index(TrackballManipulator *manipulator) :
+    OrbitManipulatorQtQml::Index(manipulator),
     qthis(0)
 {
-    othis = trackballManipulator;
+    othis = manipulator;
 }
 
 void TrackballManipulatorQtQml::Index::classBegin()
 {
     if(!othis) othis = new TrackballManipulator();
-    CameraManipulatorQtQml::Index::othis = othis;
-    CameraManipulatorQtQml::Index::qthis = qthis;
+    OrbitManipulatorQtQml::Index::othis = othis;
+    OrbitManipulatorQtQml::Index::qthis = qthis;
 
-    CameraManipulatorQtQml::Index::classBegin();
+    OrbitManipulatorQtQml::Index::classBegin();
 }
 
 TrackballManipulatorQtQml::TrackballManipulatorQtQml(QObject *parent) :
-  CameraManipulatorQtQml(parent)
+  OrbitManipulatorQtQml(parent)
 {
 }
 
 TrackballManipulatorQtQml::TrackballManipulatorQtQml(TrackballManipulatorQtQml::Index *index, QObject *parent) :
-  CameraManipulatorQtQml(index, parent)
+  OrbitManipulatorQtQml(index, parent)
 {
 }
 
@@ -39,7 +39,7 @@ void TrackballManipulatorQtQml::classBegin()
 {
     if(!i) i = new Index();
     static_cast<Index*>(i)->qthis = this;
-    CameraManipulatorQtQml::classBegin();
+    OrbitManipulatorQtQml::classBegin();
 }
 
 TrackballManipulator *TrackballManipulatorQtQml::trackballManipulator()

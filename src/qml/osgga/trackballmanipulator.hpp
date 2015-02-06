@@ -1,13 +1,13 @@
 #ifndef _OSGGA_TRACKBALLMANIPULATOR_QTQML_
 #define _OSGGA_TRACKBALLMANIPULATOR_QTQML_ 1
 
-#include <osgGA/CameraManipulatorQtQml>
+#include <osgGA/OrbitManipulatorQtQml>
 
 namespace osgGA {
 
 class TrackballManipulator;
 
-class OSGQTQML_EXPORT TrackballManipulatorQtQml : public CameraManipulatorQtQml
+class OSGQTQML_EXPORT TrackballManipulatorQtQml : public OrbitManipulatorQtQml
 {
   Q_OBJECT
 

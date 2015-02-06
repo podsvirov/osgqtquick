@@ -3,11 +3,11 @@
 
 #include <osgGA/TrackballManipulatorQtQml>
 
-#include <osgGA/CameraManipulatorQtQmlIndex>
+#include <osgGA/OrbitManipulatorQtQmlIndex>
 
 namespace osgGA {
 
-class OSGQTQML_EXPORT TrackballManipulatorQtQml::Index : public CameraManipulatorQtQml::Index
+class OSGQTQML_EXPORT TrackballManipulatorQtQml::Index : public OrbitManipulatorQtQml::Index
 {
     friend class TrackballManipulatorQtQml;
 
