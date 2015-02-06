@@ -22,11 +22,14 @@ public:
     ShapeQtQml *getShape() const;
     void setShape(ShapeQtQml *shape);
 
+    void setColor(const QColor &color);
+
 protected:
     ShapeDrawable *othis;
     ShapeDrawableQtQml *qthis;
 
     osg::ref_ptr<Shape> shape;
+    QColor color;
 };
 
 }

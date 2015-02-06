@@ -11,11 +11,19 @@ Rectangle {
 
     OSG.ShapeDrawable {
         id: sd
+        color: "yellow"
         shape: OSG.Box {
         }
         Component.onCompleted: {
             console.log("sd: " + sd)
             console.log("sd.shape: " + sd.shape)
+        }
+    }
+
+    OSG.Geode {
+        id: geode
+        Component.onCompleted: {
+            addDrawable(sd)
         }
     }
 
@@ -33,6 +41,7 @@ Rectangle {
         position: Qt.vector3d(xSlider.value, ySlider.value, zSlider.value)
         Component.onCompleted: {
             addChild(loader)
+            addChild(geode)
             console.log("group: " + group)
         }
     }

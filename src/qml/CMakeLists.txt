@@ -22,6 +22,7 @@ endmacro(META_Node)
 set(_srcs)
 set(_moc_hdrs)
 
+META_Node(osg Geode)
 META_Node(osg Shape)
 META_Node(osg Box)
 
