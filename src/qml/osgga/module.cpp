@@ -4,6 +4,7 @@
 #include "standardmanipulatorindex.hpp"
 #include "orbitmanipulatorindex.hpp"
 #include "trackballmanipulatorindex.hpp"
+#include "nodetrackermanipulatorindex.hpp"
 
 #include <osgQtQuick/Version>
 #include <QtQml>
@@ -29,6 +30,10 @@ void regisgerQtQmlTypes(const char *uri)
     qmlRegisterType<TrackballManipulatorQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "TrackballManipulator");
+
+    qmlRegisterType<NodeTrackerManipulatorQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "NodeTrackerManipulator");
 }
 
 }
