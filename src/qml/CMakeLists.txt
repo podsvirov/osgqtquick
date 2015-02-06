@@ -27,6 +27,7 @@ META_Node(osg Shape)
 META_Node(osg Box)
 
 META_Node(osgGA StandardManipulator)
+META_Node(osgGA OrbitManipulator)
 
 qt5_wrap_cpp(_mocs
   object.hpp
