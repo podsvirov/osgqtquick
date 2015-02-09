@@ -1,6 +1,8 @@
+// Qt
 import QtQuick 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 1.0
+// OpenSceneGraph
 import osg 2.0 as OSG
 import osgDB 2.0  as OSGDB
 import osgGA 2.0 as OSGGA
@@ -60,8 +62,11 @@ Rectangle {
         anchors.fill: parent
         sceneData: group
         //cameraManipulator: OSGGA.TrackballManipulator {}
-        cameraManipulator: OSGGA.NodeTrackerManipulator {
-            trackNode: geode
+        //cameraManipulator: OSGGA.NodeTrackerManipulator {
+        //    trackNode: geode
+        //}
+        cameraManipulator: OSGGA.FirstPersonManipulator {
+            node: geode
         }
     }
 

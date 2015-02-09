@@ -16,6 +16,8 @@ public:
 
     void classBegin();
 
+    void setNode(osg::NodeQtQml *node);
+
 protected:
     StandardManipulator *othis;
     StandardManipulatorQtQml *qthis;

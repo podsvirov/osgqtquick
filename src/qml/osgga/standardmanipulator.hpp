@@ -3,6 +3,8 @@
 
 #include <osgGA/CameraManipulatorQtQml>
 
+#include <osg/NodeQtQml>
+
 namespace osgGA {
 
 class StandardManipulator;
@@ -10,6 +12,8 @@ class StandardManipulator;
 class OSGQTQML_EXPORT StandardManipulatorQtQml : public CameraManipulatorQtQml
 {
   Q_OBJECT
+
+  Q_PROPERTY(osg::NodeQtQml* node READ getNode WRITE setNode NOTIFY nodeChanged)
 
 public:
   class Index;
@@ -19,9 +23,15 @@ public:
 
   void classBegin();
 
+  Q_INVOKABLE osg::NodeQtQml *getNode();
+  Q_INVOKABLE void setNode(osg::NodeQtQml *node);
+
   StandardManipulator* standardManipulator();
 
   static StandardManipulatorQtQml* fromStandardManipulator(StandardManipulator *manipulator, QObject *parent = 0);
+
+signals:
+  void nodeChanged(osg::NodeQtQml *node);
 };
 
 }

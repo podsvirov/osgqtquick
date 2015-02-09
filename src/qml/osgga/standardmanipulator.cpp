@@ -24,6 +24,17 @@ void StandardManipulatorQtQml::Index::classBegin()
     CameraManipulatorQtQml::Index::classBegin();
 }
 
+void StandardManipulatorQtQml::Index::setNode(osg::NodeQtQml *node)
+{
+    osg::Node *a = node->node();
+
+    if(othis->getNode() == a) return;
+
+    othis->setNode(a);
+
+    emit qthis->nodeChanged(node);
+}
+
 StandardManipulatorQtQml::StandardManipulatorQtQml(QObject *parent) :
   CameraManipulatorQtQml(parent)
 {
@@ -39,6 +50,16 @@ void StandardManipulatorQtQml::classBegin()
     if(!i) i = new Index();
     static_cast<Index*>(i)->qthis = this;
     CameraManipulatorQtQml::classBegin();
+}
+
+osg::NodeQtQml *StandardManipulatorQtQml::getNode()
+{
+    return osg::NodeQtQml::fromNode(static_cast<Index*>(i)->othis->getNode(), this);
+}
+
+void StandardManipulatorQtQml::setNode(osg::NodeQtQml *node)
+{
+    static_cast<Index*>(i)->setNode(node);
 }
 
 StandardManipulator *StandardManipulatorQtQml::standardManipulator()
