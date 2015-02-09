@@ -28,6 +28,7 @@ META_Node(osg Box)
 
 META_Node(osgGA StandardManipulator)
 META_Node(osgGA FirstPersonManipulator)
+META_Node(osgGA FlightManipulator)
 META_Node(osgGA OrbitManipulator)
 META_Node(osgGA NodeTrackerManipulator)
 

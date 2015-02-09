@@ -3,6 +3,7 @@
 #include "cameramanipulatorindex.hpp"
 #include "standardmanipulatorindex.hpp"
 #include "firstpersonmanipulatorindex.hpp"
+#include "flightmanipulatorindex.hpp"
 #include "orbitmanipulatorindex.hpp"
 #include "trackballmanipulatorindex.hpp"
 #include "nodetrackermanipulatorindex.hpp"
@@ -27,6 +28,10 @@ void regisgerQtQmlTypes(const char *uri)
     qmlRegisterType<FirstPersonManipulatorQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "FirstPersonManipulator");
+
+    qmlRegisterType<FlightManipulatorQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "FlightManipulator");
 
     qmlRegisterType<OrbitManipulatorQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,

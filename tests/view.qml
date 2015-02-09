@@ -65,7 +65,7 @@ Rectangle {
         //cameraManipulator: OSGGA.NodeTrackerManipulator {
         //    trackNode: geode
         //}
-        cameraManipulator: OSGGA.FirstPersonManipulator {
+        cameraManipulator: OSGGA.FlightManipulator {
             node: geode
         }
     }
