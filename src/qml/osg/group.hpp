@@ -26,6 +26,8 @@ public:
 
   Q_INVOKABLE int getNumChildren() const;
 
+  Q_INVOKABLE bool removeChildren(int pos, int numChildrenToRemove);
+
   Group* group();
 
   static GroupQtQml* fromGroup(Group *group, QObject *parent = 0);

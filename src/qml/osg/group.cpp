@@ -91,6 +91,15 @@ int GroupQtQml::getNumChildren() const
     return static_cast<osg::Group*>(i->osgObject())->getNumChildren();
 }
 
+bool GroupQtQml::removeChildren(int pos, int numChildrenToRemove)
+{
+    if (pos < 0 || numChildrenToRemove < 0) return false;
+
+    return static_cast<Index*>(i)->othis->removeChildren(
+                static_cast<unsigned int>(pos),
+                static_cast<unsigned int>(numChildrenToRemove));
+}
+
 Group *GroupQtQml::group()
 {
     return static_cast<Index*>(i)->othis;
