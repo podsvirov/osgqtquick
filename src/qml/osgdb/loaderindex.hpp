@@ -6,6 +6,7 @@
 #include <osg/GroupQtQmlIndex>
 
 #include <osgDB/ReadFile>
+#include <osgDB/FileUtils>
 
 #include <QThread>
 
@@ -60,13 +61,10 @@ public:
             }
             else
             {
-                if(const char* path = std::getenv("OSG_FILE_PATH"))
+                std::string file = osgDB::findDataFile(url.fileName().toStdString());
+                if(!file.empty())
                 {
-                    info.setFile(QDir(QString(path)), url.fileName());
-                    if(info.exists())
-                    {
-                        node = readNodeFile(info.filePath().toStdString());
-                    }
+                    node = readNodeFile(file);
                 }
             }
         }
