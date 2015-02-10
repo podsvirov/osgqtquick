@@ -42,6 +42,21 @@ void EarthManipulatorQtQml::classBegin()
     CameraManipulatorQtQml::classBegin();
 }
 
+void EarthManipulatorQtQml::pan(double dx, double dy)
+{
+    static_cast<Index*>(i)->othis->pan(dx, dy);
+}
+
+void EarthManipulatorQtQml::rotate(double dx, double dy)
+{
+    static_cast<Index*>(i)->othis->rotate(dx, dy);
+}
+
+void EarthManipulatorQtQml::zoom(double dx, double dy)
+{
+    static_cast<Index*>(i)->othis->zoom(dx, dy);
+}
+
 EarthManipulator *EarthManipulatorQtQml::earthManipulator()
 {
     return static_cast<Index*>(i)->othis;

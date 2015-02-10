@@ -19,6 +19,10 @@ public:
 
   void classBegin();
 
+  Q_INVOKABLE void pan(double dx, double dy);
+  Q_INVOKABLE void rotate(double dx, double dy);
+  Q_INVOKABLE void zoom(double dx, double dy);
+
   EarthManipulator* earthManipulator();
 
   static EarthManipulatorQtQml* fromEarthManipulator(EarthManipulator *earthManipulator, QObject *parent = 0);

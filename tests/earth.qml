@@ -23,15 +23,29 @@ Rectangle {
         }
     }
 
+    OSGEarthUtil.EarthManipulator {
+        id: manipulator
+    }
+
     OSGViewer.View {
         id: view
         anchors.fill: parent
         sceneData: loader
-        cameraManipulator: OSGEarthUtil.EarthManipulator {}
+        cameraManipulator: manipulator
     }
 
-    Button {
-        text: "Home"
-        onClicked: view.cameraManipulator.home()
+    ColumnLayout {
+        Button {
+            text: "Home"
+            onClicked: manipulator.home()
+        }
+        Button {
+            text: "Zoom"
+            onClicked: manipulator.zoom(100, -0.1)
+        }
+        Button {
+            text: "Rotate"
+            onClicked: manipulator.rotate(Math.PI/ 4, Math.PI / 4)
+        }
     }
 }
