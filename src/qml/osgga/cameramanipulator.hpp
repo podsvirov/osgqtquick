@@ -3,6 +3,8 @@
 
 #include <osg/ObjectQtQml>
 
+#include <QVector3D>
+
 namespace osgGA {
 
 class CameraManipulator;
@@ -18,6 +20,11 @@ public:
   CameraManipulatorQtQml(Index *index, QObject *parent = 0);
 
   void classBegin();
+
+  Q_INVOKABLE void setHomePosition(const QVector3D &eye,
+                                   const QVector3D &center,
+                                   const QVector3D &up,
+                                   bool autoComputeHomePosition = false);
 
   Q_INVOKABLE void home(qreal duration = 0.0);
 

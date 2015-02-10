@@ -41,6 +41,15 @@ void CameraManipulatorQtQml::classBegin()
     osgQtQml::Object::classBegin();
 }
 
+void CameraManipulatorQtQml::setHomePosition(const QVector3D &eye, const QVector3D &center, const QVector3D &up, bool autoComputeHomePosition)
+{
+    static_cast<Index*>(i)->othis->setHomePosition(
+                osgQt::vec3d(eye),
+                osgQt::vec3d(center),
+                osgQt::vec3d(up),
+                autoComputeHomePosition);
+}
+
 void CameraManipulatorQtQml::home(qreal duration)
 {
     static_cast<Index*>(i)->othis->home(static_cast<double>(duration));
