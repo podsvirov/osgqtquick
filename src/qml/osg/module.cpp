@@ -11,6 +11,7 @@
 #include "positionattitudetransformindex.hpp"
 #include "shapeindex.hpp"
 #include "boxindex.hpp"
+#include "sphereindex.hpp"
 #include "geodeindex.hpp"
 
 #include <osg/Group>
@@ -73,6 +74,10 @@ void regisgerQtQmlTypes(const char *uri)
     qmlRegisterType<BoxQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Box");
+
+    qmlRegisterType<SphereQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "Sphere");
 
     osgQtQml::Index::insertMake(&qtMakeIndex);
     osgQtQml::Index::insertMake(&osgMakeIndex);

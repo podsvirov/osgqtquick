@@ -25,6 +25,7 @@ set(_moc_hdrs)
 META_Node(osg Geode)
 META_Node(osg Shape)
 META_Node(osg Box)
+META_Node(osg Sphere)
 
 META_Node(osgGA StandardManipulator)
 META_Node(osgGA FirstPersonManipulator)
