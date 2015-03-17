@@ -20,6 +20,10 @@ set(osgQtQuick_VERSION
   ${osgQtQuick_VERSION_TWEAK})
 string(REPLACE ";" "." osgQtQuick_VERSION "${osgQtQuick_VERSION}")
 
+if(NOT DEFINED CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX  "d")
+endif()
+
 set(osgQtQuick_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}")
 
 configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/version.hpp.in"
