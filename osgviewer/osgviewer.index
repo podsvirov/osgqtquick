@@ -7,7 +7,7 @@
             <contents name="types" title="Types" level="1"/>
         </page>
         <namespace threadsafety="unspecified" name="osgViewer" href="osgviewer.html" access="private" status="internal" location="compositeviewer.hpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgviewer/compositeviewer.hpp" lineno="6">
-            <class threadsafety="unspecified" name="CompositeViewerQtQml" fullname="osgViewer::CompositeViewerQtQml" href="osgviewer-compositeviewerqtqml.html" access="public" status="commendable" location="compositeviewer.hpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgviewer/compositeviewer.hpp" lineno="10" bases="">
+            <class threadsafety="unspecified" name="CompositeViewerQtQml" fullname="osgViewer::CompositeViewerQtQml" href="osgviewer-compositeviewerqtqml.html" access="public" status="commendable" location="compositeviewer.hpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgviewer/compositeviewer.hpp" lineno="10" bases="ObjectQtQml">
                 <function threadsafety="unspecified" name="CompositeViewerQtQml" fullname="osgViewer::CompositeViewerQtQml::CompositeViewerQtQml" href="osgviewer-compositeviewerqtqml.html#CompositeViewerQtQml-2" access="public" status="commendable" location="compositeviewer.hpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgviewer/compositeviewer.hpp" lineno="18" virtual="non" meta="constructor" const="false" static="false" overload="true" overload-number="2" type="" signature="CompositeViewerQtQml(Index * index, QObject * parent)">
                     <parameter left="Index *" right="" name="index" default=""/>
                     <parameter left="QObject *" right="" name="parent" default="0"/>
@@ -157,5 +157,5 @@
             <qmlproperty threadsafety="unspecified" name="sceneData" fullname="osgViewer::View::sceneData" href="qml-osgviewer-view.html#sceneData-prop" access="public" status="commendable" location="view.cpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/quick/osgviewer/view.cpp" lineno="288" type="Node" attached="false" writable="true"/>
         </qmlclass>
     </namespace>
-    <page name="osgqmlmodules" href="osgqmlmodules.html" access="private" status="internal" subtype="group" seen="false" members="osgViewer" title="" fulltitle="" subtitle=""/>
+    <page name="osgqmlmodules" href="osgqmlmodules.html" access="private" status="internal" subtype="group" seen="false" members="osg,osgGA,osgViewer" title="" fulltitle="" subtitle=""/>
 </INDEX>

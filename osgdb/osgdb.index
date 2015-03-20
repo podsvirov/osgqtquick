@@ -6,8 +6,11 @@
             <contents name="importing" title="Importing" level="1"/>
             <contents name="types" title="Types" level="1"/>
         </page>
+        <qmlclass name="Loader" qml-module-name="osgDB" qml-base-type="osg::Group" fullname="osgDB::Loader" href="qml-osgdb-loader.html" access="public" status="commendable" location="loader.cpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgdb/loader.cpp" lineno="10" title="Loader" fulltitle="Loader" subtitle="" brief="The Loader item allows dynamically loading an Node-based subtree from a URL">
+            <qmlproperty threadsafety="unspecified" name="source" fullname="osgDB::Loader::source" href="qml-osgdb-loader.html#source-prop" access="public" status="commendable" location="loader.cpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgdb/loader.cpp" lineno="99" type="url" attached="false" writable="true"/>
+        </qmlclass>
         <namespace threadsafety="unspecified" name="osgDB" href="osgdb.html" access="private" status="internal" location="loader.hpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgdb/loader.hpp" lineno="7">
-            <class threadsafety="unspecified" name="LoaderQtQml" fullname="osgDB::LoaderQtQml" href="osgdb-loaderqtqml.html" access="public" status="commendable" location="loader.hpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgdb/loader.hpp" lineno="9" bases="">
+            <class threadsafety="unspecified" name="LoaderQtQml" fullname="osgDB::LoaderQtQml" href="osgdb-loaderqtqml.html" access="public" status="commendable" location="loader.hpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgdb/loader.hpp" lineno="9" bases="GroupQtQml">
                 <function threadsafety="unspecified" name="LoaderQtQml" fullname="osgDB::LoaderQtQml::LoaderQtQml" href="osgdb-loaderqtqml.html#LoaderQtQml-2" access="public" status="commendable" location="loader.hpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgdb/loader.hpp" lineno="20" virtual="non" meta="constructor" const="false" static="false" overload="true" overload-number="2" type="" signature="LoaderQtQml(Index * , QObject * parent)">
                     <parameter left="Index *" right="" name="" default=""/>
                     <parameter left="QObject *" right="" name="parent" default="0"/>
@@ -57,9 +60,6 @@
                 </class>
             </class>
         </namespace>
-        <qmlclass name="Loader" qml-module-name="osgDB" fullname="osgDB::Loader" href="qml-osgdb-loader.html" access="public" status="commendable" location="loader.cpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgdb/loader.cpp" lineno="10" title="Loader" fulltitle="Loader" subtitle="" brief="The Loader item allows dynamically loading an Node-based subtree from a URL">
-            <qmlproperty threadsafety="unspecified" name="source" fullname="osgDB::Loader::source" href="qml-osgdb-loader.html#source-prop" access="public" status="commendable" location="loader.cpp" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgdb/loader.cpp" lineno="99" type="url" attached="false" writable="true"/>
-        </qmlclass>
     </namespace>
-    <page name="osgqmlmodules" href="osgqmlmodules.html" access="private" status="internal" subtype="group" seen="false" members="osgDB" title="" fulltitle="" subtitle=""/>
+    <page name="osgqmlmodules" href="osgqmlmodules.html" access="private" status="internal" subtype="group" seen="false" members="osg,osgDB" title="" fulltitle="" subtitle=""/>
 </INDEX>
