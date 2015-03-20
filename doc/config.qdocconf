@@ -1,0 +1,51 @@
+version                 = 2.0
+buildversion = "osgQtQuick 2.0 Reference Documentation"
+
+imagedirs   = images
+
+sources.fileextensions = "*.cpp *.qdoc *.mm *.qml"
+headers.fileextensions = "*.h *.ch *.h++ *.hh *.hpp *.hxx"
+
+HTML.extraimages += images/arrow_bc.png \
+                    images/home.png \
+                    images/ico_out.png \
+                    images/ico_note.png \
+                    images/ico_note_attention.png \
+                    images/btn_prev.png \
+                    images/btn_next.png \
+                    images/bullet_dn.png \
+                    images/bullet_sq.png \
+                    images/bgrContent.png \
+                    images/logo.png
+
+HTML.stylesheets  = style/offline.css
+
+HTML.nonavigationbar = "false"
+navigation.homepage  = "osgQtQuick"
+
+HTML.headerstyles = \
+    "  <link rel=\"stylesheet\" type=\"text/css\" href=\"style/offline.css\" />\n"
+
+HTML.endheader = \
+    "</head>\n"
+
+HTML.postheader = \
+    "<body>\n" \
+    "<div class=\"header\" id=\"qtdocheader\">\n"\
+    "    <div class=\"main\">\n" \
+    "    <div class=\"main-rounded\">\n" \
+    "        <div class=\"navigationbar\">\n"\
+    "        <ul>\n"\
+
+HTML.postpostheader = \
+    "    </ul>\n"\
+    "    </div>\n" \
+    "</div>\n" \
+    "<div class=\"content\">\n" \
+    "<div class=\"line\">\n" \
+    "<div class=\"content mainContent\">\n" \
+
+macro.OSG.HTML = "<a href=\"http://openscenegraph.org\">OpenSceneGraph</a>"
+macro.OSE.HTML = "<a href=\"http://osgearth.org\">osgEarth</a>"
+macro.QML.HTML = "<a href=\"http://doc.qt.io/qt-5/qtqml-index.html\">Qt QML</a>"
+macro.QTQ.HTML = "<a href=\"http://doc.qt.io/qt-5/qtquick-index.html\">Qt Quick</a>"

@@ -7,6 +7,13 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype StandardManipulator
+   \inherits CameraManipulator
+   \inqmlmodule osgGA
+   \brief Provides basic functionality for user controlled manipulation
+ */
+
 namespace osgGA {
 
 StandardManipulatorQtQml::Index::Index(StandardManipulator *manipulator) :

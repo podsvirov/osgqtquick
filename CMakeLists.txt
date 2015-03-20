@@ -7,6 +7,9 @@ set(osgQtQuick_VERSION_MINOR 0)
 set(osgQtQuick_VERSION_PATCH 0)
 set(osgQtQuick_VERSION_TWEAK 4)
 
+set(osgQtQuick_BUILD_DOCS OFF
+  CACHE BOOL "Set to ON to build reference documentation (By default is OFF)")
+
 set(osgQtQuick_WITH_EARTH OFF
   CACHE BOOL "Set to ON to build with osgEarth library support (By default is OFF)")
 
@@ -49,3 +52,7 @@ else()
 endif()
 
 add_subdirectory(src)
+
+if(osgQtQuick_BUILD_DOCS)
+  add_subdirectory(doc)
+endif()

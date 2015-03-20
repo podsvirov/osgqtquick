@@ -1,0 +1,16 @@
+include(config.qdocconf)
+
+project = osgGA
+description = osgGA Module
+
+navigation.landingpage = "osgGA"
+
+headerdirs = ../src/qml/osgga
+sourcedirs = src/osgga \
+             ../src/qml/osgga
+
+outputdir = html/osgga
+
+indexes   = html/osgdoc/osgdoc.index \
+            html/osg/osg.index \
+            html/osgga/osgga.index

@@ -7,6 +7,13 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype TrackballManipulator
+   \inherits OrbitManipulator
+   \inqmlmodule osgGA
+   \brief Trackball manipulator
+ */
+
 namespace osgGA {
 
 TrackballManipulatorQtQml::Index::Index(TrackballManipulator *manipulator) :

@@ -7,6 +7,14 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype OrbitManipulator
+   \inherits StandardManipulator
+   \inqmlmodule osgGA
+   \brief Manipulator based on focal center, distance from the center,
+   and orientation of distance vector to the eye
+ */
+
 namespace osgGA {
 
 OrbitManipulatorQtQml::Index::Index(OrbitManipulator *manipulator) :

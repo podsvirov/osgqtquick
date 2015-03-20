@@ -7,6 +7,12 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype CameraManipulator
+   \inqmlmodule osgGA
+   \brief Uncreatable base type for all camera manipulators
+ */
+
 namespace osgGA {
 
 CameraManipulatorQtQml::Index::Index(CameraManipulator *cameraManipulator) :

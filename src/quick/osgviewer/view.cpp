@@ -10,6 +10,12 @@
 
 #include <QMouseEvent>
 
+/*!
+   \qmltype View
+   \inqmlmodule osgViewer
+   \brief The View type holds a single view on a scene
+ */
+
 namespace osgViewer {
 
 /* ------------------------------------------------------- struct PreDraw --- */
@@ -279,6 +285,12 @@ void ViewQtQuick::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
     osgQtQuick::Object::itemChange(change, value);
 }
 
+/*!
+   \qmlproperty Node osgViewer::View::sceneData
+
+   The \l {View}'s scene graph
+ */
+
 osg::NodeQtQml *ViewQtQuick::getSceneData()
 {
     return static_cast<Index*>(i)->getSceneData();
@@ -299,6 +311,11 @@ void ViewQtQuick::setCamera(osg::CameraQtQml *camera)
     static_cast<Index*>(i)->setCamera(camera);
 }
 
+/*!
+   \qmlproperty CameraManipulator osgViewer::View::cameraManipulator
+
+   The \l {View}'s CameraManipulator
+ */
 
 osgGA::CameraManipulatorQtQml *ViewQtQuick::getCameraManipulator()
 {

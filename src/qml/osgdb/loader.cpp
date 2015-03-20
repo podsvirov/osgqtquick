@@ -7,6 +7,14 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype Loader
+   \inherits Group
+   \inqmlmodule osgDB
+   \brief The Loader item allows dynamically loading an Node-based subtree from a URL
+ */
+
+
 namespace osgDB {
 
 LoaderQtQml::Index::Index(osg::Group *group) :
@@ -87,6 +95,12 @@ void LoaderQtQml::setSource(const QUrl &url)
 {
     static_cast<Index*>(i)->setUrl(url);
 }
+
+/*!
+   \qmlproperty url osgDB::Loader::source
+
+   This property holds the URL of the Node to instantiate
+ */
 
 QUrl LoaderQtQml::getSource()
 {

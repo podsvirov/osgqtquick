@@ -1,0 +1,23 @@
+/*!
+   \qmlmodule osgViewer 2.0
+   \title osgViewer
+   \brief Contains QML types for osgViewer library.
+   \ingroup osgqmlmodules
+
+   The osgViewer module provides high level viewer functionality designed to
+   make it easier to write a range of different types of viewers, from viewers
+   embedded in existing windows via SimpleViewer, through to highly scalable and
+   flexible Viewer and Composite types
+
+   \chapter Importing
+
+   To use the types in this module, import the module with the following line:
+
+   \qml
+   import osgViewer 2.0
+   \endqml
+
+   \chapter Types
+
+   The following types are provided:
+ */

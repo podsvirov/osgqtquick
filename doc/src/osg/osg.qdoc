@@ -1,0 +1,21 @@
+/*!
+   \qmlmodule osg 2.0
+   \title osg
+   \brief Contains QML types for osg library.
+   \ingroup osgqmlmodules
+
+   The core osg module provides the basic scene graph types such as Nodes, State
+   and Drawables, and maths and general helper types
+
+   \chapter Importing
+
+   To use the types in this module, import the module with the following line:
+
+   \qml
+        import osg 2.0
+   \endqml
+
+   \chapter Types
+
+   The following types are provided:
+ */

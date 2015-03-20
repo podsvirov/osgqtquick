@@ -7,6 +7,13 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype Group
+   \inherits Node
+   \inqmlmodule osg
+   \brief General group node which maintains a list of children
+ */
+
 namespace osg {
 
 GroupQtQml::Index::Index(Group *group) :
@@ -64,6 +71,12 @@ void GroupQtQml::classBegin()
     NodeQtQml::classBegin();
 }
 
+/*!
+   \qmlmethod osg::Group::addChild(Node child)
+
+   Add \l {Node} to \l {Group}.
+ */
+
 bool GroupQtQml::addChild(NodeQtQml *child)
 {
     if (static_cast<GroupQtQml::Index*>(i)->addChild(child))
@@ -75,6 +88,12 @@ bool GroupQtQml::addChild(NodeQtQml *child)
     return false;
 }
 
+/*!
+   \qmlmethod osg::Group::removeChild(Node child)
+
+   Remove \l {Node} from \l {Group}.
+ */
+
 bool GroupQtQml::removeChild(NodeQtQml *child)
 {
     if (static_cast<GroupQtQml::Index*>(i)->removeChild(child))
@@ -85,6 +104,12 @@ bool GroupQtQml::removeChild(NodeQtQml *child)
 
     return false;
 }
+
+/*!
+   \qmlproperty int osg::Group::numChildren
+
+   Number of children nodes
+ */
 
 int GroupQtQml::getNumChildren() const
 {

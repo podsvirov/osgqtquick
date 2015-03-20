@@ -1,0 +1,15 @@
+include(config.qdocconf)
+
+project = osgDB
+description = osgDB Module
+
+navigation.landingpage = "osgDB"
+
+headerdirs = ../src/qml/osgdb
+sourcedirs = src/osgdb \
+             ../src/qml/osgdb
+
+outputdir = html/osgdb
+
+indexes   = html/osgdoc/osgdoc.index \
+            html/osg/osg.index

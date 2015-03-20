@@ -1,0 +1,14 @@
+include(config.qdocconf)
+
+project = osg
+description = osg Module
+
+navigation.landingpage = "osg"
+
+headerdirs = ../src/qml/osg
+sourcedirs = src/osg \
+             ../src/qml/osg
+
+outputdir = html/osg
+
+indexes   = html/osgdoc/osgdoc.index

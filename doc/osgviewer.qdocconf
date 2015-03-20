@@ -1,0 +1,18 @@
+include(config.qdocconf)
+
+project = osgViewer
+description = osgViewer Module
+
+navigation.landingpage = "osgViewer"
+
+headerdirs = ../src/qml/osgviewer \
+             ../src/quick/osgviewer
+sourcedirs = src/osgviewer \
+             ../src/qml/osgviewer \
+             ../src/quick/osgviewer
+
+outputdir = html/osgviewer
+
+indexes   = html/osgdoc/osgdoc.index \
+            html/osg/osg.index \
+            html/osgga/osgga.index

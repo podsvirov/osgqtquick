@@ -7,6 +7,12 @@
 
 namespace osg {
 
+/*!
+   \qmltype Node
+   \inqmlmodule osg
+   \brief Base type for all internal nodes in the scene graph
+ */
+
 NodeQtQml::Index::Index(Node *node) :
     ObjectQtQml::Index(node),
     qthis(0)

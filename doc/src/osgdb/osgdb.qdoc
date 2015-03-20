@@ -1,0 +1,21 @@
+/*!
+   \qmlmodule osgDB 2.0
+   \title osgDB
+   \brief Contains QML types for osgDB library.
+   \ingroup osgqmlmodules
+
+   The osgDB module provides support for reading and writing scene graphs,
+   providing a plugin framework and file utility types
+
+   \chapter Importing
+
+   To use the types in this module, import the module with the following line:
+
+   \qml
+   import osgDB 2.0
+   \endqml
+
+   \chapter Types
+
+   The following types are provided:
+ */
