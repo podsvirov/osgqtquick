@@ -2,7 +2,7 @@ qt5_generate_moc(main.cpp main.moc)
 
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
-SET(APP_NAME "testQGuiApp")
+SET(APP_NAME testQGuiApp)
 ADD_EXECUTABLE(${APP_NAME} main.cpp main.moc)
 
 qt5_use_modules(${APP_NAME} Widgets OpenGL Declarative Quick)
