@@ -18,8 +18,9 @@ endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
 
 add_library(osgviewerplugin MODULE plugin.cpp plugin.moc)
 
-set_target_properties(osgviewerplugin PROPERTIES
-  COMPILE_FLAGS "-DQT_PLUGIN -DQT_NO_DEBUG")
+# Why are these needed? DQT_NO_DEBUG causes mixing debug and release errors
+#set_target_properties(osgviewerplugin PROPERTIES
+#  COMPILE_FLAGS "-DQT_PLUGIN -DQT_NO_DEBUG")
 
 target_link_libraries(osgviewerplugin osgQtQml osgQtQuick Qt5::Quick)
 

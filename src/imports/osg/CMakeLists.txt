@@ -18,8 +18,9 @@ include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
 add_library(osgplugin MODULE plugin.cpp plugin.moc)
 
-set_target_properties(osgplugin PROPERTIES
-  COMPILE_FLAGS "-DQT_PLUGIN -DQT_NO_DEBUG")
+# Why are these needed? DQT_NO_DEBUG causes mixing debug and release errors
+#set_target_properties(osgplugin PROPERTIES
+#  COMPILE_FLAGS "-DQT_PLUGIN -DQT_NO_DEBUG")
 
 target_link_libraries(osgplugin osgQtQml Qt5::Qml)
 
