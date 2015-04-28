@@ -59,7 +59,11 @@ osg::NodeQtQml *ViewQtQuick::Index::getSceneData()
 
 void ViewQtQuick::Index::setSceneData(osg::NodeQtQml *node)
 {
+    if(getSceneData() == node) return;
+
     othis->setSceneData(node->node());
+
+    emit qthis->sceneDataChanged(node);
 }
 
 /*!
