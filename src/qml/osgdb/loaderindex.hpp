@@ -53,20 +53,25 @@ public:
     }
 
     void run() {
+        std::string file;
         if(url.isLocalFile()) {
-            QFileInfo info(url.toLocalFile());            
+            QFileInfo info(url.toLocalFile());
             if(info.exists())
             {
-                node = readNodeFile(info.filePath().toStdString());
+                file = info.filePath().toStdString();
             }
             else
             {
-                std::string file = osgDB::findDataFile(url.fileName().toStdString());
-                if(!file.empty())
-                {
-                    node = readNodeFile(file);
-                }
+                file = osgDB::findDataFile(url.fileName().toStdString());
             }
+        }
+        else { // no local file
+            file = url.toString().remove("file:///").toStdString();
+        }
+
+        if(!file.empty())
+        {
+            node = readNodeFile(file);
         }
 
         emit loaded(url, node.get());
