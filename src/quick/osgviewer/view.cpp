@@ -287,6 +287,7 @@ osg::NodeQtQml *ViewQtQuick::getSceneData()
 void ViewQtQuick::setSceneData(osg::NodeQtQml *node)
 {
     static_cast<Index*>(i)->setSceneData(node);
+    emit sceneDataChanged(node);
 }
 
 osg::CameraQtQml *ViewQtQuick::getCamera()
