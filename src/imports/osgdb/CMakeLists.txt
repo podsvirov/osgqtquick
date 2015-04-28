@@ -22,7 +22,7 @@ add_library(osgdbplugin MODULE plugin.cpp plugin.moc)
 #set_target_properties(osgdbplugin PROPERTIES
 #  COMPILE_FLAGS "-DQT_PLUGIN -DQT_NO_DEBUG")
 
-target_link_libraries(osgdbplugin osgQtQml Qt5::Qml)
+target_link_libraries(osgdbplugin osgQtQml Qt5::Qml ${OPENGL_LIBRARIES})
 
 file(WRITE "${CMAKE_BINARY_DIR}/imports/osgDB/qmldir"
   "module osgDB\nplugin osgdbplugin\n")

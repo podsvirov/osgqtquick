@@ -18,7 +18,7 @@ Window::Window(QQuickWindow *window) :
 
     d.window = window;
 
-    connect(window, SIGNAL(beforeRendering()), this, SLOT(frame()));
+    connect(window, SIGNAL(beforeRendering()), this, SLOT(frame()), Qt::DirectConnection);
 
     // Render loop
     d.window->setClearBeforeRendering(false);
@@ -56,10 +56,70 @@ Window *Window::fromWindow(QQuickWindow *window)
 
 void Window::frame()
 {
+#if 0
     // Qt bug!?
     QOpenGLContext::currentContext()->functions()->glUseProgram(0);
 
     d.viewer->frame();
+#endif
+#if 1
+    // save the current context
+    // note: this will save only Qt-based contexts
+    const QOpenGLContext*savedContext = QOpenGLContext::currentContext();
+    QSurface* savedSurface = QOpenGLContext::currentContext()->surface();
+
+    // Qt bug!?
+    QOpenGLContext::currentContext()->functions()->glUseProgram(0);
+
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+
+    //char* version = (char*)glGetString(GL_VERSION);
+
+//    if( callFrame ) d.viewer->frame();
+    d.viewer->frame();
+
+graphicsContext()->getState()->dirtyAllModes();//
+graphicsContext()->getState()->dirtyAllAttributes();
+graphicsContext()->getState()->dirtyAllVertexArrays();
+
+graphicsContext()->getState()->disableAllVertexArrays();//
+graphicsContext()->getState()->disableVertexPointer();
+graphicsContext()->getState()->disableTexCoordPointersAboveAndIncluding(0);//
+graphicsContext()->getState()->disableVertexAttribPointersAboveAndIncluding(0);
+graphicsContext()->getState()->disableColorPointer();
+graphicsContext()->getState()->disableFogCoordPointer();
+graphicsContext()->getState()->disableNormalPointer();
+graphicsContext()->getState()->disableSecondaryColorPointer();
+
+/*
+    // qpainter uses vertex attribs 3,4,5 so we need to explicitly disable them:
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(0);
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(1);
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(2);
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(3); 
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(4); 
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(5); 
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(6); 
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(7); 
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(8); 
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(9); 
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(10); 
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(11); 
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(12); 
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(13); 
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(14);
+    QOpenGLContext::currentContext()->functions()->glDisableVertexAttribArray(15); 
+*/
+
+    // not sure if this is required; osg changes this when using textures so I reset it to default 
+    glPixelStorei(GL_UNPACK_ALIGNMENT,4); 
+
+    glPopAttrib();
+
+    // restore previous context
+    if ( savedContext )
+        const_cast< QOpenGLContext* >( savedContext )->makeCurrent(savedSurface);
+#endif
 }
 
 void Window::timerEvent(QTimerEvent *event)

@@ -111,6 +111,7 @@ target_link_libraries(osgQtQml
   ${OSGGA_LIBRARIES}
   ${OSGVIEWER_LIBRARIES}
   ${OSGEARTHUTIL_LIBRARY}
+  ${OPENGL_LIBRARIES}
   Qt5::Gui
   Qt5::Qml)
 

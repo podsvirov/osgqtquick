@@ -37,6 +37,8 @@ target_link_libraries(osgQtQuick
     ${OSG_LIBRARIES}
     ${OSGVIEWER_LIBRARIES}
     ${OSGGA_LIBRARIES}
+    ${OPENGL_LIBRARIES}
+    Opengl32.lib
     Qt5::Qml
     Qt5::Quick)
 
