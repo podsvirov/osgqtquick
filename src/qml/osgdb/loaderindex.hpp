@@ -68,6 +68,13 @@ public:
                 }
             }
         }
+        else { // no local file
+            QString qfile = url.toString().remove("file:///");
+            if(!qfile.isEmpty())
+            {
+                node = readNodeFile(qfile.toStdString());
+            }
+        }
 
         emit loaded(url, node.get());
     }
