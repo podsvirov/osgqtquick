@@ -2,6 +2,7 @@
 
 #include "objectindex.hpp"
 #include "nodeindex.hpp"
+#include "notifyindex.hpp"
 #include "groupindex.hpp"
 #include "transformindex.hpp"
 #include "cameraindex.hpp"
@@ -34,6 +35,10 @@ void regisgerQtQmlTypes(const char *uri)
     qmlRegisterType<NodeQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Node");
+
+    qmlRegisterType<NotifyQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "Notify");
 
     qmlRegisterType<GeodeQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
