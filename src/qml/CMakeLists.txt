@@ -38,6 +38,7 @@ qt5_wrap_cpp(_mocs
   object.hpp
   osg/object.hpp
   osg/node.hpp
+  osg/notify.hpp
   osg/group.hpp
   osg/transform.hpp
   osg/positionattitudetransform.hpp
@@ -67,6 +68,7 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
 # osg
   osg/object.cpp
   osg/node.cpp
+  osg/notify.cpp
   osg/group.cpp
   osg/transform.cpp
   osg/positionattitudetransform.cpp
@@ -142,6 +144,15 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NodeQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/nodeindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/nodeindex.hpp"
   DESTINATION "include/osg" RENAME "NodeQtQmlIndex")
+
+ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NotifyQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/notify.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/notify.hpp"
+  DESTINATION "include/osg" RENAME "NotifyQtQml")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NotifyQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/notifyindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/notifyindex.hpp"
+  DESTINATION "include/osg" RENAME "NotifyQtQmlIndex")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GroupQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/group.hpp\"\n")
