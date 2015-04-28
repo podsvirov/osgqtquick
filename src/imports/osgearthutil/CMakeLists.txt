@@ -18,8 +18,8 @@ endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
 
 add_library(osgearthutilplugin MODULE plugin.cpp plugin.moc)
 
-set_target_properties(osgearthutilplugin PROPERTIES
-  COMPILE_FLAGS "-DQT_PLUGIN -DQT_NO_DEBUG")
+#set_target_properties(osgearthutilplugin PROPERTIES
+#  COMPILE_FLAGS "-DQT_PLUGIN -DQT_NO_DEBUG")
 
 target_link_libraries(osgearthutilplugin osgQtQml Qt5::Qml)
 
