@@ -34,6 +34,15 @@ void CameraQtQml::Index::setClearColor(const QColor &color)
     emit qthis->clearColorChanged(color);
 }
 
+void CameraQtQml::Index::setNearFarRatio(const double ratio)
+{
+    if(othis->getNearFarRatio() == ratio) return;
+
+    othis->setNearFarRatio(ratio);
+
+    emit qthis->nearFarRatioChanged(ratio);
+}
+
 CameraQtQml::CameraQtQml(QObject *parent) :
   GroupQtQml(parent)
 {
@@ -59,6 +68,16 @@ QColor CameraQtQml::getClearColor() const
 void CameraQtQml::setClearColor(const QColor &color)
 {
     static_cast<Index*>(i)->setClearColor(color);
+}
+
+double CameraQtQml::getNearFarRatio() const
+{
+    return static_cast<Index*>(i)->othis->getNearFarRatio();
+}
+
+void CameraQtQml::setNearFarRatio(const double ratio)
+{
+    static_cast<Index*>(i)->setNearFarRatio(ratio);
 }
 
 Camera *CameraQtQml::camera()

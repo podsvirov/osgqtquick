@@ -14,6 +14,7 @@ class OSGQTQML_EXPORT CameraQtQml : public GroupQtQml
   Q_OBJECT
 
   Q_PROPERTY(QColor clearColor READ getClearColor WRITE setClearColor NOTIFY clearColorChanged)
+  Q_PROPERTY(double nearFarRatio READ getNearFarRatio WRITE setNearFarRatio NOTIFY nearFarRatioChanged)
 
 public:
   class Index;
@@ -26,12 +27,16 @@ public:
   Q_INVOKABLE QColor getClearColor() const;
   Q_INVOKABLE void setClearColor(const QColor &color);
 
+  Q_INVOKABLE double getNearFarRatio() const;
+  Q_INVOKABLE void setNearFarRatio(const double ratio);
+
   Camera* camera();
 
   static CameraQtQml* fromCamera(Camera *camera, QObject *parent = 0);
 
 signals:
   void clearColorChanged(const QColor &color) const;
+  void nearFarRatioChanged(const double ratio) const;
 };
 
 }
