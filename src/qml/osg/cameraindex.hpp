@@ -17,6 +17,7 @@ public:
     void classBegin();
 
     void setClearColor(const QColor &color);
+    void setNearFarRatio(const double ratio);
 
 protected:
     Camera *othis;
