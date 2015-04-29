@@ -20,8 +20,8 @@ ADD_EXECUTABLE(${APP_NAME} main.cpp main.moc)
 
 qt5_use_modules(${APP_NAME} Widgets OpenGL Declarative Quick)
 
-#set_target_properties(${APP_NAME} PROPERTIES
-#  COMPILE_FLAGS "-DQT_PLUGIN -DQT_NO_DEBUG")
+set_target_properties(${APP_NAME} PROPERTIES
+  COMPILE_FLAGS "-DQT_PLUGIN")# -DQT_NO_DEBUG")
 
 #target_link_libraries(${APP_NAME} osgQtQml Qt5::Qml)
 

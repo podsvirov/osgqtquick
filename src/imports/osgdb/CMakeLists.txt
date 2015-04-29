@@ -19,8 +19,8 @@ endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
 add_library(osgdbplugin MODULE plugin.cpp plugin.moc)
 
 # Why are these needed? DQT_NO_DEBUG causes mixing debug and release errors
-#set_target_properties(osgdbplugin PROPERTIES
-#  COMPILE_FLAGS "-DQT_PLUGIN -DQT_NO_DEBUG")
+set_target_properties(osgdbplugin PROPERTIES
+  COMPILE_FLAGS "-DQT_PLUGIN")# -DQT_NO_DEBUG")
 
 target_link_libraries(osgdbplugin osgQtQml Qt5::Qml ${OPENGL_LIBRARIES})
 
