@@ -45,7 +45,7 @@ META_Node(osgGA FlightManipulator)
 META_Node(osgGA OrbitManipulator)
 META_Node(osgGA NodeTrackerManipulator)
 
-qt5_wrap_cpp(_mocs
+SET(TARGET_H
   object.hpp
   osg/object.hpp
   osg/node.hpp
@@ -62,20 +62,11 @@ qt5_wrap_cpp(_mocs
   osgga/cameramanipulator.hpp
   osgga/trackballmanipulator.hpp
   osgviewer/compositeviewer.hpp
-  ${_moc_hdrs})
-
-if(osgQtQuick_WITH_EARTH)
-  qt5_wrap_cpp(_mocs_earth
-    osgearthutil/earthmanipulator.hpp)
-  set(osgQtQml_OSGEARTH_SRCS
-    osgearthutil/module.cpp
-    osgearthutil/earthmanipulator.cpp)
-endif()
-
-add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+)
+			
+SET(TARGET_SRC
   index.cpp
   object.cpp
-  ${_mocs}
 # osg
   osg/object.cpp
   osg/node.cpp
@@ -98,6 +89,26 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
 # osgViewer
   osgviewer/compositeviewer.cpp
   osgviewer/module.cpp
+)
+
+qt5_wrap_cpp(_mocs
+  ${TARGET_H}
+  ${_moc_hdrs})
+
+if(osgQtQuick_WITH_EARTH)
+  qt5_wrap_cpp(_mocs_earth
+    osgearthutil/earthmanipulator.hpp)
+  set(osgQtQml_OSGEARTH_SRCS
+    osgearthutil/module.cpp
+    osgearthutil/earthmanipulator.cpp)
+endif()
+
+source_group( GeneratedFiles FILES ${_mocs} ${_mocs_earth})
+
+add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+  ${TARGET_SRC}
+  ${TARGET_H}
+  ${_mocs}
 # osgEarth
   ${osgQtQml_OSGEARTH_SRCS}
   ${_mocs_earth}

@@ -16,19 +16,31 @@ foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
     set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/lib )
 endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
 
-qt5_wrap_cpp(_mocs
+SET(TARGET_H
   object.hpp
   window.hpp
-  osgviewer/view.hpp)
-
-add_library(osgQtQuick ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+  osgviewer/view.hpp
+)
+			
+SET(TARGET_SRC
   index.cpp
   object.cpp
   window.cpp
-  ${_mocs}
-# osgViewer
+  # osgViewer
   osgviewer/view.cpp
   osgviewer/module.cpp
+)
+
+qt5_wrap_cpp(_mocs
+  ${TARGET_H}
+)
+
+source_group( GeneratedFiles FILES ${_mocs})
+
+add_library(osgQtQuick ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+  ${TARGET_SRC}
+  ${TARGET_H}
+  ${_mocs}
 )
 
 target_link_libraries(osgQtQuick
@@ -37,6 +49,7 @@ target_link_libraries(osgQtQuick
     ${OSG_LIBRARIES}
     ${OSGVIEWER_LIBRARIES}
     ${OSGGA_LIBRARIES}
+    ${OSGDB_LIBRARIES}
     ${OPENGL_LIBRARIES}
     Opengl32.lib
     Qt5::Qml
