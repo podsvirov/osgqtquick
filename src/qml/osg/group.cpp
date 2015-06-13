@@ -147,7 +147,7 @@ NodeQtQml *GroupQtQml::getChild(int i)
 }
 
 /*!
-   \qmlproperty list<osg::Node> osg::Group::child
+   \qmlproperty list<osg::Node> osg::Group::children
 
    List of children nodes
  */
