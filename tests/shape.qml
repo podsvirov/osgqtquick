@@ -17,59 +17,33 @@ Rectangle {
         halfLengths: Qt.vector3d(0.5, 0.5, 0.1)
     }
 
-    OSG.ShapeDrawable {
-        id: sdRed
-        color: Qt.rgba(1, 0, 0, 0.5)
-        shape: box
-    }
-
-    OSG.Geode {
-        id: geodeRed
-        Component.onCompleted: {
-            addDrawable(sdRed)
-        }
-    }
-
-    OSG.ShapeDrawable {
-        id: sdYellow
-        color: Qt.rgba(1, 1, 0, 0.5)
-        shape: box
-    }
-
-    OSG.ShapeDrawable {
-        id: sdGreen
-        color: Qt.rgba(0, 1, 0, 0.5)
-        shape: box
-    }
-
-    OSG.Geode {
-        id: geodeGreen
-        Component.onCompleted: {
-            addDrawable(sdGreen)
-        }
-    }
-
     OSG.Group {
         id: group
 
         OSG.PositionAttitudeTransform {
             position: Qt.vector3d(xSlider.value, ySlider.value, zSlider.value)
-            Component.onCompleted: {
-                addChild(geodeGreen)
+            OSG.Geode {
+                OSG.ShapeDrawable {
+                    color: Qt.rgba(0, 1, 0, 0.5)
+                    shape: box
+                }
             }
         }
 
         OSG.Geode {
-            id: geodeYellow
-            Component.onCompleted: {
-                addDrawable(sdYellow)
+            OSG.ShapeDrawable {
+                color: Qt.rgba(1, 1, 0, 0.5)
+                shape: box
             }
         }
 
         OSG.PositionAttitudeTransform {
             position: Qt.vector3d(-xSlider.value, -ySlider.value, -zSlider.value)
-            Component.onCompleted: {
-                addChild(geodeRed)
+            OSG.Geode {
+                OSG.ShapeDrawable {
+                    color: Qt.rgba(1, 0, 0, 0.5)
+                    shape: box
+                }
             }
         }
     }
