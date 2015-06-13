@@ -61,13 +61,13 @@ Rectangle {
         id: view
         anchors.fill: parent
         sceneData: group
-        //cameraManipulator: OSGGA.TrackballManipulator {}
+        cameraManipulator: OSGGA.TrackballManipulator {}
         //cameraManipulator: OSGGA.NodeTrackerManipulator {
         //    trackNode: geode
         //}
-        cameraManipulator: OSGGA.FlightManipulator {
-            node: geode
-        }
+        //cameraManipulator: OSGGA.FlightManipulator {
+        //    node: geode
+        //}
     }
 
     Button {

@@ -15,8 +15,8 @@ Rectangle {
 
     OSGDB.Loader {
         id: loader
-        //source: "openstreetmap.earth"
-        source: "openstreetmap_flat.earth"
+        source: "openstreetmap.earth"
+        //source: "openstreetmap_flat.earth"
         onNodeChanged: {
             console.log("loader: " + getNode())
             view.cameraManipulator.home()

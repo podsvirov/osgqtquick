@@ -17,15 +17,17 @@ Rectangle {
         Component.onCompleted: {
             console.log("addChild(node) = " + addChild(node))
             console.log("addChild(node) = " + addChild(node))
+            console.log("getChild(0) = " + getChild(0))
+            console.log("getChild(1) = " + getChild(1))
             console.log("removeChild(node) = " + removeChild(node))
-            console.log("removeChild(node) = " + removeChild(node))
+            //console.log("removeChild(node) = " + removeChild(node))
             console.log("OSG: " + group)
             console.log("OSG: " + OSG)
         }
     }
 
     Text {
-        text: group.numChildren
+        text: "num = " + group.child.length
         anchors.centerIn: parent
     }
 }

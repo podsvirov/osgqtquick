@@ -4,7 +4,9 @@
 #include <QDebug>
 
 osgQtQml::Object::Object(QObject *parent) :
-  QObject(parent), i(0)
+  QObject(parent), i(0),
+  _isBegin(false),
+  _isComplete(false)
 {
 }
 
@@ -27,6 +29,8 @@ void osgQtQml::Object::classBegin()
     {
         i->classBegin();
     }
+
+    _isBegin = true;
 }
 
 void osgQtQml::Object::componentComplete()
@@ -35,6 +39,8 @@ void osgQtQml::Object::componentComplete()
     {
         i->componentComplete();
     }
+
+    _isComplete = true;
 }
 
 osgQtQml::Index *osgQtQml::Object::index()

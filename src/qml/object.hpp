@@ -22,10 +22,25 @@ public:
 
   Index* index();
 
+  bool isBegin() const;
+  bool isComplete() const;
+
 protected:
   Object(Index *i, QObject *parent = 0);
   Index *i;
+  bool _isBegin;
+  bool _isComplete;
 };
+
+inline bool Object::isBegin() const
+{
+  return _isBegin;
+}
+
+inline bool Object::isComplete() const
+{
+  return _isComplete;
+}
 
 }
 

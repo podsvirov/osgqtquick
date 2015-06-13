@@ -13,6 +13,7 @@ class OSGQTQML_EXPORT GroupQtQml::Index : public NodeQtQml::Index
 
 public:
     Index(Group *o = 0);
+    ~Index();
 
     void classBegin();
 
@@ -22,7 +23,22 @@ public:
 protected:
     Group *othis;
     GroupQtQml *qthis;
+
+    struct CompleteInfo;
+    CompleteInfo *_completeInfo;
+
+    CompleteInfo* info();
 };
+
+struct GroupQtQml::Index::CompleteInfo
+{
+  QList<NodeQtQml*> child;
+};
+
+inline GroupQtQml::Index::CompleteInfo *GroupQtQml::Index::info()
+{
+  return _completeInfo ? _completeInfo : _completeInfo = new CompleteInfo;
+}
 
 }
 
