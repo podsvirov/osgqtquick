@@ -13,16 +13,29 @@ class OSGQTQML_EXPORT GeodeQtQml::Index : public NodeQtQml::Index
 
 public:
     Index(Geode *o = 0);
+    ~Index();
 
     void classBegin();
-
-    bool addDrawable(DrawableQtQml *drawable);
-    bool removeDrawable(DrawableQtQml *drawable);
 
 protected:
     Geode *othis;
     GeodeQtQml *qthis;
+
+    struct CompleteInfo;
+    CompleteInfo *_completeInfo;
+
+    CompleteInfo* info();
 };
+
+struct GeodeQtQml::Index::CompleteInfo
+{
+  QList<DrawableQtQml*> drawables;
+};
+
+inline GeodeQtQml::Index::CompleteInfo *GeodeQtQml::Index::info()
+{
+  return _completeInfo ? _completeInfo : _completeInfo = new CompleteInfo;
+}
 
 }
 

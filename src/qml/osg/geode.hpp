@@ -4,6 +4,8 @@
 #include <osg/NodeQtQml>
 #include <osg/DrawableQtQml>
 
+#include <QQmlListProperty>
+
 namespace osg {
 
 class Geode;
@@ -13,6 +15,9 @@ class OSGQTQML_EXPORT GeodeQtQml : public NodeQtQml
   Q_OBJECT
 
   Q_PROPERTY(int numDrawables READ getNumDrawables NOTIFY numDrawablesChanged)
+  Q_PROPERTY(QQmlListProperty<osg::DrawableQtQml> drawables READ drawables NOTIFY numDrawablesChanged)
+
+  Q_CLASSINFO("DefaultProperty", "drawables")
 
 public:
   class Index;
@@ -21,11 +26,15 @@ public:
   GeodeQtQml(Index *, QObject *parent = 0);
 
   void classBegin();
+  void componentComplete();
 
   Q_INVOKABLE bool addDrawable(DrawableQtQml *drawable);
   Q_INVOKABLE bool removeDrawable(DrawableQtQml *drawable);
-
+  Q_INVOKABLE bool removeDrawables(int pos, int numDrawablesToRemove = 1);
   Q_INVOKABLE int getNumDrawables() const;
+  Q_INVOKABLE osg::DrawableQtQml* getDrawable(int pos);
+
+  QQmlListProperty<DrawableQtQml> drawables();
 
   Geode* geode();
 
@@ -33,6 +42,12 @@ public:
 
 signals:
   void numDrawablesChanged(int num);
+
+protected:
+  static int drawablesCount(QQmlListProperty<osg::DrawableQtQml> *list);
+  static DrawableQtQml* drawablesAt(QQmlListProperty<osg::DrawableQtQml> *list, int index);
+  static void drawablesAppend(QQmlListProperty<osg::DrawableQtQml> *list, osg::DrawableQtQml *drawable);
+  static void drawablesClear(QQmlListProperty<osg::DrawableQtQml> *list);
 };
 
 }
