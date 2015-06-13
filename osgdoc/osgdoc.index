@@ -2,7 +2,7 @@
 <!DOCTYPE QDOCINDEX>
 <INDEX url="" title="Intergation OSG to Qt Quick" version="2.0" project="osgDoc">
     <namespace threadsafety="unspecified" name="" access="public" status="commendable">
-        <page name="index.html" href="index.html" access="public" status="commendable" location="index.qdoc" filepath="D:/Develop/CPlusPlus/Remote/podsvirov.pro/openscenegraph/osgqtquick/doc/src/osgdoc/index.qdoc" lineno="1" subtype="page" title="osgQtQuick" fulltitle="osgQtQuick" subtitle="" module="osgDoc">
+        <page name="index.html" href="index.html" access="public" status="commendable" location="index.qdoc" filepath="/home/kot/Sources/podsvirov.pro/openscenegraph/osgqtquick/doc/src/osgdoc/index.qdoc" lineno="1" subtype="page" title="osgQtQuick" fulltitle="osgQtQuick" subtitle="" module="osgDoc">
             <contents name="structure" title="Structure" level="1"/>
             <contents name="openscenegraph-qml-modules" title="OpenSceneGraph QML modules" level="1"/>
         </page>
