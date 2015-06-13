@@ -13,7 +13,7 @@ Rectangle {
     OSG.Group {
         id: group
 
-        child: OSG.Node {
+        children: OSG.Node {
 
         }
 
@@ -27,9 +27,9 @@ Rectangle {
 
     Column {
         Repeater {
-            model: group.child.length
+            model: group.children.length
             delegate: Text {
-                text: index + " : " + group.child[index]
+                text: index + " : " + group.children[index]
             }
         }
 

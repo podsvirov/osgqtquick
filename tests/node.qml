@@ -27,7 +27,7 @@ Rectangle {
     }
 
     Text {
-        text: "num = " + group.child.length
+        text: "num = " + group.children.length
         anchors.centerIn: parent
     }
 }

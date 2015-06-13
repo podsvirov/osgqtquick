@@ -38,31 +38,6 @@ void GroupQtQml::Index::classBegin()
     NodeQtQml::Index::classBegin();
 }
 
-bool GroupQtQml::Index::addChild(NodeQtQml *child)
-{
-  osg::Node *osgChild = static_cast<osg::Node*>(child->index()->osgObject());
-
-    if(!osgChild) {
-        qDebug() << "Added node without node!";
-        return false;
-      }
-
-    osg::Group *that = static_cast<osg::Group*>(osgObject());
-
-    return that->addChild(osgChild);
-}
-
-bool GroupQtQml::Index::removeChild(NodeQtQml *child)
-{
-    osg::Node *osgChild = static_cast<osg::Node*>(child->index()->osgObject());
-
-    if(!osgChild) return false;
-
-    osg::Group *that = static_cast<osg::Group*>(osgObject());
-
-    return that->removeChild(osgChild);
-}
-
 GroupQtQml::GroupQtQml(QObject *parent) :
   NodeQtQml(parent)
 {
@@ -108,7 +83,7 @@ bool GroupQtQml::addChild(NodeQtQml *child)
       return true;
     }
   else if (static_cast<GroupQtQml::Index*>(i)->othis->addChild(
-        static_cast<osg::Node*>(child->index()->osgObject())))
+        child->node()))
     {
       emit numChildrenChanged(getNumChildren());
       return true;
@@ -125,7 +100,8 @@ bool GroupQtQml::addChild(NodeQtQml *child)
 
 bool GroupQtQml::removeChild(NodeQtQml *child)
 {
-    if (static_cast<GroupQtQml::Index*>(i)->removeChild(child))
+    if (static_cast<GroupQtQml::Index*>(i)->othis->removeChild(
+                child->node()))
     {
         emit numChildrenChanged(getNumChildren());
         return true;
@@ -176,13 +152,13 @@ NodeQtQml *GroupQtQml::getChild(int i)
    List of children nodes
  */
 
-QQmlListProperty<NodeQtQml> GroupQtQml::child()
+QQmlListProperty<NodeQtQml> GroupQtQml::children()
 {
   return QQmlListProperty<osg::NodeQtQml>(this, (void*)0,
-                                          GroupQtQml::childAppend,
-                                          GroupQtQml::childCount,
-                                          GroupQtQml::childAt,
-                                          GroupQtQml::childClear);
+                                          GroupQtQml::childrenAppend,
+                                          GroupQtQml::childrenCount,
+                                          GroupQtQml::childrenAt,
+                                          GroupQtQml::childrenClear);
 }
 
 Group *GroupQtQml::group()
@@ -202,24 +178,24 @@ GroupQtQml *GroupQtQml::fromGroup(Group *group, QObject *parent)
     return new GroupQtQml(new Index(group), parent);
 }
 
-int GroupQtQml::childCount(QQmlListProperty<NodeQtQml> *list)
+int GroupQtQml::childrenCount(QQmlListProperty<NodeQtQml> *list)
 {
   return static_cast<GroupQtQml*>(list->object)->getNumChildren();
 }
 
-NodeQtQml* GroupQtQml::childAt(QQmlListProperty<NodeQtQml> *list, int index)
+NodeQtQml* GroupQtQml::childrenAt(QQmlListProperty<NodeQtQml> *list, int index)
 {
   return static_cast<GroupQtQml*>(list->object)->getChild(index);
 }
 
-void GroupQtQml::childAppend(QQmlListProperty<NodeQtQml> *list, NodeQtQml *child)
+void GroupQtQml::childrenAppend(QQmlListProperty<NodeQtQml> *list, NodeQtQml *child)
 {
   static_cast<GroupQtQml*>(list->object)->addChild(child);
 }
 
-void GroupQtQml::childClear(QQmlListProperty<NodeQtQml> *list)
+void GroupQtQml::childrenClear(QQmlListProperty<NodeQtQml> *list)
 {
-  static_cast<GroupQtQml*>(list->object)->removeChild(0, childCount(list));
+  static_cast<GroupQtQml*>(list->object)->removeChild(0, childrenCount(list));
 }
 
 }

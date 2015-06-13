@@ -17,9 +17,6 @@ public:
 
     void classBegin();
 
-    bool addChild(NodeQtQml *child);
-    bool removeChild(NodeQtQml *child);
-
 protected:
     Group *othis;
     GroupQtQml *qthis;
