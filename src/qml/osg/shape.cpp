@@ -5,6 +5,12 @@
 
 #include <osg/Shape>
 
+/*!
+   \qmltype Shape
+   \inqmlmodule osg
+   \brief Base type for all shape types
+ */
+
 namespace osg {
 
 ShapeQtQml::Index::Index(Shape *shape) :

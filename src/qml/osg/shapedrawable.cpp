@@ -7,6 +7,13 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype ShapeDrawable
+   \inherits osg::Drawable
+   \inqmlmodule osg
+   \brief Allow the use of \l {osg::Shape}{Shapes} as \l {osg::Drawable}{Drawables}
+ */
+
 namespace osg {
 
 ShapeDrawableQtQml::Index::Index(ShapeDrawable *drawable) :
@@ -40,6 +47,12 @@ void ShapeDrawableQtQml::Index::componentComplete()
     setColor(color);
 }
 
+/*!
+   \qmlproperty osg::Shape osg::ShapeDrawable::shape
+
+   Rendered \l {osg::Shape}{shape}
+ */
+
 ShapeQtQml *ShapeDrawableQtQml::Index::getShape() const
 {
     return ShapeQtQml::fromShape(shape.get());
@@ -53,6 +66,12 @@ void ShapeDrawableQtQml::Index::setShape(ShapeQtQml *shape)
 
     emit qthis->shapeChanged(shape);
 }
+
+/*!
+   \qmlproperty color osg::ShapeDrawable::color
+
+   Color of \l {osg::Shape}{shape}
+ */
 
 void ShapeDrawableQtQml::Index::setColor(const QColor &color)
 {

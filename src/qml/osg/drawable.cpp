@@ -5,6 +5,12 @@
 
 #include <osg/Drawable>
 
+/*!
+   \qmltype Drawable
+   \inqmlmodule osg
+   \brief Base type for drawable geometry
+ */
+
 namespace osg {
 
 DrawableQtQml::Index::Index(Drawable *drawable) :

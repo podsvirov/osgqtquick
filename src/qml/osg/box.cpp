@@ -7,6 +7,13 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype Box
+   \inherits osg::Shape
+   \inqmlmodule osg
+   \brief Box shape
+ */
+
 namespace osg {
 
 BoxQtQml::Index::Index(Box *box) :
@@ -24,6 +31,12 @@ void BoxQtQml::Index::classBegin()
 
     ShapeQtQml::Index::classBegin();
 }
+
+/*!
+   \qmlproperty vector3d osg::Box::halfLengths
+
+   Half lengths
+ */
 
 void BoxQtQml::Index::setHalfLengths(const QVector3D &halfLengths)
 {
