@@ -32,11 +32,11 @@ Rectangle {
         ['First',
          [
              '   #### ',
-             '####  # ',
-             '#  $. # ',
+             ' ###  # ',
+             '## $  # ',
              '#     # ',
              '#@#$# # ',
-             '#  .. ##',
+             '# ... ##',
              '###$   #',
              '  #    #',
              '  ######'
@@ -329,12 +329,32 @@ Rectangle {
         focus: true
         anchors.fill: parent
         Keys.onPressed: {
-            player.move(event.key)
+            switch(event.key)
+            {
+            case Qt.Key_Left:
+            case Qt.Key_Up:
+            case Qt.Key_Right:
+            case Qt.Key_Down:
+                player.move(event.key)
+                break
+            case Qt.Key_H:
+                view.cameraManipulator.home()
+                break
+            case Qt.Key_N:
+                nextLevel()
+                break
+            case Qt.Key_P:
+                previousLevel()
+                break
+            case Qt.Key_R:
+                group.restart()
+                break
+            }
         }
     }
 
     Text {
-        text: "Home"
+        text: "{H}ome"
         color: "white"
         font.pixelSize: 20
         MouseArea {
@@ -346,7 +366,7 @@ Rectangle {
     }
     Row {
         Text {
-            text: "<<"
+            text: "<-{P}-"
             color: "white"
             font.pixelSize: 20
             MouseArea {
@@ -362,7 +382,7 @@ Rectangle {
             font.pixelSize: 20
         }
         Text {
-            text: ">>"
+            text: "-{N}->"
             color: "white"
             font.pixelSize: 20
             MouseArea {
@@ -396,7 +416,7 @@ Rectangle {
         anchors.bottom: parent.bottom
     }
     Text {
-        text: "Restart"
+        text: "{R}estart"
         color: "white"
         font.pixelSize: 20
         anchors.right: parent.right
