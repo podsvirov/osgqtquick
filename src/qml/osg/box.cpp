@@ -32,12 +32,6 @@ void BoxQtQml::Index::classBegin()
     ShapeQtQml::Index::classBegin();
 }
 
-/*!
-   \qmlproperty vector3d osg::Box::halfLengths
-
-   Half lengths
- */
-
 void BoxQtQml::Index::setHalfLengths(const QVector3D &halfLengths)
 {
     osg::Vec3d a = osgQt::vec3d(halfLengths);
@@ -66,6 +60,12 @@ void BoxQtQml::classBegin()
     ShapeQtQml::classBegin();
 }
 
+/*!
+   \qmlproperty vector3d osg::Box::center
+
+   Center of shape
+ */
+
 QVector3D BoxQtQml::getCenter() const
 {
     return osgQt::qVector3D(static_cast<Index*>(i)->othis->getCenter());
@@ -82,6 +82,12 @@ void BoxQtQml::setCenter(const QVector3D &center)
     emit centerChanged(center);
 }
 
+/*!
+   \qmlproperty vector3d osg::Box::halfLengths
+
+   Half lengths
+ */
+
 QVector3D BoxQtQml::getHalfLengths() const
 {
     return osgQt::qVector3D(static_cast<Index*>(i)->othis->getHalfLengths());
@@ -91,6 +97,12 @@ void BoxQtQml::setHalfLengths(const QVector3D &halfLengths)
 {
     static_cast<Index*>(i)->setHalfLengths(halfLengths);
 }
+
+/*!
+   \qmlproperty quaternion osg::Box::rotation
+
+   Shape rotation
+ */
 
 QQuaternion BoxQtQml::getRotation() const
 {
