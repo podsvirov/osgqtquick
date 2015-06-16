@@ -33,12 +33,28 @@ Rectangle {
         OSG.Geode {
             OSG.ShapeDrawable {
                 color: Qt.rgba(1, 1, 0, 0.5)
+                shape: OSG.Box {
+                    center: Qt.vector3d(0, 0, 0.2)
+                    halfLengths: Qt.vector3d(0.2, 0.2, 0.05)
+                    rotation: Qt.quaternion(Math.cos(Math.PI / 8), 0, 0, Math.sin(Math.PI / 8))
+                }
+            }
+            OSG.ShapeDrawable {
+                color: Qt.rgba(1, 1, 0, 0.5)
                 shape: box
+            }
+            OSG.ShapeDrawable {
+                color: Qt.rgba(1, 1, 0, 0.5)
+                shape: OSG.Box {
+                    center: Qt.vector3d(0, 0, -0.2)
+                    halfLengths: Qt.vector3d(0.2, 0.2, 0.05)
+                }
             }
         }
 
         OSG.PositionAttitudeTransform {
             position: Qt.vector3d(-xSlider.value, -ySlider.value, -zSlider.value)
+            attitude: Qt.quaternion(Math.cos(Math.PI / 8), 0, 0, Math.sin(Math.PI / 8))
             OSG.Geode {
                 OSG.ShapeDrawable {
                     color: Qt.rgba(1, 0, 0, 0.5)

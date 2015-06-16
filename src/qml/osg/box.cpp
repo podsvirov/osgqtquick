@@ -66,6 +66,22 @@ void BoxQtQml::classBegin()
     ShapeQtQml::classBegin();
 }
 
+QVector3D BoxQtQml::getCenter() const
+{
+    return osgQt::qVector3D(static_cast<Index*>(i)->othis->getCenter());
+}
+
+void BoxQtQml::setCenter(const QVector3D &center)
+{
+    osg::Vec3d a = osgQt::vec3d(center);
+
+    if(static_cast<Index*>(i)->othis->getCenter() == a) return;
+
+    static_cast<Index*>(i)->othis->setCenter(a);
+
+    emit centerChanged(center);
+}
+
 QVector3D BoxQtQml::getHalfLengths() const
 {
     return osgQt::qVector3D(static_cast<Index*>(i)->othis->getHalfLengths());
@@ -74,6 +90,22 @@ QVector3D BoxQtQml::getHalfLengths() const
 void BoxQtQml::setHalfLengths(const QVector3D &halfLengths)
 {
     static_cast<Index*>(i)->setHalfLengths(halfLengths);
+}
+
+QQuaternion BoxQtQml::getRotation() const
+{
+    return osgQt::qQuaternion(static_cast<Index*>(i)->othis->getRotation());
+}
+
+void BoxQtQml::setRotation(const QQuaternion &quat)
+{
+    osg::Quat a = osgQt::quat(quat);
+
+    if(static_cast<Index*>(i)->othis->getRotation() == a) return;
+
+    static_cast<Index*>(i)->othis->setRotation(a);
+
+    emit rotationChanged(quat);
 }
 
 Box *BoxQtQml::box()
