@@ -7,6 +7,13 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype Sphere
+   \inherits osg::Shape
+   \inqmlmodule osg
+   \brief Sphere shape
+ */
+
 namespace osg {
 
 SphereQtQml::Index::Index(Sphere *box) :
@@ -62,6 +69,12 @@ void SphereQtQml::classBegin()
     ShapeQtQml::classBegin();
 }
 
+/*!
+   \qmlproperty vector3d osg::Sphere::center
+
+   Center of shape
+ */
+
 QVector3D SphereQtQml::getCenter() const
 {
     return osgQt::qVector3D(static_cast<Index*>(i)->othis->getCenter());
@@ -71,6 +84,12 @@ void SphereQtQml::setCenter(const QVector3D &halfLengths)
 {
     static_cast<Index*>(i)->setCenter(halfLengths);
 }
+
+/*!
+   \qmlproperty float osg::Sphere::radius
+
+   Sphere radius
+ */
 
 float SphereQtQml::getRadius() const
 {

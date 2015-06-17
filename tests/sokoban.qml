@@ -194,8 +194,11 @@ Rectangle {
             OSG.Geode {
                 OSG.ShapeDrawable {
                     color: Qt.rgba(0, 0, 1)
-                    shape: OSG.Box {
-                        halfLengths: Qt.vector3d(0.5, 0.5, 0.5)
+//                    shape: OSG.Box {
+//                        halfLengths: Qt.vector3d(0.5, 0.5, 0.5)
+//                    }
+                    shape: OSG.Sphere {
+                        radius: 0.5
                     }
                 }
             }

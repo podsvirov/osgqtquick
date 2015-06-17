@@ -10,6 +10,7 @@
 #include "graphicscontextindex.hpp"
 #include "positionattitudetransformindex.hpp"
 #include "shapeindex.hpp"
+#include "compositeshapeindex.hpp"
 #include "boxindex.hpp"
 #include "sphereindex.hpp"
 #include "geodeindex.hpp"
@@ -70,6 +71,10 @@ void regisgerQtQmlTypes(const char *uri)
     qmlRegisterUncreatableType<ShapeQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Shape", "[osgQtQuick] Shape is Uncreatable");
+
+    qmlRegisterType<CompositeShapeQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "CompositeShape");
 
     qmlRegisterType<BoxQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,

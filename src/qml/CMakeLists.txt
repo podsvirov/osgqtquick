@@ -24,6 +24,7 @@ set(_moc_hdrs)
 
 META_Node(osg Geode)
 META_Node(osg Shape)
+META_Node(osg CompositeShape)
 META_Node(osg Box)
 META_Node(osg Sphere)
 

@@ -12,53 +12,75 @@ import osgViewer 2.0 as OSGViewer
 Rectangle {
     width: 500; height: 500
 
+    property int counter: 0
+
+    Component {
+        id: shapeFactory
+        OSG.Box {
+            property int level: 0
+            center: Qt.vector3d(0, 0, -level)
+            rotation: Qt.quaternion(Math.cos(level * aSlider.value / 2), 0, 0, -Math.sin(level * aSlider.value / 2))
+            halfLengths: Qt.vector3d(0.5, 0.5, 0.1)
+            Component.onCompleted: {
+                level = counter
+            }
+        }
+    }
+
     OSG.Box {
         id: box
         halfLengths: Qt.vector3d(0.5, 0.5, 0.1)
     }
 
-    OSG.Group {
-        id: group
-
+    Component {
+        id: transformFactory
         OSG.PositionAttitudeTransform {
-            position: Qt.vector3d(xSlider.value, ySlider.value, zSlider.value)
+            property int level: 0
+            position: Qt.vector3d(0, 0, level)
+            attitude: Qt.quaternion(Math.cos(level * aSlider.value / 2), 0, 0, Math.sin(level * aSlider.value / 2))
             OSG.Geode {
                 OSG.ShapeDrawable {
                     color: Qt.rgba(0, 1, 0, 0.5)
                     shape: box
                 }
             }
+            Component.onCompleted: {
+                level = counter
+            }
         }
+    }
+
+    OSG.Group {
+        id: group
 
         OSG.Geode {
             OSG.ShapeDrawable {
                 color: Qt.rgba(1, 1, 0, 0.5)
-                shape: OSG.Box {
-                    center: Qt.vector3d(0, 0, 0.2)
-                    halfLengths: Qt.vector3d(0.2, 0.2, 0.05)
-                    rotation: Qt.quaternion(Math.cos(Math.PI / 8), 0, 0, Math.sin(Math.PI / 8))
-                }
-            }
-            OSG.ShapeDrawable {
-                color: Qt.rgba(1, 1, 0, 0.5)
-                shape: box
-            }
-            OSG.ShapeDrawable {
-                color: Qt.rgba(1, 1, 0, 0.5)
-                shape: OSG.Box {
-                    center: Qt.vector3d(0, 0, -0.2)
-                    halfLengths: Qt.vector3d(0.2, 0.2, 0.05)
+                shape: OSG.CompositeShape {
+                    id: composite
+
+                    OSG.Box {
+                        property int level: 1
+                        center: Qt.vector3d(0, 0, -level)
+                        rotation: Qt.quaternion(Math.cos(level * Math.PI / 90), 0, 0, Math.sin(level * Math.PI / 90))
+                        halfLengths: Qt.vector3d(0.5, 0.5, 0.1)
+                    }
+
+                    OSG.Box {
+                        property int level: 2
+                        center: Qt.vector3d(0, 0, -level)
+                        rotation: Qt.quaternion(Math.cos(level * Math.PI / 90), 0, 0, Math.sin(level * Math.PI / 90))
+                        halfLengths: Qt.vector3d(0.5, 0.5, 0.1)
+                    }
                 }
             }
         }
 
-        OSG.PositionAttitudeTransform {
-            position: Qt.vector3d(-xSlider.value, -ySlider.value, -zSlider.value)
-            attitude: Qt.quaternion(Math.cos(Math.PI / 8), 0, 0, Math.sin(Math.PI / 8))
-            OSG.Geode {
-                OSG.ShapeDrawable {
-                    color: Qt.rgba(1, 0, 0, 0.5)
-                    shape: box
+        OSG.Geode {
+            OSG.ShapeDrawable {
+                color: Qt.rgba(1, 1, 0, 1)
+                shape: OSG.Sphere {
+                    radius: 0.25
                 }
             }
         }
@@ -78,10 +100,25 @@ Rectangle {
         }
     }
 
-    ColumnLayout {
-        Slider { id: xSlider; minimumValue: -1; maximumValue: 1; value: 0.3; Layout.fillWidth: true }
-        Slider { id: ySlider; minimumValue: -1; maximumValue: 1; value: 0.2; Layout.fillWidth: true }
-        Slider { id: zSlider; minimumValue: -1; maximumValue: 1; value: 0.1; Layout.fillWidth: true }
+    RowLayout {
+        Button {
+            text: "Add"
+            onClicked: {
+                ++counter;
+                group.addChild(transformFactory.createObject())
+            }
+        }
+        Button {
+            text: "Remove"
+            onClicked: {
+                if(counter > 0)
+                {
+                    --counter;
+                    group.removeChild(counter + 2)
+                }
+            }
+        }
+        Slider { id: aSlider; minimumValue: 0; maximumValue: Math.PI / 8; value: 0; Layout.fillWidth: true }
         width: parent.width
         anchors.bottom: parent.bottom
     }
