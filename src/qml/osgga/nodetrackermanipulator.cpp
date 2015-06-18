@@ -63,6 +63,40 @@ void NodeTrackerManipulatorQtQml::setTrackNode(osg::NodeQtQml *node)
     static_cast<Index*>(i)->setTrackNode(node);
 }
 
+NodeTrackerManipulatorQtQml::TrackerMode NodeTrackerManipulatorQtQml::getTrackerMode()
+{
+    return static_cast<TrackerMode>(static_cast<Index*>(i)->othis->getTrackerMode());
+}
+
+void NodeTrackerManipulatorQtQml::setTrackerMode(NodeTrackerManipulatorQtQml::TrackerMode mode)
+{
+    NodeTrackerManipulator::TrackerMode a =
+            static_cast<NodeTrackerManipulator::TrackerMode>(mode);
+
+    if(static_cast<Index*>(i)->othis->getTrackerMode() == a) return;
+
+    static_cast<Index*>(i)->othis->setTrackerMode(a);
+
+    emit trackerModeChanged(mode);
+}
+
+NodeTrackerManipulatorQtQml::RotationMode NodeTrackerManipulatorQtQml::getRotationMode()
+{
+    return static_cast<RotationMode>(static_cast<Index*>(i)->othis->getRotationMode());
+}
+
+void NodeTrackerManipulatorQtQml::setRotationMode(NodeTrackerManipulatorQtQml::RotationMode mode)
+{
+    NodeTrackerManipulator::RotationMode a =
+            static_cast<NodeTrackerManipulator::RotationMode>(mode);
+
+    if(static_cast<Index*>(i)->othis->getRotationMode() == a) return;
+
+    static_cast<Index*>(i)->othis->setRotationMode(a);
+
+    emit rotationModeChanged(mode);
+}
+
 NodeTrackerManipulator *NodeTrackerManipulatorQtQml::nodeTrackerManipulator()
 {
     return static_cast<Index*>(i)->othis;
