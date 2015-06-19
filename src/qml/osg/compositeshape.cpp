@@ -66,7 +66,23 @@ void CompositeShapeQtQml::componentComplete()
         {
           addChild(*it);
         }
-    }
+  }
+}
+
+ShapeQtQml *CompositeShapeQtQml::getShape() const
+{
+    return ShapeQtQml::fromShape(static_cast<Index*>(i)->othis->getShape());
+}
+
+void CompositeShapeQtQml::setShape(ShapeQtQml *shape)
+{
+    osg::Shape *a = shape->shape();
+
+    if(static_cast<Index*>(i)->othis->getShape() == a) return;
+
+    static_cast<Index*>(i)->othis->setShape(a);
+
+    emit shapeChanged(shape);
 }
 
 /*!
@@ -120,6 +136,7 @@ bool CompositeShapeQtQml::removeChild(int pos)
     {
         static_cast<Index*>(i)->othis->removeChild(
                 static_cast<unsigned int>(pos));
+        emit numChildrenChanged(getNumChildren());
         return true;
     }
 

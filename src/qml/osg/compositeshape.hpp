@@ -13,6 +13,7 @@ class OSGQTQML_EXPORT CompositeShapeQtQml : public ShapeQtQml
 {
   Q_OBJECT
 
+  Q_PROPERTY(osg::ShapeQtQml* shape READ getShape WRITE setShape NOTIFY shapeChanged)
   Q_PROPERTY(int numChildren READ getNumChildren NOTIFY numChildrenChanged)
   Q_PROPERTY(QQmlListProperty<osg::ShapeQtQml> children READ children NOTIFY numChildrenChanged)
 
@@ -27,6 +28,9 @@ public:
   void classBegin();
   void componentComplete();
 
+  Q_INVOKABLE ShapeQtQml *getShape() const;
+  Q_INVOKABLE void setShape(ShapeQtQml *shape);
+
   Q_INVOKABLE bool addChild(ShapeQtQml *shape);
   Q_INVOKABLE bool removeChild(ShapeQtQml *shape);
   Q_INVOKABLE bool removeChild(int pos);
@@ -40,6 +44,7 @@ public:
   static CompositeShapeQtQml* fromCompositeShape(CompositeShape *compositeShape, QObject *parent = 0);
 
 signals:
+  void shapeChanged(ShapeQtQml *shape) const;
   void numChildrenChanged(int num);
 
 protected:
