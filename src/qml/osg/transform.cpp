@@ -7,6 +7,13 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype Transform
+   \inherits Group
+   \inqmlmodule osg
+   \brief Transformation group
+ */
+
 namespace osg {
 
 TransformQtQml::Index::Index(Transform *transform) :

@@ -9,7 +9,7 @@
 
 /*!
    \qmltype Box
-   \inherits osg::Shape
+   \inherits Shape
    \inqmlmodule osg
    \brief Box shape
  */

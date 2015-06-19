@@ -5,6 +5,13 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype PositionAttitudeTransform
+   \inherits Transform
+   \inqmlmodule osg
+   \brief Transform via vector and quaternion
+ */
+
 namespace osg {
 
 PositionAttitudeTransformQtQml::Index::Index(PositionAttitudeTransform *transform) :
@@ -84,6 +91,12 @@ void PositionAttitudeTransformQtQml::classBegin()
     GroupQtQml::classBegin();
 }
 
+/*!
+   \qmlproperty vector3d osg::PositionAttitudeTransform::center
+
+   Position
+ */
+
 QVector3D PositionAttitudeTransformQtQml::getPosition() const
 {
     return osgQt::qVector3D(static_cast<Index*>(i)->othis->getPosition());
@@ -93,6 +106,12 @@ void PositionAttitudeTransformQtQml::setPosition(const QVector3D &pos)
 {
     static_cast<Index*>(i)->setPosition(pos);
 }
+
+/*!
+   \qmlproperty quaternion osg::PositionAttitudeTransform::attitude
+
+   Rotation
+ */
 
 QQuaternion PositionAttitudeTransformQtQml::getAttitude() const
 {
@@ -104,6 +123,12 @@ void PositionAttitudeTransformQtQml::setAttitude(const QQuaternion &quat)
     static_cast<Index*>(i)->setAttitude(quat);
 }
 
+/*!
+   \qmlproperty vector3d osg::PositionAttitudeTransform::scale
+
+   Scale vector
+ */
+
 QVector3D PositionAttitudeTransformQtQml::getScale() const
 {
     return osgQt::qVector3D(static_cast<Index*>(i)->othis->getScale());
@@ -113,6 +138,12 @@ void PositionAttitudeTransformQtQml::setScale(const QVector3D &scale)
 {
     static_cast<Index*>(i)->setScale(scale);
 }
+
+/*!
+   \qmlproperty vector3d osg::PositionAttitudeTransform::pivotPoint
+
+   Pivot point
+ */
 
 QVector3D PositionAttitudeTransformQtQml::getPivotPoint() const
 {
