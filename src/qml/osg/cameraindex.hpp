@@ -7,7 +7,7 @@
 
 namespace osg {
 
-class OSGQTQML_EXPORT CameraQtQml::Index : public GroupQtQml::Index
+class OSGQTQML_EXPORT CameraQtQml::Index : public TransformQtQml::Index
 {
     friend class CameraQtQml;
 

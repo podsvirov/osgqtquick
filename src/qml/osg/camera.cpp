@@ -5,10 +5,17 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype Camera
+   \inherits Transform
+   \inqmlmodule osg
+   \brief Camera
+ */
+
 namespace osg {
 
 CameraQtQml::Index::Index(Camera *camera) :
-    GroupQtQml::Index(camera),
+    TransformQtQml::Index(camera),
     qthis(0)
 {
     othis = camera;
@@ -17,10 +24,10 @@ CameraQtQml::Index::Index(Camera *camera) :
 void CameraQtQml::Index::classBegin()
 {
     if(!othis) othis = new Camera();
-    GroupQtQml::Index::othis = othis;
-    GroupQtQml::Index::qthis = qthis;
+    TransformQtQml::Index::othis = othis;
+    TransformQtQml::Index::qthis = qthis;
 
-    GroupQtQml::Index::classBegin();
+    TransformQtQml::Index::classBegin();
 }
 
 void CameraQtQml::Index::setClearColor(const QColor &color)
@@ -35,12 +42,12 @@ void CameraQtQml::Index::setClearColor(const QColor &color)
 }
 
 CameraQtQml::CameraQtQml(QObject *parent) :
-  GroupQtQml(parent)
+  TransformQtQml(parent)
 {
 }
 
 CameraQtQml::CameraQtQml(CameraQtQml::Index *index, QObject *parent) :
-  GroupQtQml(index, parent)
+  TransformQtQml(index, parent)
 {
 }
 
@@ -48,8 +55,14 @@ void CameraQtQml::classBegin()
 {
     if(!i) i = new Index();
     static_cast<Index*>(i)->qthis = this;
-    GroupQtQml::classBegin();
+    TransformQtQml::classBegin();
 }
+
+/*!
+   \qmlproperty color osg::Camera::clearColor
+
+   Clear color
+ */
 
 QColor CameraQtQml::getClearColor() const
 {

@@ -1,7 +1,7 @@
 #ifndef _OSG_CAMERA_QTQML_
 #define _OSG_CAMERA_QTQML_ 1
 
-#include <osg/GroupQtQml>
+#include <osg/TransformQtQml>
 
 #include <QColor>
 
@@ -9,7 +9,7 @@ namespace osg {
 
 class Camera;
 
-class OSGQTQML_EXPORT CameraQtQml : public GroupQtQml
+class OSGQTQML_EXPORT CameraQtQml : public TransformQtQml
 {
   Q_OBJECT
 
