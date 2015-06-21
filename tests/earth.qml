@@ -18,7 +18,7 @@ Rectangle {
         source: "openstreetmap.earth"
         //source: "openstreetmap_flat.earth"
         onNodeChanged: {
-            console.log("loader: " + getNode())
+            console.log("loader.node: " + getNode())
             view.cameraManipulator.home()
         }
     }
@@ -29,9 +29,14 @@ Rectangle {
 
     OSGViewer.View {
         id: view
+        focus: true
         anchors.fill: parent
+        camera.clearColor: "lightgray"
         sceneData: loader
         cameraManipulator: manipulator
+        Keys.onPressed: {
+            if(event.key === Qt.Key_Space) cameraManipulator.home()
+        }
     }
 
     ColumnLayout {
@@ -46,6 +51,24 @@ Rectangle {
         Button {
             text: "Rotate"
             onClicked: manipulator.rotate(Math.PI/ 4, Math.PI / 4)
+        }
+    }
+
+    RowLayout {
+        Button {
+            text: "OpenStreetMap"
+            onClicked: loader.source = "openstreetmap.earth"
+        }
+        Button {
+            text: "ReadyMap"
+            onClicked: loader.source = "readymap-osm.earth"
+        }
+        Button {
+            text: "VerticalScale"
+            onClicked: loader.source = "vertical_scale.earth"
+        }
+        anchors {
+            bottom: parent.bottom
         }
     }
 }
