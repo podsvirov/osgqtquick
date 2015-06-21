@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- nodetrackermanipulator.cpp -->
+  <title>NodeTrackerManipulator QML Type | osgGA 2.0</title>
+  <link rel="stylesheet" type="text/css" href="style/offline.css" />
+</head>
+<body>
+<div class="header" id="qtdocheader">
+    <div class="main">
+    <div class="main-rounded">
+        <div class="navigationbar">
+        <ul>
+<li><a href="../osgdoc/index.html">osgQtQuick</a></li>
+<li><a href="osgga-qmlmodule.html">osgGA</a></li>
+<li>NodeTrackerManipulator QML Type</li>
+<li id="buildversion">
+osgQtQuick 2.0 Reference Documentation</li>
+    </ul>
+    </div>
+</div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<h1 class="title">NodeTrackerManipulator QML Type</h1>
+<span class="subtitle"></span>
+<!-- $$$NodeTrackerManipulator-brief -->
+<p>Control based on tracked node position and orientation <a href="#details">More...</a></p>
+<!-- @@@NodeTrackerManipulator -->
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> </b><tt>import osgGA 2.0</tt></td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="qml-osgga-orbitmanipulator.html">OrbitManipulator</a></p>
+</td></tr></table><ul>
+<li><a href="qml-osgga-nodetrackermanipulator-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="properties"></a>
+<h2>Properties</h2>
+<ul>
+<li class="fn"><b><b><a href="qml-osgga-nodetrackermanipulator.html#rotationMode-prop">rotationMode</a></b></b> : enumeration</li>
+<li class="fn"><b><b><a href="qml-osgga-nodetrackermanipulator.html#trackNode-prop">trackNode</a></b></b> : osg::Node</li>
+<li class="fn"><b><b><a href="qml-osgga-nodetrackermanipulator.html#trackerMode-prop">trackerMode</a></b></b> : enumeration</li>
+</ul>
+<!-- $$$NodeTrackerManipulator-description -->
+<a name="details"></a>
+<h2>Detailed Description</h2>
+<!-- @@@NodeTrackerManipulator -->
+<h2>Property Documentation</h2>
+<!-- $$$rotationMode -->
+<div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="rotationMode-prop"></a><span class="name">rotationMode</span> : <span class="type">enumeration</span></p></td></tr></table></div><div class="qmldoc"><p>Rotation mode. It can be one of:</p>
+<ul>
+<li><a href="qml-osgga-nodetrackermanipulator.html">NodeTrackerManipulator</a>.TRACKBALL - Use a trackball style manipulation of the view direction w.r&#x2e;t the tracked orientation.</li>
+<li><a href="qml-osgga-nodetrackermanipulator.html">NodeTrackerManipulator</a>.ELEVATION_AZIM - Allow the elevation and azimuth angles to be adjust w.r&#x2e;t the tracked orientation.</li>
+</ul>
+</div></div><!-- @@@rotationMode -->
+<br/>
+<!-- $$$trackNode -->
+<div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="trackNode-prop"></a><span class="name">trackNode</span> : <span class="type"><a href="../osg/qml-osg-node.html">osg::Node</a></span></p></td></tr></table></div><div class="qmldoc"><p>Tracked <a href="../osg/qml-osg-node.html">node</a>.</p>
+</div></div><!-- @@@trackNode -->
+<br/>
+<!-- $$$trackerMode -->
+<div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="trackerMode-prop"></a><span class="name">trackerMode</span> : <span class="type">enumeration</span></p></td></tr></table></div><div class="qmldoc"><p>Tracker mode. It can be one of:</p>
+<ul>
+<li><a href="qml-osgga-nodetrackermanipulator.html">NodeTrackerManipulator</a>.NODE_CENTER - Track the center of the node's bounding sphere, but not rotations of the node.</li>
+<li><a href="qml-osgga-nodetrackermanipulator.html">NodeTrackerManipulator</a>.NODE_CENTER_AND_AZIM - Track the center of the node's bounding sphere, and the azimuth rotation (about the z axis of the current coordinate frame).</li>
+<li><a href="qml-osgga-nodetrackermanipulator.html">NodeTrackerManipulator</a>.NODE_CENTER_AND_ROTATION - Tack the center of the node's bounding sphere, and the all rotations of the node.</li>
+</ul>
+</div></div><!-- @@@trackerMode -->
+<br/>
+</body>
+</html>
