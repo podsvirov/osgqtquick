@@ -9,9 +9,11 @@
 
 /*!
    \qmltype Loader
-   \inherits Group
+   \inherits osg::Group
    \inqmlmodule osgDB
-   \brief The Loader item allows dynamically loading an Node-based subtree from a URL
+   \brief Loader of nodes
+
+   The Loader item allows dynamically loading an \l {osg::Node}{Node}-based subtree from a URL
  */
 
 
@@ -99,13 +101,19 @@ void LoaderQtQml::setSource(const QUrl &url)
 /*!
    \qmlproperty url osgDB::Loader::source
 
-   This property holds the URL of the Node to instantiate
+   This property holds the URL of the \l {osg::Node}{Node} to instantiate.
  */
 
 QUrl LoaderQtQml::getSource()
 {
     return static_cast<Index*>(i)->url;
 }
+
+/*!
+   \qmlproperty osg::Node osgDB::Loader::node
+
+   Loaded \l {osg::Node}{node}.
+ */
 
 osg::NodeQtQml *LoaderQtQml::getNode()
 {

@@ -7,6 +7,13 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype NodeTrackerManipulator
+   \inherits OrbitManipulator
+   \inqmlmodule osgGA
+   \brief Control based on tracked node position and orientation
+ */
+
 namespace osgGA {
 
 NodeTrackerManipulatorQtQml::Index::Index(NodeTrackerManipulator *manipulator) :
@@ -53,6 +60,12 @@ void NodeTrackerManipulatorQtQml::classBegin()
     OrbitManipulatorQtQml::classBegin();
 }
 
+/*!
+   \qmlproperty osg::Node osgGA::NodeTrackerManipulator::trackNode
+
+   Tracked \l {osg::Node}{node}.
+ */
+
 osg::NodeQtQml *NodeTrackerManipulatorQtQml::getTrackNode()
 {
     return osg::NodeQtQml::fromNode(static_cast<Index*>(i)->othis->getTrackNode(), this);
@@ -62,6 +75,19 @@ void NodeTrackerManipulatorQtQml::setTrackNode(osg::NodeQtQml *node)
 {
     static_cast<Index*>(i)->setTrackNode(node);
 }
+
+/*!
+   \qmlproperty enumeration osgGA::NodeTrackerManipulator::trackerMode
+
+   Tracker mode. It can be one of:
+   \list
+   \li NodeTrackerManipulator.NODE_CENTER - Track the center of the node's bounding sphere,
+       but not rotations of the node.
+   \li NodeTrackerManipulator.NODE_CENTER_AND_AZIM - Track the center of the node's bounding sphere,
+       and the azimuth rotation (about the z axis of the current coordinate frame).
+   \li NodeTrackerManipulator.NODE_CENTER_AND_ROTATION - Tack the center of the node's bounding sphere, and the all rotations of the node.
+   \endlist
+ */
 
 NodeTrackerManipulatorQtQml::TrackerMode NodeTrackerManipulatorQtQml::getTrackerMode()
 {
@@ -79,6 +105,16 @@ void NodeTrackerManipulatorQtQml::setTrackerMode(NodeTrackerManipulatorQtQml::Tr
 
     emit trackerModeChanged(mode);
 }
+
+/*!
+   \qmlproperty enumeration osgGA::NodeTrackerManipulator::rotationMode
+
+   Rotation mode. It can be one of:
+   \list
+   \li NodeTrackerManipulator.TRACKBALL - Use a trackball style manipulation of the view direction w.r.t the tracked orientation.
+   \li NodeTrackerManipulator.ELEVATION_AZIM - Allow the elevation and azimuth angles to be adjust w.r.t the tracked orientation.
+   \endlist
+ */
 
 NodeTrackerManipulatorQtQml::RotationMode NodeTrackerManipulatorQtQml::getRotationMode()
 {

@@ -9,6 +9,7 @@
 
 /*!
    \qmltype CameraManipulator
+   \inherits osg::Object
    \inqmlmodule osgGA
    \brief Uncreatable base type for all camera manipulators
  */

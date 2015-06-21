@@ -59,6 +59,12 @@ void StandardManipulatorQtQml::classBegin()
     CameraManipulatorQtQml::classBegin();
 }
 
+/*!
+   \qmlproperty osg::Node osgGA::StandardManipulator::node
+
+   Attached \l {osg::Node}{node}.
+ */
+
 osg::NodeQtQml *StandardManipulatorQtQml::getNode()
 {
     return osg::NodeQtQml::fromNode(static_cast<Index*>(i)->othis->getNode(), this);

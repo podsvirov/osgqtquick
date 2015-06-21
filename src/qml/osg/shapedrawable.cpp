@@ -9,7 +9,7 @@
 
 /*!
    \qmltype ShapeDrawable
-   \inherits osg::Drawable
+   \inherits Drawable
    \inqmlmodule osg
    \brief Allow the use of \l {osg::Shape}{Shapes} as \l {osg::Drawable}{Drawables}
  */

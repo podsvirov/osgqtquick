@@ -9,7 +9,7 @@
 
 /*!
    \qmltype Sphere
-   \inherits osg::Shape
+   \inherits Shape
    \inqmlmodule osg
    \brief Sphere shape
  */

@@ -7,6 +7,13 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype FlightManipulator
+   \inherits FirstPersonManipulator
+   \inqmlmodule osgGA
+   \brief Flight simulator-like camera control
+ */
+
 namespace osgGA {
 
 FlightManipulatorQtQml::Index::Index(FlightManipulator *manipulator) :

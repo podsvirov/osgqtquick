@@ -9,6 +9,7 @@ namespace osg {
 
 /*!
    \qmltype Node
+   \inherits Object
    \inqmlmodule osg
    \brief Base type for all internal nodes in the scene graph
  */

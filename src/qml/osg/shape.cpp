@@ -7,6 +7,7 @@
 
 /*!
    \qmltype Shape
+   \inherits Object
    \inqmlmodule osg
    \brief Base type for all shape types
  */

@@ -7,6 +7,7 @@
 
 /*!
    \qmltype Drawable
+   \inherits Object
    \inqmlmodule osg
    \brief Base type for drawable geometry
  */

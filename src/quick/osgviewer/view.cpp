@@ -62,6 +62,12 @@ void ViewQtQuick::Index::setSceneData(osg::NodeQtQml *node)
     othis->setSceneData(node->node());
 }
 
+/*!
+   \qmlproperty osg::Camera osgViewer::View::camera
+
+   Master \l {osg::Camera}{camera} of the view.
+ */
+
 osg::CameraQtQml *ViewQtQuick::Index::getCamera()
 {
     return osg::CameraQtQml::fromCamera(othis->getCamera(), qthis);

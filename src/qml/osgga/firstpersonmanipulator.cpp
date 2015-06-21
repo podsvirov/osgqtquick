@@ -7,6 +7,13 @@
 
 #include <QDebug>
 
+/*!
+   \qmltype FirstPersonManipulator
+   \inherits StandardManipulator
+   \inqmlmodule osgGA
+   \brief Control based on position and orientation
+ */
+
 namespace osgGA {
 
 FirstPersonManipulatorQtQml::Index::Index(FirstPersonManipulator *manipulator) :
