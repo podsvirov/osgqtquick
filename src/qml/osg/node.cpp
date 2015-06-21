@@ -23,10 +23,10 @@ NodeQtQml::Index::Index(Node *node) :
 void NodeQtQml::Index::classBegin()
 {
     if(!othis) othis = new Node();
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
+    ObjectQtQml::Index::othis = othis;
+    ObjectQtQml::Index::qthis = qthis;
 
-    osgQtQml::Index::classBegin();
+    ObjectQtQml::Index::classBegin();
 }
 
 NodeQtQml::NodeQtQml(QObject *parent) :

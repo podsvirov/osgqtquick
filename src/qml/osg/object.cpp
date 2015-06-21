@@ -3,6 +3,12 @@
 
 #include <osg/Object>
 
+/*!
+   \qmltype Object
+   \inqmlmodule osg
+   \brief Base type
+ */
+
 namespace osg {
 
 ObjectQtQml::Index::Index(osg::Object *object) :
@@ -35,6 +41,26 @@ void ObjectQtQml::classBegin()
     if(!i) i = new Index();
     static_cast<Index*>(i)->qthis = this;
     osgQtQml::Object::classBegin();
+}
+
+/*!
+   \qmlproperty string osg::Object::name
+
+   Name of object
+ */
+
+QString ObjectQtQml::getName() const
+{
+    return QString::fromStdString(static_cast<Index*>(i)->othis->getName());
+}
+
+void ObjectQtQml::setName(const QString &name)
+{
+    if(getName() == name) return;
+
+    static_cast<Index*>(i)->othis->setName(name.toStdString());
+
+    emit nameChanged(name);
 }
 
 osg::Object *ObjectQtQml::object()
