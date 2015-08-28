@@ -11,5 +11,5 @@
 
    \chapter OpenSceneGraph QML modules
 
-   \annotatedlist {osgqmlmodules}
+   \annotatedlist osgqmlmodules
  */
