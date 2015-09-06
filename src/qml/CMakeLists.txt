@@ -4,6 +4,18 @@ else()
     add_definitions(-DOSGQTQML_LIBRARY_STATIC)
 endif()
 
+# First for the generic no-config case (e.g. with mingw)
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin )
+set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib )
+set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib )
+# Second, for multi-config builds (e.g. msvc)
+foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
+    string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
+    set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/bin )
+    set( CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/lib )
+    set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/lib )
+endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
+
 macro(META_Node _library _class)
   string(TOLOWER ${_library} _library_l)
   string(TOLOWER ${_class} _class_l)
@@ -34,10 +46,11 @@ META_Node(osgGA FlightManipulator)
 META_Node(osgGA OrbitManipulator)
 META_Node(osgGA NodeTrackerManipulator)
 
-qt5_wrap_cpp(_mocs
+SET(TARGET_H
   object.hpp
   osg/object.hpp
   osg/node.hpp
+  osg/notify.hpp
   osg/group.hpp
   osg/transform.hpp
   osg/positionattitudetransform.hpp
@@ -50,23 +63,15 @@ qt5_wrap_cpp(_mocs
   osgga/cameramanipulator.hpp
   osgga/trackballmanipulator.hpp
   osgviewer/compositeviewer.hpp
-  ${_moc_hdrs})
-
-if(osgQtQuick_WITH_EARTH)
-  qt5_wrap_cpp(_mocs_earth
-    osgearthutil/earthmanipulator.hpp)
-  set(osgQtQml_OSGEARTH_SRCS
-    osgearthutil/module.cpp
-    osgearthutil/earthmanipulator.cpp)
-endif()
-
-add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+)
+			
+SET(TARGET_SRC
   index.cpp
   object.cpp
-  ${_mocs}
 # osg
   osg/object.cpp
   osg/node.cpp
+  osg/notify.cpp
   osg/group.cpp
   osg/transform.cpp
   osg/positionattitudetransform.cpp
@@ -85,6 +90,26 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
 # osgViewer
   osgviewer/compositeviewer.cpp
   osgviewer/module.cpp
+)
+
+qt5_wrap_cpp(_mocs
+  ${TARGET_H}
+  ${_moc_hdrs})
+
+if(osgQtQuick_WITH_EARTH)
+  qt5_wrap_cpp(_mocs_earth
+    osgearthutil/earthmanipulator.hpp)
+  set(osgQtQml_OSGEARTH_SRCS
+    osgearthutil/module.cpp
+    osgearthutil/earthmanipulator.cpp)
+endif()
+
+source_group( GeneratedFiles FILES ${_mocs} ${_mocs_earth})
+
+add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+  ${TARGET_SRC}
+  ${TARGET_H}
+  ${_mocs}
 # osgEarth
   ${osgQtQml_OSGEARTH_SRCS}
   ${_mocs_earth}
@@ -98,6 +123,7 @@ target_link_libraries(osgQtQml
   ${OSGGA_LIBRARIES}
   ${OSGVIEWER_LIBRARIES}
   ${OSGEARTHUTIL_LIBRARY}
+  ${OPENGL_LIBRARIES}
   Qt5::Gui
   Qt5::Qml)
 
@@ -140,6 +166,15 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NodeQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/nodeindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/nodeindex.hpp"
   DESTINATION "include/osg" RENAME "NodeQtQmlIndex")
+  
+ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NotifyQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/notify.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/notify.hpp"
+  DESTINATION "include/osg" RENAME "NotifyQtQml")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NotifyQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/notifyindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/notifyindex.hpp"
+  DESTINATION "include/osg" RENAME "NotifyQtQmlIndex")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GroupQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/group.hpp\"\n")

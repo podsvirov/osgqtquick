@@ -30,6 +30,8 @@ add_subdirectory(quick)
 
 add_subdirectory(imports)
 
+add_subdirectory(tests)
+
 install(EXPORT osgQtQuick
   DESTINATION "lib/cmake/osgQtQuick"
   FILE osgQtQuickTargets.cmake)

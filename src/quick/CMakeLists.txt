@@ -4,19 +4,43 @@ else()
     add_definitions(-DOSGQTQUICK_LIBRARY_STATIC)
 endif()
 
-qt5_wrap_cpp(_mocs
+# First for the generic no-config case (e.g. with mingw)
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin )
+set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib )
+set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib )
+# Second, for multi-config builds (e.g. msvc)
+foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
+    string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
+    set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/bin )
+    set( CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/lib )
+    set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/lib )
+endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
+
+SET(TARGET_H
   object.hpp
   window.hpp
-  osgviewer/view.hpp)
-
-add_library(osgQtQuick ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+  osgviewer/view.hpp
+)
+			
+SET(TARGET_SRC
   index.cpp
   object.cpp
   window.cpp
-  ${_mocs}
-# osgViewer
+  # osgViewer
   osgviewer/view.cpp
   osgviewer/module.cpp
+)
+
+qt5_wrap_cpp(_mocs
+  ${TARGET_H}
+)
+
+source_group( GeneratedFiles FILES ${_mocs})
+
+add_library(osgQtQuick ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+  ${TARGET_SRC}
+  ${TARGET_H}
+  ${_mocs}
 )
 
 target_link_libraries(osgQtQuick
@@ -25,6 +49,9 @@ target_link_libraries(osgQtQuick
     ${OSG_LIBRARIES}
     ${OSGVIEWER_LIBRARIES}
     ${OSGGA_LIBRARIES}
+    ${OSGDB_LIBRARIES}
+    ${OPENGL_LIBRARIES}
+    Opengl32.lib
     Qt5::Qml
     Qt5::Quick)
 
