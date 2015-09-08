@@ -19,6 +19,8 @@ add_library(osgQtQuick ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   osgviewer/module.cpp
 )
 
+osgqtquick_library(osgQtQuick)
+
 target_link_libraries(osgQtQuick
     osgQtQml
     ${OPENTHREADS_LIBRARIES}
@@ -58,7 +60,7 @@ install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgviewer/view.hpp"
   DESTINATION "include/osgViewer" RENAME "ViewQtQuick")
 
 set_target_properties(osgQtQuick PROPERTIES
-  INTERFACE_LINK_LIBRARIES "")
+  INTERFACE_LINK_LIBRARIES "osgQtQml")
 
 install(TARGETS osgQtQuick EXPORT osgQtQuick
   RUNTIME DESTINATION "bin"

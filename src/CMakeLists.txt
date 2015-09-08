@@ -1,5 +1,8 @@
 cmake_policy(SET CMP0020 NEW)
 cmake_policy(SET CMP0022 NEW)
+cmake_policy(SET CMP0043 NEW)
+
+list(APPEND CMAKE_MODULE_PATH "${osgQtQuick_ROOT_DIR}/cmake")
 
 # OpenSceneGraph
 find_package(OpenSceneGraph 3.0 REQUIRED
@@ -15,9 +18,10 @@ find_package(Qt5 CONFIG
   COMPONENTS Core Qml Quick)
 
 if(osgQtQuick_WITH_EARTH)
-  list(APPEND CMAKE_MODULE_PATH "${osgQtQuick_ROOT_DIR}/cmake")
   find_package(OsgEarth 2.0 MODULE REQUIRED)
 endif()
+
+include(osgQtQuickFunctions)
 
 include_directories(
   ${OPENSCENEGRAPH_INCLUDE_DIRS}

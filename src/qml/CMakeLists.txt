@@ -91,6 +91,8 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
   ${_srcs}
 )
 
+osgqtquick_library(osgQtQml)
+
 target_link_libraries(osgQtQml
   ${OPENTHREADS_LIBRARIES}
   ${OSG_LIBRARIES}

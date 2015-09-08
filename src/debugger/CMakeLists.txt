@@ -14,6 +14,9 @@ add_executable(${_app_name} main.cpp)
 
 qt5_use_modules(${_app_name} Widgets OpenGL Quick)
 
+set_property(TARGET ${_app_name} PROPERTY
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
 target_link_libraries(${_app_name} osgQtQml osgQtQuick)
 
 if(osgQtQuick_WITH_EARTH)

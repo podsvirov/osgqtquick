@@ -2,8 +2,6 @@
 
 #include <osgDB/ModuleQtQml>
 
-#include <QDebug>
-
 class osgDBQtPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
