@@ -10,6 +10,9 @@ set(osgQtQuick_VERSION_TWEAK 5)
 set(osgQtQuick_BUILD_DOCS OFF
   CACHE BOOL "Set to ON to build reference documentation (By default is OFF)")
 
+set(osgQtQuick_BUILD_DEBUGGER OFF
+  CACHE BOOL "Set to ON to build debugger application (By default is OFF)")
+
 set(osgQtQuick_WITH_EARTH OFF
   CACHE BOOL "Set to ON to build with osgEarth library support (By default is OFF)")
 
@@ -19,6 +22,10 @@ set(osgQtQuick_VERSION
   ${osgQtQuick_VERSION_PATCH}
   ${osgQtQuick_VERSION_TWEAK})
 string(REPLACE ";" "." osgQtQuick_VERSION "${osgQtQuick_VERSION}")
+
+if(NOT DEFINED CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX  "d")
+endif()
 
 set(osgQtQuick_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}")
 

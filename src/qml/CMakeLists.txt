@@ -34,10 +34,11 @@ META_Node(osgGA FlightManipulator)
 META_Node(osgGA OrbitManipulator)
 META_Node(osgGA NodeTrackerManipulator)
 
-qt5_wrap_cpp(_mocs
+set(_hdrs
   object.hpp
   osg/object.hpp
   osg/node.hpp
+  osg/notify.hpp
   osg/group.hpp
   osg/transform.hpp
   osg/positionattitudetransform.hpp
@@ -52,21 +53,13 @@ qt5_wrap_cpp(_mocs
   osgviewer/compositeviewer.hpp
   ${_moc_hdrs})
 
-if(osgQtQuick_WITH_EARTH)
-  qt5_wrap_cpp(_mocs_earth
-    osgearthutil/earthmanipulator.hpp)
-  set(osgQtQml_OSGEARTH_SRCS
-    osgearthutil/module.cpp
-    osgearthutil/earthmanipulator.cpp)
-endif()
-
-add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+list(APPEND _srcs
   index.cpp
   object.cpp
-  ${_mocs}
 # osg
   osg/object.cpp
   osg/node.cpp
+  osg/notify.cpp
   osg/group.cpp
   osg/transform.cpp
   osg/positionattitudetransform.cpp
@@ -85,11 +78,32 @@ add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
 # osgViewer
   osgviewer/compositeviewer.cpp
   osgviewer/module.cpp
-# osgEarth
-  ${osgQtQml_OSGEARTH_SRCS}
-  ${_mocs_earth}
-  ${_srcs}
 )
+
+if(osgQtQuick_WITH_EARTH)
+  list(APPEND _moc_hdrs
+    # osgEarthUtil
+    osgearthutil/earthmanipulator.hpp)
+  list(APPEND _srcs
+    # osgEarthUtil
+    osgearthutil/module.cpp
+    osgearthutil/earthmanipulator.cpp)
+endif()
+
+qt5_wrap_cpp(_mocs
+  ${_hdrs}
+  ${_moc_hdrs})
+
+source_group(GeneratedFiles FILES ${_mocs})
+
+add_library(osgQtQml ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+  ${_hdrs}
+  ${_srcs}
+  ${_moc_hdrs}
+  ${_mocs}
+)
+
+osgqtquick_library(osgQtQml)
 
 target_link_libraries(osgQtQml
   ${OPENTHREADS_LIBRARIES}
@@ -140,6 +154,15 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NodeQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/nodeindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/nodeindex.hpp"
   DESTINATION "include/osg" RENAME "NodeQtQmlIndex")
+
+ file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NotifyQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/notify.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/notify.hpp"
+  DESTINATION "include/osg" RENAME "NotifyQtQml")
+file(WRITE "${CMAKE_BINARY_DIR}/include/osg/NotifyQtQmlIndex"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/notifyindex.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osg/notifyindex.hpp"
+  DESTINATION "include/osg" RENAME "NotifyQtQmlIndex")
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osg/GroupQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osg/group.hpp\"\n")

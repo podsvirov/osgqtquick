@@ -13,6 +13,12 @@ import osgEarthUtil 2.0 as OSGEarthUtil
 Rectangle {
     width: 500; height: 500
 
+    OSG.Notify {
+        id: notifier
+        notifyLevel: OSG.Notify.WARN
+        onNotify: console.log(message);
+    }
+
     OSGDB.Loader {
         id: loader
         source: "openstreetmap.earth"

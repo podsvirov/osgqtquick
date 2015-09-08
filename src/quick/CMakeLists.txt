@@ -4,20 +4,33 @@ else()
     add_definitions(-DOSGQTQUICK_LIBRARY_STATIC)
 endif()
 
-qt5_wrap_cpp(_mocs
+set(_hdrs
   object.hpp
   window.hpp
   osgviewer/view.hpp)
 
-add_library(osgQtQuick ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+set(_srcs
   index.cpp
   object.cpp
   window.cpp
-  ${_mocs}
 # osgViewer
   osgviewer/view.cpp
   osgviewer/module.cpp
 )
+
+qt5_wrap_cpp(_mocs
+  ${_hdrs}
+)
+
+source_group(GeneratedFiles FILES ${_mocs})
+
+add_library(osgQtQuick ${OSGQTQUICK_USER_DEFINED_DYNAMIC_OR_STATIC}
+  ${_hdrs}
+  ${_srcs}
+  ${_mocs}
+)
+
+osgqtquick_library(osgQtQuick)
 
 target_link_libraries(osgQtQuick
     osgQtQml
@@ -25,6 +38,7 @@ target_link_libraries(osgQtQuick
     ${OSG_LIBRARIES}
     ${OSGVIEWER_LIBRARIES}
     ${OSGGA_LIBRARIES}
+    ${OSGDB_LIBRARIES}
     Qt5::Qml
     Qt5::Quick)
 
@@ -58,7 +72,7 @@ install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgviewer/view.hpp"
   DESTINATION "include/osgViewer" RENAME "ViewQtQuick")
 
 set_target_properties(osgQtQuick PROPERTIES
-  INTERFACE_LINK_LIBRARIES "")
+  INTERFACE_LINK_LIBRARIES "osgQtQml")
 
 install(TARGETS osgQtQuick EXPORT osgQtQuick
   RUNTIME DESTINATION "bin"
