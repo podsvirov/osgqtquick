@@ -34,6 +34,8 @@ META_Node(osgGA FlightManipulator)
 META_Node(osgGA OrbitManipulator)
 META_Node(osgGA NodeTrackerManipulator)
 
+META_Node(osgText TextBase)
+
 set(_hdrs
   object.hpp
   osg/object.hpp
@@ -75,6 +77,8 @@ list(APPEND _srcs
   osgga/cameramanipulator.cpp
   osgga/trackballmanipulator.cpp
   osgga/module.cpp
+# osgText
+  osgtext/module.cpp
 # osgViewer
   osgviewer/compositeviewer.cpp
   osgviewer/module.cpp
@@ -110,6 +114,7 @@ target_link_libraries(osgQtQml
   ${OSG_LIBRARIES}
   ${OSGDB_LIBRARIES}
   ${OSGGA_LIBRARIES}
+  ${OSGTEXT_LIBRARIES}
   ${OSGVIEWER_LIBRARIES}
   ${OSGEARTHUTIL_LIBRARY}
   Qt5::Gui
