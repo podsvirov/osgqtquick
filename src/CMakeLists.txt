@@ -24,6 +24,7 @@ endif()
 include(osgQtQuickFunctions)
 
 include_directories(
+  "${CMAKE_BINARY_DIR}/include"
   ${OPENSCENEGRAPH_INCLUDE_DIRS}
   ${OSGEARTH_INCLUDE_DIRS}
   ${Qt5Qml_INCLUDE_DIRS}

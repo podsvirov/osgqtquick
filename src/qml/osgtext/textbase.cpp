@@ -116,6 +116,24 @@ void TextBaseQtQml::setColor(const QColor &color)
     static_cast<Index*>(i)->setColor(color);
 }
 
+QString TextBaseQtQml::getText() const
+{
+    return osgQt::swapString(static_cast<Index*>(i)->othis->getText());
+}
+
+void TextBaseQtQml::setText(const QString &text)
+{
+    QString qText = getText();
+
+    if(text == qText) return;
+
+    static_cast<Index*>(i)->othis->setText(osgQt::swapString(text));
+
+    emit textChanged(text);
+
+    qDebug() << "New Text3D:" << text;
+}
+
 TextBase *TextBaseQtQml::textBase()
 {
     return static_cast<Index*>(i)->othis;

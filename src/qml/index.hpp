@@ -7,6 +7,7 @@
 #include <osg/Vec4>
 #include <osg/Vec3d>
 #include <osg/Quat>
+#include <osgText/String>
 
 #include <QObject>
 #include <QPointer>
@@ -63,6 +64,17 @@ inline QQuaternion qQuaternion(const osg::Quat& q)
                        static_cast<float>(q.x()),
                        static_cast<float>(q.y()),
                        static_cast<float>(q.z()));
+}
+
+inline osgText::String swapString(const QString& string)
+{
+    return osgText::String(string.toStdString(),
+                           osgText::String::ENCODING_UTF8);
+}
+
+inline QString swapString(const osgText::String& string)
+{
+    return QString::fromStdString(string.createUTF8EncodedString());
 }
 
 }

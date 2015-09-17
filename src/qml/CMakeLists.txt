@@ -35,6 +35,7 @@ META_Node(osgGA OrbitManipulator)
 META_Node(osgGA NodeTrackerManipulator)
 
 META_Node(osgText TextBase)
+META_Node(osgText Text3D)
 
 set(_hdrs
   object.hpp
@@ -270,6 +271,12 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/TrackballManipulatorQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulatorindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulatorindex.hpp"
   DESTINATION "include/osgGA" RENAME "TrackballManipulatorQtQmlIndex")
+
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgText/ModuleQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgtext/module.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgtext/module.hpp"
+  DESTINATION "include/osgText" RENAME "ModuleQtQml")
 
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/ModuleQtQml"
