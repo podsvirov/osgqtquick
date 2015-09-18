@@ -11,6 +11,8 @@ class OSGQTQML_EXPORT OrbitManipulatorQtQml : public StandardManipulatorQtQml
 {
   Q_OBJECT
 
+  Q_PROPERTY(qreal wheelZoomFactor READ getWheelZoomFactor WRITE setWheelZoomFactor NOTIFY wheelZoomFactorChanged)
+
 public:
   class Index;
 
@@ -19,9 +21,15 @@ public:
 
   void classBegin();
 
+  qreal getWheelZoomFactor() const;
+  void setWheelZoomFactor(qreal wheelZoomFactor);
+
   OrbitManipulator* orbitManipulator();
 
   static OrbitManipulatorQtQml* fromOrbitManipulator(OrbitManipulator *orbitManipulator, QObject *parent = 0);
+
+signals:
+  void wheelZoomFactorChanged(qreal wheelZoomFactor) const;
 };
 
 }
