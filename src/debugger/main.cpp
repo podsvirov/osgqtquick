@@ -9,6 +9,7 @@
 #include <osg/ModuleQtQml>
 #include <osgDB/ModuleQtQml>
 #include <osgGA/ModuleQtQml>
+#include <osgText/ModuleQtQml>
 #include <osgViewer/ModuleQtQml>
 #include <osgViewer/ModuleQtQuick>
 #if defined(OSGQTQUICK_WITH_EARTH)
@@ -38,6 +39,7 @@ int main(int argc, char *argv[])
     osg::regisgerQtQmlTypes("osg");
     osgDB::regisgerQtQmlTypes("osgDB");
     osgGA::regisgerQtQmlTypes("osgGA");
+    osgText::regisgerQtQmlTypes("osgText");
     osgViewer::regisgerQtQmlTypes("osgViewer");
     osgViewer::regisgerQtQuickTypes("osgViewer");
 #if defined(OSGQTQUICK_WITH_EARTH)
