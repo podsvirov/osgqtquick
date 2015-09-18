@@ -50,6 +50,20 @@ void OrbitManipulatorQtQml::classBegin()
     StandardManipulatorQtQml::classBegin();
 }
 
+qreal OrbitManipulatorQtQml::getWheelZoomFactor() const
+{
+    return static_cast<qreal>(static_cast<Index*>(i)->othis->getWheelZoomFactor());
+}
+
+void OrbitManipulatorQtQml::setWheelZoomFactor(qreal wheelZoomFactor)
+{
+    if (getWheelZoomFactor() == wheelZoomFactor) return;
+
+    static_cast<Index*>(i)->othis->setWheelZoomFactor(static_cast<float>(wheelZoomFactor));
+
+    emit wheelZoomFactorChanged(wheelZoomFactor);
+}
+
 OrbitManipulator *OrbitManipulatorQtQml::orbitManipulator()
 {
     return static_cast<Index*>(i)->othis;
