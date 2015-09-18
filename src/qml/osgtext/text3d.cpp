@@ -25,13 +25,13 @@ void Text3DQtQml::Index::classBegin()
 {
     if(!othis) othis = new Text3D();
 
-    float radius = 1.0f;
-    float characterSize=radius*0.2f;
-    float characterDepth=characterSize*0.2f;
+    //float radius = 1.0f;
+    //float characterSize=radius*0.2f;
+    //float characterDepth=characterSize*0.2f;
     //osg::Vec3 pos(0.0f,0.0f,0.0f);
     othis->setFont("fonts/arial.ttf");
-    othis->setCharacterSize(characterSize);
-    othis->setCharacterDepth(characterDepth);
+    //othis->setCharacterSize(characterSize);
+    //othis->setCharacterDepth(characterDepth);
     //othis->setPosition(pos);
     //othis->setDrawMode(osgText::Text3D::TEXT | osgText::Text3D::BOUNDINGBOX);
     //othis->setAxisAlignment(osgText::Text3D::XY_PLANE);
@@ -58,6 +58,20 @@ void Text3DQtQml::classBegin()
     if(!i) i = new Index();
     static_cast<Index*>(i)->qthis = this;
     TextBaseQtQml::classBegin();
+}
+
+qreal Text3DQtQml::getCharacterDepth() const
+{
+    return static_cast<qreal>(static_cast<Index*>(i)->othis->getCharacterDepth());
+}
+
+void Text3DQtQml::setCharacterDepth(qreal depth)
+{
+    if(getCharacterDepth() == depth) return;
+
+    static_cast<Index*>(i)->othis->setCharacterDepth(static_cast<float>(depth));
+
+    emit characterDepthChanged(depth);
 }
 
 Text3D *Text3DQtQml::text3D()
