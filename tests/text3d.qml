@@ -10,6 +10,8 @@ import osgViewer 2.0 as OSGViewer
 
 OSGViewer.View {
 
+    id: view
+
     width: 640; height: 480
 
     cameraManipulator: OSGGA.TrackballManipulator {}
@@ -18,9 +20,16 @@ OSGViewer.View {
         OSGText.Text3D {
             id: text3d
             text: "Hello from osgQtQuick!"
-            characterSize: slider.value
+            characterSize: characterSizeSlider.value
             characterDepth: characterDepthSlider.value
             color: "yellow"
+        }
+    }
+
+    Button {
+        text: "Home"
+        onClicked: {
+            view.cameraManipulator.home()
         }
     }
 
@@ -32,7 +41,7 @@ OSGViewer.View {
             Layout.alignment: Qt.AlignRight
         }
         Slider {
-            id: slider
+            id: characterSizeSlider
             value: 0.5
             Layout.fillWidth: true
         }
@@ -52,4 +61,6 @@ OSGViewer.View {
             bottom: parent.bottom
         }
     }
+
+    Component.onCompleted: cameraManipulator.home()
 }

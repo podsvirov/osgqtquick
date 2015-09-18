@@ -34,7 +34,7 @@ void Text3DQtQml::Index::classBegin()
     //othis->setCharacterDepth(characterDepth);
     //othis->setPosition(pos);
     //othis->setDrawMode(osgText::Text3D::TEXT | osgText::Text3D::BOUNDINGBOX);
-    //othis->setAxisAlignment(osgText::Text3D::XY_PLANE);
+    othis->setAxisAlignment(osgText::Text3D::XZ_PLANE);
     //othis->setText("XY_PLANE");
 
     TextBaseQtQml::Index::othis = othis;
