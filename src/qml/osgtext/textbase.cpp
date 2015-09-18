@@ -18,7 +18,8 @@ namespace osgText {
 
 TextBaseQtQml::Index::Index(TextBase *drawable) :
     DrawableQtQml::Index(drawable),
-    qthis(0)
+    qthis(0),
+    characterSize(0)
 {
     othis = drawable;
 }
@@ -130,8 +131,23 @@ void TextBaseQtQml::setText(const QString &text)
     static_cast<Index*>(i)->othis->setText(osgQt::swapString(text));
 
     emit textChanged(text);
+}
 
-    qDebug() << "New Text3D:" << text;
+qreal TextBaseQtQml::getCharacterSize() const
+{
+    return static_cast<qreal>(static_cast<Index*>(i)->characterSize);
+}
+
+void TextBaseQtQml::setCharacterSize(qreal size)
+{
+    if(static_cast<Index*>(i)->characterSize == size) return;
+
+    // NOTE: osgText::TextBase has not getCharacterSize method?...
+    // We cache it in index object now
+    static_cast<Index*>(i)->characterSize = size;
+    static_cast<Index*>(i)->othis->setCharacterSize(static_cast<float>(size));
+
+    emit characterSizeChanged(size);
 }
 
 TextBase *TextBaseQtQml::textBase()

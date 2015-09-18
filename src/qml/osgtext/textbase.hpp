@@ -18,6 +18,7 @@ class OSGQTQML_EXPORT TextBaseQtQml : public osg::DrawableQtQml
   //Q_PROPERTY(osgText::StyleQtQml* style READ getStyle WRITE setStyle NOTIFY styleChanged)
   Q_PROPERTY(QColor color READ getColor WRITE setColor NOTIFY colorChanged)
   Q_PROPERTY(QString text READ getText WRITE setText NOTIFY textChanged)
+  Q_PROPERTY(qreal characterSize READ getCharacterSize WRITE setCharacterSize NOTIFY characterSizeChanged)
 
 public:
   class Index;
@@ -36,6 +37,9 @@ public:
   Q_INVOKABLE QString getText() const;
   Q_INVOKABLE void setText(const QString &text);
 
+  Q_INVOKABLE qreal getCharacterSize() const;
+  Q_INVOKABLE void setCharacterSize(qreal size);
+
   TextBase* textBase();
 
   static TextBaseQtQml* fromTextBase(TextBase *textBase, QObject *parent = 0);
@@ -44,6 +48,7 @@ signals:
   //void shapeChanged(ShapeQtQml *shape) const;
   void colorChanged(const QColor &color) const;
   void textChanged(const QString &text) const;
+  void characterSizeChanged(qreal size) const;
 };
 
 }

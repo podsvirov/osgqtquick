@@ -30,6 +30,7 @@ protected:
 
     //osg::ref_ptr<Style> style;
     QColor color;
+    qreal characterSize;
 };
 
 }
