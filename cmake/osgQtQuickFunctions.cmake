@@ -26,6 +26,10 @@ function(osgqtquick_imported_module module_name)
   set_property(TARGET ${target_name} PROPERTY
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/imports/${module_name}")
 
+  if(MINGW)
+    set_target_properties(${target_name} PROPERTIES PREFIX "")
+  endif()
+
   target_include_directories(${target_name}
     PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
 
