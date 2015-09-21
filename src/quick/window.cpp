@@ -18,7 +18,7 @@ Window::Window(QQuickWindow *window) :
 
     d.window = window;
 
-    connect(window, SIGNAL(beforeRendering()), this, SLOT(frame()));
+    connect(window, SIGNAL(beforeRendering()), this, SLOT(frame()), Qt::DirectConnection);
 
     // Render loop
     d.window->setClearBeforeRendering(false);
