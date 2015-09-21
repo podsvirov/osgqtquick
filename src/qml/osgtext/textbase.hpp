@@ -3,7 +3,7 @@
 
 #include <osg/DrawableQtQml>
 
-#include <osg/ShapeQtQml>
+#include <osgText/StyleQtQml>
 
 #include <QColor>
 
@@ -15,7 +15,7 @@ class OSGQTQML_EXPORT TextBaseQtQml : public osg::DrawableQtQml
 {
   Q_OBJECT
 
-  //Q_PROPERTY(osgText::StyleQtQml* style READ getStyle WRITE setStyle NOTIFY styleChanged)
+  Q_PROPERTY(osgText::StyleQtQml* style READ getStyle WRITE setStyle NOTIFY styleChanged)
   Q_PROPERTY(QColor color READ getColor WRITE setColor NOTIFY colorChanged)
   Q_PROPERTY(QString text READ getText WRITE setText NOTIFY textChanged)
   Q_PROPERTY(qreal characterSize READ getCharacterSize WRITE setCharacterSize NOTIFY characterSizeChanged)
@@ -28,8 +28,8 @@ public:
 
   void classBegin();
 
-  //Q_INVOKABLE StyleQtQml *getStyle() const;
-  //Q_INVOKABLE void setStyle(StyleQtQml *style);
+  Q_INVOKABLE StyleQtQml *getStyle() const;
+  Q_INVOKABLE void setStyle(StyleQtQml *style);
 
   Q_INVOKABLE QColor getColor() const;
   Q_INVOKABLE void setColor(const QColor &color);
@@ -45,7 +45,7 @@ public:
   static TextBaseQtQml* fromTextBase(TextBase *textBase, QObject *parent = 0);
 
 signals:
-  //void shapeChanged(ShapeQtQml *shape) const;
+  void styleChanged(StyleQtQml *shape) const;
   void colorChanged(const QColor &color) const;
   void textChanged(const QString &text) const;
   void characterSizeChanged(qreal size) const;

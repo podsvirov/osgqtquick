@@ -34,6 +34,7 @@ META_Node(osgGA FlightManipulator)
 META_Node(osgGA OrbitManipulator)
 META_Node(osgGA NodeTrackerManipulator)
 
+META_Node(osgText Style)
 META_Node(osgText TextBase)
 META_Node(osgText Text3D)
 

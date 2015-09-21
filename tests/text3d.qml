@@ -23,6 +23,9 @@ OSGViewer.View {
             characterSize: characterSizeSlider.value
             characterDepth: characterDepthSlider.value
             color: "yellow"
+            style: OSGText.Style {
+                widthRatio: styleWidthRationSlider.value
+            }
         }
     }
 
@@ -53,6 +56,16 @@ OSGViewer.View {
         Slider {
             id: characterDepthSlider
             value: 0.5
+            Layout.fillWidth: true
+        }
+        Label {
+            text: "style.widthRatio :"
+            color: "white"
+            Layout.alignment: Qt.AlignRight
+        }
+        Slider {
+            id: styleWidthRationSlider
+            value: 1.0
             Layout.fillWidth: true
         }
         anchors {

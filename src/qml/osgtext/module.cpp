@@ -1,5 +1,6 @@
 #include "module.hpp"
 
+#include "styleindex.hpp"
 #include "textbaseindex.hpp"
 #include "text3dindex.hpp"
 
@@ -12,6 +13,10 @@ namespace osgText {
 
 void regisgerQtQmlTypes(const char *uri)
 {
+    qmlRegisterType<StyleQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "Style");
+
     qmlRegisterUncreatableType<TextBaseQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "TextBase", "[osgQtQuick] TextBase is Uncreatable");

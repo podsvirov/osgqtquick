@@ -41,27 +41,6 @@ void TextBaseQtQml::Index::componentComplete()
 }
 
 /*!
-   \qmlproperty osgText::Style osgText::TextBase::style
-
-   Text \l {osgText::Style}{style}
- */
-/*
-StyleQtQml *TextBaseQtQml::Index::getStyle() const
-{
-    return StyleQtQml::fromStyle(style.get());
-}
-
-void TextBaseQtQml::Index::setStyle(StyleQtQml *style)
-{
-    if(this->style.get() == style->style()) return;
-
-    this->style = style->style();
-
-    emit qthis->styleChanged(style);
-}
-*/
-
-/*!
    \qmlproperty color osgText::TextBase::color
 
    Color of \l {osgText::TextBase}{text}
@@ -95,17 +74,25 @@ void TextBaseQtQml::classBegin()
     DrawableQtQml::classBegin();
 }
 
-/*
+/*!
+   \qmlproperty osgText::Style osgText::TextBase::style
+
+   Text \l {osgText::Style}{style}
+ */
+
 StyleQtQml *TextBaseQtQml::getStyle() const
 {
-    return static_cast<Index*>(i)->getStyle();
+    return StyleQtQml::fromStyle(static_cast<Index*>(i)->othis->getStyle());
 }
 
 void TextBaseQtQml::setStyle(StyleQtQml *style)
 {
-    static_cast<Index*>(i)->setStyle(style);
+    if(static_cast<Index*>(i)->othis->getStyle() == style->style()) return;
+
+    static_cast<Index*>(i)->othis->setStyle(style->style());
+
+    emit styleChanged(style);
 }
-*/
 
 QColor TextBaseQtQml::getColor() const
 {
