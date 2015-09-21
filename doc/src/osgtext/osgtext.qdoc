@@ -1,0 +1,20 @@
+/*!
+   \qmlmodule osgText 2.0
+   \title osgText
+   \brief Contains QML types for osgText library.
+   \ingroup osgqmlmodules
+
+   The osgText module extends the core scene graph to support high quality text
+
+   \chapter Importing
+
+   To use the types in this module, import the module with the following line:
+
+   \qml
+   import osgText 2.0
+   \endqml
+
+   \chapter Types
+
+   The following types are provided:
+ */

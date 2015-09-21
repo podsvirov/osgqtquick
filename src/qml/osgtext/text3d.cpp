@@ -60,6 +60,12 @@ void Text3DQtQml::classBegin()
     TextBaseQtQml::classBegin();
 }
 
+/*!
+   \qmlproperty real osgText::Text3D::characterDepth
+
+   The Charactere Depth of text
+ */
+
 qreal Text3DQtQml::getCharacterDepth() const
 {
     return static_cast<qreal>(static_cast<Index*>(i)->othis->getCharacterDepth());

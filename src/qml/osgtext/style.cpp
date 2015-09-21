@@ -41,12 +41,6 @@ void StyleQtQml::Index::componentComplete()
     ObjectQtQml::Index::componentComplete();
 }
 
-/*!
-   \qmlproperty osgText::Style osgText::Style::style
-
-   Text \l {osgText::Style}{style}
- */
-
 StyleQtQml::StyleQtQml(QObject *parent) :
   ObjectQtQml(parent)
 {
@@ -75,6 +69,12 @@ void StyleQtQml::setStyle(StyleQtQml *style)
     static_cast<Index*>(i)->setStyle(style);
 }
 */
+
+/*!
+   \qmlproperty real osgText::Style::widthRatio
+
+   The text width ratio
+ */
 
 qreal StyleQtQml::getWidthRatio() const
 {

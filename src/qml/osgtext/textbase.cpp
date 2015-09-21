@@ -9,7 +9,7 @@
 
 /*!
    \qmltype TextBase
-   \inherits Drawable
+   \inherits osg::Drawable
    \inqmlmodule osgText
    \brief Base type for text \l {osg::Node}{Nodes}
  */
@@ -39,12 +39,6 @@ void TextBaseQtQml::Index::componentComplete()
 
     DrawableQtQml::Index::componentComplete();
 }
-
-/*!
-   \qmlproperty color osgText::TextBase::color
-
-   Color of \l {osgText::TextBase}{text}
- */
 
 void TextBaseQtQml::Index::setColor(const QColor &color)
 {
@@ -94,6 +88,12 @@ void TextBaseQtQml::setStyle(StyleQtQml *style)
     emit styleChanged(style);
 }
 
+/*!
+   \qmlproperty color osgText::TextBase::color
+
+   Color of \l {osgText::TextBase}{text}
+ */
+
 QColor TextBaseQtQml::getColor() const
 {
     return osgQt::swapColor(static_cast<Index*>(i)->othis->getColor());
@@ -103,6 +103,12 @@ void TextBaseQtQml::setColor(const QColor &color)
 {
     static_cast<Index*>(i)->setColor(color);
 }
+
+/*!
+   \qmlproperty string osgText::TextBase::text
+
+   The the text string
+ */
 
 QString TextBaseQtQml::getText() const
 {
@@ -119,6 +125,12 @@ void TextBaseQtQml::setText(const QString &text)
 
     emit textChanged(text);
 }
+
+/*!
+   \qmlproperty real osgText::TextBase::characterSize
+
+   The the rendered character size in object coordinates
+ */
 
 qreal TextBaseQtQml::getCharacterSize() const
 {

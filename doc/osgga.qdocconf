@@ -12,5 +12,4 @@ sourcedirs = src/osgga \
 outputdir = html/osgga
 
 indexes   = html/osgdoc/osgdoc.index \
-            html/osg/osg.index \
-            html/osgga/osgga.index
+            html/osg/osg.index

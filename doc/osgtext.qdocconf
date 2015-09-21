@@ -1,0 +1,15 @@
+include(config.qdocconf)
+
+project = osgText
+description = osgText Module
+
+navigation.landingpage = "osgText"
+
+headerdirs = ../src/qml/osgtext
+sourcedirs = src/osgtext \
+             ../src/qml/osgtext
+
+outputdir = html/osgtext
+
+indexes   = html/osgdoc/osgdoc.index \
+            html/osg/osg.index
