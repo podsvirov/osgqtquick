@@ -156,7 +156,25 @@ TextBaseQtQml::AxisAlignment TextBaseQtQml::getAxisAlignment() const
 
 void TextBaseQtQml::setAxisAlignment(TextBaseQtQml::AxisAlignment axisAlignment)
 {
+    if(getAxisAlignment() == axisAlignment) return;
+
     static_cast<Index*>(i)->othis->setAxisAlignment(static_cast<TextBase::AxisAlignment>(axisAlignment));
+
+    emit axisAlignmentChanged(axisAlignment);
+}
+
+TextBaseQtQml::DrawModeMasks TextBaseQtQml::getDrawMode() const
+{
+    return DrawModeMasks(static_cast<Index*>(i)->othis->getDrawMode());
+}
+
+void TextBaseQtQml::setDrawMode(TextBaseQtQml::DrawModeMasks drawMode)
+{
+    if(getDrawMode() == drawMode) return;
+
+    static_cast<Index*>(i)->othis->setDrawMode(static_cast<TextBase::DrawModeMask>(static_cast<int>(drawMode)));
+
+    emit drawModeChanged(drawMode);
 }
 
 TextBase *TextBaseQtQml::textBase()

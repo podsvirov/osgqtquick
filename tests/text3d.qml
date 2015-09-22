@@ -24,6 +24,7 @@ OSGViewer.View {
             characterDepth: characterDepthSlider.value
             color: "yellow"
             axisAlignment: "XZ_PLANE"
+            drawMode: OSGText.TextBase.TEXT | OSGText.TextBase.BOUNDINGBOX | OSGText.TextBase.ALIGNMENT
             style: OSGText.Style {
                 widthRatio: styleWidthRationSlider.value
             }

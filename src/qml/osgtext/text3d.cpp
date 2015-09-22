@@ -25,17 +25,10 @@ void Text3DQtQml::Index::classBegin()
 {
     if(!othis) othis = new Text3D();
 
-    //float radius = 1.0f;
-    //float characterSize=radius*0.2f;
-    //float characterDepth=characterSize*0.2f;
-    //osg::Vec3 pos(0.0f,0.0f,0.0f);
     othis->setFont("fonts/arial.ttf");
-    //othis->setCharacterSize(characterSize);
-    //othis->setCharacterDepth(characterDepth);
+
+    //osg::Vec3 pos(0.0f,0.0f,0.0f);
     //othis->setPosition(pos);
-    //othis->setDrawMode(osgText::Text3D::TEXT | osgText::Text3D::BOUNDINGBOX);
-    othis->setAxisAlignment(osgText::Text3D::XZ_PLANE);
-    //othis->setText("XY_PLANE");
 
     TextBaseQtQml::Index::othis = othis;
     TextBaseQtQml::Index::qthis = qthis;
