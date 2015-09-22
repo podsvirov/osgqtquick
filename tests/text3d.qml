@@ -19,14 +19,33 @@ OSGViewer.View {
     sceneData: OSG.Geode {
         OSGText.Text3D {
             id: text3d
-            text: "Hello from osgQtQuick!"
+            text: "Hello from\n  osgQtQuick!"
             characterSize: characterSizeSlider.value
             characterDepth: characterDepthSlider.value
             color: "yellow"
             axisAlignment: "XZ_PLANE"
-            drawMode: OSGText.TextBase.TEXT | OSGText.TextBase.BOUNDINGBOX | OSGText.TextBase.ALIGNMENT
             style: OSGText.Style {
                 widthRatio: styleWidthRationSlider.value
+            }
+            function updateDrawMode() {
+                var mode = 0.0
+                if(drawModeTEXTChecker.checked)
+                {
+                    mode |= OSGText.TextBase.TEXT
+                }
+                if(drawModeBOUNDINGBOXChecker.checked)
+                {
+                    mode |= OSGText.TextBase.BOUNDINGBOX
+                }
+                if(drawModeFILLEDBOUNDINGBOXChecker.checked)
+                {
+                    mode |= OSGText.TextBase.FILLEDBOUNDINGBOX
+                }
+                if(drawModeALIGNMENTChecker.checked)
+                {
+                    mode |= OSGText.TextBase.ALIGNMENT
+                }
+                drawMode = mode
             }
         }
     }
@@ -35,6 +54,48 @@ OSGViewer.View {
         text: "Home"
         onClicked: {
             view.cameraManipulator.home()
+        }
+    }
+
+    GridLayout {
+        columns: 2
+        anchors.right: parent.right
+        Label {
+            text: "TEXT :"
+            color: "white"
+            Layout.alignment: Qt.AlignRight
+        }
+        CheckBox {
+            id: drawModeTEXTChecker
+            checked: true
+            onCheckedChanged: text3d.updateDrawMode()
+        }
+        Label {
+            text: "BOUNDINGBOX :"
+            color: "white"
+            Layout.alignment: Qt.AlignRight
+        }
+        CheckBox {
+            id: drawModeBOUNDINGBOXChecker
+            onCheckedChanged: text3d.updateDrawMode()
+        }
+        Label {
+            text: "FILLEDBOUNDINGBOX :"
+            color: "white"
+            Layout.alignment: Qt.AlignRight
+        }
+        CheckBox {
+            id: drawModeFILLEDBOUNDINGBOXChecker
+            onCheckedChanged: text3d.updateDrawMode()
+        }
+        Label {
+            text: "ALIGNMENT :"
+            color: "white"
+            Layout.alignment: Qt.AlignRight
+        }
+        CheckBox {
+            id: drawModeALIGNMENTChecker
+            onCheckedChanged: text3d.updateDrawMode()
         }
     }
 
@@ -77,5 +138,8 @@ OSGViewer.View {
         }
     }
 
-    Component.onCompleted: cameraManipulator.home()
+    Component.onCompleted: {
+        cameraManipulator.home()
+        text3d.updateDrawMode()
+    }
 }
