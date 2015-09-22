@@ -149,6 +149,16 @@ void TextBaseQtQml::setCharacterSize(qreal size)
     emit characterSizeChanged(size);
 }
 
+TextBaseQtQml::AxisAlignment TextBaseQtQml::getAxisAlignment() const
+{
+    return static_cast<AxisAlignment>(static_cast<Index*>(i)->othis->getAxisAlignment());
+}
+
+void TextBaseQtQml::setAxisAlignment(TextBaseQtQml::AxisAlignment axisAlignment)
+{
+    static_cast<Index*>(i)->othis->setAxisAlignment(static_cast<TextBase::AxisAlignment>(axisAlignment));
+}
+
 TextBase *TextBaseQtQml::textBase()
 {
     return static_cast<Index*>(i)->othis;

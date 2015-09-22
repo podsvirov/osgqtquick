@@ -19,6 +19,22 @@ class OSGQTQML_EXPORT TextBaseQtQml : public osg::DrawableQtQml
   Q_PROPERTY(QColor color READ getColor WRITE setColor NOTIFY colorChanged)
   Q_PROPERTY(QString text READ getText WRITE setText NOTIFY textChanged)
   Q_PROPERTY(qreal characterSize READ getCharacterSize WRITE setCharacterSize NOTIFY characterSizeChanged)
+  Q_PROPERTY(AxisAlignment axisAlignment READ getAxisAlignment WRITE setAxisAlignment NOTIFY axisAlignmentChanged)
+
+public:
+  enum AxisAlignment
+  {
+      XY_PLANE,
+      REVERSED_XY_PLANE,
+      XZ_PLANE,
+      REVERSED_XZ_PLANE,
+      YZ_PLANE,
+      REVERSED_YZ_PLANE,
+      SCREEN,
+      USER_DEFINED_ROTATION
+  };
+
+  Q_ENUMS(AxisAlignment)
 
 public:
   class Index;
@@ -40,6 +56,9 @@ public:
   Q_INVOKABLE qreal getCharacterSize() const;
   Q_INVOKABLE void setCharacterSize(qreal size);
 
+  Q_INVOKABLE AxisAlignment getAxisAlignment() const;
+  Q_INVOKABLE void setAxisAlignment(AxisAlignment axisAlignment);
+
   TextBase* textBase();
 
   static TextBaseQtQml* fromTextBase(TextBase *textBase, QObject *parent = 0);
@@ -49,6 +68,7 @@ signals:
   void colorChanged(const QColor &color) const;
   void textChanged(const QString &text) const;
   void characterSizeChanged(qreal size) const;
+  void axisAlignmentChanged(AxisAlignment axisAlignment) const;
 };
 
 }

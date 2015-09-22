@@ -23,6 +23,7 @@ OSGViewer.View {
             characterSize: characterSizeSlider.value
             characterDepth: characterDepthSlider.value
             color: "yellow"
+            axisAlignment: "XZ_PLANE"
             style: OSGText.Style {
                 widthRatio: styleWidthRationSlider.value
             }
