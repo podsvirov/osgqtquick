@@ -97,7 +97,7 @@ struct OSGQTQML_EXPORT Storage {
     std::set<qtMakeIndex> qtMakers;
     std::set<osgMakeIndex> osgMakers;
     std::map<QObject*, Index*> qtIndexes;
-    std::map<osg::Object*, Index*> osgIndexes;
+    std::map<osg::Referenced*, Index*> osgIndexes;
 };
 
 class OSGQTQML_EXPORT Index
@@ -108,7 +108,7 @@ public:
 
 public: // methods
     QObject *qtObject();
-    osg::Object *osgObject();
+    osg::Referenced *osgReferenced();
 
     bool isBegin() const;
     bool isComplete() const;
@@ -130,7 +130,7 @@ public: // static methods
     static bool eraseMake(qtMakeIndex make);
 
 protected:
-    osg::Object *othis;
+    osg::Referenced *othis;
     QObject *qthis;
 
     void setQtObject(QObject *object);
@@ -143,7 +143,7 @@ private:
     bool is_begin;
     bool is_complete;
 
-    osg::ref_ptr<osg::Object> o_ptr;
+    osg::ref_ptr<osg::Referenced> o_ptr;
     QPointer<QObject> q_ptr;
 
     static Storage storage;
@@ -154,7 +154,7 @@ inline QObject *Index::qtObject()
     return q_ptr.data();
 }
 
-inline osg::Object *Index::osgObject()
+inline osg::Referenced *Index::osgReferenced()
 {
     return o_ptr.get();
 }

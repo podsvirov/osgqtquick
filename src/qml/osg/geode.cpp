@@ -78,7 +78,7 @@ bool GeodeQtQml::addDrawable(DrawableQtQml *drawable)
         return true;
       }
     else if (static_cast<GeodeQtQml::Index*>(i)->othis->addDrawable(
-          static_cast<osg::Drawable*>(drawable->index()->osgObject())))
+          static_cast<osg::Drawable*>(drawable->index()->osgReferenced())))
       {
         emit numDrawablesChanged(getNumDrawables());
         return true;

@@ -44,14 +44,14 @@ void Index::componentComplete()
     q_ptr = qthis;
 
     storage.qtIndexes.insert(std::pair<QObject*, Index*>(q_ptr.data(), this));
-    storage.osgIndexes.insert(std::pair<osg::Object*, Index*>(o_ptr.get(), this));
+    storage.osgIndexes.insert(std::pair<osg::Referenced*, Index*>(o_ptr.get(), this));
 
     is_complete = true;
 }
 
 Index *Index::checkIndex(osg::Object *o)
 {
-    std::map<osg::Object*, Index*>::iterator it = storage.osgIndexes.find(o);
+    std::map<osg::Referenced*, Index*>::iterator it = storage.osgIndexes.find(o);
 
     if (it != storage.osgIndexes.end()) return it->second;
 
@@ -69,7 +69,7 @@ Index *Index::checkIndex(QObject *o)
 
 Index *Index::fromObject(osg::Object *o)
 {
-    std::map<osg::Object*, Index*>::iterator it = storage.osgIndexes.find(o);
+    std::map<osg::Referenced*, Index*>::iterator it = storage.osgIndexes.find(o);
 
     if (it != storage.osgIndexes.end()) return it->second;
 
