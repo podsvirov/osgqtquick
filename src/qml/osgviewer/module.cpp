@@ -7,7 +7,7 @@
 
 namespace osgViewer {
 
-void regisgerQtQmlTypes(const char *uri)
+void registerQtQmlTypes(const char *uri)
 {
     qmlRegisterType<CompositeViewerQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,

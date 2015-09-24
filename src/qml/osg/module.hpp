@@ -5,7 +5,7 @@
 
 namespace osg {
 
-OSGQTQML_EXPORT void regisgerQtQmlTypes(const char *uri);
+OSGQTQML_EXPORT void registerQtQmlTypes(const char *uri);
 
 OSGQTQML_EXPORT osgQtQml::Index* qtMakeIndex(QObject *o);
 OSGQTQML_EXPORT osgQtQml::Index* osgMakeIndex(osg::Object *o);

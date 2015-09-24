@@ -13,9 +13,9 @@ public:
     {
         Q_ASSERT(uri == QLatin1String("osgViewer"));
         // osgViewer types from osgQtQml library
-        osgViewer::regisgerQtQmlTypes(uri);
+        osgViewer::registerQtQmlTypes(uri);
         // osgViewer types from osgQtQuick library
-        osgViewer::regisgerQtQuickTypes(uri);
+        osgViewer::registerQtQuickTypes(uri);
     }
 };
 

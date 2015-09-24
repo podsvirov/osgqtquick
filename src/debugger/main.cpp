@@ -36,14 +36,14 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     // Register modules
-    osg::regisgerQtQmlTypes("osg");
-    osgDB::regisgerQtQmlTypes("osgDB");
-    osgGA::regisgerQtQmlTypes("osgGA");
-    osgText::regisgerQtQmlTypes("osgText");
-    osgViewer::regisgerQtQmlTypes("osgViewer");
-    osgViewer::regisgerQtQuickTypes("osgViewer");
+    osg::registerQtQmlTypes("osg");
+    osgDB::registerQtQmlTypes("osgDB");
+    osgGA::registerQtQmlTypes("osgGA");
+    osgText::registerQtQmlTypes("osgText");
+    osgViewer::registerQtQmlTypes("osgViewer");
+    osgViewer::registerQtQuickTypes("osgViewer");
 #if defined(OSGQTQUICK_WITH_EARTH)
-    osgEarth::Util::regisgerQtQmlTypes("osgEarthUtil");
+    osgEarth::Util::registerQtQmlTypes("osgEarthUtil");
 #endif
 
     // Create Viewer and load qml script

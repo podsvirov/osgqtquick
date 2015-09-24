@@ -5,7 +5,7 @@
 
 namespace osgGA {
 
-OSGQTQML_EXPORT void regisgerQtQmlTypes(const char *uri);
+OSGQTQML_EXPORT void registerQtQmlTypes(const char *uri);
 
 }
 

@@ -15,7 +15,7 @@
 
 namespace osgGA {
 
-void regisgerQtQmlTypes(const char *uri)
+void registerQtQmlTypes(const char *uri)
 {
     qmlRegisterUncreatableType<CameraManipulatorQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,

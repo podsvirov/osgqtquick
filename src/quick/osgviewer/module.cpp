@@ -13,7 +13,7 @@
 
 namespace osgViewer {
 
-void regisgerQtQuickTypes(const char *uri)
+void registerQtQuickTypes(const char *uri)
 {
     qmlRegisterType<osgViewer::ViewQtQuick>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,

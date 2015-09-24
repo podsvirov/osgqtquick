@@ -27,7 +27,7 @@
 
 namespace osg {
 
-void regisgerQtQmlTypes(const char *uri)
+void registerQtQmlTypes(const char *uri)
 {
     qmlRegisterUncreatableType<ObjectQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,

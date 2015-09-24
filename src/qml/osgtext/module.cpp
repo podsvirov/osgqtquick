@@ -11,7 +11,7 @@
 
 namespace osgText {
 
-void regisgerQtQmlTypes(const char *uri)
+void registerQtQmlTypes(const char *uri)
 {
     qmlRegisterType<StyleQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,

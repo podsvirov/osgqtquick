@@ -12,7 +12,7 @@ public:
     {
         Q_ASSERT(uri == QLatin1String("osgDB"));
         // osgDB types from osgQtQml library
-        osgDB::regisgerQtQmlTypes(uri);
+        osgDB::registerQtQmlTypes(uri);
     }
 };
 

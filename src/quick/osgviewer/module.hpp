@@ -6,7 +6,7 @@
 
 namespace osgViewer {
 
-OSGQTQUICK_EXPORT void regisgerQtQuickTypes(const char *uri);
+OSGQTQUICK_EXPORT void registerQtQuickTypes(const char *uri);
 
 OSGQTQUICK_EXPORT osgQtQml::Index* qtMakeQuickIndex(QObject *o);
 OSGQTQUICK_EXPORT osgQtQml::Index* osgMakeQuickIndex(osg::Object *o);

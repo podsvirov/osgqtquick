@@ -12,7 +12,7 @@ public:
     {
         Q_ASSERT(uri == QLatin1String("osgText"));
         // osgText types from osgQtQml library
-        osgText::regisgerQtQmlTypes(uri);
+        osgText::registerQtQmlTypes(uri);
     }
 };
 

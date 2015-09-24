@@ -12,7 +12,7 @@ public:
     {
         Q_ASSERT(uri == QLatin1String("osgEarthUtil"));
         // osgEarth::Util types from osgQtQml library
-        osgEarth::Util::regisgerQtQmlTypes(uri);
+        osgEarth::Util::registerQtQmlTypes(uri);
     }
 };
 
