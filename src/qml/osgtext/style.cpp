@@ -8,10 +8,10 @@
 #include <QDebug>
 
 /*!
-   \qmltype Style
+   \qmltype Font
    \inherits osg::Object
    \inqmlmodule osgText
-   \brief Text style
+   \brief Text font
  */
 
 namespace osgText {

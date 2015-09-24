@@ -89,6 +89,27 @@ void TextBaseQtQml::setStyle(StyleQtQml *style)
 }
 
 /*!
+   \qmlproperty osgText::Font osgText::TextBase::font
+
+   Text \l {osgText::Font}{Font}
+ */
+
+FontQtQml *TextBaseQtQml::getFont() const
+{
+    // NOTE: const_cast...
+    return FontQtQml::fromFont(const_cast<osgText::Font*>(static_cast<Index*>(i)->othis->getFont()));
+}
+
+void TextBaseQtQml::setFont(FontQtQml *font)
+{
+    if(static_cast<Index*>(i)->othis->getFont() == font->font()) return;
+
+    static_cast<Index*>(i)->othis->setFont(font->font());
+
+    emit fontChanged(font);
+}
+
+/*!
    \qmlproperty color osgText::TextBase::color
 
    Color of \l {osgText::TextBase}{text}
