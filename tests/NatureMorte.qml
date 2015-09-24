@@ -22,6 +22,14 @@ OSG.Group {
             }
         }
 
+        OSG.ShapeDrawable {
+            color: "blue"
+            shape: OSG.Cylinder {
+                center: Qt.vector3d(0.25, 0.15, 0.2)
+                radius: 0.2
+                height: 0.4
+            }
+        }
     }
 
     OSG.PositionAttitudeTransform {
