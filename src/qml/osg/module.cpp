@@ -14,6 +14,7 @@
 #include "compositeshapeindex.hpp"
 #include "boxindex.hpp"
 #include "sphereindex.hpp"
+#include "cylinderindex.hpp"
 #include "geodeindex.hpp"
 
 #include <osg/Group>
@@ -88,6 +89,10 @@ void registerQtQmlTypes(const char *uri)
     qmlRegisterType<SphereQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Sphere");
+
+    qmlRegisterType<CylinderQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "Cylinder");
 
     osgQtQml::Index::insertMake(&qtMakeIndex);
     osgQtQml::Index::insertMake(&osgMakeIndex);
