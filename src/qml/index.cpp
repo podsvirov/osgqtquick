@@ -6,7 +6,7 @@ namespace osgQtQml {
 
 Storage Index::storage = Storage();
 
-Index::Index(osg::Object *o) :
+Index::Index(osg::Referenced *o) :
     othis(0),
     qthis(0),
     is_begin(false), is_complete(false),
@@ -49,7 +49,7 @@ void Index::componentComplete()
     is_complete = true;
 }
 
-Index *Index::checkIndex(osg::Object *o)
+Index *Index::checkIndex(osg::Referenced *o)
 {
     std::map<osg::Referenced*, Index*>::iterator it = storage.osgIndexes.find(o);
 

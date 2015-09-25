@@ -8,7 +8,7 @@
 #include <QDebug>
 
 /*!
-   \qmltype Font
+   \qmltype Style
    \inherits osg::Object
    \inqmlmodule osgText
    \brief Text font

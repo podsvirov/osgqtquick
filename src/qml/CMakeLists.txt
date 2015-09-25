@@ -37,6 +37,7 @@ META_Node(osgGA NodeTrackerManipulator)
 
 META_Node(osgText Style)
 META_Node(osgText Font)
+META_Node(osgText FontImplementation)
 META_Node(osgText TextBase)
 META_Node(osgText Text3D)
 

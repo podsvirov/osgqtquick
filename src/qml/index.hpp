@@ -103,7 +103,7 @@ struct OSGQTQML_EXPORT Storage {
 class OSGQTQML_EXPORT Index
 {
 public:
-    Index(osg::Object *o_ptr = 0);
+    Index(osg::Referenced *o_ptr = 0);
     virtual ~Index();
 
 public: // methods
@@ -117,7 +117,7 @@ public: // methods
     virtual void componentComplete();
 
 public: // static methods
-    static Index *checkIndex(osg::Object *o_ptr);
+    static Index *checkIndex(osg::Referenced *o_ptr);
     static Index *checkIndex(QObject *o_ptr);
 
     static Index *fromObject(osg::Object *o_ptr);

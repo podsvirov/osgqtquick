@@ -8,7 +8,7 @@
 #include <QDebug>
 
 /*!
-   \qmltype Style
+   \qmltype Font
    \inherits osg::Object
    \inqmlmodule osgText
    \brief Text style
@@ -56,6 +56,28 @@ void FontQtQml::classBegin()
     if(!i) i = new Index();
     static_cast<Index*>(i)->qthis = this;
     ObjectQtQml::classBegin();
+}
+
+/*!
+   \qmlproperty osgText::FontImplementation osgText::Font::implementation
+
+   Concrete font implementation
+ */
+
+FontImplementationQtQml *FontQtQml::getImplementation() const
+{
+    return FontImplementationQtQml::fromFontImplementation(
+                static_cast<Index*>(i)->othis->getImplementation());
+}
+
+void FontQtQml::setImplementation(FontImplementationQtQml *implementation)
+{
+    if(static_cast<Index*>(i)->othis->getImplementation() ==
+            implementation->fontImplementation()) return;
+
+    static_cast<Index*>(i)->othis->setImplementation(implementation->fontImplementation());
+
+    emit implementationChanged(implementation);
 }
 
 /*!
