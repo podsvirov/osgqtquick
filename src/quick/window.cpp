@@ -22,7 +22,9 @@ Window::Window(QQuickWindow *window) :
 
     // Render loop
     d.window->setClearBeforeRendering(false);
-    d.frameTimer = startTimer(10);
+    // 17 mc -> 59 fps (< 60 fps)
+    // Any timer value less then 17 mc (> 60 fps) is caused bug with camera manipulator in rotating mode
+    d.frameTimer = startTimer(17);
 
     // Context
     d.context = new osgViewer::GraphicsWindowEmbedded(0, 0,
