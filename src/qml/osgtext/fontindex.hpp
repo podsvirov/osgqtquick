@@ -9,6 +9,8 @@
 
 namespace osgText {
 
+class FontImplementationQtQml;
+
 class OSGQTQML_EXPORT FontQtQml::Index : public osg::ObjectQtQml::Index
 {
     friend class FontQtQml;
@@ -23,7 +25,7 @@ protected:
     Font *othis;
     FontQtQml *qthis;
 
-    //osg::ref_ptr<Style> style;
+    FontImplementationQtQml *implementation;
 };
 
 }

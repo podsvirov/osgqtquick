@@ -19,7 +19,8 @@ namespace osgText {
 TextBaseQtQml::Index::Index(TextBase *drawable) :
     DrawableQtQml::Index(drawable),
     qthis(0),
-    characterSize(0)
+    characterSize(0),
+    font(0)
 {
     othis = drawable;
 }
@@ -38,6 +39,14 @@ void TextBaseQtQml::Index::componentComplete()
     DrawableQtQml::Index::qthis = qthis;
 
     DrawableQtQml::Index::componentComplete();
+
+    osg::ref_ptr<Font> df = Font::getDefaultFont();
+
+    if(font) {
+        qthis->setFont(font);
+    } else if(df.valid()) {
+        //othis->setFont(df);
+    }
 }
 
 void TextBaseQtQml::Index::setColor(const QColor &color)
@@ -102,6 +111,12 @@ FontQtQml *TextBaseQtQml::getFont() const
 
 void TextBaseQtQml::setFont(FontQtQml *font)
 {
+    if(!isComplete())
+    {
+        static_cast<Index*>(i)->font = font;
+        return;
+    }
+
     if(static_cast<Index*>(i)->othis->getFont() == font->font()) return;
 
     static_cast<Index*>(i)->othis->setFont(font->font());

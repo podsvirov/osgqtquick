@@ -18,15 +18,14 @@ namespace osgText {
 
 FontQtQml::Index::Index(Font *font) :
     ObjectQtQml::Index(font),
-    qthis(0)
+    qthis(0),
+    implementation(0)
 {
     othis = font;
 }
 
 void FontQtQml::Index::classBegin()
 {
-    if(!othis) othis = new Font();
-
     ObjectQtQml::Index::othis = othis;
     ObjectQtQml::Index::qthis = qthis;
 
@@ -35,6 +34,12 @@ void FontQtQml::Index::classBegin()
 
 void FontQtQml::Index::componentComplete()
 {
+    if(!othis) {
+        othis = implementation ?
+                     new Font(implementation->fontImplementation()) :
+                     new Font();
+    }
+
     ObjectQtQml::Index::othis = othis;
     ObjectQtQml::Index::qthis = qthis;
 
@@ -66,18 +71,31 @@ void FontQtQml::classBegin()
 
 FontImplementationQtQml *FontQtQml::getImplementation() const
 {
+    if (!isComplete())
+    {
+        return static_cast<Index*>(i)->implementation;
+    }
+
     return FontImplementationQtQml::fromFontImplementation(
                 static_cast<Index*>(i)->othis->getImplementation());
 }
 
 void FontQtQml::setImplementation(FontImplementationQtQml *implementation)
 {
-    if(static_cast<Index*>(i)->othis->getImplementation() ==
-            implementation->fontImplementation()) return;
+    if (!isComplete())
+    {
+        static_cast<Index*>(i)->implementation = implementation;
+        emit implementationChanged(implementation);
+    }
+    else
+    {
+        if(static_cast<Index*>(i)->othis->getImplementation() ==
+                implementation->fontImplementation()) return;
 
-    static_cast<Index*>(i)->othis->setImplementation(implementation->fontImplementation());
+        static_cast<Index*>(i)->othis->setImplementation(implementation->fontImplementation());
 
-    emit implementationChanged(implementation);
+        emit implementationChanged(implementation);
+    }
 }
 
 /*!

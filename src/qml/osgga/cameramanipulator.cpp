@@ -25,10 +25,10 @@ CameraManipulatorQtQml::Index::Index(CameraManipulator *cameraManipulator) :
 
 void CameraManipulatorQtQml::Index::classBegin()
 {
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
+    ObjectQtQml::Index::othis = othis;
+    ObjectQtQml::Index::qthis = qthis;
 
-    osgQtQml::Index::classBegin();
+    ObjectQtQml::Index::classBegin();
 }
 
 CameraManipulatorQtQml::CameraManipulatorQtQml(QObject *parent) :

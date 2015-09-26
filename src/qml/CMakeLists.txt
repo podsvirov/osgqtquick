@@ -41,6 +41,8 @@ META_Node(osgText FontImplementation)
 META_Node(osgText TextBase)
 META_Node(osgText Text3D)
 
+META_Node(osgQt QFontImplementation)
+
 set(_hdrs
   object.hpp
   osg/object.hpp
@@ -84,6 +86,8 @@ list(APPEND _srcs
   osgga/module.cpp
 # osgText
   osgtext/module.cpp
+# osgQt
+  osgqt/module.cpp
 # osgViewer
   osgviewer/compositeviewer.cpp
   osgviewer/module.cpp
@@ -117,6 +121,7 @@ osgqtquick_library(osgQtQml)
 target_link_libraries(osgQtQml
   ${OPENTHREADS_LIBRARIES}
   ${OSG_LIBRARIES}
+  ${OSGQT_LIBRARIES}
   ${OSGDB_LIBRARIES}
   ${OSGGA_LIBRARIES}
   ${OSGTEXT_LIBRARIES}
@@ -281,6 +286,12 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osgText/ModuleQtQml"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgtext/module.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgtext/module.hpp"
   DESTINATION "include/osgText" RENAME "ModuleQtQml")
+
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgQt/ModuleQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgqt/module.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgqt/module.hpp"
+  DESTINATION "include/osgQt" RENAME "ModuleQtQml")
 
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgViewer/ModuleQtQml"

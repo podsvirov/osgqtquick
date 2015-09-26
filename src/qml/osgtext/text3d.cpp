@@ -3,6 +3,8 @@
 
 #include <osgText/Text3D>
 
+#include <osgQt/QFontImplementation>
+
 #include <QDebug>
 
 /*!
@@ -34,6 +36,14 @@ void Text3DQtQml::Index::classBegin()
     TextBaseQtQml::Index::qthis = qthis;
 
     TextBaseQtQml::Index::classBegin();
+}
+
+void Text3DQtQml::Index::componentComplete()
+{
+    TextBaseQtQml::Index::othis = othis;
+    TextBaseQtQml::Index::qthis = qthis;
+
+    TextBaseQtQml::Index::componentComplete();
 }
 
 Text3DQtQml::Text3DQtQml(QObject *parent) :

@@ -9,6 +9,8 @@
 
 namespace osgText {
 
+class FontQtQml;
+
 class OSGQTQML_EXPORT TextBaseQtQml::Index : public osg::DrawableQtQml::Index
 {
     friend class TextBaseQtQml;
@@ -28,9 +30,9 @@ protected:
     TextBase *othis;
     TextBaseQtQml *qthis;
 
-    //osg::ref_ptr<Style> style;
     QColor color;
     qreal characterSize;
+    FontQtQml *font;
 };
 
 }

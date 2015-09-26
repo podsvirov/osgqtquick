@@ -15,6 +15,7 @@ public:
     Index(osg::Object *object = 0);
 
     void classBegin();
+    void componentComplete();
 
 protected:
     osg::Object *othis;

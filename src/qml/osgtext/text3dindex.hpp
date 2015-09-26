@@ -15,6 +15,7 @@ public:
     Index(Text3D *Text3D = 0);
 
     void classBegin();
+    void componentComplete();
 
 protected:
     Text3D *othis;

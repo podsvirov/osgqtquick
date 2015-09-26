@@ -26,6 +26,14 @@ void ObjectQtQml::Index::classBegin()
     osgQtQml::Index::classBegin();
 }
 
+void ObjectQtQml::Index::componentComplete()
+{
+    osgQtQml::Index::othis = othis;
+    osgQtQml::Index::qthis = qthis;
+
+    osgQtQml::Index::componentComplete();
+}
+
 ObjectQtQml::ObjectQtQml(QObject *parent) :
   Object(parent)
 {
