@@ -7,6 +7,7 @@
 #include <osgText/FontQtQml>
 
 #include <QColor>
+#include <QUrl>
 
 namespace osgText {
 
@@ -18,6 +19,7 @@ class OSGQTQML_EXPORT TextBaseQtQml : public osg::DrawableQtQml
 
   Q_PROPERTY(osgText::StyleQtQml* style READ getStyle WRITE setStyle NOTIFY styleChanged)
   Q_PROPERTY(osgText::FontQtQml* font READ getFont WRITE setFont NOTIFY fontChanged)
+  Q_PROPERTY(QUrl fontSource READ getFontSource WRITE setFontSource NOTIFY fontSourceChanged)
   Q_PROPERTY(QColor color READ getColor WRITE setColor NOTIFY colorChanged)
   Q_PROPERTY(QString text READ getText WRITE setText NOTIFY textChanged)
   Q_PROPERTY(qreal characterSize READ getCharacterSize WRITE setCharacterSize NOTIFY characterSizeChanged)
@@ -65,6 +67,9 @@ public:
   Q_INVOKABLE FontQtQml *getFont() const;
   Q_INVOKABLE void setFont(FontQtQml *font);
 
+  Q_INVOKABLE QUrl getFontSource();
+  Q_INVOKABLE void setFontSource(const QUrl &source);
+
   Q_INVOKABLE QColor getColor() const;
   Q_INVOKABLE void setColor(const QColor &color);
 
@@ -87,6 +92,7 @@ public:
 signals:
   void styleChanged(StyleQtQml *shape) const;
   void fontChanged(FontQtQml *font) const;
+  void fontSourceChanged(const QUrl &source);
   void colorChanged(const QColor &color) const;
   void textChanged(const QString &text) const;
   void characterSizeChanged(qreal size) const;

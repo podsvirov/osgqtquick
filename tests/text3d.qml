@@ -19,7 +19,8 @@ OSGViewer.View {
     sceneData: OSG.Geode {
         OSGText.Text3D {
             id: text3d
-            text: "Hello from\n  osgQtQuick!"
+            text: "    Hello from\nosgQtQuick 2.0!"
+            fontSource: "times.ttf"
             characterSize: characterSizeSlider.value
             characterDepth: characterDepthSlider.value
             color: "yellow"
@@ -55,11 +56,15 @@ OSGViewer.View {
         onClicked: {
             view.cameraManipulator.home()
         }
+        anchors {
+            margins: 10
+            top: parent.top
+            left: parent.left
+        }
     }
 
     GridLayout {
         columns: 2
-        anchors.right: parent.right
         Label {
             text: "TEXT :"
             color: "white"
@@ -97,6 +102,12 @@ OSGViewer.View {
             id: drawModeALIGNMENTChecker
             onCheckedChanged: text3d.updateDrawMode()
         }
+        anchors {
+            topMargin: 10
+            rightMargin: 0
+            top: parent.top
+            right: parent.right
+        }
     }
 
     GridLayout {
@@ -132,6 +143,7 @@ OSGViewer.View {
             Layout.fillWidth: true
         }
         anchors {
+            margins: 10
             left: parent.left
             right: parent.right
             bottom: parent.bottom

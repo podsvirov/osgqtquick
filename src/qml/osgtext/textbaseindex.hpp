@@ -21,8 +21,7 @@ public:
     void classBegin();
     void componentComplete();
 
-    //StyleQtQml *getStyle() const;
-    //void setStyle(StyleQtQml *style);
+    void loadFontFromSource();
 
     void setColor(const QColor &color);
 
@@ -33,6 +32,7 @@ protected:
     QColor color;
     qreal characterSize;
     FontQtQml *font;
+    QUrl fontSource;
 };
 
 }

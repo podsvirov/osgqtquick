@@ -27,7 +27,7 @@ void Text3DQtQml::Index::classBegin()
 {
     if(!othis) othis = new Text3D();
 
-    othis->setFont("fonts/arial.ttf");
+    //othis->setFont("fonts/arial.ttf");
 
     //osg::Vec3 pos(0.0f,0.0f,0.0f);
     //othis->setPosition(pos);

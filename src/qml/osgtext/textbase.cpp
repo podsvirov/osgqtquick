@@ -5,6 +5,13 @@
 
 #include <osgText/TextBase>
 
+#include <osgDB/ReadFile>
+#include <osgDB/FileUtils>
+
+#include <QFileInfo>
+#include <QQmlContext>
+#include <QQmlEngine>
+
 #include <QDebug>
 
 /*!
@@ -44,8 +51,46 @@ void TextBaseQtQml::Index::componentComplete()
 
     if(font) {
         qthis->setFont(font);
-    } else if(df.valid()) {
-        //othis->setFont(df);
+    } else if(!fontSource.isEmpty())
+    {
+        loadFontFromSource();
+    }
+    if(!othis->getFont()) {
+        if(df.valid()) {
+            othis->setFont(df);
+        }
+    }
+}
+
+void TextBaseQtQml::Index::loadFontFromSource()
+{
+    std::string file;
+
+    if(fontSource.isLocalFile()) {
+        QFileInfo info(fontSource.toLocalFile());
+        if(info.exists())
+        {
+            file = info.filePath().toStdString();
+        }
+        else
+        {
+            if(QQmlContext *ctx = QQmlEngine::contextForObject(qthis))
+            {
+                file = fontSource.toString().replace(
+                            QFileInfo(ctx->baseUrl().toString()).path(),
+                            "").toStdString();
+            }
+            file = osgText::findFontFile(file);
+        }
+    }
+    else { // no local file
+        file = fontSource.toString().remove("file:///").toStdString();
+    }
+
+    if(!file.empty())
+    {
+        othis->setFont(file);
+        fontSource = QUrl::fromLocalFile(QString::fromStdString(file));
     }
 }
 
@@ -122,6 +167,30 @@ void TextBaseQtQml::setFont(FontQtQml *font)
     static_cast<Index*>(i)->othis->setFont(font->font());
 
     emit fontChanged(font);
+}
+
+/*!
+   \qmlproperty url osgText::TextBase::fontSource
+
+   This property holds the URL of the font file.
+ */
+
+QUrl TextBaseQtQml::getFontSource()
+{
+    return static_cast<Index*>(i)->fontSource;
+}
+
+void TextBaseQtQml::setFontSource(const QUrl &source)
+{
+    //if(static_cast<Index*>(i)->fontSource == source) return;
+
+    static_cast<Index*>(i)->fontSource = source;
+
+    if(isComplete()) {
+        static_cast<Index*>(i)->loadFontFromSource();
+    }
+
+    return fontSourceChanged(source);
 }
 
 /*!
