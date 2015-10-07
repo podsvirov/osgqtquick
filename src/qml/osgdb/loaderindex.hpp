@@ -20,6 +20,9 @@ namespace osgDB {
 
 class OSGQTQML_EXPORT LoaderQtQml::Index : public GroupQtQml::Index
 {
+public:
+    typedef osg::Group OType;
+    typedef LoaderQtQml QType;
     friend class LoaderQtQml;
 
     class Loader;
@@ -36,9 +39,6 @@ public:
 
 protected:
     void acceptNode(const QUrl &url, osg::Node *node);
-
-    osg::Group *othis;
-    LoaderQtQml *qthis;
 
     QUrl url;
     osg::ref_ptr<osg::Node> node;

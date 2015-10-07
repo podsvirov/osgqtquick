@@ -28,14 +28,14 @@ public:
   void classBegin();
   void componentComplete();
 
-  Q_INVOKABLE ShapeQtQml *getShape() const;
+  Q_INVOKABLE ShapeQtQml *getShape();
   Q_INVOKABLE void setShape(ShapeQtQml *shape);
 
   Q_INVOKABLE bool addChild(ShapeQtQml *shape);
   Q_INVOKABLE bool removeChild(ShapeQtQml *shape);
   Q_INVOKABLE bool removeChild(int pos);
   Q_INVOKABLE int getNumChildren() const;
-  Q_INVOKABLE osg::ShapeQtQml* getChild(int i);
+  Q_INVOKABLE osg::ShapeQtQml* getChild(int _i_ptr);
 
   QQmlListProperty<ShapeQtQml> children();
 

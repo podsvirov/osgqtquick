@@ -9,6 +9,9 @@ namespace osgGA {
 
 class OSGQTQML_EXPORT NodeTrackerManipulatorQtQml::Index : public OrbitManipulatorQtQml::Index
 {
+public:
+    typedef NodeTrackerManipulator OType;
+    typedef NodeTrackerManipulatorQtQml QType;
     friend class NodeTrackerManipulatorQtQml;
 
 public:
@@ -17,10 +20,6 @@ public:
     void classBegin();
 
     void setTrackNode(osg::NodeQtQml *node);
-
-protected:
-    NodeTrackerManipulator *othis;
-    NodeTrackerManipulatorQtQml *qthis;
 };
 
 }

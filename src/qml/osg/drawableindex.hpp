@@ -9,17 +9,13 @@ namespace osg {
 
 class OSGQTQML_EXPORT DrawableQtQml::Index : public ObjectQtQml::Index
 {
+public:
+    typedef Drawable OType;
+    typedef DrawableQtQml QType;
     friend class DrawableQtQml;
 
 public:
     Index(Drawable *o = 0);
-
-    void classBegin();
-    void componentComplete();
-
-protected:
-    Drawable *othis;
-    DrawableQtQml *qthis;
 };
 
 }

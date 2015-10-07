@@ -10,17 +10,13 @@
 namespace osgEarth { namespace Util {
 
 EarthManipulatorQtQml::Index::Index(EarthManipulator *manipulator) :
-    osgGA::CameraManipulatorQtQml::Index(manipulator),
-    qthis(0)
+    osgGA::CameraManipulatorQtQml::Index(manipulator)
 {
-    othis = manipulator;
 }
 
 void EarthManipulatorQtQml::Index::classBegin()
 {
-    if(!othis) othis = new EarthManipulator();
-    CameraManipulatorQtQml::Index::othis = othis;
-    CameraManipulatorQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new EarthManipulator);
 
     CameraManipulatorQtQml::Index::classBegin();
 }
@@ -37,29 +33,31 @@ EarthManipulatorQtQml::EarthManipulatorQtQml(EarthManipulatorQtQml::Index *index
 
 void EarthManipulatorQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     CameraManipulatorQtQml::classBegin();
 }
 
 void EarthManipulatorQtQml::pan(double dx, double dy)
 {
-    static_cast<Index*>(i)->othis->pan(dx, dy);
+    o(this)->pan(dx, dy);
 }
 
 void EarthManipulatorQtQml::rotate(double dx, double dy)
 {
-    static_cast<Index*>(i)->othis->rotate(dx, dy);
+    o(this)->rotate(dx, dy);
 }
 
 void EarthManipulatorQtQml::zoom(double dx, double dy)
 {
-    static_cast<Index*>(i)->othis->zoom(dx, dy);
+    o(this)->zoom(dx, dy);
 }
 
 EarthManipulator *EarthManipulatorQtQml::earthManipulator()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 EarthManipulatorQtQml *EarthManipulatorQtQml::fromEarthManipulator(EarthManipulator *manipulator, QObject *parent)
@@ -68,10 +66,12 @@ EarthManipulatorQtQml *EarthManipulatorQtQml::fromEarthManipulator(EarthManipula
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(manipulator))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<EarthManipulatorQtQml*>(index->qtObject());
     }
 
-    return new EarthManipulatorQtQml(new Index(manipulator), parent);
+    EarthManipulatorQtQml *result =  new EarthManipulatorQtQml(new Index(manipulator), parent);
+    result->classBegin();
+    return result;
 }
 
 } }

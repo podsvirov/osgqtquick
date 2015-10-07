@@ -15,8 +15,9 @@ CompositeViewerQtQml::Index::Index(CompositeViewer *compositeViewer) :
 void CompositeViewerQtQml::Index::classBegin()
 {
     if(!othis) othis = new CompositeViewer();
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
+
+    if(othis) setO(othis);
+    if(qthis) setQ(qthis);
 
     osgQtQml::Index::classBegin();
 }
@@ -33,14 +34,14 @@ CompositeViewerQtQml::CompositeViewerQtQml(CompositeViewerQtQml::Index *index, Q
 
 void CompositeViewerQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!_i_ptr) _i_ptr = new Index();
+    static_cast<Index*>(_i_ptr)->qthis = this;
     osgQtQml::Object::classBegin();
 }
 
 CompositeViewer *CompositeViewerQtQml::compositeViewer()
 {
-    return static_cast<Index*>(i)->othis;
+    return static_cast<Index*>(_i_ptr)->othis;
 }
 
 CompositeViewerQtQml *CompositeViewerQtQml::fromCompositeViewer(CompositeViewer *compositeViewer, QObject *parent)

@@ -11,12 +11,14 @@ namespace osg {
 
 class OSGQTQML_EXPORT ShapeDrawableQtQml::Index : public DrawableQtQml::Index
 {
+public:
+    typedef ShapeDrawable OType;
+    typedef ShapeDrawableQtQml QType;
     friend class ShapeDrawableQtQml;
 
 public:
     Index(ShapeDrawable *o = 0);
 
-    void classBegin();
     void componentComplete();
 
     ShapeQtQml *getShape() const;
@@ -25,9 +27,6 @@ public:
     void setColor(const QColor &color);
 
 protected:
-    ShapeDrawable *othis;
-    ShapeDrawableQtQml *qthis;
-
     osg::ref_ptr<Shape> shape;
     QColor color;
 };

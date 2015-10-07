@@ -5,7 +5,7 @@
 
 namespace osg {
 
-class Node;
+class Notify;
 
 class OSGQTQML_EXPORT NotifyQtQml : public osg::ObjectQtQml
 {

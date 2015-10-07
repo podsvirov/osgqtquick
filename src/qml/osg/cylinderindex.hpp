@@ -9,6 +9,9 @@ namespace osg {
 
 class OSGQTQML_EXPORT CylinderQtQml::Index : public ShapeQtQml::Index
 {
+public:
+    typedef Cylinder OType;
+    typedef CylinderQtQml QType;
     friend class CylinderQtQml;
 
 public:
@@ -19,10 +22,6 @@ public:
     void setCenter(const QVector3D &center);
     void setRadius(float radius);
     void setHeight(float height);
-
-protected:
-    Cylinder *othis;
-    CylinderQtQml *qthis;
 };
 
 }

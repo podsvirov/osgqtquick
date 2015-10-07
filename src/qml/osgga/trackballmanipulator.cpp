@@ -17,17 +17,13 @@
 namespace osgGA {
 
 TrackballManipulatorQtQml::Index::Index(TrackballManipulator *manipulator) :
-    OrbitManipulatorQtQml::Index(manipulator),
-    qthis(0)
+    OrbitManipulatorQtQml::Index(manipulator)
 {
-    othis = manipulator;
 }
 
 void TrackballManipulatorQtQml::Index::classBegin()
 {
-    if(!othis) othis = new TrackballManipulator();
-    OrbitManipulatorQtQml::Index::othis = othis;
-    OrbitManipulatorQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new TrackballManipulator);
 
     OrbitManipulatorQtQml::Index::classBegin();
 }
@@ -44,14 +40,16 @@ TrackballManipulatorQtQml::TrackballManipulatorQtQml(TrackballManipulatorQtQml::
 
 void TrackballManipulatorQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     OrbitManipulatorQtQml::classBegin();
 }
 
 TrackballManipulator *TrackballManipulatorQtQml::trackballManipulator()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 TrackballManipulatorQtQml *TrackballManipulatorQtQml::fromTrackballManipulator(TrackballManipulator *trackballManipulator, QObject *parent)
@@ -60,10 +58,12 @@ TrackballManipulatorQtQml *TrackballManipulatorQtQml::fromTrackballManipulator(T
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(trackballManipulator))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<TrackballManipulatorQtQml*>(index->qtObject());
     }
 
-    return new TrackballManipulatorQtQml(new Index(trackballManipulator), parent);
+    TrackballManipulatorQtQml *result = new TrackballManipulatorQtQml(new Index(trackballManipulator), parent);
+    result->classBegin();
+    return result;
 }
 
 }

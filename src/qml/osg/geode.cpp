@@ -18,10 +18,8 @@ namespace osg {
 
 GeodeQtQml::Index::Index(Geode *group) :
     NodeQtQml::Index(group),
-    qthis(0),
     _completeInfo(0)
 {
-    othis = group;
 }
 
 GeodeQtQml::Index::~Index()
@@ -31,9 +29,7 @@ GeodeQtQml::Index::~Index()
 
 void GeodeQtQml::Index::classBegin()
 {
-    if(!othis) othis = new Geode();
-    NodeQtQml::Index::othis = othis;
-    NodeQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new Geode);
 
     NodeQtQml::Index::classBegin();
 }
@@ -50,8 +46,10 @@ GeodeQtQml::GeodeQtQml(GeodeQtQml::Index *index, QObject *parent) :
 
 void GeodeQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     NodeQtQml::classBegin();
 }
 
@@ -59,7 +57,7 @@ void GeodeQtQml::componentComplete()
 {
     NodeQtQml::componentComplete();
 
-    if(Index::CompleteInfo *info = static_cast<Index*>(i)->_completeInfo)
+    if(Index::CompleteInfo *info = i(this)->_completeInfo)
       {
         for(QList<DrawableQtQml*>::iterator it = info->drawables.begin();
             it != info->drawables.end(); ++it)
@@ -74,10 +72,10 @@ bool GeodeQtQml::addDrawable(DrawableQtQml *drawable)
 {
     if (!isComplete())
       {
-        static_cast<Index*>(i)->info()->drawables.append(drawable);
+        static_cast<Index*>(_i_ptr)->info()->drawables.append(drawable);
         return true;
       }
-    else if (static_cast<GeodeQtQml::Index*>(i)->othis->addDrawable(
+    else if (o(this)->addDrawable(
           static_cast<osg::Drawable*>(drawable->index()->osgReferenced())))
       {
         emit numDrawablesChanged(getNumDrawables());
@@ -89,7 +87,7 @@ bool GeodeQtQml::addDrawable(DrawableQtQml *drawable)
 
 bool GeodeQtQml::removeDrawable(DrawableQtQml *drawable)
 {
-    if (static_cast<GeodeQtQml::Index*>(i)->othis->removeDrawable(
+    if (o(this)->removeDrawable(
                 drawable->drawable()))
       {
         emit numDrawablesChanged(getNumDrawables());
@@ -103,7 +101,7 @@ bool GeodeQtQml::removeDrawables(int pos, int numDrawablesToRemove)
 {
     if (pos < 0 || numDrawablesToRemove < 0) return false;
 
-    if(static_cast<Index*>(i)->othis->removeDrawables(
+    if(o(this)->removeDrawables(
                 static_cast<unsigned int>(pos),
                 static_cast<unsigned int>(numDrawablesToRemove)))
     {
@@ -116,12 +114,12 @@ bool GeodeQtQml::removeDrawables(int pos, int numDrawablesToRemove)
 
 int GeodeQtQml::getNumDrawables() const
 {
-    return static_cast<Index*>(i)->othis->getNumDrawables();
+    return o(this)->getNumDrawables();
 }
 
 DrawableQtQml *GeodeQtQml::getDrawable(int pos)
 {
-    return osg::DrawableQtQml::fromDrawable(static_cast<Index*>(i)->othis->getDrawable(pos));
+    return osg::DrawableQtQml::fromDrawable(o(this)->getDrawable(pos));
 }
 
 /*!
@@ -141,7 +139,7 @@ QQmlListProperty<DrawableQtQml> GeodeQtQml::drawables()
 
 Geode *GeodeQtQml::geode()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 GeodeQtQml *GeodeQtQml::fromGeode(Geode *group, QObject *parent)
@@ -150,10 +148,12 @@ GeodeQtQml *GeodeQtQml::fromGeode(Geode *group, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(group))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<GeodeQtQml*>(index->qtObject());
     }
 
-    return new GeodeQtQml(new Index(group), parent);
+    GeodeQtQml *result = new GeodeQtQml(new Index(group), parent);
+    result->classBegin();
+    return result;
 }
 
 int GeodeQtQml::drawablesCount(QQmlListProperty<DrawableQtQml> *list)

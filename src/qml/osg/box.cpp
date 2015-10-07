@@ -17,17 +17,13 @@
 namespace osg {
 
 BoxQtQml::Index::Index(Box *box) :
-    ShapeQtQml::Index(box),
-    qthis(0)
+    ShapeQtQml::Index(box)
 {
-    othis = box;
 }
 
 void BoxQtQml::Index::classBegin()
 {
-    if(!othis) othis = new Box();
-    ShapeQtQml::Index::othis = othis;
-    ShapeQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new Box);
 
     ShapeQtQml::Index::classBegin();
 }
@@ -36,11 +32,11 @@ void BoxQtQml::Index::setHalfLengths(const QVector3D &halfLengths)
 {
     osg::Vec3d a = osgQt::vec3d(halfLengths);
 
-    if(othis->getHalfLengths() == a) return;
+    if(o(this)->getHalfLengths() == a) return;
 
-    othis->setHalfLengths(a);
+    o(this)->setHalfLengths(a);
 
-    emit qthis->halfLengthsChanged(halfLengths);
+    emit q(this)->halfLengthsChanged(halfLengths);
 }
 
 BoxQtQml::BoxQtQml(QObject *parent) :
@@ -55,8 +51,10 @@ BoxQtQml::BoxQtQml(BoxQtQml::Index *index, QObject *parent) :
 
 void BoxQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     ShapeQtQml::classBegin();
 }
 
@@ -68,16 +66,16 @@ void BoxQtQml::classBegin()
 
 QVector3D BoxQtQml::getCenter() const
 {
-    return osgQt::qVector3D(static_cast<Index*>(i)->othis->getCenter());
+    return osgQt::qVector3D(o(this)->getCenter());
 }
 
 void BoxQtQml::setCenter(const QVector3D &center)
 {
     osg::Vec3d a = osgQt::vec3d(center);
 
-    if(static_cast<Index*>(i)->othis->getCenter() == a) return;
+    if(o(this)->getCenter() == a) return;
 
-    static_cast<Index*>(i)->othis->setCenter(a);
+    o(this)->setCenter(a);
 
     emit centerChanged(center);
 }
@@ -90,12 +88,12 @@ void BoxQtQml::setCenter(const QVector3D &center)
 
 QVector3D BoxQtQml::getHalfLengths() const
 {
-    return osgQt::qVector3D(static_cast<Index*>(i)->othis->getHalfLengths());
+    return osgQt::qVector3D(o(this)->getHalfLengths());
 }
 
 void BoxQtQml::setHalfLengths(const QVector3D &halfLengths)
 {
-    static_cast<Index*>(i)->setHalfLengths(halfLengths);
+    i(this)->setHalfLengths(halfLengths);
 }
 
 /*!
@@ -106,23 +104,23 @@ void BoxQtQml::setHalfLengths(const QVector3D &halfLengths)
 
 QQuaternion BoxQtQml::getRotation() const
 {
-    return osgQt::qQuaternion(static_cast<Index*>(i)->othis->getRotation());
+    return osgQt::qQuaternion(o(this)->getRotation());
 }
 
 void BoxQtQml::setRotation(const QQuaternion &quat)
 {
     osg::Quat a = osgQt::quat(quat);
 
-    if(static_cast<Index*>(i)->othis->getRotation() == a) return;
+    if(o(this)->getRotation() == a) return;
 
-    static_cast<Index*>(i)->othis->setRotation(a);
+    o(this)->setRotation(a);
 
     emit rotationChanged(quat);
 }
 
 Box *BoxQtQml::box()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 BoxQtQml *BoxQtQml::fromBox(Box *drawable, QObject *parent)
@@ -131,10 +129,12 @@ BoxQtQml *BoxQtQml::fromBox(Box *drawable, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(drawable))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<BoxQtQml*>(index->qtObject());
     }
 
-    return new BoxQtQml(new Index(drawable), parent);
+    BoxQtQml *result = new BoxQtQml(new Index(drawable), parent);
+    result->classBegin();
+    return result;
 }
 
 }

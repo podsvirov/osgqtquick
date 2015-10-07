@@ -14,8 +14,8 @@ GraphicsContextQtQml::Index::Index(GraphicsContext *graphicsContext) :
 
 void GraphicsContextQtQml::Index::classBegin()
 {    
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
+    if(othis) setO(othis);
+    if(qthis) setQ(qthis);
 
     osgQtQml::Index::classBegin();
 }
@@ -32,14 +32,14 @@ GraphicsContextQtQml::GraphicsContextQtQml(GraphicsContextQtQml::Index *index, Q
 
 void GraphicsContextQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!_i_ptr) _i_ptr = new Index();
+    static_cast<Index*>(_i_ptr)->qthis = this;
     osgQtQml::Object::classBegin();
 }
 
 GraphicsContext *GraphicsContextQtQml::graphicsContext()
 {
-    return static_cast<Index*>(i)->othis;
+    return static_cast<Index*>(_i_ptr)->othis;
 }
 
 GraphicsContextQtQml *GraphicsContextQtQml::fromGraphicsContext(GraphicsContext *GraphicsContext, QObject *parent)

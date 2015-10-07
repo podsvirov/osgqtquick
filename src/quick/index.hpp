@@ -5,10 +5,10 @@
 
 #include <osgQtQml/Index>
 
+#include <osg/View>
+
 #include <QQuickItem>
 #include <QQuickWindow>
-
-#include <map>
 
 namespace osgQtQuick {
 
@@ -23,13 +23,22 @@ struct Storage
 class OSGQTQUICK_EXPORT Index : public osgQtQml::Index
 {
 public:
+    typedef osg::View OType;
+    typedef Object QType;
+
+public:
     Index(osg::Object *object = 0);
     ~Index();
 
     void classBegin();
 
 protected:
-    QQuickItem *qthis;
+    template<typename T, typename O = typename T::OType>
+    O* o(T *p);
+
+    void setO(osg::View *o);
+
+    osg::View *othis;
 
 private:
     friend class Object;
@@ -37,6 +46,18 @@ private:
 
     static Storage storage;
 };
+
+template<typename T, typename O>
+inline O* Index::o(T *p)
+{
+    return static_cast<O*>(p->othis);
+}
+
+inline void Index::setO(osg::View *o)
+{
+    othis = o;
+    osgQtQml::Index::setO(o);
+}
 
 } // namespace osgQtQuick
 

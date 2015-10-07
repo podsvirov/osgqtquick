@@ -32,7 +32,7 @@ public:
   Q_INVOKABLE bool removeChild(unsigned int pos, unsigned int numChildrenToRemove=1);
   Q_INVOKABLE bool removeChildren(int pos, int numChildrenToRemove);
   Q_INVOKABLE int getNumChildren() const;
-  Q_INVOKABLE osg::NodeQtQml* getChild(int i);
+  Q_INVOKABLE osg::NodeQtQml* getChild(int _i_ptr);
 
   QQmlListProperty<NodeQtQml> children();
 

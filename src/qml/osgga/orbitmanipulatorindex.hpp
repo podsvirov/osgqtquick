@@ -9,16 +9,15 @@ namespace osgGA {
 
 class OSGQTQML_EXPORT OrbitManipulatorQtQml::Index : public StandardManipulatorQtQml::Index
 {
+public:
+    typedef OrbitManipulator OType;
+    typedef OrbitManipulatorQtQml QType;
     friend class OrbitManipulatorQtQml;
 
 public:
     Index(OrbitManipulator *o = 0);
 
     void classBegin();
-
-protected:
-    OrbitManipulator *othis;
-    OrbitManipulatorQtQml *qthis;
 };
 
 }

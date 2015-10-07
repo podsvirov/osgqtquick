@@ -5,20 +5,40 @@
 
 #include <osgGA/CameraManipulatorQtQml>
 
+#include <osgGA/CameraManipulator>
+
 namespace osgGA {
 
 class OSGQTQML_EXPORT CameraManipulatorQtQml::Index : public ObjectQtQml::Index
 {
+public:
+    typedef CameraManipulator OType;
+    typedef CameraManipulatorQtQml QType;
     friend class CameraManipulatorQtQml;
 
 public:
     Index(CameraManipulator *o = 0);
-    void classBegin();
 
 protected:
+    template<typename T, typename O = typename T::OType>
+    O* o(T *p);
+
+    void setO(CameraManipulator *o);
+
     CameraManipulator *othis;
-    CameraManipulatorQtQml *qthis;
 };
+
+template<typename T, typename O>
+inline O* CameraManipulatorQtQml::Index::o(T *p)
+{
+    return static_cast<O*>(p->othis);
+}
+
+inline void CameraManipulatorQtQml::Index::setO(CameraManipulator *o)
+{
+    othis = o;
+    ObjectQtQml::Index::setO(static_cast<osg::NodeCallback*>(o));
+}
 
 }
 

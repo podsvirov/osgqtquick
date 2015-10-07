@@ -9,15 +9,13 @@ namespace osg {
 
 class OSGQTQML_EXPORT ShapeQtQml::Index : public ObjectQtQml::Index
 {
+public:
+    typedef Shape OType;
+    typedef ShapeQtQml QType;
     friend class ShapeQtQml;
 
 public:
     Index(Shape *o = 0);
-    void classBegin();
-
-protected:
-    Shape *othis;
-    ShapeQtQml *qthis;
 };
 
 }

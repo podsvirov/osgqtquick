@@ -9,6 +9,10 @@ namespace osg {
 
 class OSGQTQML_EXPORT GroupQtQml::Index : public NodeQtQml::Index
 {
+public:
+    typedef Group OType;
+    typedef GroupQtQml QType;
+
     friend class GroupQtQml;
 
 public:
@@ -18,9 +22,6 @@ public:
     void classBegin();
 
 protected:
-    Group *othis;
-    GroupQtQml *qthis;
-
     struct CompleteInfo;
     CompleteInfo *_completeInfo;
 

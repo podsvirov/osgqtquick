@@ -11,16 +11,15 @@ class Transform;
 
 class OSGQTQML_EXPORT TransformQtQml::Index : public GroupQtQml::Index
 {
+public:
+    typedef Transform OType;
+    typedef TransformQtQml QType;
     friend class TransformQtQml;
 
 public:
     Index(Transform *o = 0);
 
     void classBegin();
-
-protected:
-    Transform *othis;
-    TransformQtQml *qthis;
 };
 
 }

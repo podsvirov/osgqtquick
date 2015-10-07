@@ -9,6 +9,9 @@ namespace osgViewer {
 
 class OSGQTQML_EXPORT CompositeViewerQtQml::Index : public osg::ObjectQtQml::Index
 {
+public:
+    typedef CompositeViewer OType;
+    typedef CompositeViewerQtQml QType;
     friend class CompositeViewerQtQml;
 
 public:

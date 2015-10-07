@@ -15,18 +15,8 @@
 namespace osg {
 
 ShapeQtQml::Index::Index(Shape *shape) :
-    ObjectQtQml::Index(shape),
-    qthis(0)
+    ObjectQtQml::Index(shape)
 {
-    othis = shape;
-}
-
-void ShapeQtQml::Index::classBegin()
-{
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
-
-    osgQtQml::Index::classBegin();
 }
 
 ShapeQtQml::ShapeQtQml(QObject *parent) :
@@ -41,14 +31,16 @@ ShapeQtQml::ShapeQtQml(ShapeQtQml::Index *index, QObject *parent) :
 
 void ShapeQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     osgQtQml::Object::classBegin();
 }
 
 Shape *ShapeQtQml::shape()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 ShapeQtQml *ShapeQtQml::fromShape(Shape *shape, QObject *parent)
@@ -57,7 +49,7 @@ ShapeQtQml *ShapeQtQml::fromShape(Shape *shape, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(shape))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<ShapeQtQml*>(index->qtObject());
     }
 
     ShapeQtQml *result = new ShapeQtQml(new Index(shape), parent);

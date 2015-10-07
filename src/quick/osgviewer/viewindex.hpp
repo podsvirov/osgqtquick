@@ -15,6 +15,8 @@ namespace osgViewer {
 class OSGQTQUICK_EXPORT ViewQtQuick::Index : public osgQtQuick::Index
 {
 public:
+    typedef View OType;
+    typedef ViewQtQuick QType;
     friend class ViewQtQuick;
 
     struct PreDraw: public osg::Camera::DrawCallback {
@@ -72,9 +74,6 @@ private:
     QSGSimpleTextureNode *textureNode;
     osg::ref_ptr<PreDraw> preDraw;
     osg::ref_ptr<PostDraw> postDraw;
-
-    View *othis;
-    ViewQtQuick *qthis;
 };
 
 }

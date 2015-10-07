@@ -61,7 +61,7 @@ public:
 
   void classBegin();
 
-  Q_INVOKABLE StyleQtQml *getStyle() const;
+  Q_INVOKABLE StyleQtQml *getStyle();
   Q_INVOKABLE void setStyle(StyleQtQml *style);
 
   Q_INVOKABLE FontQtQml *getFont() const;

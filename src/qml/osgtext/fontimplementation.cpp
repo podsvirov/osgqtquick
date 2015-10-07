@@ -25,16 +25,16 @@ FontImplementationQtQml::Index::Index(Font::FontImplementation *implementation) 
 
 void FontImplementationQtQml::Index::classBegin()
 {
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
+    if(othis) setO(othis);
+    if(qthis) setQ(qthis);
 
     osgQtQml::Index::classBegin();
 }
 
 void FontImplementationQtQml::Index::componentComplete()
 {
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
+    if(othis) setO(othis);
+    if(qthis) setQ(qthis);
 
     osgQtQml::Index::componentComplete();
 }
@@ -51,14 +51,16 @@ FontImplementationQtQml::FontImplementationQtQml(FontImplementationQtQml::Index 
 
 void FontImplementationQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     Object::classBegin();
 }
 
 Font::FontImplementation *FontImplementationQtQml::fontImplementation()
 {
-    return static_cast<Index*>(i)->othis;
+    return static_cast<Index*>(_i_ptr)->othis;
 }
 
 FontImplementationQtQml *FontImplementationQtQml::fromFontImplementation(

@@ -9,6 +9,9 @@ namespace osg {
 
 class OSGQTQML_EXPORT NotifyQtQml::Index : public ObjectQtQml::Index
 {
+public:
+    typedef NotifyHandler OType;
+    typedef NotifyQtQml QType;
     friend class NotifyQtQml;
 
 public:

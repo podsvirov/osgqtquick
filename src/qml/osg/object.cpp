@@ -12,26 +12,8 @@
 namespace osg {
 
 ObjectQtQml::Index::Index(osg::Object *object) :
-    osgQtQml::Index(object),
-    qthis(0)
+    osgQtQml::Index(object)
 {
-    othis = object;
-}
-
-void ObjectQtQml::Index::classBegin()
-{    
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
-
-    osgQtQml::Index::classBegin();
-}
-
-void ObjectQtQml::Index::componentComplete()
-{
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
-
-    osgQtQml::Index::componentComplete();
 }
 
 ObjectQtQml::ObjectQtQml(QObject *parent) :
@@ -46,8 +28,10 @@ ObjectQtQml::ObjectQtQml(ObjectQtQml::Index *index, QObject *parent) :
 
 void ObjectQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     osgQtQml::Object::classBegin();
 }
 
@@ -59,21 +43,21 @@ void ObjectQtQml::classBegin()
 
 QString ObjectQtQml::getName() const
 {
-    return QString::fromStdString(static_cast<Index*>(i)->othis->getName());
+    return QString::fromStdString(o(this)->getName());
 }
 
 void ObjectQtQml::setName(const QString &name)
 {
     if(getName() == name) return;
 
-    static_cast<Index*>(i)->othis->setName(name.toStdString());
+    o(this)->setName(name.toStdString());
 
     emit nameChanged(name);
 }
 
 osg::Object *ObjectQtQml::object()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 ObjectQtQml *ObjectQtQml::fromObject(osg::Object *object, QObject *parent)
@@ -82,7 +66,7 @@ ObjectQtQml *ObjectQtQml::fromObject(osg::Object *object, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(object))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<ObjectQtQml*>(index->qtObject());
     }
 
     return new ObjectQtQml(new Index(object), parent);

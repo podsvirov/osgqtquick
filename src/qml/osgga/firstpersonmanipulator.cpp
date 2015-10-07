@@ -17,17 +17,13 @@
 namespace osgGA {
 
 FirstPersonManipulatorQtQml::Index::Index(FirstPersonManipulator *manipulator) :
-    StandardManipulatorQtQml::Index(manipulator),
-    qthis(0)
+    StandardManipulatorQtQml::Index(manipulator)
 {
-    othis = manipulator;
 }
 
 void FirstPersonManipulatorQtQml::Index::classBegin()
 {
-    if(!othis) othis = new FirstPersonManipulator();
-    StandardManipulatorQtQml::Index::othis = othis;
-    StandardManipulatorQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new FirstPersonManipulator);
 
     StandardManipulatorQtQml::Index::classBegin();
 }
@@ -44,14 +40,16 @@ FirstPersonManipulatorQtQml::FirstPersonManipulatorQtQml(FirstPersonManipulatorQ
 
 void FirstPersonManipulatorQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     StandardManipulatorQtQml::classBegin();
 }
 
 FirstPersonManipulator *FirstPersonManipulatorQtQml::firstPersonManipulator()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 FirstPersonManipulatorQtQml *FirstPersonManipulatorQtQml::fromFirstPersonManipulator(FirstPersonManipulator *manipulator, QObject *parent)
@@ -60,10 +58,12 @@ FirstPersonManipulatorQtQml *FirstPersonManipulatorQtQml::fromFirstPersonManipul
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(manipulator))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<FirstPersonManipulatorQtQml*>(index->qtObject());
     }
 
-    return new FirstPersonManipulatorQtQml(new Index(manipulator), parent);
+    FirstPersonManipulatorQtQml *result = new FirstPersonManipulatorQtQml(new Index(manipulator), parent);
+    result->classBegin();
+    return result;
 }
 
 }

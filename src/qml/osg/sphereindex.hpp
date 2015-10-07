@@ -9,6 +9,9 @@ namespace osg {
 
 class OSGQTQML_EXPORT SphereQtQml::Index : public ShapeQtQml::Index
 {
+public:
+    typedef Sphere OType;
+    typedef SphereQtQml QType;
     friend class SphereQtQml;
 
 public:
@@ -18,10 +21,6 @@ public:
 
     void setCenter(const QVector3D &center);
     void setRadius(float radius);
-
-protected:
-    Sphere *othis;
-    SphereQtQml *qthis;
 };
 
 }

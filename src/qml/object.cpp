@@ -4,46 +4,46 @@
 #include <QDebug>
 
 osgQtQml::Object::Object(QObject *parent) :
-  QObject(parent), i(0),
-  _isBegin(false),
-  _isComplete(false)
+  QObject(parent), _i_ptr(0),
+  _is_begin(false),
+  _is_complete(false)
 {
 }
 
 osgQtQml::Object::Object(osgQtQml::Index *i, QObject *parent) :
-  QObject(parent), i(i)
+  QObject(parent), _i_ptr(i)
 {
 }
 
 osgQtQml::Object::~Object()
 {
-    if(i)
+    if(_i_ptr)
     {
-        delete i;
+        delete _i_ptr;
     }
 }
 
 void osgQtQml::Object::classBegin()
 {
-    if(i)
+    if(_i_ptr)
     {
-        i->classBegin();
+        _i_ptr->classBegin();
     }
 
-    _isBegin = true;
+    _is_begin = true;
 }
 
 void osgQtQml::Object::componentComplete()
 {
-    if(i)
+    if(_i_ptr)
     {
-        i->componentComplete();
+        _i_ptr->componentComplete();
     }
 
-    _isComplete = true;
+    _is_complete = true;
 }
 
 osgQtQml::Index *osgQtQml::Object::index()
 {
-    return i;
+    return _i_ptr;
 }

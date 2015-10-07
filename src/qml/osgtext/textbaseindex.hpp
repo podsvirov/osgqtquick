@@ -13,12 +13,14 @@ class FontQtQml;
 
 class OSGQTQML_EXPORT TextBaseQtQml::Index : public osg::DrawableQtQml::Index
 {
+public:
+    typedef TextBase OType;
+    typedef TextBaseQtQml QType;
     friend class TextBaseQtQml;
 
 public:
     Index(TextBase *o = 0);
 
-    void classBegin();
     void componentComplete();
 
     void loadFontFromSource();
@@ -26,9 +28,6 @@ public:
     void setColor(const QColor &color);
 
 protected:
-    TextBase *othis;
-    TextBaseQtQml *qthis;
-
     QColor color;
     qreal characterSize;
     FontQtQml *font;

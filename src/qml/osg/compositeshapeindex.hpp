@@ -9,6 +9,9 @@ namespace osg {
 
 class OSGQTQML_EXPORT CompositeShapeQtQml::Index : public ShapeQtQml::Index
 {
+public:
+    typedef CompositeShape OType;
+    typedef CompositeShapeQtQml QType;
     friend class CompositeShapeQtQml;
 
 public:
@@ -18,9 +21,6 @@ public:
     void classBegin();
 
 protected:
-    CompositeShape *othis;
-    CompositeShapeQtQml *qthis;
-
     struct CompleteInfo;
     CompleteInfo *_completeInfo;
 

@@ -25,39 +25,26 @@ namespace osgText {
 
 TextBaseQtQml::Index::Index(TextBase *drawable) :
     DrawableQtQml::Index(drawable),
-    qthis(0),
     characterSize(0),
     font(0)
 {
-    othis = drawable;
-}
-
-void TextBaseQtQml::Index::classBegin()
-{
-    DrawableQtQml::Index::othis = othis;
-    DrawableQtQml::Index::qthis = qthis;
-
-    DrawableQtQml::Index::classBegin();
 }
 
 void TextBaseQtQml::Index::componentComplete()
 {
-    DrawableQtQml::Index::othis = othis;
-    DrawableQtQml::Index::qthis = qthis;
-
     DrawableQtQml::Index::componentComplete();
 
     osg::ref_ptr<Font> df = Font::getDefaultFont();
 
     if(font) {
-        qthis->setFont(font);
+        q(this)->setFont(font);
     } else if(!fontSource.isEmpty())
     {
         loadFontFromSource();
     }
-    if(!othis->getFont()) {
+    if(!o(this)->getFont()) {
         if(df.valid()) {
-            othis->setFont(df);
+            o(this)->setFont(df);
         }
     }
 }
@@ -74,7 +61,7 @@ void TextBaseQtQml::Index::loadFontFromSource()
         }
         else
         {
-            if(QQmlContext *ctx = QQmlEngine::contextForObject(qthis))
+            if(QQmlContext *ctx = QQmlEngine::contextForObject(q(this)))
             {
                 file = fontSource.toString().replace(
                             QFileInfo(ctx->baseUrl().toString()).path(),
@@ -89,7 +76,7 @@ void TextBaseQtQml::Index::loadFontFromSource()
 
     if(!file.empty())
     {
-        othis->setFont(file);
+        o(this)->setFont(file);
         fontSource = QUrl::fromLocalFile(QString::fromStdString(file));
     }
 }
@@ -98,11 +85,11 @@ void TextBaseQtQml::Index::setColor(const QColor &color)
 {
     osg::Vec4 c = osgQt::swapColor(color);
 
-    if(othis->getColor() == c) return;
+    if(o(this)->getColor() == c) return;
 
-    othis->setColor(c);
+    o(this)->setColor(c);
 
-    emit qthis->colorChanged(color);
+    emit q(this)->colorChanged(color);
 }
 
 TextBaseQtQml::TextBaseQtQml(QObject *parent) :
@@ -117,8 +104,10 @@ TextBaseQtQml::TextBaseQtQml(TextBaseQtQml::Index *index, QObject *parent) :
 
 void TextBaseQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     DrawableQtQml::classBegin();
 }
 
@@ -128,16 +117,16 @@ void TextBaseQtQml::classBegin()
    Text \l {osgText::Style}{style}
  */
 
-StyleQtQml *TextBaseQtQml::getStyle() const
+StyleQtQml *TextBaseQtQml::getStyle()
 {
-    return StyleQtQml::fromStyle(static_cast<Index*>(i)->othis->getStyle());
+    return StyleQtQml::fromStyle(o(this)->getStyle());
 }
 
 void TextBaseQtQml::setStyle(StyleQtQml *style)
 {
-    if(static_cast<Index*>(i)->othis->getStyle() == style->style()) return;
+    if(o(this)->getStyle() == style->style()) return;
 
-    static_cast<Index*>(i)->othis->setStyle(style->style());
+    o(this)->setStyle(style->style());
 
     emit styleChanged(style);
 }
@@ -151,20 +140,20 @@ void TextBaseQtQml::setStyle(StyleQtQml *style)
 FontQtQml *TextBaseQtQml::getFont() const
 {
     // NOTE: const_cast...
-    return FontQtQml::fromFont(const_cast<osgText::Font*>(static_cast<Index*>(i)->othis->getFont()));
+    return FontQtQml::fromFont(const_cast<osgText::Font*>(o(this)->getFont()));
 }
 
 void TextBaseQtQml::setFont(FontQtQml *font)
 {
     if(!isComplete())
     {
-        static_cast<Index*>(i)->font = font;
+        static_cast<Index*>(_i_ptr)->font = font;
         return;
     }
 
-    if(static_cast<Index*>(i)->othis->getFont() == font->font()) return;
+    if(o(this)->getFont() == font->font()) return;
 
-    static_cast<Index*>(i)->othis->setFont(font->font());
+    o(this)->setFont(font->font());
 
     emit fontChanged(font);
 }
@@ -177,17 +166,17 @@ void TextBaseQtQml::setFont(FontQtQml *font)
 
 QUrl TextBaseQtQml::getFontSource()
 {
-    return static_cast<Index*>(i)->fontSource;
+    return static_cast<Index*>(_i_ptr)->fontSource;
 }
 
 void TextBaseQtQml::setFontSource(const QUrl &source)
 {
     //if(static_cast<Index*>(i)->fontSource == source) return;
 
-    static_cast<Index*>(i)->fontSource = source;
+    static_cast<Index*>(_i_ptr)->fontSource = source;
 
     if(isComplete()) {
-        static_cast<Index*>(i)->loadFontFromSource();
+        static_cast<Index*>(_i_ptr)->loadFontFromSource();
     }
 
     return fontSourceChanged(source);
@@ -201,12 +190,12 @@ void TextBaseQtQml::setFontSource(const QUrl &source)
 
 QColor TextBaseQtQml::getColor() const
 {
-    return osgQt::swapColor(static_cast<Index*>(i)->othis->getColor());
+    return osgQt::swapColor(o(this)->getColor());
 }
 
 void TextBaseQtQml::setColor(const QColor &color)
 {
-    static_cast<Index*>(i)->setColor(color);
+    static_cast<Index*>(_i_ptr)->setColor(color);
 }
 
 /*!
@@ -217,7 +206,7 @@ void TextBaseQtQml::setColor(const QColor &color)
 
 QString TextBaseQtQml::getText() const
 {
-    return osgQt::swapString(static_cast<Index*>(i)->othis->getText());
+    return osgQt::swapString(o(this)->getText());
 }
 
 void TextBaseQtQml::setText(const QString &text)
@@ -226,7 +215,7 @@ void TextBaseQtQml::setText(const QString &text)
 
     if(text == qText) return;
 
-    static_cast<Index*>(i)->othis->setText(osgQt::swapString(text));
+    o(this)->setText(osgQt::swapString(text));
 
     emit textChanged(text);
 }
@@ -239,52 +228,52 @@ void TextBaseQtQml::setText(const QString &text)
 
 qreal TextBaseQtQml::getCharacterSize() const
 {
-    return static_cast<qreal>(static_cast<Index*>(i)->characterSize);
+    return static_cast<qreal>(static_cast<Index*>(_i_ptr)->characterSize);
 }
 
 void TextBaseQtQml::setCharacterSize(qreal size)
 {
-    if(static_cast<Index*>(i)->characterSize == size) return;
+    if(static_cast<Index*>(_i_ptr)->characterSize == size) return;
 
     // NOTE: osgText::TextBase has not getCharacterSize method?...
     // We cache it in index object now
-    static_cast<Index*>(i)->characterSize = size;
-    static_cast<Index*>(i)->othis->setCharacterSize(static_cast<float>(size));
+    static_cast<Index*>(_i_ptr)->characterSize = size;
+    o(this)->setCharacterSize(static_cast<float>(size));
 
     emit characterSizeChanged(size);
 }
 
 TextBaseQtQml::AxisAlignment TextBaseQtQml::getAxisAlignment() const
 {
-    return static_cast<AxisAlignment>(static_cast<Index*>(i)->othis->getAxisAlignment());
+    return static_cast<AxisAlignment>(o(this)->getAxisAlignment());
 }
 
 void TextBaseQtQml::setAxisAlignment(TextBaseQtQml::AxisAlignment axisAlignment)
 {
     if(getAxisAlignment() == axisAlignment) return;
 
-    static_cast<Index*>(i)->othis->setAxisAlignment(static_cast<TextBase::AxisAlignment>(axisAlignment));
+    o(this)->setAxisAlignment(static_cast<TextBase::AxisAlignment>(axisAlignment));
 
     emit axisAlignmentChanged(axisAlignment);
 }
 
 TextBaseQtQml::DrawModeMasks TextBaseQtQml::getDrawMode() const
 {
-    return DrawModeMasks(static_cast<Index*>(i)->othis->getDrawMode());
+    return DrawModeMasks(o(this)->getDrawMode());
 }
 
 void TextBaseQtQml::setDrawMode(TextBaseQtQml::DrawModeMasks drawMode)
 {
     if(getDrawMode() == drawMode) return;
 
-    static_cast<Index*>(i)->othis->setDrawMode(static_cast<TextBase::DrawModeMask>(static_cast<int>(drawMode)));
+    o(this)->setDrawMode(static_cast<TextBase::DrawModeMask>(static_cast<int>(drawMode)));
 
     emit drawModeChanged(drawMode);
 }
 
 TextBase *TextBaseQtQml::textBase()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 TextBaseQtQml *TextBaseQtQml::fromTextBase(TextBase *textBase, QObject *parent)
@@ -293,7 +282,7 @@ TextBaseQtQml *TextBaseQtQml::fromTextBase(TextBase *textBase, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(textBase))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<TextBaseQtQml*>(index->qtObject());
     }
 
     TextBaseQtQml *result = new TextBaseQtQml(new Index(textBase), parent);

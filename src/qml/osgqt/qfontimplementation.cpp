@@ -55,28 +55,28 @@ QFontImplementationQtQml::QFontImplementationQtQml(QFontImplementationQtQml::Ind
 
 void QFontImplementationQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!_i_ptr) _i_ptr = new Index();
+    static_cast<Index*>(_i_ptr)->qthis = this;
     Object::classBegin();
 }
 
 QFont QFontImplementationQtQml::getFont() const
 {
-    return static_cast<Index*>(i)->font;
+    return static_cast<Index*>(_i_ptr)->font;
 }
 
 void QFontImplementationQtQml::setFont(const QFont &font)
 {
-    if(static_cast<Index*>(i)->font == font) return;
+    if(static_cast<Index*>(_i_ptr)->font == font) return;
 
-    static_cast<Index*>(i)->font = font;
+    static_cast<Index*>(_i_ptr)->font = font;
 
     emit fontChanged(font);
 }
 
 QFontImplementation *QFontImplementationQtQml::qFontImplementation()
 {
-    return static_cast<Index*>(i)->othis;
+    return static_cast<Index*>(_i_ptr)->othis;
 }
 
 QFontImplementationQtQml *QFontImplementationQtQml::fromQFontImplementation(

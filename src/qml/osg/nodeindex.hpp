@@ -9,15 +9,14 @@ namespace osg {
 
 class OSGQTQML_EXPORT NodeQtQml::Index : public ObjectQtQml::Index
 {
+public:
+    typedef Node OType;
+    typedef NodeQtQml QType;
     friend class NodeQtQml;
 
 public:
     Index(Node *o = 0);
     void classBegin();
-
-protected:
-    Node *othis;
-    NodeQtQml *qthis;
 };
 
 }

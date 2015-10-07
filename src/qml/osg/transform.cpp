@@ -17,17 +17,13 @@
 namespace osg {
 
 TransformQtQml::Index::Index(Transform *transform) :
-    GroupQtQml::Index(transform),
-    qthis(0)
+    GroupQtQml::Index(transform)
 {
-    othis = transform;
 }
 
 void TransformQtQml::Index::classBegin()
 {
-    if(!othis) othis = new Transform();
-    GroupQtQml::Index::othis = othis;
-    GroupQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new Transform);
 
     GroupQtQml::Index::classBegin();
 }
@@ -44,14 +40,16 @@ TransformQtQml::TransformQtQml(TransformQtQml::Index *index, QObject *parent) :
 
 void TransformQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     GroupQtQml::classBegin();
 }
 
 Transform *TransformQtQml::transform()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 TransformQtQml *TransformQtQml::fromTransform(Transform *transform, QObject *parent)
@@ -60,7 +58,7 @@ TransformQtQml *TransformQtQml::fromTransform(Transform *transform, QObject *par
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(transform))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<TransformQtQml*>(index->qtObject());
     }
 
     return new TransformQtQml(new Index(transform), parent);

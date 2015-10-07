@@ -17,29 +17,19 @@
 namespace osgGA {
 
 StandardManipulatorQtQml::Index::Index(StandardManipulator *manipulator) :
-    CameraManipulatorQtQml::Index(manipulator),
-    qthis(0)
+    CameraManipulatorQtQml::Index(manipulator)
 {
-    othis = manipulator;
-}
-
-void StandardManipulatorQtQml::Index::classBegin()
-{
-    CameraManipulatorQtQml::Index::othis = othis;
-    CameraManipulatorQtQml::Index::qthis = qthis;
-
-    CameraManipulatorQtQml::Index::classBegin();
 }
 
 void StandardManipulatorQtQml::Index::setNode(osg::NodeQtQml *node)
 {
     osg::Node *a = node->node();
 
-    if(othis->getNode() == a) return;
+    if(o(this)->getNode() == a) return;
 
-    othis->setNode(a);
+    o(this)->setNode(a);
 
-    emit qthis->nodeChanged(node);
+    emit q(this)->nodeChanged(node);
 }
 
 StandardManipulatorQtQml::StandardManipulatorQtQml(QObject *parent) :
@@ -54,8 +44,10 @@ StandardManipulatorQtQml::StandardManipulatorQtQml(StandardManipulatorQtQml::Ind
 
 void StandardManipulatorQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     CameraManipulatorQtQml::classBegin();
 }
 
@@ -67,17 +59,17 @@ void StandardManipulatorQtQml::classBegin()
 
 osg::NodeQtQml *StandardManipulatorQtQml::getNode()
 {
-    return osg::NodeQtQml::fromNode(static_cast<Index*>(i)->othis->getNode(), this);
+    return osg::NodeQtQml::fromNode(o(this)->getNode(), this);
 }
 
 void StandardManipulatorQtQml::setNode(osg::NodeQtQml *node)
 {
-    static_cast<Index*>(i)->setNode(node);
+    static_cast<Index*>(_i_ptr)->setNode(node);
 }
 
 StandardManipulator *StandardManipulatorQtQml::standardManipulator()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 StandardManipulatorQtQml *StandardManipulatorQtQml::fromStandardManipulator(StandardManipulator *trackballManipulator, QObject *parent)
@@ -86,7 +78,7 @@ StandardManipulatorQtQml *StandardManipulatorQtQml::fromStandardManipulator(Stan
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(trackballManipulator))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<StandardManipulatorQtQml*>(index->qtObject());
     }
 
     return new StandardManipulatorQtQml(new Index(trackballManipulator), parent);
