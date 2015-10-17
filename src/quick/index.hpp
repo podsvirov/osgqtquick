@@ -33,8 +33,8 @@ public:
     void classBegin();
 
 protected:
-    template<typename T, typename O = typename T::OType>
-    O* o(T *p);
+    template<typename T>
+    typename T::OType* o(T *p);
 
     void setO(osg::View *o);
 
@@ -47,10 +47,10 @@ private:
     static Storage storage;
 };
 
-template<typename T, typename O>
-inline O* Index::o(T *p)
+template<typename T>
+inline typename T::OType* Index::o(T *p)
 {
-    return static_cast<O*>(p->othis);
+    return static_cast<typename T::OType*>(p->othis);
 }
 
 inline void Index::setO(osg::View *o)

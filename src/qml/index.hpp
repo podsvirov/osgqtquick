@@ -134,11 +134,11 @@ public: // static methods
     static bool eraseMake(qtMakeIndex make);
 
 protected:
-    template<typename T, typename O = typename T::OType>
-    O* o(T *p);
+    template<typename T>
+    typename T::OType* o(T *p);
 
-    template<typename T, typename Q = typename T::QType>
-    Q* q(T *p);
+    template<typename T>
+    typename T::QType* q(T *p);
 
     void setQ(QObject *q);
     void setO(osg::Referenced *o);
@@ -176,16 +176,16 @@ inline bool Index::isComplete() const
     return is_complete;
 }
 
-template<typename T, typename O>
-inline O* Index::o(T *p)
+template<typename T>
+inline typename T::OType* Index::o(T *p)
 {
-    return static_cast<O*>(p->o_ptr.get());
+    return static_cast<typename T::OType*>(p->o_ptr.get());
 }
 
-template<typename T, typename Q>
-inline Q* Index::q(T *p)
+template<typename T>
+inline typename T::QType* Index::q(T *p)
 {
-    return static_cast<Q*>(p->q_ptr.data());
+    return static_cast<typename T::QType*>(p->q_ptr.data());
 }
 
 inline void Index::setQ(QObject *q)

@@ -28,17 +28,17 @@ public:
 protected:
   Object(Index *_i_ptr, QObject *parent = 0);
 
-  template<typename T, typename I = typename T::Index>
-  I* i(T *p);
+  template<typename T>
+  typename T::Index* i(T *p);
 
-  template<typename T, typename I = typename T::Index>
-  const I* i(const T *p) const;
+  template<typename T>
+  const typename T::Index* i(const T *p) const;
 
-  template<typename T, typename O = typename T::Index::OType>
-  O* o(T *p);
+  template<typename T>
+  typename T::Index::OType* o(T *p);
 
-  template<typename T, typename O = typename T::Index::OType>
-  const O* o(const T *p) const;
+  template<typename T>
+  const typename T::Index::OType* o(const T *p) const;
 
   void setI(Index *i);
 
@@ -62,28 +62,28 @@ inline void Object::setI(Index *i)
     _i_ptr = i;
 }
 
-template<typename T, typename I>
-inline I* Object::i(T *p)
+template<typename T>
+inline typename T::Index* Object::i(T *p)
 {
-    return static_cast<I*>(p->_i_ptr);
+    return static_cast<typename T::Index*>(p->_i_ptr);
 }
 
-template<typename T, typename I>
-inline const I* Object::i(const T *p) const
+template<typename T>
+inline const typename T::Index* Object::i(const T *p) const
 {
-    return static_cast<const I*>(p->_i_ptr);
+    return static_cast<const typename T::Index*>(p->_i_ptr);
 }
 
-template<typename T, typename O>
-inline O* Object::o(T *p)
+template<typename T>
+inline typename T::Index::OType* Object::o(T *p)
 {
-    return static_cast<O*>(p->_i_ptr->o_ptr.get());
+    return static_cast<typename T::Index::OType*>(p->_i_ptr->o_ptr.get());
 }
 
-template<typename T, typename O>
-inline const O* Object::o(const T *p) const
+template<typename T>
+inline const typename T::Index::OType* Object::o(const T *p) const
 {
-    return static_cast<const O*>(p->_i_ptr->o_ptr.get());
+    return static_cast<const typename T::Index::OType*>(p->_i_ptr->o_ptr.get());
 }
 
 

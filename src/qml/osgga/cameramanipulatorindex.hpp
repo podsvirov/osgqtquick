@@ -20,18 +20,18 @@ public:
     Index(CameraManipulator *o = 0);
 
 protected:
-    template<typename T, typename O = typename T::OType>
-    O* o(T *p);
+    template<typename T>
+    typename T::OType* o(T *p);
 
     void setO(CameraManipulator *o);
 
     CameraManipulator *othis;
 };
 
-template<typename T, typename O>
-inline O* CameraManipulatorQtQml::Index::o(T *p)
+template<typename T>
+inline typename T::OType* CameraManipulatorQtQml::Index::o(T *p)
 {
-    return static_cast<O*>(p->othis);
+    return static_cast<typename T::OType*>(p->othis);
 }
 
 inline void CameraManipulatorQtQml::Index::setO(CameraManipulator *o)

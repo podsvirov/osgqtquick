@@ -24,27 +24,27 @@ public:
 protected:
   Object(Index *i, QQuickItem *parent = 0);
 
-  template<typename T, typename I = typename T::Index>
-  I* i(T *p);
+  template<typename T>
+  typename T::Index* i(T *p);
 
-  template<typename T, typename O = typename T::Index::OType>
-  O* o(T *p);
+  template<typename T>
+  typename T::Index::OType* o(T *p);
 
   void setI(Index *i);
 
   Index *_i_ptr;
 };
 
-template<typename T, typename I>
-inline I* Object::i(T *p)
+template<typename T>
+inline typename T::Index* Object::i(T *p)
 {
-    return static_cast<I*>(p->_i_ptr);
+    return static_cast<typename T::Index*>(p->_i_ptr);
 }
 
-template<typename T, typename O>
-inline O* Object::o(T *p)
+template<typename T>
+inline typename T::Index::OType* Object::o(T *p)
 {
-    return static_cast<O*>(i(p)->othis);
+    return static_cast<typename T::Index::OType*>(i(p)->othis);
 }
 
 inline void Object::setI(Index *i)
