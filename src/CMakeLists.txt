@@ -15,11 +15,29 @@ find_package(OpenSceneGraph 3.0 REQUIRED
   osgText)
 
 # Qt
-find_package(Qt5 CONFIG
+find_package(Qt5 CONFIG REQUIRED
   COMPONENTS Core Qml Quick)
 
 if(osgQtQuick_WITH_EARTH)
   find_package(OsgEarth 2.0 MODULE REQUIRED)
+endif()
+
+include(GNUInstallDirs)
+
+if(NOT DEFINED CMAKE_INSTALL_QMLDIR)
+  if(NOT EXISTS "${QMAKE_EXECUTABLE}")
+    get_target_property(QMAKE_EXECUTABLE Qt5::qmake LOCATION)
+  endif()
+  execute_process(COMMAND "${QMAKE_EXECUTABLE}" -query QT_INSTALL_PREFIX
+    OUTPUT_VARIABLE QT_INSTALL_PREFIX)
+  string(STRIP "${QT_INSTALL_PREFIX}" QT_INSTALL_PREFIX)
+  execute_process(COMMAND "${QMAKE_EXECUTABLE}" -query QT_INSTALL_QML
+    OUTPUT_VARIABLE QT_INSTALL_QML)
+  string(STRIP "${QT_INSTALL_QML}" QT_INSTALL_QML)
+  file(RELATIVE_PATH CMAKE_INSTALL_QMLDIR
+    ${QT_INSTALL_PREFIX} ${QT_INSTALL_QML})
+  set(CMAKE_INSTALL_QMLDIR "${CMAKE_INSTALL_QMLDIR}"
+    CACHE STRING "qml modules")
 endif()
 
 include(osgQtQuickFunctions)

@@ -24,7 +24,7 @@ function(osgqtquick_imported_module module_name)
     "${CMAKE_CURRENT_BINARY_DIR}/plugin.moc")
 
   set_property(TARGET ${target_name} PROPERTY
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/imports/${module_name}")
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_QMLDIR}/${module_name}")
 
   if(MINGW)
     set_target_properties(${target_name} PROPERTIES PREFIX "")
@@ -38,14 +38,14 @@ function(osgqtquick_imported_module module_name)
 
   target_link_libraries(${target_name} osgQtQuick Qt5::Quick)
 
-  file(WRITE "${CMAKE_BINARY_DIR}/imports/${module_name}/qmldir"
+  file(WRITE "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_QMLDIR}/${module_name}/qmldir"
     "module ${module_name}\nplugin ${target_name}\n")
 
   install(FILES
-    "${CMAKE_BINARY_DIR}/imports/${module_name}/qmldir"
-    DESTINATION "imports/${module_name}")
+    "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_QMLDIR}/${module_name}/qmldir"
+    DESTINATION "${CMAKE_INSTALL_QMLDIR}/${module_name}")
 
   install(TARGETS ${target_name}
-    LIBRARY DESTINATION "imports/${module_name}")
+    LIBRARY DESTINATION "${CMAKE_INSTALL_QMLDIR}/${module_name}")
 
 endfunction()
