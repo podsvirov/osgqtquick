@@ -7,7 +7,7 @@
 
 namespace osg {
 
-class OSGQTQML_EXPORT NotifyQtQml::Index : public ObjectQtQml::Index
+class OSGQTQML_EXPORT NotifyQtQml::Index : public osgQtQml::Index
 {
 public:
     typedef NotifyHandler OType;
@@ -15,12 +15,8 @@ public:
     friend class NotifyQtQml;
 
 public:
-    Index();
+    Index(NotifyHandler *o = 0);
     void classBegin();
-
-protected:
-//    Notify *othis;
-    NotifyQtQml *qthis;
 };
 
 }

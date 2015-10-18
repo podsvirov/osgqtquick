@@ -7,8 +7,6 @@ namespace osgQtQml {
 Storage Index::storage = Storage();
 
 Index::Index(osg::Referenced *o) :
-//    othis(0),
-//    qthis(0),
     is_begin(false), is_complete(false),
     o_ptr(o),
     q_ptr(0)
@@ -35,14 +33,10 @@ void Index::classBegin()
 
 void Index::componentComplete()
 {
-    //if(!othis || !qthis)
     if(!o_ptr.get() || !q_ptr.data())
     {
         qDebug() << "[osgQtQuick] Component initialization error";
     }
-
-    //o_ptr = othis;
-    //q_ptr = qthis;
 
     storage.qtIndexes.insert(std::pair<QObject*, Index*>(q_ptr.data(), this));
     storage.osgIndexes.insert(std::pair<osg::Referenced*, Index*>(o_ptr.get(), this));

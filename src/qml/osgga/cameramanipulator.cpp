@@ -16,7 +16,7 @@ namespace osgGA {
 
 CameraManipulatorQtQml::Index::Index(CameraManipulator *cameraManipulator) :
     ObjectQtQml::Index(cameraManipulator),
-    othis(0)
+    o_ptr(0)
 {
 }
 

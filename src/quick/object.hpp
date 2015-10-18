@@ -44,7 +44,7 @@ inline typename T::Index* Object::i(T *p)
 template<typename T>
 inline typename T::Index::OType* Object::o(T *p)
 {
-    return static_cast<typename T::Index::OType*>(i(p)->othis);
+    return static_cast<typename T::Index::OType*>(i(p)->o_ptr);
 }
 
 inline void Object::setI(Index *i)

@@ -38,7 +38,7 @@ protected:
 
     void setO(osg::View *o);
 
-    osg::View *othis;
+    osg::View *o_ptr;
 
 private:
     friend class Object;
@@ -50,12 +50,12 @@ private:
 template<typename T>
 inline typename T::OType* Index::o(T *p)
 {
-    return static_cast<typename T::OType*>(p->othis);
+    return static_cast<typename T::OType*>(p->o_ptr);
 }
 
 inline void Index::setO(osg::View *o)
 {
-    othis = o;
+    o_ptr = o;
     osgQtQml::Index::setO(o);
 }
 

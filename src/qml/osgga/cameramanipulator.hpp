@@ -43,13 +43,13 @@ protected:
 template<typename T>
 inline typename T::Index::OType* CameraManipulatorQtQml::o(T *p)
 {
-    return static_cast<typename T::Index::OType*>(i(p)->othis);
+    return static_cast<typename T::Index::OType*>(i(p)->o_ptr);
 }
 
 template<typename T>
 inline const typename T::Index::OType* CameraManipulatorQtQml::o(const T *p) const
 {
-    return static_cast<typename T::Index::OType*>(i(p)->othis);
+    return static_cast<typename T::Index::OType*>(i(p)->o_ptr);
 }
 
 }

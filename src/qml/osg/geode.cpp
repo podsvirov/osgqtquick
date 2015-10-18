@@ -72,11 +72,11 @@ bool GeodeQtQml::addDrawable(DrawableQtQml *drawable)
 {
     if (!isComplete())
       {
-        static_cast<Index*>(_i_ptr)->info()->drawables.append(drawable);
+        i(this)->info()->drawables.append(drawable);
         return true;
       }
     else if (o(this)->addDrawable(
-          static_cast<osg::Drawable*>(drawable->index()->osgReferenced())))
+          drawable->drawable()))
       {
         emit numDrawablesChanged(getNumDrawables());
         return true;

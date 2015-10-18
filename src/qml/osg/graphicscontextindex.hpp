@@ -9,15 +9,13 @@ namespace osg {
 
 class OSGQTQML_EXPORT GraphicsContextQtQml::Index : public ObjectQtQml::Index
 {
+public:
+    typedef GraphicsContext OType;
+    typedef GraphicsContextQtQml QType;
     friend class GraphicsContextQtQml;
 
 public:
     Index(GraphicsContext *graphicsContext = 0);
-    void classBegin();
-
-protected:
-    GraphicsContext *othis;
-    GraphicsContextQtQml *qthis;
 };
 
 }

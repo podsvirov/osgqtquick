@@ -22,7 +22,26 @@ public:
   CompositeViewer* compositeViewer();
 
   static CompositeViewerQtQml* fromCompositeViewer(CompositeViewer *compositeViewer, QObject *parent = 0);
+
+protected:
+  template<typename T>
+  typename T::Index::OType* o(T *p);
+
+  template<typename T>
+  const typename T::Index::OType* o(const T *p) const;
 };
+
+template<typename T>
+inline typename T::Index::OType* CompositeViewerQtQml::o(T *p)
+{
+    return static_cast<typename T::Index::OType*>(i(p)->o_ptr);
+}
+
+template<typename T>
+inline const typename T::Index::OType* CompositeViewerQtQml::o(const T *p) const
+{
+    return static_cast<typename T::Index::OType*>(i(p)->o_ptr);
+}
 
 }
 

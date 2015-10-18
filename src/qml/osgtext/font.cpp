@@ -22,11 +22,6 @@ FontQtQml::Index::Index(Font *font) :
 {
 }
 
-void FontQtQml::Index::classBegin()
-{
-    ObjectQtQml::Index::classBegin();
-}
-
 void FontQtQml::Index::componentComplete()
 {
     if(!o(this)) {
@@ -67,7 +62,7 @@ FontImplementationQtQml *FontQtQml::getImplementation()
 {
     if (!isComplete())
     {
-        return static_cast<Index*>(_i_ptr)->implementation;
+        return i(this)->implementation;
     }
 
     return FontImplementationQtQml::fromFontImplementation(
@@ -78,7 +73,7 @@ void FontQtQml::setImplementation(FontImplementationQtQml *implementation)
 {
     if (!isComplete())
     {
-        static_cast<Index*>(_i_ptr)->implementation = implementation;
+        i(this)->implementation = implementation;
         emit implementationChanged(implementation);
     }
     else

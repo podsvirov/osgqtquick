@@ -64,7 +64,7 @@ osg::NodeQtQml *StandardManipulatorQtQml::getNode()
 
 void StandardManipulatorQtQml::setNode(osg::NodeQtQml *node)
 {
-    static_cast<Index*>(_i_ptr)->setNode(node);
+    i(this)->setNode(node);
 }
 
 StandardManipulator *StandardManipulatorQtQml::standardManipulator()

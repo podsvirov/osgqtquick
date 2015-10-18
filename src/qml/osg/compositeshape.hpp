@@ -35,7 +35,7 @@ public:
   Q_INVOKABLE bool removeChild(ShapeQtQml *shape);
   Q_INVOKABLE bool removeChild(int pos);
   Q_INVOKABLE int getNumChildren() const;
-  Q_INVOKABLE osg::ShapeQtQml* getChild(int _i_ptr);
+  Q_INVOKABLE osg::ShapeQtQml* getChild(int i);
 
   QQmlListProperty<ShapeQtQml> children();
 

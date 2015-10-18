@@ -141,7 +141,7 @@ int GroupQtQml::getNumChildren() const
 
 NodeQtQml *GroupQtQml::getChild(int i)
 {
-  return osg::NodeQtQml::fromNode(o(this)->getChild(i));
+  return osg::NodeQtQml::fromNode(o(this)->getChild(i), this);
 }
 
 /*!

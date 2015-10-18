@@ -12,18 +12,17 @@ namespace osgQt {
 class OSGQTQML_EXPORT QFontImplementationQtQml::Index :
     public osgText::FontImplementationQtQml::Index
 {
+public:
+    typedef osgQt::QFontImplementation OType;
+    typedef QFontImplementationQtQml QType;
     friend class QFontImplementationQtQml;
 
 public:
     Index(QFontImplementation *o = 0);
 
-    void classBegin();
     void componentComplete();
 
 protected:
-    QFontImplementation *othis;
-    QFontImplementationQtQml *qthis;
-
     QFont font;
 };
 

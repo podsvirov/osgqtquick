@@ -33,29 +33,29 @@ protected:
 
 /* ---------------------------------------------------------- class Index --- */
 
-NotifyQtQml::Index::Index() :
-    ObjectQtQml::Index(),
-    qthis(0)
+NotifyQtQml::Index::Index(NotifyHandler *o) :
+    osgQtQml::Index(o)
 {
 }
 
 void NotifyQtQml::Index::classBegin()
 {
     if(!o(this) && q(this)) {
+        setO(new NotifyHandlerQtQml(q(this)));
         osg::setNotifyLevel(osg::WARN);
-        osg::setNotifyHandler(new NotifyHandlerQtQml(q(this)));
+        osg::setNotifyHandler(o(this));
     }
 
     osgQtQml::Index::classBegin();
 }
 
 NotifyQtQml::NotifyQtQml(QObject *parent) :
-  ObjectQtQml(parent)
+  osgQtQml::Object(parent)
 {
 }
 
 NotifyQtQml::NotifyQtQml(NotifyQtQml::Index *index, QObject *parent) :
-  ObjectQtQml(index, parent)
+  osgQtQml::Object(index, parent)
 {
 }
 

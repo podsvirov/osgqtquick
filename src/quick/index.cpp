@@ -6,7 +6,7 @@ Storage Index::storage = Storage();
 
 Index::Index(osg::Object *object) :
     osgQtQml::Index(object),
-    othis(0)
+    o_ptr(0)
 {
 }
 

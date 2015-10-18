@@ -7,7 +7,7 @@ namespace osg {
 
 class Notify;
 
-class OSGQTQML_EXPORT NotifyQtQml : public osg::ObjectQtQml
+class OSGQTQML_EXPORT NotifyQtQml : public osgQtQml::Object
 {
   Q_OBJECT
 

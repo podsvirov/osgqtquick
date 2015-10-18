@@ -21,7 +21,6 @@ public:
 public:
     Index(Font *o = 0);
 
-    void classBegin();
     void componentComplete();
 
 protected:

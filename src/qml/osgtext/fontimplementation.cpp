@@ -17,26 +17,8 @@
 namespace osgText {
 
 FontImplementationQtQml::Index::Index(Font::FontImplementation *implementation) :
-    osgQtQml::Index(implementation),
-    qthis(0)
+    osgQtQml::Index(implementation)
 {
-    othis = implementation;
-}
-
-void FontImplementationQtQml::Index::classBegin()
-{
-    if(othis) setO(othis);
-    if(qthis) setQ(qthis);
-
-    osgQtQml::Index::classBegin();
-}
-
-void FontImplementationQtQml::Index::componentComplete()
-{
-    if(othis) setO(othis);
-    if(qthis) setQ(qthis);
-
-    osgQtQml::Index::componentComplete();
 }
 
 FontImplementationQtQml::FontImplementationQtQml(QObject *parent) :
@@ -55,12 +37,12 @@ void FontImplementationQtQml::classBegin()
 
     i(this)->setQ(this);
 
-    Object::classBegin();
+    osgQtQml::Object::classBegin();
 }
 
 Font::FontImplementation *FontImplementationQtQml::fontImplementation()
 {
-    return static_cast<Index*>(_i_ptr)->othis;
+    return o(this);
 }
 
 FontImplementationQtQml *FontImplementationQtQml::fromFontImplementation(
@@ -70,7 +52,7 @@ FontImplementationQtQml *FontImplementationQtQml::fromFontImplementation(
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(implementation))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<FontImplementationQtQml*>(index->qtObject());
     }
 
     FontImplementationQtQml *result = new FontImplementationQtQml(new Index(implementation), parent);

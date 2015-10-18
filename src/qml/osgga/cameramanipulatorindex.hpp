@@ -25,18 +25,18 @@ protected:
 
     void setO(CameraManipulator *o);
 
-    CameraManipulator *othis;
+    CameraManipulator *o_ptr;
 };
 
 template<typename T>
 inline typename T::OType* CameraManipulatorQtQml::Index::o(T *p)
 {
-    return static_cast<typename T::OType*>(p->othis);
+    return static_cast<typename T::OType*>(p->o_ptr);
 }
 
 inline void CameraManipulatorQtQml::Index::setO(CameraManipulator *o)
 {
-    othis = o;
+    o_ptr = o;
     ObjectQtQml::Index::setO(static_cast<osg::NodeCallback*>(o));
 }
 

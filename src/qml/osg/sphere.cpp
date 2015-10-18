@@ -80,7 +80,7 @@ QVector3D SphereQtQml::getCenter() const
 
 void SphereQtQml::setCenter(const QVector3D &halfLengths)
 {
-    static_cast<Index*>(_i_ptr)->setCenter(halfLengths);
+    i(this)->setCenter(halfLengths);
 }
 
 /*!
@@ -96,7 +96,7 @@ float SphereQtQml::getRadius() const
 
 void SphereQtQml::setRadius(float radius)
 {
-    static_cast<Index*>(_i_ptr)->setRadius(radius);
+    i(this)->setRadius(radius);
 }
 
 Sphere *SphereQtQml::sphere()

@@ -35,7 +35,7 @@ void ShapeQtQml::classBegin()
 
     i(this)->setQ(this);
 
-    osgQtQml::Object::classBegin();
+    ObjectQtQml::classBegin();
 }
 
 Shape *ShapeQtQml::shape()

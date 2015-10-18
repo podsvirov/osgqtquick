@@ -147,7 +147,7 @@ void TextBaseQtQml::setFont(FontQtQml *font)
 {
     if(!isComplete())
     {
-        static_cast<Index*>(_i_ptr)->font = font;
+        i(this)->font = font;
         return;
     }
 
@@ -166,17 +166,17 @@ void TextBaseQtQml::setFont(FontQtQml *font)
 
 QUrl TextBaseQtQml::getFontSource()
 {
-    return static_cast<Index*>(_i_ptr)->fontSource;
+    return i(this)->fontSource;
 }
 
 void TextBaseQtQml::setFontSource(const QUrl &source)
 {
-    //if(static_cast<Index*>(i)->fontSource == source) return;
+    if(i(this)->fontSource == source) return;
 
-    static_cast<Index*>(_i_ptr)->fontSource = source;
+    i(this)->fontSource = source;
 
     if(isComplete()) {
-        static_cast<Index*>(_i_ptr)->loadFontFromSource();
+        i(this)->loadFontFromSource();
     }
 
     return fontSourceChanged(source);
@@ -195,7 +195,7 @@ QColor TextBaseQtQml::getColor() const
 
 void TextBaseQtQml::setColor(const QColor &color)
 {
-    static_cast<Index*>(_i_ptr)->setColor(color);
+    i(this)->setColor(color);
 }
 
 /*!
@@ -228,16 +228,16 @@ void TextBaseQtQml::setText(const QString &text)
 
 qreal TextBaseQtQml::getCharacterSize() const
 {
-    return static_cast<qreal>(static_cast<Index*>(_i_ptr)->characterSize);
+    return static_cast<qreal>(i(this)->characterSize);
 }
 
 void TextBaseQtQml::setCharacterSize(qreal size)
 {
-    if(static_cast<Index*>(_i_ptr)->characterSize == size) return;
+    if(i(this)->characterSize == size) return;
 
     // NOTE: osgText::TextBase has not getCharacterSize method?...
     // We cache it in index object now
-    static_cast<Index*>(_i_ptr)->characterSize = size;
+    i(this)->characterSize = size;
     o(this)->setCharacterSize(static_cast<float>(size));
 
     emit characterSizeChanged(size);
