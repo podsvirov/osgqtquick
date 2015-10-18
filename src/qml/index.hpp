@@ -103,6 +103,10 @@ struct OSGQTQML_EXPORT Storage {
 class OSGQTQML_EXPORT Index
 {
 public:
+    typedef osg::Referenced OType;
+    typedef QObject QType;
+
+public:
     Index(osg::Referenced *o_ptr = 0);
     virtual ~Index();
 
@@ -130,11 +134,14 @@ public: // static methods
     static bool eraseMake(qtMakeIndex make);
 
 protected:
-    osg::Referenced *othis;
-    QObject *qthis;
+    template<typename T>
+    typename T::OType* o(T *p);
 
-    void setQtObject(QObject *object);
-    void setOSGObject(osg::Object *object);
+    template<typename T>
+    typename T::QType* q(T *p);
+
+    void setQ(QObject *q);
+    void setO(osg::Referenced *o);
 
 private:
     friend class ::osgQtQml::Object;
@@ -169,14 +176,26 @@ inline bool Index::isComplete() const
     return is_complete;
 }
 
-inline void Index::setQtObject(QObject *object)
+template<typename T>
+inline typename T::OType* Index::o(T *p)
 {
-    q_ptr = object;
+    return static_cast<typename T::OType*>(p->o_ptr.get());
 }
 
-inline void Index::setOSGObject(osg::Object *object)
+template<typename T>
+inline typename T::QType* Index::q(T *p)
 {
-    o_ptr = object;
+    return static_cast<typename T::QType*>(p->q_ptr.data());
+}
+
+inline void Index::setQ(QObject *q)
+{
+    q_ptr = q;
+}
+
+inline void Index::setO(osg::Referenced *o)
+{
+    o_ptr = o;
 }
 
 }

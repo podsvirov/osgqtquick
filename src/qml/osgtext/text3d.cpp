@@ -17,33 +17,15 @@
 namespace osgText {
 
 Text3DQtQml::Index::Index(Text3D *text3D) :
-    TextBaseQtQml::Index(text3D),
-    qthis(0)
+    TextBaseQtQml::Index(text3D)
 {
-    othis = text3D;
 }
 
 void Text3DQtQml::Index::classBegin()
 {
-    if(!othis) othis = new Text3D();
-
-    //othis->setFont("fonts/arial.ttf");
-
-    //osg::Vec3 pos(0.0f,0.0f,0.0f);
-    //othis->setPosition(pos);
-
-    TextBaseQtQml::Index::othis = othis;
-    TextBaseQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new Text3D);
 
     TextBaseQtQml::Index::classBegin();
-}
-
-void Text3DQtQml::Index::componentComplete()
-{
-    TextBaseQtQml::Index::othis = othis;
-    TextBaseQtQml::Index::qthis = qthis;
-
-    TextBaseQtQml::Index::componentComplete();
 }
 
 Text3DQtQml::Text3DQtQml(QObject *parent) :
@@ -58,8 +40,10 @@ Text3DQtQml::Text3DQtQml(Text3DQtQml::Index *index, QObject *parent) :
 
 void Text3DQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     TextBaseQtQml::classBegin();
 }
 
@@ -71,21 +55,21 @@ void Text3DQtQml::classBegin()
 
 qreal Text3DQtQml::getCharacterDepth() const
 {
-    return static_cast<qreal>(static_cast<Index*>(i)->othis->getCharacterDepth());
+    return static_cast<qreal>(o(this)->getCharacterDepth());
 }
 
 void Text3DQtQml::setCharacterDepth(qreal depth)
 {
     if(getCharacterDepth() == depth) return;
 
-    static_cast<Index*>(i)->othis->setCharacterDepth(static_cast<float>(depth));
+    o(this)->setCharacterDepth(static_cast<float>(depth));
 
     emit characterDepthChanged(depth);
 }
 
 Text3D *Text3DQtQml::text3D()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 Text3DQtQml *Text3DQtQml::fromText3D(Text3D *text3D, QObject *parent)
@@ -94,7 +78,7 @@ Text3DQtQml *Text3DQtQml::fromText3D(Text3D *text3D, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(text3D))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<Text3DQtQml*>(index->qtObject());
     }
 
     Text3DQtQml *result = new Text3DQtQml(new Index(text3D), parent);

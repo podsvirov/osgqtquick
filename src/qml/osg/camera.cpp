@@ -15,17 +15,13 @@
 namespace osg {
 
 CameraQtQml::Index::Index(Camera *camera) :
-    TransformQtQml::Index(camera),
-    qthis(0)
+    TransformQtQml::Index(camera)
 {
-    othis = camera;
 }
 
 void CameraQtQml::Index::classBegin()
 {
-    if(!othis) othis = new Camera();
-    TransformQtQml::Index::othis = othis;
-    TransformQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new Camera);
 
     TransformQtQml::Index::classBegin();
 }
@@ -34,20 +30,20 @@ void CameraQtQml::Index::setClearColor(const QColor &color)
 {
     osg::Vec4 c = osgQt::swapColor(color);
 
-    if(othis->getClearColor() == c) return;
+    if(o(this)->getClearColor() == c) return;
 
-    othis->setClearColor(c);
+    o(this)->setClearColor(c);
 
-    emit qthis->clearColorChanged(color);
+    emit q(this)->clearColorChanged(color);
 }
 
 void CameraQtQml::Index::setNearFarRatio(const double ratio)
 {
-    if(othis->getNearFarRatio() == ratio) return;
+    if(o(this)->getNearFarRatio() == ratio) return;
 
-    othis->setNearFarRatio(ratio);
+    o(this)->setNearFarRatio(ratio);
 
-    emit qthis->nearFarRatioChanged(ratio);
+    emit q(this)->nearFarRatioChanged(ratio);
 }
 
 CameraQtQml::CameraQtQml(QObject *parent) :
@@ -62,8 +58,10 @@ CameraQtQml::CameraQtQml(CameraQtQml::Index *index, QObject *parent) :
 
 void CameraQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     TransformQtQml::classBegin();
 }
 
@@ -75,27 +73,27 @@ void CameraQtQml::classBegin()
 
 QColor CameraQtQml::getClearColor() const
 {
-    return osgQt::swapColor(static_cast<Index*>(i)->othis->getClearColor());
+    return osgQt::swapColor(o(this)->getClearColor());
 }
 
 void CameraQtQml::setClearColor(const QColor &color)
 {
-    static_cast<Index*>(i)->setClearColor(color);
+    i(this)->setClearColor(color);
 }
 
 double CameraQtQml::getNearFarRatio() const
 {
-    return static_cast<Index*>(i)->othis->getNearFarRatio();
+    return o(this)->getNearFarRatio();
 }
 
 void CameraQtQml::setNearFarRatio(const double ratio)
 {
-    static_cast<Index*>(i)->setNearFarRatio(ratio);
+    i(this)->setNearFarRatio(ratio);
 }
 
 Camera *CameraQtQml::camera()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 CameraQtQml *CameraQtQml::fromCamera(Camera *camera, QObject *parent)
@@ -104,7 +102,7 @@ CameraQtQml *CameraQtQml::fromCamera(Camera *camera, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(camera))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<CameraQtQml*>(index->qtObject());
     }
 
     CameraQtQml *result = new CameraQtQml(new Index(camera), parent);

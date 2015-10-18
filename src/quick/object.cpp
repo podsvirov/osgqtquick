@@ -8,45 +8,45 @@
 namespace osgQtQuick {
 
 Object::Object(QQuickItem *parent) :
-  QQuickItem(parent), i(0)
+  QQuickItem(parent), _i_ptr(0)
 {
 
 }
 
 Object::Object(Index *i, QQuickItem *parent) :
-  QQuickItem(parent), i(i)
+  QQuickItem(parent), _i_ptr(i)
 {
 }
 
 Object::~Object()
 {
-    if(i)
+    if(_i_ptr)
     {
-        delete i;
+        delete _i_ptr;
     }
 }
 
 void Object::classBegin()
 {
-    if(i)
+    if(_i_ptr)
     {
-        i->classBegin();
+        _i_ptr->classBegin();
     }
     QQuickItem::classBegin();
 }
 
 void Object::componentComplete()
 {
-    if(i)
+    if(_i_ptr)
     {
-        i->componentComplete();
+        _i_ptr->componentComplete();
     }
     QQuickItem::componentComplete();
 }
 
 Index *Object::index()
 {
-    return i;
+    return _i_ptr;
 }
 
 }

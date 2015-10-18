@@ -18,30 +18,17 @@ namespace osgText {
 
 FontQtQml::Index::Index(Font *font) :
     ObjectQtQml::Index(font),
-    qthis(0),
     implementation(0)
 {
-    othis = font;
-}
-
-void FontQtQml::Index::classBegin()
-{
-    ObjectQtQml::Index::othis = othis;
-    ObjectQtQml::Index::qthis = qthis;
-
-    ObjectQtQml::Index::classBegin();
 }
 
 void FontQtQml::Index::componentComplete()
 {
-    if(!othis) {
-        othis = implementation ?
-                     new Font(implementation->fontImplementation()) :
-                     new Font();
+    if(!o(this)) {
+        setO(implementation
+             ? new Font(implementation->fontImplementation())
+             : new Font());
     }
-
-    ObjectQtQml::Index::othis = othis;
-    ObjectQtQml::Index::qthis = qthis;
 
     ObjectQtQml::Index::componentComplete();
 }
@@ -58,8 +45,10 @@ FontQtQml::FontQtQml(FontQtQml::Index *index, QObject *parent) :
 
 void FontQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     ObjectQtQml::classBegin();
 }
 
@@ -69,30 +58,30 @@ void FontQtQml::classBegin()
    Concrete font implementation
  */
 
-FontImplementationQtQml *FontQtQml::getImplementation() const
+FontImplementationQtQml *FontQtQml::getImplementation()
 {
     if (!isComplete())
     {
-        return static_cast<Index*>(i)->implementation;
+        return i(this)->implementation;
     }
 
     return FontImplementationQtQml::fromFontImplementation(
-                static_cast<Index*>(i)->othis->getImplementation());
+                o(this)->getImplementation());
 }
 
 void FontQtQml::setImplementation(FontImplementationQtQml *implementation)
 {
     if (!isComplete())
     {
-        static_cast<Index*>(i)->implementation = implementation;
+        i(this)->implementation = implementation;
         emit implementationChanged(implementation);
     }
     else
     {
-        if(static_cast<Index*>(i)->othis->getImplementation() ==
+        if(o(this)->getImplementation() ==
                 implementation->fontImplementation()) return;
 
-        static_cast<Index*>(i)->othis->setImplementation(implementation->fontImplementation());
+        o(this)->setImplementation(implementation->fontImplementation());
 
         emit implementationChanged(implementation);
     }
@@ -106,21 +95,21 @@ void FontQtQml::setImplementation(FontImplementationQtQml *implementation)
 
 qreal FontQtQml::getGlyphImageMarginRatio() const
 {
-    return static_cast<qreal>(static_cast<Index*>(i)->othis->getGlyphImageMarginRatio());
+    return static_cast<qreal>(o(this)->getGlyphImageMarginRatio());
 }
 
 void FontQtQml::setGlyphImageMarginRatio(qreal widthRation)
 {
     if(getGlyphImageMarginRatio() == widthRation) return;
 
-    static_cast<Index*>(i)->othis->setGlyphImageMarginRatio(static_cast<float>(widthRation));
+    o(this)->setGlyphImageMarginRatio(static_cast<float>(widthRation));
 
     emit glyphImageMarginRatioChanged(widthRation);
 }
 
 Font *FontQtQml::font()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 FontQtQml *FontQtQml::fromFont(Font *font, QObject *parent)
@@ -129,7 +118,7 @@ FontQtQml *FontQtQml::fromFont(Font *font, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(font))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<FontQtQml*>(index->qtObject());
     }
 
     FontQtQml *result = new FontQtQml(new Index(font), parent);

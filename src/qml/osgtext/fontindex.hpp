@@ -13,18 +13,17 @@ class FontImplementationQtQml;
 
 class OSGQTQML_EXPORT FontQtQml::Index : public osg::ObjectQtQml::Index
 {
+public:
+    typedef Font OType;
+    typedef FontQtQml QType;
     friend class FontQtQml;
 
 public:
     Index(Font *o = 0);
 
-    void classBegin();
     void componentComplete();
 
 protected:
-    Font *othis;
-    FontQtQml *qthis;
-
     FontImplementationQtQml *implementation;
 };
 

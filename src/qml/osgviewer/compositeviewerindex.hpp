@@ -5,10 +5,15 @@
 
 #include <osgViewer/CompositeViewerQtQml>
 
+#include <osgViewer/CompositeViewer>
+
 namespace osgViewer {
 
 class OSGQTQML_EXPORT CompositeViewerQtQml::Index : public osg::ObjectQtQml::Index
 {
+public:
+    typedef CompositeViewer OType;
+    typedef CompositeViewerQtQml QType;
     friend class CompositeViewerQtQml;
 
 public:
@@ -16,9 +21,25 @@ public:
     void classBegin();
 
 protected:
-    CompositeViewer *othis;
-    CompositeViewerQtQml *qthis;
+    template<typename T>
+    typename T::OType* o(T *p);
+
+    void setO(CompositeViewer *o);
+
+    CompositeViewer *o_ptr;
 };
+
+template<typename T>
+inline typename T::OType* CompositeViewerQtQml::Index::o(T *p)
+{
+    return static_cast<typename T::OType*>(p->o_ptr);
+}
+
+inline void CompositeViewerQtQml::Index::setO(CompositeViewer *o)
+{
+    o_ptr = o;
+    ObjectQtQml::Index::setO(o);
+}
 
 }
 

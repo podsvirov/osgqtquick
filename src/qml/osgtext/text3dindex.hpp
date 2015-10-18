@@ -9,17 +9,15 @@ namespace osgText {
 
 class OSGQTQML_EXPORT Text3DQtQml::Index : public TextBaseQtQml::Index
 {
+public:
+    typedef Text3D OType;
+    typedef Text3DQtQml QType;
     friend class Text3DQtQml;
 
 public:
     Index(Text3D *Text3D = 0);
 
     void classBegin();
-    void componentComplete();
-
-protected:
-    Text3D *othis;
-    Text3DQtQml *qthis;
 };
 
 }

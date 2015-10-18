@@ -9,16 +9,15 @@ namespace osgGA {
 
 class OSGQTQML_EXPORT FirstPersonManipulatorQtQml::Index : public StandardManipulatorQtQml::Index
 {
+public:
+    typedef FirstPersonManipulator OType;
+    typedef FirstPersonManipulatorQtQml QType;
     friend class FirstPersonManipulatorQtQml;
 
 public:
     Index(FirstPersonManipulator *o = 0);
 
     void classBegin();
-
-protected:
-    FirstPersonManipulator *othis;
-    FirstPersonManipulatorQtQml *qthis;
 };
 
 }

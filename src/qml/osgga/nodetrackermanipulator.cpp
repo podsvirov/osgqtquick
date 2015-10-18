@@ -17,17 +17,13 @@
 namespace osgGA {
 
 NodeTrackerManipulatorQtQml::Index::Index(NodeTrackerManipulator *manipulator) :
-    OrbitManipulatorQtQml::Index(manipulator),
-    qthis(0)
+    OrbitManipulatorQtQml::Index(manipulator)
 {
-    othis = manipulator;
 }
 
 void NodeTrackerManipulatorQtQml::Index::classBegin()
 {
-    if(!othis) othis = new NodeTrackerManipulator();
-    OrbitManipulatorQtQml::Index::othis = othis;
-    OrbitManipulatorQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new NodeTrackerManipulator);
 
     OrbitManipulatorQtQml::Index::classBegin();
 }
@@ -36,11 +32,11 @@ void NodeTrackerManipulatorQtQml::Index::setTrackNode(osg::NodeQtQml *node)
 {
   osg::Node *a = node->node();
 
-  if(othis->getTrackNode() == a) return;
+  if(o(this)->getTrackNode() == a) return;
 
-  othis->setTrackNode(a);
+  o(this)->setTrackNode(a);
 
-  emit qthis->trackNodeChanged(node);
+  emit q(this)->trackNodeChanged(node);
 }
 
 NodeTrackerManipulatorQtQml::NodeTrackerManipulatorQtQml(QObject *parent) :
@@ -55,8 +51,10 @@ NodeTrackerManipulatorQtQml::NodeTrackerManipulatorQtQml(NodeTrackerManipulatorQ
 
 void NodeTrackerManipulatorQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     OrbitManipulatorQtQml::classBegin();
 }
 
@@ -68,12 +66,12 @@ void NodeTrackerManipulatorQtQml::classBegin()
 
 osg::NodeQtQml *NodeTrackerManipulatorQtQml::getTrackNode()
 {
-    return osg::NodeQtQml::fromNode(static_cast<Index*>(i)->othis->getTrackNode(), this);
+    return osg::NodeQtQml::fromNode(o(this)->getTrackNode(), this);
 }
 
 void NodeTrackerManipulatorQtQml::setTrackNode(osg::NodeQtQml *node)
 {
-    static_cast<Index*>(i)->setTrackNode(node);
+    i(this)->setTrackNode(node);
 }
 
 /*!
@@ -91,7 +89,7 @@ void NodeTrackerManipulatorQtQml::setTrackNode(osg::NodeQtQml *node)
 
 NodeTrackerManipulatorQtQml::TrackerMode NodeTrackerManipulatorQtQml::getTrackerMode()
 {
-    return static_cast<TrackerMode>(static_cast<Index*>(i)->othis->getTrackerMode());
+    return static_cast<TrackerMode>(o(this)->getTrackerMode());
 }
 
 void NodeTrackerManipulatorQtQml::setTrackerMode(NodeTrackerManipulatorQtQml::TrackerMode mode)
@@ -99,9 +97,9 @@ void NodeTrackerManipulatorQtQml::setTrackerMode(NodeTrackerManipulatorQtQml::Tr
     NodeTrackerManipulator::TrackerMode a =
             static_cast<NodeTrackerManipulator::TrackerMode>(mode);
 
-    if(static_cast<Index*>(i)->othis->getTrackerMode() == a) return;
+    if(o(this)->getTrackerMode() == a) return;
 
-    static_cast<Index*>(i)->othis->setTrackerMode(a);
+    o(this)->setTrackerMode(a);
 
     emit trackerModeChanged(mode);
 }
@@ -118,7 +116,7 @@ void NodeTrackerManipulatorQtQml::setTrackerMode(NodeTrackerManipulatorQtQml::Tr
 
 NodeTrackerManipulatorQtQml::RotationMode NodeTrackerManipulatorQtQml::getRotationMode()
 {
-    return static_cast<RotationMode>(static_cast<Index*>(i)->othis->getRotationMode());
+    return static_cast<RotationMode>(o(this)->getRotationMode());
 }
 
 void NodeTrackerManipulatorQtQml::setRotationMode(NodeTrackerManipulatorQtQml::RotationMode mode)
@@ -126,16 +124,16 @@ void NodeTrackerManipulatorQtQml::setRotationMode(NodeTrackerManipulatorQtQml::R
     NodeTrackerManipulator::RotationMode a =
             static_cast<NodeTrackerManipulator::RotationMode>(mode);
 
-    if(static_cast<Index*>(i)->othis->getRotationMode() == a) return;
+    if(o(this)->getRotationMode() == a) return;
 
-    static_cast<Index*>(i)->othis->setRotationMode(a);
+    o(this)->setRotationMode(a);
 
     emit rotationModeChanged(mode);
 }
 
 NodeTrackerManipulator *NodeTrackerManipulatorQtQml::nodeTrackerManipulator()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 NodeTrackerManipulatorQtQml *NodeTrackerManipulatorQtQml::fromNodeTrackerManipulator(NodeTrackerManipulator *trackballManipulator, QObject *parent)
@@ -144,10 +142,12 @@ NodeTrackerManipulatorQtQml *NodeTrackerManipulatorQtQml::fromNodeTrackerManipul
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(trackballManipulator))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<NodeTrackerManipulatorQtQml*>(index->qtObject());
     }
 
-    return new NodeTrackerManipulatorQtQml(new Index(trackballManipulator), parent);
+    NodeTrackerManipulatorQtQml *result = new NodeTrackerManipulatorQtQml(new Index(trackballManipulator), parent);
+    result->classBegin();
+    return result;
 }
 
 }

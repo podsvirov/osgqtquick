@@ -9,16 +9,15 @@ namespace osgGA {
 
 class OSGQTQML_EXPORT FlightManipulatorQtQml::Index : public FirstPersonManipulatorQtQml::Index
 {
+public:
+    typedef FlightManipulator OType;
+    typedef FlightManipulatorQtQml QType;
     friend class FlightManipulatorQtQml;
 
 public:
     Index(FlightManipulator *o = 0);
 
     void classBegin();
-
-protected:
-    FlightManipulator *othis;
-    FlightManipulatorQtQml *qthis;
 };
 
 }

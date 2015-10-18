@@ -44,8 +44,6 @@ void ViewQtQuick::Index::PostDraw::operator ()(osg::RenderInfo &/*renderInfo*/) 
 ViewQtQuick::Index::Index(View *view) :
     osgQtQuick::Index(view)
 {
-    othis = view;
-
     window = 0;
     fbo = 0;
     texture = 0;
@@ -54,16 +52,16 @@ ViewQtQuick::Index::Index(View *view) :
 
 osg::NodeQtQml *ViewQtQuick::Index::getSceneData()
 {
-    return osg::NodeQtQml::fromNode(othis->getSceneData(), qthis);
+    return osg::NodeQtQml::fromNode(o(this)->getSceneData(), q(this));
 }
 
 void ViewQtQuick::Index::setSceneData(osg::NodeQtQml *node)
 {
     if(getSceneData() == node) return;
 
-    othis->setSceneData(node->node());
+    o(this)->setSceneData(node->node());
 
-    emit qthis->sceneDataChanged(node);
+    emit q(this)->sceneDataChanged(node);
 }
 
 /*!
@@ -74,39 +72,36 @@ void ViewQtQuick::Index::setSceneData(osg::NodeQtQml *node)
 
 osg::CameraQtQml *ViewQtQuick::Index::getCamera()
 {
-    return osg::CameraQtQml::fromCamera(othis->getCamera(), qthis);
+    return osg::CameraQtQml::fromCamera(o(this)->getCamera(), q(this));
 }
 
 void ViewQtQuick::Index::setCamera(osg::CameraQtQml *camera)
 {
-    othis->setCamera(camera->camera());
+    o(this)->setCamera(camera->camera());
 }
 
 osgGA::CameraManipulatorQtQml *ViewQtQuick::Index::getCameraManipulator()
 {
-    return osgGA::CameraManipulatorQtQml::fromCameraManipulator(othis->getCameraManipulator(), qthis);
+    return osgGA::CameraManipulatorQtQml::fromCameraManipulator(o(this)->getCameraManipulator(), q(this));
 }
 
 void ViewQtQuick::Index::setCameraManipulator(osgGA::CameraManipulatorQtQml *manipulator)
 {
-    othis->setCameraManipulator(manipulator->cameraManipulator());
+    o(this)->setCameraManipulator(manipulator->cameraManipulator());
 }
 
 void ViewQtQuick::Index::classBegin()
 {
-    if(!othis) othis = new View();
+    if(!o(this)) setO(new View);
 
-    qthis->setAcceptHoverEvents(true);
-    qthis->setAcceptedMouseButtons(Qt::AllButtons);
+    q(this)->setAcceptHoverEvents(true);
+    q(this)->setAcceptedMouseButtons(Qt::AllButtons);
 
     preDraw = new PreDraw(this);
-    othis->getCamera()->setPreDrawCallback(preDraw.get());
+    o(this)->getCamera()->setPreDrawCallback(preDraw.get());
 
     postDraw = new PostDraw(this);
-    othis->getCamera()->setPostDrawCallback(postDraw.get());
-
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
+    o(this)->getCamera()->setPostDrawCallback(postDraw.get());
 
     osgQtQml::Index::classBegin();
 }
@@ -118,7 +113,7 @@ void ViewQtQuick::Index::setKeyboardModifiers(QInputEvent *event)
     if ( modkey & Qt::ShiftModifier ) mask |= osgGA::GUIEventAdapter::MODKEY_SHIFT;
     if ( modkey & Qt::ControlModifier ) mask |= osgGA::GUIEventAdapter::MODKEY_CTRL;
     if ( modkey & Qt::AltModifier ) mask |= osgGA::GUIEventAdapter::MODKEY_ALT;
-    othis->getEventQueue()->getCurrentEventState()->setModKeyMask( mask );
+    o(this)->getEventQueue()->getCurrentEventState()->setModKeyMask( mask );
 }
 
 int ViewQtQuick::Index::mouseButton(QMouseEvent *event)
@@ -138,8 +133,8 @@ int ViewQtQuick::Index::mouseButton(QMouseEvent *event)
 
 QPointF ViewQtQuick::Index::mousePoint(QMouseEvent *event)
 {
-    qreal x = 2.0 * (event->x() - qthis->width() / 2) / qthis->width();
-    qreal y = 2.0 * (event->y() - qthis->height() / 2) / qthis->height();
+    qreal x = 2.0 * (event->x() - q(this)->width() / 2) / q(this)->width();
+    qreal y = 2.0 * (event->y() - q(this)->height() / 2) / q(this)->height();
 
     return QPointF(x, y);
 }
@@ -149,14 +144,14 @@ void ViewQtQuick::Index::mouseButtonPress(QMouseEvent *event)
     int button = mouseButton(event);
     setKeyboardModifiers(event);
     QPointF pos = mousePoint(event);
-    othis->getEventQueue()->mouseButtonPress(pos.x(), pos.y(), button);
+    o(this)->getEventQueue()->mouseButtonPress(pos.x(), pos.y(), button);
 }
 
 void ViewQtQuick::Index::mouseMotion(QMouseEvent *event)
 {
     setKeyboardModifiers(event);
     QPointF pos = mousePoint(event);
-    othis->getEventQueue()->mouseMotion(pos.x(), pos.y());
+    o(this)->getEventQueue()->mouseMotion(pos.x(), pos.y());
 }
 
 void ViewQtQuick::Index::mouseButtonRelease(QMouseEvent *event)
@@ -164,54 +159,54 @@ void ViewQtQuick::Index::mouseButtonRelease(QMouseEvent *event)
     int button = mouseButton(event);
     setKeyboardModifiers(event);
     QPointF pos = mousePoint(event);
-    othis->getEventQueue()->mouseButtonRelease(pos.x(), pos.y(), button);
+    o(this)->getEventQueue()->mouseButtonRelease(pos.x(), pos.y(), button);
 }
 
 void ViewQtQuick::Index::mouseDoubleButtonPress(QMouseEvent *event)
 {
     int button = mouseButton(event);
     setKeyboardModifiers(event);
-    QPointF pos(event->x(), qthis->height() - event->y());
-    othis->getEventQueue()->mouseDoubleButtonPress(pos.x(), pos.y(), button);
+    QPointF pos(event->x(), q(this)->height() - event->y());
+    o(this)->getEventQueue()->mouseDoubleButtonPress(pos.x(), pos.y(), button);
 }
 
 void ViewQtQuick::Index::initFBO()
 {
-    QRectF rect = qthis->mapRectToItem(0, qthis->boundingRect());
+    QRectF rect = q(this)->mapRectToItem(0, q(this)->boundingRect());
     QOpenGLFramebufferObjectFormat format;
     format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
     QSize size(rect.size().toSize());
     fbo = new QOpenGLFramebufferObject(size, format);
-    texture = qthis->window()->createTextureFromId(fbo->texture(), size);
+    texture = q(this)->window()->createTextureFromId(fbo->texture(), size);
     textureNode = new QSGSimpleTextureNode();
-    textureNode->setRect(0, qthis->height(), qthis->width(), -qthis->height());
+    textureNode->setRect(0, q(this)->height(), q(this)->width(), -q(this)->height());
     textureNode->setTexture(texture);
-    qthis->setFlag(QQuickItem::ItemHasContents, true);
+    q(this)->setFlag(QQuickItem::ItemHasContents, true);
     updateViewport();
-    qthis->update();
+    q(this)->update();
 }
 
 void ViewQtQuick::Index::updateFBO()
 {
     if (fbo) delete fbo;
-    QRectF rect = qthis->mapRectToItem(0, qthis->boundingRect());
+    QRectF rect = q(this)->mapRectToItem(0, q(this)->boundingRect());
     QOpenGLFramebufferObjectFormat format;
     format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
     QSize size(rect.size().toSize());
     fbo = new QOpenGLFramebufferObject(size, format);
     if (texture) delete texture;
-    texture = qthis->window()->createTextureFromId(fbo->texture(), size);
+    texture = q(this)->window()->createTextureFromId(fbo->texture(), size);
     textureNode = new QSGSimpleTextureNode();
-    textureNode->setRect(0, qthis->height(), qthis->width(), -qthis->height());
+    textureNode->setRect(0, q(this)->height(), q(this)->width(), -q(this)->height());
     textureNode->setTexture(texture);
-    qthis->update();
+    q(this)->update();
 }
 
 void ViewQtQuick::Index::updateViewport()
 {
-    QSize size(qthis->boundingRect().size().toSize());
-    othis->getCamera()->setViewport(0, 0, size.width(), size.height());
-    othis->getCamera()->setProjectionMatrixAsPerspective(30.0f, static_cast<double>(size.width())/static_cast<double>(size.height()), 1.0f, 10000.0f );
+    QSize size(q(this)->boundingRect().size().toSize());
+    o(this)->getCamera()->setViewport(0, 0, size.width(), size.height());
+    o(this)->getCamera()->setProjectionMatrixAsPerspective(30.0f, static_cast<double>(size.width())/static_cast<double>(size.height()), 1.0f, 10000.0f );
     if (texture && texture->textureSize() != size) {
         updateFBO();
     }
@@ -219,9 +214,9 @@ void ViewQtQuick::Index::updateViewport()
 
 void ViewQtQuick::Index::acceptWindow(osgQtQuick::Window *window)
 {
-    othis->getCamera()->setGraphicsContext(window->graphicsContext());
+    o(this)->getCamera()->setGraphicsContext(window->graphicsContext());
     updateViewport();
-    window->viewer()->addView(othis);
+    window->viewer()->addView(o(this));
 }
 
 ViewQtQuick *ViewQtQuick::fromView(View *view, QQuickItem *parent)
@@ -230,7 +225,7 @@ ViewQtQuick *ViewQtQuick::fromView(View *view, QQuickItem *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(view))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<ViewQtQuick*>(index->qtObject());
     }
 
     return new ViewQtQuick(new Index(view), parent);
@@ -238,28 +233,28 @@ ViewQtQuick *ViewQtQuick::fromView(View *view, QQuickItem *parent)
 
 void ViewQtQuick::mousePressEvent(QMouseEvent *event)
 {
-    static_cast<Index*>(i)->mouseButtonPress(event);
+    i(this)->mouseButtonPress(event);
 }
 
 void ViewQtQuick::mouseMoveEvent(QMouseEvent *event)
 {
-    static_cast<Index*>(i)->mouseMotion(event);
+    i(this)->mouseMotion(event);
 }
 
 void ViewQtQuick::mouseReleaseEvent(QMouseEvent *event)
 {
-    static_cast<Index*>(i)->mouseButtonRelease(event);
+    i(this)->mouseButtonRelease(event);
 }
 
 void ViewQtQuick::mouseDoubleClickEvent(QMouseEvent *event)
 {
 
-    static_cast<Index*>(i)->mouseDoubleButtonPress(event);
+    i(this)->mouseDoubleButtonPress(event);
 }
 
 void ViewQtQuick::wheelEvent(QWheelEvent *event)
 {
-    static_cast<Index*>(i)->othis->getEventQueue()->mouseScroll(
+    o(this)->getEventQueue()->mouseScroll(
                 event->orientation() == Qt::Vertical ?
                     (event->delta() > 0 ? osgGA::GUIEventAdapter::SCROLL_UP : osgGA::GUIEventAdapter::SCROLL_DOWN) :
                     (event->delta() > 0 ? osgGA::GUIEventAdapter::SCROLL_LEFT : osgGA::GUIEventAdapter::SCROLL_RIGHT) );
@@ -269,17 +264,17 @@ void ViewQtQuick::geometryChanged(const QRectF &newGeometry, const QRectF &oldGe
 {
     osgQtQuick::Object::geometryChanged(newGeometry, oldGeometry);
 
-    static_cast<Index*>(i)->updateViewport();
+    i(this)->updateViewport();
 }
 
 QSGNode *ViewQtQuick::updatePaintNode(QSGNode *oldNode, QQuickItem::UpdatePaintNodeData *updatePaintNodeData)
 {
-    if (oldNode && oldNode != static_cast<Index*>(i)->textureNode) {
+    if (oldNode && oldNode != i(this)->textureNode) {
         delete oldNode;
     }
     Q_UNUSED(updatePaintNodeData);
 
-    return static_cast<Index*>(i)->textureNode;
+    return i(this)->textureNode;
 }
 
 void ViewQtQuick::itemChange(QQuickItem::ItemChange change, const QQuickItem::ItemChangeData &value)
@@ -289,7 +284,7 @@ void ViewQtQuick::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
         if(osgQtQuick::Window *window =
                 osgQtQuick::Window::fromWindow(value.window))
         {
-            static_cast<Index*>(i)->acceptWindow(window);
+            i(this)->acceptWindow(window);
         }
     }
     osgQtQuick::Object::itemChange(change, value);
@@ -303,22 +298,22 @@ void ViewQtQuick::itemChange(QQuickItem::ItemChange change, const QQuickItem::It
 
 osg::NodeQtQml *ViewQtQuick::getSceneData()
 {
-    return static_cast<Index*>(i)->getSceneData();
+    return i(this)->getSceneData();
 }
 
 void ViewQtQuick::setSceneData(osg::NodeQtQml *node)
 {
-    static_cast<Index*>(i)->setSceneData(node);
+    i(this)->setSceneData(node);
 }
 
 osg::CameraQtQml *ViewQtQuick::getCamera()
 {
-    return static_cast<Index*>(i)->getCamera();
+    return i(this)->getCamera();
 }
 
 void ViewQtQuick::setCamera(osg::CameraQtQml *camera)
 {
-    static_cast<Index*>(i)->setCamera(camera);
+    i(this)->setCamera(camera);
 }
 
 /*!
@@ -329,17 +324,17 @@ void ViewQtQuick::setCamera(osg::CameraQtQml *camera)
 
 osgGA::CameraManipulatorQtQml *ViewQtQuick::getCameraManipulator()
 {
-    return static_cast<Index*>(i)->getCameraManipulator();
+    return i(this)->getCameraManipulator();
 }
 
 void ViewQtQuick::setCameraManipulator(osgGA::CameraManipulatorQtQml *manipulator)
 {
-    static_cast<Index*>(i)->setCameraManipulator(manipulator);
+    i(this)->setCameraManipulator(manipulator);
 }
 
 ViewQtQuick::ViewQtQuick(QQuickItem *parent) :
   osgQtQuick::Object(parent)
-{    
+{
 }
 
 ViewQtQuick::ViewQtQuick(ViewQtQuick::Index *index, QQuickItem *parent) :
@@ -349,8 +344,10 @@ ViewQtQuick::ViewQtQuick(ViewQtQuick::Index *index, QQuickItem *parent) :
 
 void ViewQtQuick::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     osgQtQuick::Object::classBegin();
 }
 

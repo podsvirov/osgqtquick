@@ -5,25 +5,19 @@
 
 #include <osg/ObjectQtQmlIndex>
 
-#include <osg/Shape>
-
 namespace osgText {
 
 class OSGQTQML_EXPORT StyleQtQml::Index : public osg::ObjectQtQml::Index
 {
+public:
+    typedef Style OType;
+    typedef StyleQtQml QType;
     friend class StyleQtQml;
 
 public:
     Index(Style *o = 0);
 
     void classBegin();
-    void componentComplete();
-
-protected:
-    Style *othis;
-    StyleQtQml *qthis;
-
-    //osg::ref_ptr<Style> style;
 };
 
 }

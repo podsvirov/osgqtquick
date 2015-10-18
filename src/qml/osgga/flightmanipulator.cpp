@@ -17,17 +17,13 @@
 namespace osgGA {
 
 FlightManipulatorQtQml::Index::Index(FlightManipulator *manipulator) :
-    FirstPersonManipulatorQtQml::Index(manipulator),
-    qthis(0)
+    FirstPersonManipulatorQtQml::Index(manipulator)
 {
-    othis = manipulator;
 }
 
 void FlightManipulatorQtQml::Index::classBegin()
 {
-    if(!othis) othis = new FlightManipulator();
-    FirstPersonManipulatorQtQml::Index::othis = othis;
-    FirstPersonManipulatorQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new FlightManipulator);
 
     FirstPersonManipulatorQtQml::Index::classBegin();
 }
@@ -44,14 +40,16 @@ FlightManipulatorQtQml::FlightManipulatorQtQml(FlightManipulatorQtQml::Index *in
 
 void FlightManipulatorQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     FirstPersonManipulatorQtQml::classBegin();
 }
 
 FlightManipulator *FlightManipulatorQtQml::flightManipulator()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 FlightManipulatorQtQml *FlightManipulatorQtQml::fromFlightManipulator(FlightManipulator *manipulator, QObject *parent)
@@ -60,10 +58,12 @@ FlightManipulatorQtQml *FlightManipulatorQtQml::fromFlightManipulator(FlightMani
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(manipulator))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<FlightManipulatorQtQml*>(index->qtObject());
     }
 
-    return new FlightManipulatorQtQml(new Index(manipulator), parent);
+    FlightManipulatorQtQml *result = new FlightManipulatorQtQml(new Index(manipulator), parent);
+    result->classBegin();
+    return result;
 }
 
 }

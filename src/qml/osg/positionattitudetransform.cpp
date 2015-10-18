@@ -15,17 +15,13 @@
 namespace osg {
 
 PositionAttitudeTransformQtQml::Index::Index(PositionAttitudeTransform *transform) :
-    GroupQtQml::Index(transform),
-    qthis(0)
+    GroupQtQml::Index(transform)
 {
-    othis = transform;
 }
 
 void PositionAttitudeTransformQtQml::Index::classBegin()
 {
-    if(!othis) othis = new PositionAttitudeTransform();
-    GroupQtQml::Index::othis = othis;
-    GroupQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new PositionAttitudeTransform);
 
     GroupQtQml::Index::classBegin();
 }
@@ -34,44 +30,44 @@ void PositionAttitudeTransformQtQml::Index::setPosition(const QVector3D &pos)
 {
     osg::Vec3d a = osgQt::vec3d(pos);
 
-    if(othis->getPosition() == a) return;
+    if(o(this)->getPosition() == a) return;
 
-    othis->setPosition(a);
+    o(this)->setPosition(a);
 
-    emit qthis->positionChanged(pos);
+    emit q(this)->positionChanged(pos);
 }
 
 void PositionAttitudeTransformQtQml::Index::setAttitude(const QQuaternion &quat)
 {
     osg::Quat a = osgQt::quat(quat);
 
-    if(othis->getAttitude() == a) return;
+    if(o(this)->getAttitude() == a) return;
 
-    othis->setAttitude(a);
+    o(this)->setAttitude(a);
 
-    emit qthis->attitudeChanged(quat);
+    emit q(this)->attitudeChanged(quat);
 }
 
 void PositionAttitudeTransformQtQml::Index::setScale(const QVector3D &scale)
 {
     osg::Vec3d a = osgQt::vec3d(scale);
 
-    if(othis->getScale() == a) return;
+    if(o(this)->getScale() == a) return;
 
-    othis->setScale(a);
+    o(this)->setScale(a);
 
-    emit qthis->scaleChanged(scale);
+    emit q(this)->scaleChanged(scale);
 }
 
 void PositionAttitudeTransformQtQml::Index::setPivotPoint(const QVector3D &pivot)
 {
     osg::Vec3d a = osgQt::vec3d(pivot);
 
-    if(othis->getPivotPoint() == a) return;
+    if(o(this)->getPivotPoint() == a) return;
 
-    othis->setPivotPoint(a);
+    o(this)->setPivotPoint(a);
 
-    emit qthis->pivotPointChanged(pivot);
+    emit q(this)->pivotPointChanged(pivot);
 }
 
 PositionAttitudeTransformQtQml::PositionAttitudeTransformQtQml(QObject *parent) :
@@ -86,8 +82,10 @@ PositionAttitudeTransformQtQml::PositionAttitudeTransformQtQml(PositionAttitudeT
 
 void PositionAttitudeTransformQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     GroupQtQml::classBegin();
 }
 
@@ -99,12 +97,12 @@ void PositionAttitudeTransformQtQml::classBegin()
 
 QVector3D PositionAttitudeTransformQtQml::getPosition() const
 {
-    return osgQt::qVector3D(static_cast<Index*>(i)->othis->getPosition());
+    return osgQt::qVector3D(o(this)->getPosition());
 }
 
 void PositionAttitudeTransformQtQml::setPosition(const QVector3D &pos)
 {
-    static_cast<Index*>(i)->setPosition(pos);
+    i(this)->setPosition(pos);
 }
 
 /*!
@@ -115,12 +113,12 @@ void PositionAttitudeTransformQtQml::setPosition(const QVector3D &pos)
 
 QQuaternion PositionAttitudeTransformQtQml::getAttitude() const
 {
-    return osgQt::qQuaternion(static_cast<Index*>(i)->othis->getAttitude());
+    return osgQt::qQuaternion(o(this)->getAttitude());
 }
 
 void PositionAttitudeTransformQtQml::setAttitude(const QQuaternion &quat)
 {
-    static_cast<Index*>(i)->setAttitude(quat);
+    i(this)->setAttitude(quat);
 }
 
 /*!
@@ -131,12 +129,12 @@ void PositionAttitudeTransformQtQml::setAttitude(const QQuaternion &quat)
 
 QVector3D PositionAttitudeTransformQtQml::getScale() const
 {
-    return osgQt::qVector3D(static_cast<Index*>(i)->othis->getScale());
+    return osgQt::qVector3D(o(this)->getScale());
 }
 
 void PositionAttitudeTransformQtQml::setScale(const QVector3D &scale)
 {
-    static_cast<Index*>(i)->setScale(scale);
+    i(this)->setScale(scale);
 }
 
 /*!
@@ -147,17 +145,17 @@ void PositionAttitudeTransformQtQml::setScale(const QVector3D &scale)
 
 QVector3D PositionAttitudeTransformQtQml::getPivotPoint() const
 {
-    return osgQt::qVector3D(static_cast<Index*>(i)->othis->getPivotPoint());
+    return osgQt::qVector3D(o(this)->getPivotPoint());
 }
 
 void PositionAttitudeTransformQtQml::setPivotPoint(const QVector3D &pivot)
 {
-    static_cast<Index*>(i)->setPivotPoint(pivot);
+    i(this)->setPivotPoint(pivot);
 }
 
 PositionAttitudeTransform *PositionAttitudeTransformQtQml::asPositionAttitudeTransform()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 PositionAttitudeTransformQtQml *PositionAttitudeTransformQtQml::fromPositionAttitudeTransform(PositionAttitudeTransform *transform, QObject *parent)
@@ -166,7 +164,7 @@ PositionAttitudeTransformQtQml *PositionAttitudeTransformQtQml::fromPositionAtti
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(transform))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<PositionAttitudeTransformQtQml*>(index->qtObject());
     }
 
     PositionAttitudeTransformQtQml *result = new PositionAttitudeTransformQtQml(new Index(transform), parent);

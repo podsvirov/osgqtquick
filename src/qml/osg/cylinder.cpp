@@ -17,17 +17,13 @@
 namespace osg {
 
 CylinderQtQml::Index::Index(Cylinder *box) :
-    ShapeQtQml::Index(box),
-    qthis(0)
+    ShapeQtQml::Index(box)
 {
-    othis = box;
 }
 
 void CylinderQtQml::Index::classBegin()
 {
-    if(!othis) othis = new Cylinder();
-    ShapeQtQml::Index::othis = othis;
-    ShapeQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new Cylinder);
 
     ShapeQtQml::Index::classBegin();
 }
@@ -36,29 +32,29 @@ void CylinderQtQml::Index::setCenter(const QVector3D &center)
 {
     osg::Vec3d a = osgQt::vec3d(center);
 
-    if(othis->getCenter() == a) return;
+    if(o(this)->getCenter() == a) return;
 
-    othis->setCenter(a);
+    o(this)->setCenter(a);
 
-    emit qthis->centerChanged(center);
+    emit q(this)->centerChanged(center);
 }
 
 void CylinderQtQml::Index::setRadius(float radius)
 {
-    if(othis->getRadius() == radius) return;
+    if(o(this)->getRadius() == radius) return;
 
-    othis->setRadius(radius);
+    o(this)->setRadius(radius);
 
-    emit qthis->radiusChanged(radius);
+    emit q(this)->radiusChanged(radius);
 }
 
 void CylinderQtQml::Index::setHeight(float height)
 {
-    if(othis->getHeight() == height) return;
+    if(o(this)->getHeight() == height) return;
 
-    othis->setHeight(height);
+    o(this)->setHeight(height);
 
-    emit qthis->heightChanged(height);
+    emit q(this)->heightChanged(height);
 }
 
 CylinderQtQml::CylinderQtQml(QObject *parent) :
@@ -73,8 +69,10 @@ CylinderQtQml::CylinderQtQml(CylinderQtQml::Index *index, QObject *parent) :
 
 void CylinderQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     ShapeQtQml::classBegin();
 }
 
@@ -86,12 +84,12 @@ void CylinderQtQml::classBegin()
 
 QVector3D CylinderQtQml::getCenter() const
 {
-    return osgQt::qVector3D(static_cast<Index*>(i)->othis->getCenter());
+    return osgQt::qVector3D(o(this)->getCenter());
 }
 
 void CylinderQtQml::setCenter(const QVector3D &halfLengths)
 {
-    static_cast<Index*>(i)->setCenter(halfLengths);
+    i(this)->setCenter(halfLengths);
 }
 
 /*!
@@ -102,12 +100,12 @@ void CylinderQtQml::setCenter(const QVector3D &halfLengths)
 
 float CylinderQtQml::getRadius() const
 {
-    return static_cast<Index*>(i)->othis->getRadius();
+    return o(this)->getRadius();
 }
 
 void CylinderQtQml::setRadius(float radius)
 {
-    static_cast<Index*>(i)->setRadius(radius);
+    i(this)->setRadius(radius);
 }
 
 /*!
@@ -118,17 +116,17 @@ void CylinderQtQml::setRadius(float radius)
 
 float CylinderQtQml::getHeight() const
 {
-    return static_cast<Index*>(i)->othis->getHeight();
+    return o(this)->getHeight();
 }
 
 void CylinderQtQml::setHeight(float height)
 {
-    static_cast<Index*>(i)->setHeight(height);
+    i(this)->setHeight(height);
 }
 
 Cylinder *CylinderQtQml::cylinder()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 CylinderQtQml *CylinderQtQml::fromCylinder(Cylinder *drawable, QObject *parent)
@@ -137,10 +135,12 @@ CylinderQtQml *CylinderQtQml::fromCylinder(Cylinder *drawable, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(drawable))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<CylinderQtQml*>(index->qtObject());
     }
 
-    return new CylinderQtQml(new Index(drawable), parent);
+    CylinderQtQml *result = new CylinderQtQml(new Index(drawable), parent);
+    result->classBegin();
+    return result;
 }
 
 }

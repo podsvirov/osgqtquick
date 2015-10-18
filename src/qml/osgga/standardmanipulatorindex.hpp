@@ -9,18 +9,15 @@ namespace osgGA {
 
 class OSGQTQML_EXPORT StandardManipulatorQtQml::Index : public CameraManipulatorQtQml::Index
 {
+public:
+    typedef StandardManipulator OType;
+    typedef StandardManipulatorQtQml QType;
     friend class StandardManipulatorQtQml;
 
 public:
     Index(StandardManipulator *o = 0);
 
-    void classBegin();
-
     void setNode(osg::NodeQtQml *node);
-
-protected:
-    StandardManipulator *othis;
-    StandardManipulatorQtQml *qthis;
 };
 
 }

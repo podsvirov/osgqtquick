@@ -9,6 +9,9 @@ namespace osg {
 
 class OSGQTQML_EXPORT GeodeQtQml::Index : public NodeQtQml::Index
 {
+public:
+    typedef Geode OType;
+    typedef GeodeQtQml QType;
     friend class GeodeQtQml;
 
 public:
@@ -18,9 +21,6 @@ public:
     void classBegin();
 
 protected:
-    Geode *othis;
-    GeodeQtQml *qthis;
-
     struct CompleteInfo;
     CompleteInfo *_completeInfo;
 

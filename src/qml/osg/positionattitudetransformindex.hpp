@@ -9,6 +9,9 @@ namespace osg {
 
 class OSGQTQML_EXPORT PositionAttitudeTransformQtQml::Index : public GroupQtQml::Index
 {
+public:
+    typedef PositionAttitudeTransform OType;
+    typedef PositionAttitudeTransformQtQml QType;
     friend class PositionAttitudeTransformQtQml;
 
 public:
@@ -20,10 +23,6 @@ public:
     void setAttitude(const QQuaternion &quat);
     void setScale(const QVector3D &scale);
     void setPivotPoint(const QVector3D &pivot);
-
-protected:
-    PositionAttitudeTransform *othis;
-    PositionAttitudeTransformQtQml *qthis;
 };
 
 }

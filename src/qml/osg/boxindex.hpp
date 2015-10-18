@@ -9,6 +9,9 @@ namespace osg {
 
 class OSGQTQML_EXPORT BoxQtQml::Index : public ShapeQtQml::Index
 {
+public:
+    typedef Box OType;
+    typedef BoxQtQml QType;
     friend class BoxQtQml;
 
 public:
@@ -17,10 +20,6 @@ public:
     void classBegin();
 
     void setHalfLengths(const QVector3D &halfLengths);
-
-protected:
-    Box *othis;
-    BoxQtQml *qthis;
 };
 
 }

@@ -17,30 +17,17 @@
 namespace osg {
 
 ShapeDrawableQtQml::Index::Index(ShapeDrawable *drawable) :
-    DrawableQtQml::Index(drawable),
-    qthis(0)
+    DrawableQtQml::Index(drawable)
 {
-    othis = drawable;
-}
-
-void ShapeDrawableQtQml::Index::classBegin()
-{
-    DrawableQtQml::Index::othis = othis;
-    DrawableQtQml::Index::qthis = qthis;
-
-    DrawableQtQml::Index::classBegin();
 }
 
 void ShapeDrawableQtQml::Index::componentComplete()
 {
-    if(!othis) {
-        othis = shape.valid() ?
-                    new ShapeDrawable(shape.get()) :
-                    new ShapeDrawable();
+    if(!o(this)) {
+        setO(shape.valid()
+             ? new ShapeDrawable(shape.get())
+             : new ShapeDrawable);
     }
-
-    DrawableQtQml::Index::othis = othis;
-    DrawableQtQml::Index::qthis = qthis;
 
     DrawableQtQml::Index::componentComplete();
 
@@ -64,7 +51,7 @@ void ShapeDrawableQtQml::Index::setShape(ShapeQtQml *shape)
 
     this->shape = shape->shape();
 
-    emit qthis->shapeChanged(shape);
+    emit q(this)->shapeChanged(shape);
 }
 
 /*!
@@ -83,11 +70,11 @@ void ShapeDrawableQtQml::Index::setColor(const QColor &color)
 
     osg::Vec4 c = osgQt::swapColor(color);
 
-    if(othis->getColor() == c) return;
+    if(o(this)->getColor() == c) return;
 
-    othis->setColor(c);
+    o(this)->setColor(c);
 
-    emit qthis->colorChanged(color);
+    emit q(this)->colorChanged(color);
 }
 
 ShapeDrawableQtQml::ShapeDrawableQtQml(QObject *parent) :
@@ -102,34 +89,36 @@ ShapeDrawableQtQml::ShapeDrawableQtQml(ShapeDrawableQtQml::Index *index, QObject
 
 void ShapeDrawableQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     DrawableQtQml::classBegin();
 }
 
 ShapeQtQml *ShapeDrawableQtQml::getShape() const
 {
-    return static_cast<Index*>(i)->getShape();
+    return i(this)->getShape();
 }
 
 void ShapeDrawableQtQml::setShape(ShapeQtQml *shape)
 {
-    static_cast<Index*>(i)->setShape(shape);
+    i(this)->setShape(shape);
 }
 
 QColor ShapeDrawableQtQml::getColor() const
 {
-    return osgQt::swapColor(static_cast<Index*>(i)->othis->getColor());
+    return osgQt::swapColor(o(this)->getColor());
 }
 
 void ShapeDrawableQtQml::setColor(const QColor &color)
 {
-    static_cast<Index*>(i)->setColor(color);
+    i(this)->setColor(color);
 }
 
 ShapeDrawable *ShapeDrawableQtQml::shapeDrawable()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 ShapeDrawableQtQml *ShapeDrawableQtQml::fromShapeDrawable(ShapeDrawable *drawable, QObject *parent)
@@ -138,7 +127,7 @@ ShapeDrawableQtQml *ShapeDrawableQtQml::fromShapeDrawable(ShapeDrawable *drawabl
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(drawable))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<ShapeDrawableQtQml*>(index->qtObject());
     }
 
     return new ShapeDrawableQtQml(new Index(drawable), parent);

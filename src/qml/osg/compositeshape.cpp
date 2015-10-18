@@ -16,12 +16,10 @@
 
 namespace osg {
 
-CompositeShapeQtQml::Index::Index(CompositeShape *CompositeShape) :
-    ShapeQtQml::Index(CompositeShape),
-    qthis(0),
+CompositeShapeQtQml::Index::Index(CompositeShape *compositeShape) :
+    ShapeQtQml::Index(compositeShape),
     _completeInfo(0)
 {
-  othis = CompositeShape;
 }
 
 CompositeShapeQtQml::Index::~Index()
@@ -31,9 +29,7 @@ CompositeShapeQtQml::Index::~Index()
 
 void CompositeShapeQtQml::Index::classBegin()
 {
-    if(!othis) othis = new CompositeShape();
-    ShapeQtQml::Index::othis = othis;
-    ShapeQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new CompositeShape);
 
     ShapeQtQml::Index::classBegin();
 }
@@ -50,8 +46,10 @@ CompositeShapeQtQml::CompositeShapeQtQml(CompositeShapeQtQml::Index *index, QObj
 
 void CompositeShapeQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     ShapeQtQml::classBegin();
 }
 
@@ -59,7 +57,7 @@ void CompositeShapeQtQml::componentComplete()
 {
   ShapeQtQml::componentComplete();
 
-  if(Index::CompleteInfo *info = static_cast<Index*>(i)->_completeInfo)
+  if(Index::CompleteInfo *info = i(this)->_completeInfo)
     {
       for(QList<ShapeQtQml*>::iterator it = info->child.begin();
           it != info->child.end(); ++it)
@@ -69,18 +67,18 @@ void CompositeShapeQtQml::componentComplete()
   }
 }
 
-ShapeQtQml *CompositeShapeQtQml::getShape() const
+ShapeQtQml *CompositeShapeQtQml::getShape()
 {
-    return ShapeQtQml::fromShape(static_cast<Index*>(i)->othis->getShape());
+    return ShapeQtQml::fromShape(o(this)->getShape());
 }
 
 void CompositeShapeQtQml::setShape(ShapeQtQml *shape)
 {
     osg::Shape *a = shape->shape();
 
-    if(static_cast<Index*>(i)->othis->getShape() == a) return;
+    if(o(this)->getShape() == a) return;
 
-    static_cast<Index*>(i)->othis->setShape(a);
+    o(this)->setShape(a);
 
     emit shapeChanged(shape);
 }
@@ -96,12 +94,12 @@ bool CompositeShapeQtQml::addChild(ShapeQtQml *shape)
   if(!shape) return false;
   if (!isComplete())
   {
-      static_cast<Index*>(i)->info()->child.append(shape);
+      i(this)->info()->child.append(shape);
       return true;
   }
   else
   {
-      static_cast<CompositeShapeQtQml::Index*>(i)->othis->addChild(shape->shape());
+      o(this)->addChild(shape->shape());
       emit numChildrenChanged(getNumChildren());
       return true;
   }
@@ -117,10 +115,10 @@ bool CompositeShapeQtQml::addChild(ShapeQtQml *shape)
 
 bool CompositeShapeQtQml::removeChild(ShapeQtQml *shape)
 {
-    unsigned int index = static_cast<CompositeShapeQtQml::Index*>(i)->othis->findChildNo(shape->shape());
-    if (index != static_cast<CompositeShapeQtQml::Index*>(i)->othis->getNumChildren())
+    unsigned int index = o(this)->findChildNo(shape->shape());
+    if (index != o(this)->getNumChildren())
     {
-        static_cast<CompositeShapeQtQml::Index*>(i)->othis->removeChild(index);
+        o(this)->removeChild(index);
         emit numChildrenChanged(getNumChildren());
         return true;
     }
@@ -134,7 +132,7 @@ bool CompositeShapeQtQml::removeChild(int pos)
 
     if(pos < getNumChildren())
     {
-        static_cast<Index*>(i)->othis->removeChild(
+        o(this)->removeChild(
                 static_cast<unsigned int>(pos));
         emit numChildrenChanged(getNumChildren());
         return true;
@@ -151,13 +149,13 @@ bool CompositeShapeQtQml::removeChild(int pos)
 
 int CompositeShapeQtQml::getNumChildren() const
 {
-    return static_cast<Index*>(i)->othis->getNumChildren();
+    return o(this)->getNumChildren();
 }
 
 ShapeQtQml *CompositeShapeQtQml::getChild(int i)
 {
-  return osg::ShapeQtQml::fromShape(static_cast<Index*>(this->i)->othis->getChild(
-                                        static_cast<unsigned int>(i)));
+  return osg::ShapeQtQml::fromShape(
+              o(this)->getChild(static_cast<unsigned int>(i)));
 }
 
 /*!
@@ -177,7 +175,7 @@ QQmlListProperty<ShapeQtQml> CompositeShapeQtQml::children()
 
 CompositeShape *CompositeShapeQtQml::compositeShape()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 CompositeShapeQtQml *CompositeShapeQtQml::fromCompositeShape(CompositeShape *compositeShape, QObject *parent)
@@ -186,10 +184,12 @@ CompositeShapeQtQml *CompositeShapeQtQml::fromCompositeShape(CompositeShape *com
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(compositeShape))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<CompositeShapeQtQml*>(index->qtObject());
     }
 
-    return new CompositeShapeQtQml(new Index(compositeShape), parent);
+    CompositeShapeQtQml *result = new CompositeShapeQtQml(new Index(compositeShape), parent);
+    result->classBegin();
+    return result;
 }
 
 int CompositeShapeQtQml::childrenCount(QQmlListProperty<ShapeQtQml> *list)

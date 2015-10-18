@@ -17,17 +17,13 @@
 namespace osg {
 
 SphereQtQml::Index::Index(Sphere *box) :
-    ShapeQtQml::Index(box),
-    qthis(0)
+    ShapeQtQml::Index(box)
 {
-    othis = box;
 }
 
 void SphereQtQml::Index::classBegin()
 {
-    if(!othis) othis = new Sphere();
-    ShapeQtQml::Index::othis = othis;
-    ShapeQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new Sphere);
 
     ShapeQtQml::Index::classBegin();
 }
@@ -36,20 +32,20 @@ void SphereQtQml::Index::setCenter(const QVector3D &center)
 {
     osg::Vec3d a = osgQt::vec3d(center);
 
-    if(othis->getCenter() == a) return;
+    if(o(this)->getCenter() == a) return;
 
-    othis->setCenter(a);
+    o(this)->setCenter(a);
 
-    emit qthis->centerChanged(center);
+    emit q(this)->centerChanged(center);
 }
 
 void SphereQtQml::Index::setRadius(float radius)
 {
-    if(othis->getRadius() == radius) return;
+    if(o(this)->getRadius() == radius) return;
 
-    othis->setRadius(radius);
+    o(this)->setRadius(radius);
 
-    emit qthis->radiusChanged(radius);
+    emit q(this)->radiusChanged(radius);
 }
 
 SphereQtQml::SphereQtQml(QObject *parent) :
@@ -64,8 +60,10 @@ SphereQtQml::SphereQtQml(SphereQtQml::Index *index, QObject *parent) :
 
 void SphereQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     ShapeQtQml::classBegin();
 }
 
@@ -77,12 +75,12 @@ void SphereQtQml::classBegin()
 
 QVector3D SphereQtQml::getCenter() const
 {
-    return osgQt::qVector3D(static_cast<Index*>(i)->othis->getCenter());
+    return osgQt::qVector3D(o(this)->getCenter());
 }
 
 void SphereQtQml::setCenter(const QVector3D &halfLengths)
 {
-    static_cast<Index*>(i)->setCenter(halfLengths);
+    i(this)->setCenter(halfLengths);
 }
 
 /*!
@@ -93,17 +91,17 @@ void SphereQtQml::setCenter(const QVector3D &halfLengths)
 
 float SphereQtQml::getRadius() const
 {
-    return static_cast<Index*>(i)->othis->getRadius();
+    return o(this)->getRadius();
 }
 
 void SphereQtQml::setRadius(float radius)
 {
-    static_cast<Index*>(i)->setRadius(radius);
+    i(this)->setRadius(radius);
 }
 
 Sphere *SphereQtQml::sphere()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 SphereQtQml *SphereQtQml::fromSphere(Sphere *drawable, QObject *parent)
@@ -112,10 +110,12 @@ SphereQtQml *SphereQtQml::fromSphere(Sphere *drawable, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(drawable))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<SphereQtQml*>(index->qtObject());
     }
 
-    return new SphereQtQml(new Index(drawable), parent);
+    SphereQtQml *result = new SphereQtQml(new Index(drawable), parent);
+    result->classBegin();
+    return result;
 }
 
 }

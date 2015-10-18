@@ -24,7 +24,7 @@ public:
 
   void classBegin();
 
-  Q_INVOKABLE FontImplementationQtQml *getImplementation() const;
+  Q_INVOKABLE FontImplementationQtQml *getImplementation();
   Q_INVOKABLE void setImplementation(FontImplementationQtQml *implementation);
 
   Q_INVOKABLE qreal getGlyphImageMarginRatio() const;

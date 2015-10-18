@@ -15,17 +15,13 @@ namespace osg {
  */
 
 NodeQtQml::Index::Index(Node *node) :
-    ObjectQtQml::Index(node),
-    qthis(0)
+    ObjectQtQml::Index(node)
 {
-    othis = node;
 }
 
 void NodeQtQml::Index::classBegin()
 {
-    if(!othis) othis = new Node();
-    ObjectQtQml::Index::othis = othis;
-    ObjectQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new Node);
 
     ObjectQtQml::Index::classBegin();
 }
@@ -42,14 +38,16 @@ NodeQtQml::NodeQtQml(NodeQtQml::Index *index, QObject *parent) :
 
 void NodeQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     osgQtQml::Object::classBegin();
 }
 
 Node *NodeQtQml::node()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 NodeQtQml *NodeQtQml::fromNode(Node *node, QObject *parent)
@@ -58,11 +56,12 @@ NodeQtQml *NodeQtQml::fromNode(Node *node, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(node))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<NodeQtQml*>(index->qtObject());
     }
 
     NodeQtQml *result = new NodeQtQml(new Index(node), parent);
     result->classBegin();
+
     return result;
 }
 

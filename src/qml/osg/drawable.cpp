@@ -15,26 +15,8 @@
 namespace osg {
 
 DrawableQtQml::Index::Index(Drawable *drawable) :
-    ObjectQtQml::Index(drawable),
-    qthis(0)
+    ObjectQtQml::Index(drawable)
 {
-    othis = drawable;
-}
-
-void DrawableQtQml::Index::classBegin()
-{
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
-
-    osgQtQml::Index::classBegin();
-}
-
-void DrawableQtQml::Index::componentComplete()
-{
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
-
-    osgQtQml::Index::componentComplete();
 }
 
 DrawableQtQml::DrawableQtQml(QObject *parent) :
@@ -49,14 +31,16 @@ DrawableQtQml::DrawableQtQml(DrawableQtQml::Index *index, QObject *parent) :
 
 void DrawableQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     osgQtQml::Object::classBegin();
 }
 
 Drawable *DrawableQtQml::drawable()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 DrawableQtQml *DrawableQtQml::fromDrawable(Drawable *drawable, QObject *parent)
@@ -65,7 +49,7 @@ DrawableQtQml *DrawableQtQml::fromDrawable(Drawable *drawable, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(drawable))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<DrawableQtQml*>(index->qtObject());
     }
 
     DrawableQtQml *result = new DrawableQtQml(new Index(drawable), parent);

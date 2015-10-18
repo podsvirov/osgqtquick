@@ -6,18 +6,8 @@
 namespace osg {
 
 GraphicsContextQtQml::Index::Index(GraphicsContext *graphicsContext) :
-    ObjectQtQml::Index(graphicsContext),
-    qthis(0)
+    ObjectQtQml::Index(graphicsContext)
 {
-    othis = graphicsContext;
-}
-
-void GraphicsContextQtQml::Index::classBegin()
-{    
-    osgQtQml::Index::othis = othis;
-    osgQtQml::Index::qthis = qthis;
-
-    osgQtQml::Index::classBegin();
 }
 
 GraphicsContextQtQml::GraphicsContextQtQml(QObject *parent) :
@@ -32,26 +22,31 @@ GraphicsContextQtQml::GraphicsContextQtQml(GraphicsContextQtQml::Index *index, Q
 
 void GraphicsContextQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
-    osgQtQml::Object::classBegin();
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
+    ObjectQtQml::classBegin();
 }
 
 GraphicsContext *GraphicsContextQtQml::graphicsContext()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
-GraphicsContextQtQml *GraphicsContextQtQml::fromGraphicsContext(GraphicsContext *GraphicsContext, QObject *parent)
+GraphicsContextQtQml *GraphicsContextQtQml::fromGraphicsContext(GraphicsContext *graphicsContext, QObject *parent)
 {
-    if(!GraphicsContext) return 0;
+    if(!graphicsContext) return 0;
 
-    if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(GraphicsContext))
+    if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(graphicsContext))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<GraphicsContextQtQml*>(index->qtObject());
     }
 
-    return new GraphicsContextQtQml(new Index(GraphicsContext), parent);
+    GraphicsContextQtQml *result = new GraphicsContextQtQml(new Index(graphicsContext), parent);
+    result->classBegin();
+
+    return result;
 }
 
 }

@@ -17,28 +17,15 @@
 namespace osgText {
 
 StyleQtQml::Index::Index(Style *style) :
-    ObjectQtQml::Index(style),
-    qthis(0)
+    ObjectQtQml::Index(style)
 {
-    othis = style;
 }
 
 void StyleQtQml::Index::classBegin()
 {
-    if(!othis) othis = new Style();
-
-    ObjectQtQml::Index::othis = othis;
-    ObjectQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new Style);
 
     ObjectQtQml::Index::classBegin();
-}
-
-void StyleQtQml::Index::componentComplete()
-{
-    ObjectQtQml::Index::othis = othis;
-    ObjectQtQml::Index::qthis = qthis;
-
-    ObjectQtQml::Index::componentComplete();
 }
 
 StyleQtQml::StyleQtQml(QObject *parent) :
@@ -53,8 +40,10 @@ StyleQtQml::StyleQtQml(StyleQtQml::Index *index, QObject *parent) :
 
 void StyleQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     ObjectQtQml::classBegin();
 }
 
@@ -78,21 +67,21 @@ void StyleQtQml::setStyle(StyleQtQml *style)
 
 qreal StyleQtQml::getWidthRatio() const
 {
-    return static_cast<qreal>(static_cast<Index*>(i)->othis->getWidthRatio());
+    return static_cast<qreal>(o(this)->getWidthRatio());
 }
 
 void StyleQtQml::setWidthRatio(qreal widthRation)
 {
     if(getWidthRatio() == widthRation) return;
 
-    static_cast<Index*>(i)->othis->setWidthRatio(static_cast<float>(widthRation));
+    o(this)->setWidthRatio(static_cast<float>(widthRation));
 
     emit widthRatioChanged(widthRation);
 }
 
 Style *StyleQtQml::style()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 StyleQtQml *StyleQtQml::fromStyle(Style *style, QObject *parent)
@@ -101,7 +90,7 @@ StyleQtQml *StyleQtQml::fromStyle(Style *style, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(style))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<StyleQtQml*>(index->qtObject());
     }
 
     StyleQtQml *result = new StyleQtQml(new Index(style), parent);

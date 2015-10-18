@@ -9,6 +9,9 @@ namespace osg {
 
 class OSGQTQML_EXPORT CameraQtQml::Index : public TransformQtQml::Index
 {
+public:
+    typedef Camera OType;
+    typedef CameraQtQml QType;
     friend class CameraQtQml;
 
 public:
@@ -18,10 +21,6 @@ public:
 
     void setClearColor(const QColor &color);
     void setNearFarRatio(const double ratio);
-
-protected:
-    Camera *othis;
-    CameraQtQml *qthis;
 };
 
 }

@@ -20,10 +20,8 @@
 namespace osgDB {
 
 LoaderQtQml::Index::Index(osg::Group *group) :
-    GroupQtQml::Index(group),
-    qthis(0)
+    GroupQtQml::Index(group)
 {
-    othis = group;
 }
 
 LoaderQtQml::Index::~Index()
@@ -32,9 +30,7 @@ LoaderQtQml::Index::~Index()
 
 void LoaderQtQml::Index::classBegin()
 {
-    if(!othis) othis = new osg::Group();
-    GroupQtQml::Index::othis = othis;
-    GroupQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new osg::Group);
 
     GroupQtQml::Index::classBegin();
 }
@@ -46,11 +42,11 @@ void LoaderQtQml::Index::setUrl(const QUrl &url)
     this->url = url;
 
     Loader *loader = new Loader(this->url);
-    connect(loader, SIGNAL(loaded(const QUrl&, osg::Node*)), qthis, SLOT(nodeLoadingDone(const QUrl &, osg::Node*)));
+    connect(loader, SIGNAL(loaded(const QUrl&, osg::Node*)), q(this), SLOT(nodeLoadingDone(const QUrl &, osg::Node*)));
     connect(loader, SIGNAL(finished()), loader, SLOT(deleteLater()));
     loader->start();
 
-    emit qthis->sourceChanged(this->url);
+    emit q(this)->sourceChanged(this->url);
 }
 
 osg::NodeQtQml *LoaderQtQml::Index::getNode()
@@ -64,16 +60,16 @@ void LoaderQtQml::Index::acceptNode(const QUrl &url, osg::Node *node)
 
     if(this->node.valid())
     {
-        othis->removeChild(this->node.get());
+        o(this)->removeChild(this->node.get());
     }
 
     if(node)
     {
-        othis->addChild(node);
+        o(this)->addChild(node);
     }
 
     this->node = node;
-    emit qthis->nodeChanged(getNode());
+    emit q(this)->nodeChanged(getNode());
 }
 
 LoaderQtQml::LoaderQtQml(QObject *parent) :
@@ -88,14 +84,16 @@ LoaderQtQml::LoaderQtQml(LoaderQtQml::Index *index, QObject *parent) :
 
 void LoaderQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     GroupQtQml::classBegin();
 }
 
 void LoaderQtQml::setSource(const QUrl &url)
 {
-    static_cast<Index*>(i)->setUrl(url);
+    i(this)->setUrl(url);
 }
 
 /*!
@@ -106,7 +104,7 @@ void LoaderQtQml::setSource(const QUrl &url)
 
 QUrl LoaderQtQml::getSource()
 {
-    return static_cast<Index*>(i)->url;
+    return i(this)->url;
 }
 
 /*!
@@ -117,7 +115,7 @@ QUrl LoaderQtQml::getSource()
 
 osg::NodeQtQml *LoaderQtQml::getNode()
 {
-    return static_cast<Index*>(i)->getNode();
+    return i(this)->getNode();
 }
 
 LoaderQtQml *LoaderQtQml::fromGroup(osg::Group *group, QObject *parent)
@@ -126,15 +124,17 @@ LoaderQtQml *LoaderQtQml::fromGroup(osg::Group *group, QObject *parent)
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(group))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<LoaderQtQml*>(index->qtObject());
     }
 
-    return new LoaderQtQml(new Index(group), parent);
+    LoaderQtQml *result = new LoaderQtQml(new Index(group), parent);
+    result->classBegin();
+    return result;
 }
 
 void LoaderQtQml::nodeLoadingDone(const QUrl &url, osg::Node *node)
 {
-    static_cast<Index*>(i)->acceptNode(url, node);
+    i(this)->acceptNode(url, node);
 }
 
 }

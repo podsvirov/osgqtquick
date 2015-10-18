@@ -28,7 +28,7 @@ public:
   void classBegin();
   void componentComplete();
 
-  Q_INVOKABLE ShapeQtQml *getShape() const;
+  Q_INVOKABLE ShapeQtQml *getShape();
   Q_INVOKABLE void setShape(ShapeQtQml *shape);
 
   Q_INVOKABLE bool addChild(ShapeQtQml *shape);

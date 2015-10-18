@@ -18,17 +18,13 @@
 namespace osgGA {
 
 OrbitManipulatorQtQml::Index::Index(OrbitManipulator *manipulator) :
-    StandardManipulatorQtQml::Index(manipulator),
-    qthis(0)
+    StandardManipulatorQtQml::Index(manipulator)
 {
-    othis = manipulator;
 }
 
 void OrbitManipulatorQtQml::Index::classBegin()
 {
-    if(!othis) othis = new OrbitManipulator();
-    StandardManipulatorQtQml::Index::othis = othis;
-    StandardManipulatorQtQml::Index::qthis = qthis;
+    if(!o(this)) setO(new OrbitManipulator);
 
     StandardManipulatorQtQml::Index::classBegin();
 }
@@ -45,40 +41,44 @@ OrbitManipulatorQtQml::OrbitManipulatorQtQml(OrbitManipulatorQtQml::Index *index
 
 void OrbitManipulatorQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     StandardManipulatorQtQml::classBegin();
 }
 
 qreal OrbitManipulatorQtQml::getWheelZoomFactor() const
 {
-    return static_cast<qreal>(static_cast<Index*>(i)->othis->getWheelZoomFactor());
+    return static_cast<qreal>(o(this)->getWheelZoomFactor());
 }
 
 void OrbitManipulatorQtQml::setWheelZoomFactor(qreal wheelZoomFactor)
 {
     if (getWheelZoomFactor() == wheelZoomFactor) return;
 
-    static_cast<Index*>(i)->othis->setWheelZoomFactor(static_cast<float>(wheelZoomFactor));
+    o(this)->setWheelZoomFactor(static_cast<float>(wheelZoomFactor));
 
     emit wheelZoomFactorChanged(wheelZoomFactor);
 }
 
 OrbitManipulator *OrbitManipulatorQtQml::orbitManipulator()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
-OrbitManipulatorQtQml *OrbitManipulatorQtQml::fromOrbitManipulator(OrbitManipulator *trackballManipulator, QObject *parent)
+OrbitManipulatorQtQml *OrbitManipulatorQtQml::fromOrbitManipulator(OrbitManipulator *ortitManipulator, QObject *parent)
 {
-    if(!trackballManipulator) return 0;
+    if(!ortitManipulator) return 0;
 
-    if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(trackballManipulator))
+    if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(ortitManipulator))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<OrbitManipulatorQtQml*>(index->qtObject());
     }
 
-    return new OrbitManipulatorQtQml(new Index(trackballManipulator), parent);
+    OrbitManipulatorQtQml *result = new OrbitManipulatorQtQml(new Index(ortitManipulator), parent);
+    result->classBegin();
+    return result;
 }
 
 }

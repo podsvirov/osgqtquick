@@ -3,8 +3,6 @@
 
 #include <osgQtQml/Index>
 
-#include <osgGA/CameraManipulator>
-
 #include <QDebug>
 
 /*!
@@ -18,17 +16,8 @@ namespace osgGA {
 
 CameraManipulatorQtQml::Index::Index(CameraManipulator *cameraManipulator) :
     ObjectQtQml::Index(cameraManipulator),
-    qthis(0)
+    o_ptr(0)
 {
-    othis = cameraManipulator;
-}
-
-void CameraManipulatorQtQml::Index::classBegin()
-{
-    ObjectQtQml::Index::othis = othis;
-    ObjectQtQml::Index::qthis = qthis;
-
-    ObjectQtQml::Index::classBegin();
 }
 
 CameraManipulatorQtQml::CameraManipulatorQtQml(QObject *parent) :
@@ -43,14 +32,16 @@ CameraManipulatorQtQml::CameraManipulatorQtQml(CameraManipulatorQtQml::Index *in
 
 void CameraManipulatorQtQml::classBegin()
 {
-    if(!i) i = new Index();
-    static_cast<Index*>(i)->qthis = this;
+    if(!i(this)) setI(new Index);
+
+    i(this)->setQ(this);
+
     osgQtQml::Object::classBegin();
 }
 
 void CameraManipulatorQtQml::setHomePosition(const QVector3D &eye, const QVector3D &center, const QVector3D &up, bool autoComputeHomePosition)
 {
-    static_cast<Index*>(i)->othis->setHomePosition(
+    o(this)->setHomePosition(
                 osgQt::vec3d(eye),
                 osgQt::vec3d(center),
                 osgQt::vec3d(up),
@@ -59,12 +50,12 @@ void CameraManipulatorQtQml::setHomePosition(const QVector3D &eye, const QVector
 
 void CameraManipulatorQtQml::home(qreal duration)
 {
-    static_cast<Index*>(i)->othis->home(static_cast<double>(duration));
+    o(this)->home(static_cast<double>(duration));
 }
 
 CameraManipulator *CameraManipulatorQtQml::cameraManipulator()
 {
-    return static_cast<Index*>(i)->othis;
+    return o(this);
 }
 
 CameraManipulatorQtQml *CameraManipulatorQtQml::fromCameraManipulator(CameraManipulator *cameraManipulator, QObject *parent)
@@ -73,7 +64,7 @@ CameraManipulatorQtQml *CameraManipulatorQtQml::fromCameraManipulator(CameraMani
 
     if(osgQtQml::Index *index = osgQtQml::Index::checkIndex(cameraManipulator))
     {
-        return static_cast<Index*>(index)->qthis;
+        return static_cast<CameraManipulatorQtQml*>(index->qtObject());
     }
 
     CameraManipulatorQtQml *result = new CameraManipulatorQtQml(new Index(cameraManipulator), parent);
