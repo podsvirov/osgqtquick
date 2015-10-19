@@ -18,5 +18,6 @@ You can find some binaries at [DaD's](http://dad.podsvirov.pro)  project.
 
 ## Related Links
 
+* The wiki [pages](https://github.com/podsvirov/osgqtquick/wiki/osgQtQuick-2.0).
 * The library [page](http://inqlude.org/libraries/osgqtquick.html) at [inqlude](http://inqlude.org/) project.
 * The discussion [thread](http://forum.qt.io/topic/58737) at Qt [forum](http://forum.qt.io).
