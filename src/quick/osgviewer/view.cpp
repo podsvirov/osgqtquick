@@ -9,6 +9,7 @@
 #include <osgGA/TrackballManipulator>
 
 #include <QMouseEvent>
+#include <QKeyEvent>
 
 /*!
    \qmltype View
@@ -244,6 +245,10 @@ void ViewQtQuick::mouseMoveEvent(QMouseEvent *event)
 void ViewQtQuick::mouseReleaseEvent(QMouseEvent *event)
 {
     i(this)->mouseButtonRelease(event);
+    if(!this->hasFocus())
+    {
+        this->setFocus(true);
+    }
 }
 
 void ViewQtQuick::mouseDoubleClickEvent(QMouseEvent *event)
@@ -258,6 +263,25 @@ void ViewQtQuick::wheelEvent(QWheelEvent *event)
                 event->orientation() == Qt::Vertical ?
                     (event->delta() > 0 ? osgGA::GUIEventAdapter::SCROLL_UP : osgGA::GUIEventAdapter::SCROLL_DOWN) :
                     (event->delta() > 0 ? osgGA::GUIEventAdapter::SCROLL_LEFT : osgGA::GUIEventAdapter::SCROLL_RIGHT) );
+}
+
+void ViewQtQuick::keyPressEvent(QKeyEvent *event)
+{
+    i(this)->setKeyboardModifiers(event);
+    o(this)->getEventQueue()->keyPress( osgQt::swapKey(event) );
+}
+
+void ViewQtQuick::keyReleaseEvent(QKeyEvent *event)
+{
+    if(event->isAutoRepeat())
+    {
+        event->ignore();
+    }
+    else
+    {
+        i(this)->setKeyboardModifiers(event);
+        o(this)->getEventQueue()->keyRelease(osgQt::swapKey(event));
+    }
 }
 
 void ViewQtQuick::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)

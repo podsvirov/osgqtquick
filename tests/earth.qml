@@ -21,8 +21,7 @@ Rectangle {
 
     OSGDB.Loader {
         id: loader
-        source: "openstreetmap.earth"
-        //source: "openstreetmap_flat.earth"
+        source: "gdal_tiff.earth"
         onNodeChanged: {
             console.log("loader.node: " + getNode())
             view.cameraManipulator.home()
@@ -61,6 +60,10 @@ Rectangle {
     }
 
     RowLayout {
+        Button {
+            text: "GDAL"
+            onClicked: loader.source = "gdal_tiff.earth"
+        }
         Button {
             text: "OpenStreetMap"
             onClicked: loader.source = "openstreetmap.earth"

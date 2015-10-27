@@ -50,6 +50,9 @@ protected:
   void mouseDoubleClickEvent(QMouseEvent *event);
   void wheelEvent(QWheelEvent *event);
 
+  void keyPressEvent(QKeyEvent *event);
+  void keyReleaseEvent(QKeyEvent *event);
+
   void geometryChanged(const QRectF & newGeometry, const QRectF & oldGeometry);
 
   QSGNode* updatePaintNode(QSGNode *oldNode,

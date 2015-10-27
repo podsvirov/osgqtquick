@@ -16,4 +16,5 @@ OSGViewer.View {
         source: "cow.osg"
         onNodeChanged: cameraManipulator.home()
     }
+    focus: true
 }

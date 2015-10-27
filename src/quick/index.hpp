@@ -9,6 +9,24 @@
 
 #include <QQuickItem>
 #include <QQuickWindow>
+#include <QKeyEvent>
+
+#include <map>
+
+namespace osgQt {
+
+OSGQTQUICK_EXPORT extern std::map<unsigned int, int> keyMap;
+
+inline int swapKey(QKeyEvent *event)
+{
+    std::map<unsigned int, int>::iterator it =
+            keyMap.find(event->key());
+    return it == keyMap.end() ?
+                static_cast<int>(*(event->text().toLatin1().data())) :
+                it->second;
+}
+
+}
 
 namespace osgQtQuick {
 
