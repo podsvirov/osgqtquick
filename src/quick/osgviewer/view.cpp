@@ -245,15 +245,10 @@ void ViewQtQuick::mouseMoveEvent(QMouseEvent *event)
 void ViewQtQuick::mouseReleaseEvent(QMouseEvent *event)
 {
     i(this)->mouseButtonRelease(event);
-    if(!this->hasFocus())
-    {
-        this->setFocus(true);
-    }
 }
 
 void ViewQtQuick::mouseDoubleClickEvent(QMouseEvent *event)
 {
-
     i(this)->mouseDoubleButtonPress(event);
 }
 
