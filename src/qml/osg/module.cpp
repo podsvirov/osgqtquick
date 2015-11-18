@@ -9,6 +9,8 @@
 #include "drawableindex.hpp"
 #include "shapedrawableindex.hpp"
 #include "graphicscontextindex.hpp"
+#include "transformindex.hpp"
+#include "matrixtransformindex.hpp"
 #include "positionattitudetransformindex.hpp"
 #include "shapeindex.hpp"
 #include "compositeshapeindex.hpp"
@@ -53,6 +55,10 @@ void registerQtQmlTypes(const char *uri)
     qmlRegisterType<TransformQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Transform");
+
+    qmlRegisterType<MatrixTransformQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "MatrixTransform");
 
     qmlRegisterType<PositionAttitudeTransformQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,

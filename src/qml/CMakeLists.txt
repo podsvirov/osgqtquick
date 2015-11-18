@@ -28,6 +28,7 @@ META_Node(osg CompositeShape)
 META_Node(osg Box)
 META_Node(osg Sphere)
 META_Node(osg Cylinder)
+META_Node(osg MatrixTransform)
 
 META_Node(osgGA StandardManipulator)
 META_Node(osgGA FirstPersonManipulator)

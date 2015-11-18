@@ -6,6 +6,8 @@
 #include <osg/Object>
 #include <osg/Vec4>
 #include <osg/Vec3d>
+#include <osg/Matrixf>
+#include <osg/Matrixd>
 #include <osg/Quat>
 #include <osgText/String>
 
@@ -13,6 +15,7 @@
 #include <QPointer>
 #include <QColor>
 #include <QVector3D>
+#include <QMatrix4x4>
 #include <QQuaternion>
 
 #include <list>
@@ -48,6 +51,16 @@ inline QVector3D qVector3D(const osg::Vec3d& v)
     return QVector3D(static_cast<float>(v.x()),
                      static_cast<float>(v.y()),
                      static_cast<float>(v.z()));
+}
+
+inline QMatrix4x4 matrix(const osg::Matrixd &m)
+{
+    return QMatrix4x4(osg::Matrixf(m).ptr());
+}
+
+inline osg::Matrixd matrix(const QMatrix4x4 &m)
+{
+    return osg::Matrixd(m.constData());
 }
 
 inline osg::Quat quat(const QQuaternion& q)
