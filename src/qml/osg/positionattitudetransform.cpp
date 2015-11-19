@@ -15,7 +15,7 @@
 namespace osg {
 
 PositionAttitudeTransformQtQml::Index::Index(PositionAttitudeTransform *transform) :
-    GroupQtQml::Index(transform)
+    TransformQtQml::Index(transform)
 {
 }
 
@@ -23,7 +23,7 @@ void PositionAttitudeTransformQtQml::Index::classBegin()
 {
     if(!o(this)) setO(new PositionAttitudeTransform);
 
-    GroupQtQml::Index::classBegin();
+    TransformQtQml::Index::classBegin();
 }
 
 void PositionAttitudeTransformQtQml::Index::setPosition(const QVector3D &pos)
@@ -71,12 +71,12 @@ void PositionAttitudeTransformQtQml::Index::setPivotPoint(const QVector3D &pivot
 }
 
 PositionAttitudeTransformQtQml::PositionAttitudeTransformQtQml(QObject *parent) :
-  GroupQtQml(parent)
+  TransformQtQml(parent)
 {
 }
 
 PositionAttitudeTransformQtQml::PositionAttitudeTransformQtQml(PositionAttitudeTransformQtQml::Index *index, QObject *parent) :
-  GroupQtQml(index, parent)
+  TransformQtQml(index, parent)
 {
 }
 
@@ -86,11 +86,11 @@ void PositionAttitudeTransformQtQml::classBegin()
 
     i(this)->setQ(this);
 
-    GroupQtQml::classBegin();
+    TransformQtQml::classBegin();
 }
 
 /*!
-   \qmlproperty vector3d osg::PositionAttitudeTransform::center
+   \qmlproperty vector3d osg::PositionAttitudeTransform::position
 
    Position
  */

@@ -1,7 +1,7 @@
 #ifndef _OSG_POSITIONATTITUDETRANSFORM_QTQML_
 #define _OSG_POSITIONATTITUDETRANSFORM_QTQML_ 1
 
-#include <osg/GroupQtQml>
+#include <osg/TransformQtQml>
 
 #include <QVector3D>
 #include <QQuaternion>
@@ -10,7 +10,7 @@ namespace osg {
 
 class PositionAttitudeTransform;
 
-class OSGQTQML_EXPORT PositionAttitudeTransformQtQml : public GroupQtQml
+class OSGQTQML_EXPORT PositionAttitudeTransformQtQml : public TransformQtQml
 {
   Q_OBJECT
 

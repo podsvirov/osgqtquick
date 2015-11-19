@@ -7,7 +7,7 @@
 
 namespace osg {
 
-class OSGQTQML_EXPORT PositionAttitudeTransformQtQml::Index : public GroupQtQml::Index
+class OSGQTQML_EXPORT PositionAttitudeTransformQtQml::Index : public TransformQtQml::Index
 {
 public:
     typedef PositionAttitudeTransform OType;
