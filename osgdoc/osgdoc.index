@@ -7,5 +7,5 @@
             <contents name="openscenegraph-qml-modules" title="OpenSceneGraph QML modules" level="1"/>
         </page>
     </namespace>
-    <page name="osgqmlmodules" href="osgqmlmodules.html" access="public" status="commendable" location="groups.qdoc" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/doc/src/osgdoc/groups.qdoc" lineno="1" subtype="group" seen="true" members="osg,osgDB,osgGA,osgText,osgViewer" title="\OSG QML Modules" fulltitle="\OSG QML Modules" subtitle=""/>
+    <page name="osgqmlmodules" href="osgqmlmodules.html" access="public" status="commendable" location="groups.qdoc" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/doc/src/osgdoc/groups.qdoc" lineno="1" subtype="group" seen="true" members="osg,osgDB,osgGA,osgManipulator,osgText,osgViewer" title="\OSG QML Modules" fulltitle="\OSG QML Modules" subtitle=""/>
 </INDEX>
