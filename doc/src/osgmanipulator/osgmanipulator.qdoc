@@ -1,0 +1,21 @@
+/*!
+   \qmlmodule osgManipulator 2.0
+   \title osgManipulator
+   \brief Contains QML types for osgManipulator library.
+   \ingroup osgqmlmodules
+
+   The osgManipulator module extends the core scene graph to support 3D
+   interactive manipulators
+
+   \chapter Importing
+
+   To use the types in this module, import the module with the following line:
+
+   \qml
+   import osgManipulator 2.0
+   \endqml
+
+   \chapter Types
+
+   The following types are provided:
+ */

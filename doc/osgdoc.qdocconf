@@ -9,5 +9,6 @@ sourcedirs  = src/osgdoc
 indexes   = html/osg/osg.index \
             html/osgdb/osgdb.index \
             html/osgga/osgga.index \
+            html/osgmanipulator/osgmanipulator.index \
             html/osgtext/osgtext.index \
             html/osgviewer/osgviewer.index

@@ -10,6 +10,7 @@ find_package(OpenSceneGraph 3.0 REQUIRED
   osgQt
   osgDB
   osgGA
+  osgManipulator
   osgUtil
   osgViewer
   osgText)

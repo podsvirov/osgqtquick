@@ -36,6 +36,9 @@ META_Node(osgGA FlightManipulator)
 META_Node(osgGA OrbitManipulator)
 META_Node(osgGA NodeTrackerManipulator)
 
+META_Node(osgManipulator Dragger)
+META_Node(osgManipulator RotateSphereDragger)
+
 META_Node(osgText Style)
 META_Node(osgText Font)
 META_Node(osgText FontImplementation)
@@ -85,6 +88,8 @@ list(APPEND _srcs
   osgga/cameramanipulator.cpp
   osgga/trackballmanipulator.cpp
   osgga/module.cpp
+# osgManipulator
+  osgmanipulator/module.cpp
 # osgText
   osgtext/module.cpp
 # osgQt
@@ -125,6 +130,7 @@ target_link_libraries(osgQtQml
   ${OSGQT_LIBRARIES}
   ${OSGDB_LIBRARIES}
   ${OSGGA_LIBRARIES}
+  ${OSGMANIPULATOR_LIBRARIES}
   ${OSGTEXT_LIBRARIES}
   ${OSGVIEWER_LIBRARIES}
   ${OSGEARTHUTIL_LIBRARY}
@@ -281,6 +287,12 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/osgGA/TrackballManipulatorQtQmlIndex"
   "#include \"${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulatorindex.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgga/trackballmanipulatorindex.hpp"
   DESTINATION "include/osgGA" RENAME "TrackballManipulatorQtQmlIndex")
+
+
+file(WRITE "${CMAKE_BINARY_DIR}/include/osgManipulator/ModuleQtQml"
+  "#include \"${CMAKE_CURRENT_LIST_DIR}/osgmanipulator/module.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgmanipulator/module.hpp"
+  DESTINATION "include/osgManipulator" RENAME "ModuleQtQml")
 
 
 file(WRITE "${CMAKE_BINARY_DIR}/include/osgText/ModuleQtQml"

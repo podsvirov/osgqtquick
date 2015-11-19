@@ -9,6 +9,7 @@
 #include <osg/ModuleQtQml>
 #include <osgDB/ModuleQtQml>
 #include <osgGA/ModuleQtQml>
+#include <osgManipulator/ModuleQtQml>
 #include <osgText/ModuleQtQml>
 #include <osgViewer/ModuleQtQml>
 #include <osgViewer/ModuleQtQuick>
@@ -40,6 +41,7 @@ int main(int argc, char *argv[])
     osg::registerQtQmlTypes("osg");
     osgDB::registerQtQmlTypes("osgDB");
     osgGA::registerQtQmlTypes("osgGA");
+    osgManipulator::registerQtQmlTypes("osgManipulator");
     osgText::registerQtQmlTypes("osgText");
     osgViewer::registerQtQmlTypes("osgViewer");
     osgViewer::registerQtQuickTypes("osgViewer");

@@ -1,0 +1,41 @@
+#ifndef _OSGMANIPULATOR_DRAGGER_QTQML_
+#define _OSGMANIPULATOR_DRAGGER_QTQML_ 1
+
+#include <osg/MatrixTransformQtQml>
+
+#include <QMatrix4x4>
+
+namespace osgManipulator {
+
+class Dragger;
+
+class OSGQTQML_EXPORT DraggerQtQml : public osg::MatrixTransformQtQml
+{
+  Q_OBJECT
+
+  Q_PROPERTY(bool draggerActive READ getDraggerActive WRITE setDraggerActive NOTIFY draggerActiveChanged)
+
+public:
+  class Index;
+
+  DraggerQtQml(QObject *parent = 0);
+  DraggerQtQml(Index *, QObject *parent = 0);
+
+  void classBegin();
+
+  Q_INVOKABLE bool getDraggerActive() const;
+  Q_INVOKABLE void setDraggerActive(bool draggerActive);
+
+  Q_INVOKABLE void setupDefaultGeometry();
+
+  Dragger* asDragger();
+
+  static DraggerQtQml* fromDragger(Dragger *dragger, QObject *parent = 0);
+
+signals:
+  void draggerActiveChanged(bool draggerActive) const;
+};
+
+}
+
+#endif // _OSGMANIPULATOR_DRAGGER_QTQML_

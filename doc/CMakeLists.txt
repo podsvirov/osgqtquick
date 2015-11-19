@@ -22,7 +22,7 @@ endif()
 if(DEFINED _DOC_INDEXES)
   unset(_DOC_INDEXES)
 endif()
-foreach(_DOC_MODULE osg osgdb osgga osgtext osgviewer osgdoc)
+foreach(_DOC_MODULE osg osgdb osgga osgmanipulator osgtext osgviewer osgdoc)
     set(_DOC_INDEX "${_DOCS_DIR}/${_DOC_MODULE}/${_DOC_MODULE}.index")
     add_custom_target(osgDoc_${_DOC_MODULE}
       COMMAND Qt5::qdoc ${_DOC_MODULE}.qdocconf

@@ -1,0 +1,15 @@
+include(config.qdocconf)
+
+project = osgManipulator
+description = osgManipulator Module
+
+navigation.landingpage = "osgManipulator"
+
+headerdirs = ../src/qml/osgmanipulator
+sourcedirs = src/osgmanipulator \
+             ../src/qml/osgmanipulator
+
+outputdir = html/osgmanipulator
+
+indexes   = html/osgdoc/osgdoc.index \
+            html/osg/osg.index
