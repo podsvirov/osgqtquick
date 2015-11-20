@@ -20,7 +20,8 @@
 namespace osgDB {
 
 LoaderQtQml::Index::Index(osg::Group *group) :
-    GroupQtQml::Index(group)
+    GroupQtQml::Index(group),
+    status(LoaderQtQml::Null)
 {
 }
 
@@ -41,12 +42,16 @@ void LoaderQtQml::Index::setUrl(const QUrl &url)
 
     this->url = url;
 
+    emit q(this)->sourceChanged(this->url);
+
     Loader *loader = new Loader(this->url);
     connect(loader, SIGNAL(loaded(const QUrl&, osg::Node*)), q(this), SLOT(nodeLoadingDone(const QUrl &, osg::Node*)));
     connect(loader, SIGNAL(finished()), loader, SLOT(deleteLater()));
     loader->start();
 
-    emit q(this)->sourceChanged(this->url);
+    status = LoaderQtQml::Loading;
+
+    emit q(this)->statusChanged(status);
 }
 
 osg::NodeQtQml *LoaderQtQml::Index::getNode()
@@ -60,16 +65,21 @@ void LoaderQtQml::Index::acceptNode(const QUrl &url, osg::Node *node)
 
     if(this->node.valid())
     {
+        this->status = LoaderQtQml::Error;
         o(this)->removeChild(this->node.get());
     }
 
     if(node)
     {
+        this->status = LoaderQtQml::Ready;
         o(this)->addChild(node);
     }
 
     this->node = node;
+
     emit q(this)->nodeChanged(getNode());
+
+    emit q(this)->statusChanged(this->status);
 }
 
 LoaderQtQml::LoaderQtQml(QObject *parent) :
@@ -91,11 +101,6 @@ void LoaderQtQml::classBegin()
     GroupQtQml::classBegin();
 }
 
-void LoaderQtQml::setSource(const QUrl &url)
-{
-    i(this)->setUrl(url);
-}
-
 /*!
    \qmlproperty url osgDB::Loader::source
 
@@ -107,6 +112,11 @@ QUrl LoaderQtQml::getSource()
     return i(this)->url;
 }
 
+void LoaderQtQml::setSource(const QUrl &url)
+{
+    i(this)->setUrl(url);
+}
+
 /*!
    \qmlproperty osg::Node osgDB::Loader::node
 
@@ -116,6 +126,23 @@ QUrl LoaderQtQml::getSource()
 osg::NodeQtQml *LoaderQtQml::getNode()
 {
     return i(this)->getNode();
+}
+
+/*!
+   \qmlproperty enumeration osgDB::Loader::status
+
+   This property holds the status of Node loading.  It can be one of:
+   \list
+   \li Loader.Null - the node source has not been set
+   \li Loader.Loading - the node source is currently being loaded
+   \li Loader.Ready - the node source has been loaded
+   \li Loader.Error - an error occurred while loading the node source
+   \endlist
+ */
+
+LoaderQtQml::Status LoaderQtQml::getStatus()
+{
+    return i(this)->status;
 }
 
 LoaderQtQml *LoaderQtQml::fromGroup(osg::Group *group, QObject *parent)

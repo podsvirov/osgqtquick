@@ -42,6 +42,7 @@ protected:
 
     QUrl url;
     osg::ref_ptr<osg::Node> node;
+    LoaderQtQml::Status status;
 };
 
 class LoaderQtQml::Index::Loader : public QThread

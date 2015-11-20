@@ -26,6 +26,23 @@ Rectangle {
             console.log("loader.node: " + getNode())
             view.cameraManipulator.home()
         }
+        onStatusChanged: {
+            switch(status)
+            {
+            case OSGDB.Loader.Null:
+                statusLabel.text = "";
+                break;
+            case OSGDB.Loader.Loading:
+                statusLabel.text = "Loading...";
+                break;
+            case OSGDB.Loader.Ready:
+                statusLabel.text = "Ready";
+                break;
+            case OSGDB.Loader.Error:
+                statusLabel.text = "Error";
+                break;
+            }
+        }
     }
 
     OSGEarthUtil.EarthManipulator {
@@ -75,6 +92,9 @@ Rectangle {
         Button {
             text: "VerticalScale"
             onClicked: loader.source = "vertical_scale.earth"
+        }
+        Label {
+            id: statusLabel
         }
         anchors {
             bottom: parent.bottom
