@@ -7,7 +7,7 @@
 
 /*!
    \qmltype Dragger
-   \inherits osg::MatrixMatrixTransform
+   \inherits osg::MatrixTransform
    \inqmlmodule osgManipulator
    \brief Base type for draggers
  */
