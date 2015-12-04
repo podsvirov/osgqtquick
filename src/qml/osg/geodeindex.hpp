@@ -3,11 +3,11 @@
 
 #include <osg/GeodeQtQml>
 
-#include <osg/NodeQtQmlIndex>
+#include <osg/GroupQtQmlIndex>
 
 namespace osg {
 
-class OSGQTQML_EXPORT GeodeQtQml::Index : public NodeQtQml::Index
+class OSGQTQML_EXPORT GeodeQtQml::Index : public GroupQtQml::Index
 {
 public:
     typedef Geode OType;

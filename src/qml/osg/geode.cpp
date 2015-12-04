@@ -9,15 +9,15 @@
 
 /*!
    \qmltype Geode
-   \inherits osg::Node
+   \inherits Group
    \inqmlmodule osg
    \brief Geometry node
  */
 
 namespace osg {
 
-GeodeQtQml::Index::Index(Geode *group) :
-    NodeQtQml::Index(group),
+GeodeQtQml::Index::Index(Geode *geode) :
+    GroupQtQml::Index(geode),
     _completeInfo(0)
 {
 }
@@ -31,16 +31,16 @@ void GeodeQtQml::Index::classBegin()
 {
     if(!o(this)) setO(new Geode);
 
-    NodeQtQml::Index::classBegin();
+    GroupQtQml::Index::classBegin();
 }
 
 GeodeQtQml::GeodeQtQml(QObject *parent) :
-  NodeQtQml(parent)
+  GroupQtQml(parent)
 {
 }
 
 GeodeQtQml::GeodeQtQml(GeodeQtQml::Index *index, QObject *parent) :
-  NodeQtQml(index, parent)
+  GroupQtQml(index, parent)
 {
 }
 
@@ -50,7 +50,7 @@ void GeodeQtQml::classBegin()
 
     i(this)->setQ(this);
 
-    NodeQtQml::classBegin();
+    GroupQtQml::classBegin();
 }
 
 void GeodeQtQml::componentComplete()
@@ -153,6 +153,7 @@ GeodeQtQml *GeodeQtQml::fromGeode(Geode *group, QObject *parent)
 
     GeodeQtQml *result = new GeodeQtQml(new Index(group), parent);
     result->classBegin();
+    result->componentComplete();
     return result;
 }
 

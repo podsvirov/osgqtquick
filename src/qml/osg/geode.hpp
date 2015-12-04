@@ -1,7 +1,7 @@
 #ifndef _OSG_GEODE_QTQML_
 #define _OSG_GEODE_QTQML_ 1
 
-#include <osg/NodeQtQml>
+#include <osg/GroupQtQml>
 #include <osg/DrawableQtQml>
 
 #include <QQmlListProperty>
@@ -10,7 +10,7 @@ namespace osg {
 
 class Geode;
 
-class OSGQTQML_EXPORT GeodeQtQml : public NodeQtQml
+class OSGQTQML_EXPORT GeodeQtQml : public GroupQtQml
 {
   Q_OBJECT
 
