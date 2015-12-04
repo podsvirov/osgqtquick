@@ -1,13 +1,13 @@
 #ifndef _OSG_DRAWABLE_QTQML_INDEX_
 #define _OSG_DRAWABLE_QTQML_INDEX_ 1
 
-#include <osg/ObjectQtQmlIndex>
+#include <osg/NodeQtQmlIndex>
 
 #include <osg/DrawableQtQml>
 
 namespace osg {
 
-class OSGQTQML_EXPORT DrawableQtQml::Index : public ObjectQtQml::Index
+class OSGQTQML_EXPORT DrawableQtQml::Index : public NodeQtQml::Index
 {
 public:
     typedef Drawable OType;
@@ -16,6 +16,8 @@ public:
 
 public:
     Index(Drawable *o = 0);
+
+    void classBegin();
 };
 
 }

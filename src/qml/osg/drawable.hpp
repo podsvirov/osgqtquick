@@ -1,13 +1,13 @@
 #ifndef _OSG_DRAWABLE_QTQML_
 #define _OSG_DRAWABLE_QTQML_ 1
 
-#include <osg/ObjectQtQml>
+#include <osg/NodeQtQml>
 
 namespace osg {
 
 class Drawable;
 
-class OSGQTQML_EXPORT DrawableQtQml : public osg::ObjectQtQml
+class OSGQTQML_EXPORT DrawableQtQml : public osg::NodeQtQml
 {
   Q_OBJECT
 

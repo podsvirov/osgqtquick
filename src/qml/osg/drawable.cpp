@@ -7,7 +7,7 @@
 
 /*!
    \qmltype Drawable
-   \inherits Object
+   \inherits Node
    \inqmlmodule osg
    \brief Base type for drawable geometry
  */
@@ -15,17 +15,22 @@
 namespace osg {
 
 DrawableQtQml::Index::Index(Drawable *drawable) :
-    ObjectQtQml::Index(drawable)
+    NodeQtQml::Index(drawable)
 {
 }
 
+void DrawableQtQml::Index::classBegin()
+{
+    // Do nothing. Drawable is Uncreatable.
+}
+
 DrawableQtQml::DrawableQtQml(QObject *parent) :
-  ObjectQtQml(parent)
+  NodeQtQml(parent)
 {
 }
 
 DrawableQtQml::DrawableQtQml(DrawableQtQml::Index *index, QObject *parent) :
-  ObjectQtQml(index, parent)
+  NodeQtQml(index, parent)
 {
 }
 
@@ -35,7 +40,7 @@ void DrawableQtQml::classBegin()
 
     i(this)->setQ(this);
 
-    osgQtQml::Object::classBegin();
+    NodeQtQml::classBegin();
 }
 
 Drawable *DrawableQtQml::drawable()
@@ -54,6 +59,7 @@ DrawableQtQml *DrawableQtQml::fromDrawable(Drawable *drawable, QObject *parent)
 
     DrawableQtQml *result = new DrawableQtQml(new Index(drawable), parent);
     result->classBegin();
+    result->componentComplete();
     return result;
 }
 
