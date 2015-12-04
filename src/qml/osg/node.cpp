@@ -42,7 +42,7 @@ void NodeQtQml::classBegin()
 
     i(this)->setQ(this);
 
-    osgQtQml::Object::classBegin();
+    ObjectQtQml::classBegin();
 }
 
 Node *NodeQtQml::node()
