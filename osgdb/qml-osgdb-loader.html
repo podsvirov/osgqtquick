@@ -46,6 +46,7 @@ osgQtQuick 2.0 Reference Documentation</li>
 <ul>
 <li class="fn"><b><b><a href="qml-osgdb-loader.html#node-prop">node</a></b></b> : osg::Node</li>
 <li class="fn"><b><b><a href="qml-osgdb-loader.html#source-prop">source</a></b></b> : url</li>
+<li class="fn"><b><b><a href="qml-osgdb-loader.html#status-prop">status</a></b></b> : enumeration</li>
 </ul>
 <!-- $$$Loader-description -->
 <a name="details"></a>
@@ -60,6 +61,16 @@ osgQtQuick 2.0 Reference Documentation</li>
 <!-- $$$source -->
 <div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="source-prop"></a><span class="name">source</span> : <span class="type">url</span></p></td></tr></table></div><div class="qmldoc"><p>This property holds the URL of the <a href="../osg/qml-osg-node.html">Node</a> to instantiate.</p>
 </div></div><!-- @@@source -->
+<br/>
+<!-- $$$status -->
+<div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="status-prop"></a><span class="name">status</span> : <span class="type">enumeration</span></p></td></tr></table></div><div class="qmldoc"><p>This property holds the status of Node loading. It can be one of:</p>
+<ul>
+<li>Loader.Null - the node source has not been set</li>
+<li>Loader.Loading - the node source is currently being loaded</li>
+<li>Loader.Ready - the node source has been loaded</li>
+<li>Loader.Error - an error occurred while loading the node source</li>
+</ul>
+</div></div><!-- @@@status -->
 <br/>
 </body>
 </html>
