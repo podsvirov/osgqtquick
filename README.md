@@ -30,6 +30,11 @@ or
 
     pacman -S mingw-w64-x86_64-osgQtQuick
 
+## Dependencies
+
+* Qt >= 5.0.0
+* OpenSceneGraph >= 3.3.2
+
 ## Related Links
 
 * The wiki [pages](https://github.com/podsvirov/osgqtquick/wiki/osgQtQuick-2.0).
