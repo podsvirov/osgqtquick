@@ -40,3 +40,8 @@ or
 * The wiki [pages](https://github.com/podsvirov/osgqtquick/wiki/osgQtQuick-2.0).
 * The library [page](http://inqlude.org/libraries/osgqtquick.html) at [inqlude](http://inqlude.org/) project.
 * The discussion [thread](http://forum.qt.io/topic/58737) at Qt [forum](http://forum.qt.io).
+
+## Similar Projects
+
+* [osgqml](https://github.com/rickyviking/qmlosg) - Integration test of osg and qt quick + qml framework
+* [QtQuick2OSGItem](https://bitbucket.org/leon_manukyan/qtquick2osgitem) - small package allowing to embed OpenSceneGraph scenes as visual items in Qt Quick 2 applications
