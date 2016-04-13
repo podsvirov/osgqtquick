@@ -35,6 +35,12 @@ or
 * Qt >= 5.0.0
 * OpenSceneGraph >= 3.3.2
 
+## Rendering Limitations
+
+The osgQtQuick is now only supports single-threaded rendering.
+If your application crash on startup or resize the window,
+try to set a environment variable "QSG_RENDER_LOOP" to the value of "basic" or "windows".
+
 ## Related Links
 
 * The wiki [pages](https://github.com/podsvirov/osgqtquick/wiki/osgQtQuick-2.0).
