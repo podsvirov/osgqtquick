@@ -77,21 +77,29 @@ Rectangle {
     }
 
     RowLayout {
-        Button {
-            text: "GDAL"
-            onClicked: loader.source = "gdal_tiff.earth"
-        }
-        Button {
-            text: "OpenStreetMap"
-            onClicked: loader.source = "openstreetmap.earth"
-        }
-        Button {
-            text: "ReadyMap"
-            onClicked: loader.source = "readymap-osm.earth"
-        }
-        Button {
-            text: "VerticalScale"
-            onClicked: loader.source = "vertical_scale.earth"
+        ComboBox {
+            model: [
+                "GDAL", "Lines", "Polygons", "Labels",
+                "OpenStreetMap", "ReadyMap", "VerticalScale"
+            ]
+            onActivated: {
+                switch (index) {
+                case 0: loader.source = "gdal_tiff.earth"
+                    break;
+                case 1: loader.source = "feature_draped_lines.earth"
+                    break;
+                case 2: loader.source = "feature_draped_polygons.earth"
+                    break;
+                case 3: loader.source = "feature_labels.earth"
+                    break;
+                case 4: loader.source = "openstreetmap.earth"
+                    break;
+                case 5: loader.source = "readymap-osm.earth"
+                    break;
+                case 6: loader.source = "vertical_scale.earth"
+                    break;
+                }
+            }
         }
         Label {
             id: statusLabel
