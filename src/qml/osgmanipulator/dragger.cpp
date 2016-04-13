@@ -39,6 +39,48 @@ void DraggerQtQml::classBegin()
 }
 
 /*!
+   \qmlproperty bool osgManipulator::Dragger::handleEvents
+
+   Handle events
+ */
+
+bool DraggerQtQml::getHandleEvents() const
+{
+    return o(this)->getHandleEvents();
+}
+
+void DraggerQtQml::setHandleEvents(bool handleEvents)
+{
+    if(handleEvents == getHandleEvents()) return;
+
+    o(this)->setHandleEvents(handleEvents);
+
+    emit handleEventsChanged(handleEvents);
+}
+
+/*!
+   \qmlmethod void osgManipulator::Dragger::addTransformUpdating(osg::MatrixTransform transform)
+
+   Add \a transform updating
+ */
+
+void DraggerQtQml::addTransformUpdating(osg::MatrixTransformQtQml *transform)
+{
+    o(this)->addTransformUpdating(transform->asMatrixTransform());
+}
+
+/*!
+   \qmlmethod void osgManipulator::Dragger::removeTransformUpdating(osg::MatrixTransform transform)
+
+   Remove \a transform updating
+ */
+
+void DraggerQtQml::removeTransformUpdating(osg::MatrixTransformQtQml *transform)
+{
+    o(this)->removeTransformUpdating(transform->asMatrixTransform());
+}
+
+/*!
    \qmlproperty bool osgManipulator::Dragger::draggerActive
 
    Dragger active

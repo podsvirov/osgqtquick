@@ -13,6 +13,7 @@ class OSGQTQML_EXPORT DraggerQtQml : public osg::MatrixTransformQtQml
 {
   Q_OBJECT
 
+  Q_PROPERTY(bool handleEvents READ getHandleEvents WRITE setHandleEvents NOTIFY handleEventsChanged)
   Q_PROPERTY(bool draggerActive READ getDraggerActive WRITE setDraggerActive NOTIFY draggerActiveChanged)
 
 public:
@@ -22,6 +23,14 @@ public:
   DraggerQtQml(Index *, QObject *parent = 0);
 
   void classBegin();
+
+  Q_INVOKABLE bool getHandleEvents() const;
+  Q_INVOKABLE void setHandleEvents(bool handleEvents);
+
+  Q_INVOKABLE void addTransformUpdating(osg::MatrixTransformQtQml *transform /*,
+                                        int handleCommandMask=DraggerTransformCallback::HANDLE_ALL*/);
+
+  Q_INVOKABLE void removeTransformUpdating(osg::MatrixTransformQtQml *transform);
 
   Q_INVOKABLE bool getDraggerActive() const;
   Q_INVOKABLE void setDraggerActive(bool draggerActive);
@@ -33,6 +42,7 @@ public:
   static DraggerQtQml* fromDragger(Dragger *dragger, QObject *parent = 0);
 
 signals:
+  void handleEventsChanged(bool handleEvents) const;
   void draggerActiveChanged(bool draggerActive) const;
 };
 
