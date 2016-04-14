@@ -88,7 +88,8 @@ osgGA::CameraManipulatorQtQml *ViewQtQuick::Index::getCameraManipulator()
 
 void ViewQtQuick::Index::setCameraManipulator(osgGA::CameraManipulatorQtQml *manipulator)
 {
-    o(this)->setCameraManipulator(manipulator->cameraManipulator());
+    o(this)->setCameraManipulator(manipulator ? manipulator->cameraManipulator()
+                                              : 0);
 }
 
 void ViewQtQuick::Index::classBegin()
