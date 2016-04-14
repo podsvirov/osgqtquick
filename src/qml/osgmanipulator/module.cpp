@@ -2,6 +2,7 @@
 
 #include "draggerindex.hpp"
 #include "rotatespheredraggerindex.hpp"
+#include "tabboxdraggerindex.hpp"
 
 #include <osgQtQuick/Version>
 #include <QtQml>
@@ -19,6 +20,10 @@ void registerQtQmlTypes(const char *uri)
     qmlRegisterType<RotateSphereDraggerQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "RotateSphereDragger");
+
+    qmlRegisterType<TabBoxDraggerQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "TabBoxDragger");
 }
 
 }
