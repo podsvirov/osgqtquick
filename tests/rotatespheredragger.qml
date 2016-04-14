@@ -12,9 +12,10 @@ import osgViewer      2.0 as OSGViewer
 
 // Root item - 3D scene view
 OSGViewer.View {
+    id: view
     width: 640; height: 480
     focus: true
-    cameraManipulator: OSGGA.TrackballManipulator {}
+    cameraManipulator: OSGGA.TrackballManipulator { id: manipulator}
     sceneData: OSG.Group {
         OSG.Geode {
             OSG.ShapeDrawable {
@@ -37,16 +38,36 @@ OSGViewer.View {
         }
         OSGManipulator.RotateSphereDragger {
             id: dragger
-            handleEvents: true
-            draggerActive: true
+            //handleEvents: true
+            //draggerActive: true
             color: "lightgreen"
             pickColor: "lightblue"
             Component.onCompleted: {
-                addTransformUpdating(transform)
+                //addTransformUpdating(transform)
                 setupDefaultGeometry()
             }
         }
     }
+
+    RowLayout {
+        Button {
+            text: "Dragger"
+            onClicked: {
+                view.cameraManipulator = null
+                dragger.addTransformUpdating(transform)
+                dragger.handleEvents = true
+            }
+        }
+        Button {
+            text: "Manipulator"
+            onClicked: {
+                view.cameraManipulator = manipulator
+                dragger.removeTransformUpdating(transform)
+                dragger.handleEvents = false
+            }
+        }
+    }
+
     Component.onCompleted: {
         cameraManipulator.home()
     }
