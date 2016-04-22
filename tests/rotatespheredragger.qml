@@ -38,32 +38,13 @@ OSGViewer.View {
         }
         OSGManipulator.RotateSphereDragger {
             id: dragger
-            //handleEvents: true
+            handleEvents: true
             //draggerActive: true
             color: "lightgreen"
             pickColor: "lightblue"
             Component.onCompleted: {
-                //addTransformUpdating(transform)
+                addTransformUpdating(transform)
                 setupDefaultGeometry()
-            }
-        }
-    }
-
-    RowLayout {
-        Button {
-            text: "Dragger"
-            onClicked: {
-                view.cameraManipulator = null
-                dragger.addTransformUpdating(transform)
-                dragger.handleEvents = true
-            }
-        }
-        Button {
-            text: "Manipulator"
-            onClicked: {
-                view.cameraManipulator = manipulator
-                dragger.removeTransformUpdating(transform)
-                dragger.handleEvents = false
             }
         }
     }
