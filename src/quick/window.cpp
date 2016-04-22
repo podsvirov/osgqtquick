@@ -37,6 +37,9 @@ Window::Window(QQuickWindow *window) :
     d.viewer->setThreadingModel(osgViewer::ViewerBase::SingleThreaded);
     // disable the default setting of viewer.done() by pressing Escape.
     d.viewer->setKeyEventSetsDone(0);
+
+    // Handle window events
+    window->installEventFilter(this);
 }
 
 Window::~Window()
@@ -62,6 +65,17 @@ void Window::frame()
     QOpenGLContext::currentContext()->functions()->glUseProgram(0);
 
     d.viewer->frame();
+}
+
+bool Window::eventFilter(QObject *watched, QEvent *event)
+{
+    if(event->type() == QEvent::Resize)
+    {
+        QSize size = static_cast<QResizeEvent*>(event)->size();
+        d.context->resizedImplementation(0, 0, size.width(), size.height());
+    }
+
+    return QObject::eventFilter(watched, event);
 }
 
 void Window::timerEvent(QTimerEvent *event)

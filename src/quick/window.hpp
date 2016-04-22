@@ -27,6 +27,7 @@ public slots:
     void frame(); // frame
 
 protected:
+    bool eventFilter(QObject *watched, QEvent *event);
     void timerEvent(QTimerEvent *event);
 
 private:
