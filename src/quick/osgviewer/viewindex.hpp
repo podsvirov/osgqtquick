@@ -72,6 +72,7 @@ private:
     QOpenGLFramebufferObject *fbo;
     QSGTexture *texture;
     QSGSimpleTextureNode *textureNode;
+    osg::ref_ptr<osg::GraphicsContext> context;
     osg::ref_ptr<PreDraw> preDraw;
     osg::ref_ptr<PostDraw> postDraw;
 };

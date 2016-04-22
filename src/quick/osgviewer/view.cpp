@@ -99,6 +99,11 @@ void ViewQtQuick::Index::classBegin()
     q(this)->setAcceptHoverEvents(true);
     q(this)->setAcceptedMouseButtons(Qt::AllButtons);
 
+    osgGA::GUIEventAdapter *ea = o(this)->getEventQueue()->getCurrentEventState();
+    ea->setMouseYOrientation(osgGA::GUIEventAdapter::Y_INCREASING_UPWARDS);
+
+    context = new osgViewer::GraphicsWindowEmbedded(0, 0, 1, 1);
+
     preDraw = new PreDraw(this);
     o(this)->getCamera()->setPreDrawCallback(preDraw.get());
 
@@ -135,8 +140,8 @@ int ViewQtQuick::Index::mouseButton(QMouseEvent *event)
 
 QPointF ViewQtQuick::Index::mousePoint(QMouseEvent *event)
 {
-    qreal x = 2.0 * (event->x() - q(this)->width() / 2) / q(this)->width();
-    qreal y = 2.0 * (event->y() - q(this)->height() / 2) / q(this)->height();
+    qreal x = event->x();
+    qreal y = q(this)->height() - event->y();
 
     return QPointF(x, y);
 }
@@ -207,6 +212,12 @@ void ViewQtQuick::Index::updateFBO()
 void ViewQtQuick::Index::updateViewport()
 {
     QSize size(q(this)->boundingRect().size().toSize());
+    context->resizedImplementation(0, 0, size.width(), size.height());
+    osgGA::GUIEventAdapter *ea = o(this)->getEventQueue()->getCurrentEventState();
+    ea->setXmin(0);
+    ea->setXmax(size.width());
+    ea->setYmin(0);
+    ea->setYmax(size.height());
     o(this)->getCamera()->setViewport(0, 0, size.width(), size.height());
     o(this)->getCamera()->setProjectionMatrixAsPerspective(30.0f, static_cast<double>(size.width())/static_cast<double>(size.height()), 1.0f, 10000.0f );
     if (texture && texture->textureSize() != size) {
@@ -216,7 +227,8 @@ void ViewQtQuick::Index::updateViewport()
 
 void ViewQtQuick::Index::acceptWindow(osgQtQuick::Window *window)
 {
-    o(this)->getCamera()->setGraphicsContext(window->graphicsContext());
+    o(this)->getCamera()->setGraphicsContext(context);
+    o(this)->getEventQueue()->setGraphicsContext(context);
     updateViewport();
     window->viewer()->addView(o(this));
 }
