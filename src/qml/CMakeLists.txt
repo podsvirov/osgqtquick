@@ -53,6 +53,7 @@ META_Node(osgGA TrackballManipulator)
 
 META_Node(osgManipulator Dragger)
 META_Node(osgManipulator RotateSphereDragger)
+META_Node(osgManipulator CompositeDragger)
 META_Node(osgManipulator TabBoxDragger)
 
 META_Node(osgText Style)
