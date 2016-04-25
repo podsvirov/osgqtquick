@@ -9,15 +9,18 @@
 
 /*!
    \qmltype TabBoxDragger
-   \inherits Dragger
+   \inherits CompositeDragger
    \inqmlmodule osgManipulator
-   \brief Dragger for performing 3D rotation on a sphere
+   \brief Consists of 6 TabPlaneDraggers to form a box dragger
+
+   TabBoxDragger consists of 6 TabPlaneDraggers to form a box dragger that
+   performs translation and scaling.
  */
 
 namespace osgManipulator {
 
 TabBoxDraggerQtQml::Index::Index(TabBoxDragger *dragger) :
-    DraggerQtQml::Index(dragger)
+    CompositeDraggerQtQml::Index(dragger)
 {
 }
 
@@ -25,16 +28,16 @@ void TabBoxDraggerQtQml::Index::classBegin()
 {
     if(!o(this)) setO(new TabBoxDragger);
 
-    DraggerQtQml::Index::classBegin();
+    CompositeDraggerQtQml::Index::classBegin();
 }
 
 TabBoxDraggerQtQml::TabBoxDraggerQtQml(QObject *parent) :
-  DraggerQtQml(parent)
+  CompositeDraggerQtQml(parent)
 {
 }
 
 TabBoxDraggerQtQml::TabBoxDraggerQtQml(TabBoxDraggerQtQml::Index *index, QObject *parent) :
-  DraggerQtQml(index, parent)
+  CompositeDraggerQtQml(index, parent)
 {
 }
 
@@ -44,7 +47,7 @@ void TabBoxDraggerQtQml::classBegin()
 
     i(this)->setQ(this);
 
-    DraggerQtQml::classBegin();
+    CompositeDraggerQtQml::classBegin();
 }
 
 /*!

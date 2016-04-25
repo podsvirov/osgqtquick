@@ -3,11 +3,11 @@
 
 #include <osgManipulator/TabBoxDraggerQtQml>
 
-#include <osgManipulator/DraggerQtQmlIndex>
+#include <osgManipulator/CompositeDraggerQtQmlIndex>
 
 namespace osgManipulator {
 
-class OSGQTQML_EXPORT TabBoxDraggerQtQml::Index : public DraggerQtQml::Index
+class OSGQTQML_EXPORT TabBoxDraggerQtQml::Index : public CompositeDraggerQtQml::Index
 {
 public:
     typedef TabBoxDragger OType;

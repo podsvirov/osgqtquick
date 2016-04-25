@@ -1,7 +1,7 @@
 #ifndef _OSGMANIPULATOR_TABBOXDRAGGER_QTQML_
 #define _OSGMANIPULATOR_TABBOXDRAGGER_QTQML_ 1
 
-#include <osgManipulator/DraggerQtQml>
+#include <osgManipulator/CompositeDraggerQtQml>
 
 #include <QColor>
 
@@ -9,7 +9,7 @@ namespace osgManipulator {
 
 class TabBoxDragger;
 
-class OSGQTQML_EXPORT TabBoxDraggerQtQml : public DraggerQtQml
+class OSGQTQML_EXPORT TabBoxDraggerQtQml : public CompositeDraggerQtQml
 {
   Q_OBJECT
 
