@@ -49,5 +49,5 @@ try to set a environment variable "QSG_RENDER_LOOP" to the value of "basic" or "
 
 ## Similar Projects
 
-* [osgqml](https://github.com/rickyviking/qmlosg) - Integration test of osg and qt quick + qml framework
+* [qmlosg](https://github.com/rickyviking/qmlosg) - Integration test of osg and qt quick + qml framework
 * [QtQuick2OSGItem](https://bitbucket.org/leon_manukyan/qtquick2osgitem) - small package allowing to embed OpenSceneGraph scenes as visual items in Qt Quick 2 applications
