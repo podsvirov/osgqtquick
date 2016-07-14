@@ -3,6 +3,7 @@
 #include "draggerindex.hpp"
 #include "rotatespheredraggerindex.hpp"
 #include "compositedraggerindex.hpp"
+#include "tabplanedraggerindex.hpp"
 #include "tabboxdraggerindex.hpp"
 
 #include <osgQtQuick/Version>
@@ -25,6 +26,10 @@ void registerQtQmlTypes(const char *uri)
     qmlRegisterUncreatableType<CompositeDraggerQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "CompositeDragger", "[osgQtQuick] CompositeDragger is Uncreatable");
+
+    qmlRegisterType<TabPlaneDraggerQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "TabPlaneDragger");
 
     qmlRegisterType<TabBoxDraggerQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
