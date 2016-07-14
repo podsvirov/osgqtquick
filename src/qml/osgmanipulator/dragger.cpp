@@ -100,6 +100,12 @@ void DraggerQtQml::setDraggerActive(bool draggerActive)
     emit draggerActiveChanged(draggerActive);
 }
 
+/*!
+   \qmlmethod void osgManipulator::Dragger::setupDefaultGeometry()
+
+   Setup default geometry for dragger
+ */
+
 void DraggerQtQml::setupDefaultGeometry()
 {
     o(this)->setupDefaultGeometry();
