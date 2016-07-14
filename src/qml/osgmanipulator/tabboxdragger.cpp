@@ -51,9 +51,9 @@ void TabBoxDraggerQtQml::classBegin()
 }
 
 /*!
-   \qmlproperty color osgManipulator::TabBoxDragger::pickColor
+   \qmlproperty color osgManipulator::TabBoxDragger::planeColor
 
-   Pick color
+   Plane color
  */
 
 QColor TabBoxDraggerQtQml::getPlaneColor() const
