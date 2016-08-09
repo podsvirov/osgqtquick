@@ -9,6 +9,7 @@
 
 #include <QOpenGLFramebufferObject>
 #include <QSGSimpleTextureNode>
+#include <QMutex>
 
 namespace osgViewer {
 
@@ -39,6 +40,7 @@ public:
 
 public:
     Index(View *o = 0);
+    ~Index();
 
     osg::NodeQtQml* getSceneData();
     void setSceneData(osg::NodeQtQml *node);
@@ -48,6 +50,8 @@ public:
 
     osgGA::CameraManipulatorQtQml* getCameraManipulator();
     void setCameraManipulator(osgGA::CameraManipulatorQtQml *manipulator);
+
+    void prepareNode();
 
     void classBegin();
 
@@ -64,13 +68,18 @@ protected:
 
     void initFBO();
     void updateFBO();
+    void prepareObject();
     void updateViewport();
     void acceptWindow(osgQtQuick::Window *window);
 
 private:
+    QSize size;
     osgQtQuick::Window *window;
-    QOpenGLFramebufferObject *fbo;
-    QSGTexture *texture;
+    QOpenGLFramebufferObjectFormat format;
+    QOpenGLFramebufferObject *renderFbo, *displayFbo;
+    int needUpdate;
+    QMutex needUpdateFboMutex;
+    QSGTexture *renderTexture, *displayTexture;
     QSGSimpleTextureNode *textureNode;
     osg::ref_ptr<osg::GraphicsContext> context;
     osg::ref_ptr<PreDraw> preDraw;

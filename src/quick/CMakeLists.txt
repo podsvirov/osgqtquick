@@ -4,17 +4,43 @@ else()
     add_definitions(-DOSGQTQUICK_LIBRARY_STATIC)
 endif()
 
+include_directories(${Qt5Quick_PRIVATE_INCLUDE_DIRS})
+
+set(_srcs)
+set(_moc_hdrs)
+
+# Meta node
+macro(META_Node _library _class)
+  string(TOLOWER ${_library} _library_l)
+  string(TOLOWER ${_class} _class_l)
+  file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/${_library}/${_class}QtQuick"
+    CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp\"\n")
+  install(FILES "${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp"
+    DESTINATION "include/${_library}" RENAME "${_class}QtQuick")
+  file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/${_library}/${_class}QtQuickIndex"
+    CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}index.hpp\"\n")
+  install(FILES "${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}index.hpp"
+    DESTINATION "include/${_library}" RENAME "${_class}QtQuickIndex")
+  list(APPEND _srcs "${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.cpp")
+  list(APPEND _moc_hdrs "${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp")
+endmacro(META_Node)
+
+META_Node(osgViewer View)
+
 set(_hdrs
   object.hpp
+  texturenode.hpp
+  renderthread.hpp
   window.hpp
-  osgviewer/view.hpp)
+  ${_moc_hdrs})
 
-set(_srcs
+list(APPEND _srcs
   index.cpp
   object.cpp
+  texturenode.cpp
+  renderthread.cpp
   window.cpp
 # osgViewer
-  osgviewer/view.cpp
   osgviewer/module.cpp
 )
 
@@ -57,6 +83,16 @@ file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/osgQtQuick/Object"
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/object.hpp"
   DESTINATION "include/osgQtQuick" RENAME "Object")
 
+file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/osgQtQuick/TextureNode"
+  CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/texturenode.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/texturenode.hpp"
+  DESTINATION "include/osgQtQuick" RENAME "TextureNode")
+
+file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/osgQtQuick/RenderThread"
+  CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/renderthread.hpp\"\n")
+install(FILES "${CMAKE_CURRENT_LIST_DIR}/renderthread.hpp"
+  DESTINATION "include/osgQtQuick" RENAME "RenderThread")
+
 file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/osgQtQuick/Window"
   CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/window.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/window.hpp"
@@ -66,11 +102,6 @@ file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/osgViewer/ModuleQtQuick"
   CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/osgviewer/module.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgviewer/module.hpp"
   DESTINATION "include/osgViewer" RENAME "ModuleQtQuick")
-
-file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/osgViewer/ViewQtQuick"
-  CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/osgviewer/view.hpp\"\n")
-install(FILES "${CMAKE_CURRENT_LIST_DIR}/osgviewer/view.hpp"
-  DESTINATION "include/osgViewer" RENAME "ViewQtQuick")
 
 set_target_properties(osgQtQuick PROPERTIES
   INTERFACE_LINK_LIBRARIES "osgQtQml")

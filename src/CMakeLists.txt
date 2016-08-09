@@ -16,8 +16,8 @@ find_package(OpenSceneGraph 3.0 REQUIRED
   osgText)
 
 # Qt
-find_package(Qt5 CONFIG REQUIRED
-  COMPONENTS Core Qml Quick)
+find_package(Qt5Quick CONFIG REQUIRED
+  COMPONENTS Private)
 
 if(osgQtQuick_WITH_EARTH)
   find_package(OsgEarth 2.0 MODULE REQUIRED)
@@ -53,7 +53,9 @@ include_directories(
 add_subdirectory(qml)
 add_subdirectory(quick)
 
-add_subdirectory(imports)
+if(osgQtQuick_BUILD_IMPORTS)
+  add_subdirectory(imports)
+endif()
 
 if(osgQtQuick_BUILD_DEBUGGER)
   add_subdirectory(debugger)

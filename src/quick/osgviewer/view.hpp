@@ -34,7 +34,6 @@ public:
   ViewQtQuick(Index *index, QQuickItem *parent = 0);
 
   void classBegin();
-  void componentComplete();
 
   static ViewQtQuick* fromView(View *view, QQuickItem *parent = 0);
 
