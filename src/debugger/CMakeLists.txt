@@ -12,6 +12,8 @@ set(_app_name "osgQtQuickDebugger")
 
 add_executable(${_app_name} main.cpp)
 
+osgqtquick_executable(${_app_name})
+
 qt5_use_modules(${_app_name} Widgets OpenGL Quick)
 
 set_property(TARGET ${_app_name} PROPERTY

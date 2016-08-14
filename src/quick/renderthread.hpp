@@ -2,6 +2,7 @@
 #define _OSGQTQUICK_RENDERTHREAD_ 1
 
 #include <osgQtQuick/Export>
+#include <osgViewer/ViewQtQuick>
 
 #include <QGuiApplication>
 #include <QThread>
@@ -33,9 +34,10 @@ public slots:
 
     void shutDown();
 
+    void acceptNewSize(osgViewer::ViewQtQuick::Index *view, QSize size);
+
 signals:
-    void textureReady(int id, const QSize &size);
-    void renderNextDone();
+    void textureReady();
 
 private:
     QDateTime _latestEndFrameTime;

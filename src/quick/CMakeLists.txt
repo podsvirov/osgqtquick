@@ -29,7 +29,6 @@ META_Node(osgViewer View)
 
 set(_hdrs
   object.hpp
-  texturenode.hpp
   renderthread.hpp
   window.hpp
   ${_moc_hdrs})
@@ -37,7 +36,6 @@ set(_hdrs
 list(APPEND _srcs
   index.cpp
   object.cpp
-  texturenode.cpp
   renderthread.cpp
   window.cpp
 # osgViewer
@@ -82,11 +80,6 @@ file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/osgQtQuick/Object"
   CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/object.hpp\"\n")
 install(FILES "${CMAKE_CURRENT_LIST_DIR}/object.hpp"
   DESTINATION "include/osgQtQuick" RENAME "Object")
-
-file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/osgQtQuick/TextureNode"
-  CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/texturenode.hpp\"\n")
-install(FILES "${CMAKE_CURRENT_LIST_DIR}/texturenode.hpp"
-  DESTINATION "include/osgQtQuick" RENAME "TextureNode")
 
 file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/osgQtQuick/RenderThread"
   CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/renderthread.hpp\"\n")

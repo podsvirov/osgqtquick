@@ -7,6 +7,13 @@ function(osgqtquick_library library_name)
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 endfunction()
 
+# Executable configuration
+function(osgqtquick_executable executable_name)
+  set(target_name ${executable_name})
+  set_target_properties(${target_name} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+endfunction()
+
 # Imported module configuration
 function(osgqtquick_imported_module module_name)
 

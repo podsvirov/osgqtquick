@@ -47,18 +47,23 @@ public:
 
 signals:
     void textureInUse();
+    void acceptNewSize(osgViewer::ViewQtQuick::Index *view, QSize size);
+    void pendingNewTexture();
 
 public slots:
-    void frame(); // frame
-    void ready(); // Context ready for threaded rendering
+    void frame();
+    void ready(); // Context ready for rendering
     void prepareNodes();
     void deleteFbos();
+    void newTexture();
+    void onSceneGraphAboutToStop();
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
     void timerEvent(QTimerEvent *event);
 
 private:
+  friend class osgViewer::ViewQtQuick;
   friend class osgViewer::ViewQtQuick::Index;
 
   struct {
@@ -70,6 +75,7 @@ private:
     int minFrameTime;
     RenderLoopType renderLoopType;
     RenderThread *renderThread;
+    bool newTexture;
   } d;
 };
 

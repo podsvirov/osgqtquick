@@ -1,6 +1,9 @@
-cmake_policy(SET CMP0020 NEW)
-cmake_policy(SET CMP0022 NEW)
-cmake_policy(SET CMP0043 NEW)
+# New policies
+foreach(policy CMP0020 CMP0022 CMP0043)
+  if(POLICY ${policy})
+      cmake_policy(SET ${policy} NEW)
+  endif()
+endforeach()
 
 list(APPEND CMAKE_MODULE_PATH "${osgQtQuick_ROOT_DIR}/cmake")
 

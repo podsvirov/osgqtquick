@@ -1,8 +1,6 @@
 #include "renderthread.hpp"
 #include "window.hpp"
-
-#include <iostream>
-#include <QDebug>
+#include "osgviewer/viewindex.hpp"
 
 namespace osgQtQuick {
 
@@ -18,8 +16,6 @@ RenderThread::RenderThread(Window *window)
 
 void RenderThread::renderNext()
 {
-    std::cout << "          Render\n"; std::cout.flush();
-
     if(_shutDown) return;
 
     context->makeCurrent(surface);
@@ -31,19 +27,14 @@ void RenderThread::renderNext()
     _latestEndFrameTime = endFrameTime;
     unsigned long minFrameTime = static_cast<unsigned long>(window->minFrameTime());
 
-    //qDebug() << "[osgQtQuick] RenderThread frameTime:" << frameTime << "/" << minFrameTime;
     if(frameTime < minFrameTime)
         QThread::msleep(minFrameTime - frameTime);
 
-    //std::cout << "          Render Done\n"; std::cout.flush();
-
-    emit renderNextDone();
+    emit textureReady();
 }
 
 void RenderThread::shutDown()
 {
-    qDebug() << "[osgQtQuick] RenderThread::shutDown";
-
     _shutDown = true;
 
     context->makeCurrent(surface);
@@ -61,6 +52,12 @@ void RenderThread::shutDown()
     // Stop event processing, move the thread to GUI and make sure it is deleted.
     exit();
     moveToThread(QGuiApplication::instance()->thread());
+}
+
+void RenderThread::acceptNewSize(osgViewer::ViewQtQuick::Index *view, QSize size)
+{
+    view->render.size = size;
+    view->render.update = view->render.update % 2 + 2;
 }
 
 }

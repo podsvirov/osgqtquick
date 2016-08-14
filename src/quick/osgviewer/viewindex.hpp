@@ -11,6 +11,11 @@
 #include <QSGSimpleTextureNode>
 #include <QMutex>
 
+namespace osgQtQuick {
+class Window;
+class RenderThread;
+}
+
 namespace osgViewer {
 
 class OSGQTQUICK_EXPORT ViewQtQuick::Index : public osgQtQuick::Index
@@ -65,25 +70,31 @@ protected:
     void mouseButtonRelease(QMouseEvent *event);
     void mouseDoubleButtonPress(QMouseEvent *event);
 
-
-    void initFBO();
-    void updateFBO();
     void prepareObject();
+    void deleteFrameBufferObjects();
     void updateViewport();
     void acceptWindow(osgQtQuick::Window *window);
 
 private:
-    QSize size;
+    friend class osgQtQuick::Window;
+    friend class osgQtQuick::RenderThread;
+
     osgQtQuick::Window *window;
     QOpenGLFramebufferObjectFormat format;
     QOpenGLFramebufferObject *renderFbo, *displayFbo;
-    int needUpdate;
-    QMutex needUpdateFboMutex;
     QSGTexture *renderTexture, *displayTexture;
     QSGSimpleTextureNode *textureNode;
     osg::ref_ptr<osg::GraphicsContext> context;
     osg::ref_ptr<PreDraw> preDraw;
     osg::ref_ptr<PostDraw> postDraw;
+    struct {
+        int update;
+        QSize size;
+    } display;
+    struct {
+        int update;
+        QSize size;
+    } render;
 };
 
 }

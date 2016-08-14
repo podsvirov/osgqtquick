@@ -24,9 +24,11 @@ DEFINE_BOOL_CONFIG_OPTION(qmlForceThreadedRenderer, QML_FORCE_THREADED_RENDERER)
 Window::Window(QQuickWindow *window) :
     QObject(window)
 {
-    qDebug() << "[osgQtQuick] New Window for" << window;
-
     d.window = window;
+
+    d.frameTimer = -1;
+    d.newTexture = false;
+    d.renderThread = 0;
 
     osgQtQuick::Index::storage.windows.insert(
                 std::pair<QQuickWindow*, Window*>(window, this));
@@ -69,20 +71,23 @@ Window::Window(QQuickWindow *window) :
     // 17 mc -> 59 fps (< 60 fps)
     // Any timer value less then 17 mc (> 60 fps) is caused bug with camera manipulator in rotating mode
     d.minFrameTime = 17;
-    //d.minFrameTime = 1000;
+
+    connect(window, SIGNAL(sceneGraphAboutToStop()), this, SLOT(onSceneGraphAboutToStop()));
 
     if(d.renderLoopType == ThreadedRenderLoop)
     {
-        qDebug() << "[osgQtQuick] ThreadedRenderLoop";
         d.renderThread = new RenderThread(this);
-        //connect(d.window, SIGNAL(beforeRendering()), this, SLOT(prepareNodes()), Qt::DirectConnection);
+        connect(this, SIGNAL(acceptNewSize(osgViewer::ViewQtQuick::Index*, QSize)),
+                d.renderThread, SLOT(acceptNewSize(osgViewer::ViewQtQuick::Index*, QSize)));
+        connect(d.renderThread, SIGNAL(textureReady()), this, SLOT(newTexture()), Qt::QueuedConnection);
+        connect(d.window, SIGNAL(beforeRendering()), this, SLOT(prepareNodes()), Qt::DirectConnection);
         connect(this, SIGNAL(textureInUse()), d.renderThread, SLOT(renderNext()), Qt::QueuedConnection);
-        connect(d.renderThread, SIGNAL(renderNextDone()), window, SLOT(update()), Qt::QueuedConnection);
+        connect(d.renderThread, SIGNAL(textureReady()), window, SLOT(update()), Qt::QueuedConnection);
     }
     else
     {
-        connect(window, SIGNAL(beforeRendering()), this, SLOT(frame()), Qt::DirectConnection);
-        d.frameTimer = startTimer(d.minFrameTime);
+        connect(d.window, SIGNAL(beforeRendering()), this, SLOT(prepareNodes()), Qt::DirectConnection);
+        connect(this, SIGNAL(pendingNewTexture()), window, SLOT(update()), Qt::QueuedConnection);
     }
 
     // Disable clearing
@@ -134,14 +139,7 @@ void Window::addView(osgViewer::ViewQtQuick::Index *view)
 void Window::removeView(osgViewer::ViewQtQuick::Index *view)
 {
     d.viewer->removeView(osgViewer::ViewQtQuick::Index::o(view));
-
     d.views.erase(view);
-
-    if(d.views.empty()) {
-        qDebug() << "[osgQtQuick] Removed latest"
-                 << osgViewer::ViewQtQuick::Index::q(view)
-                 << "from" << d.window;
-    }
 }
 
 Window *Window::fromWindow(QQuickWindow *window)
@@ -159,46 +157,70 @@ Window *Window::fromWindow(QQuickWindow *window)
 void Window::frame()
 {
     if(d.renderLoopType != ThreadedRenderLoop) {
-        // Qt bug!?
-        QOpenGLContext::currentContext()->functions()->glUseProgram(0);
+        { // Qt bug!?
+            QOpenGLContext::currentContext()->functions()->glUseProgram(0);
+        }
+        d.viewer->frame();
+        d.newTexture = true;
+        prepareNodes();
+    } else {
+        d.viewer->frame();
     }
-
-    d.viewer->frame();
 }
 
 void Window::ready()
 {
-    qDebug() << "[osgQtQuick] Window::ready";
+    if(d.renderLoopType == ThreadedRenderLoop) {
 
-    d.renderThread->surface = new QOffscreenSurface();
-    d.renderThread->surface->setFormat(d.renderThread->context->format());
-    d.renderThread->surface->create();
+        d.renderThread->surface = new QOffscreenSurface();
+        d.renderThread->surface->setFormat(d.renderThread->context->format());
+        d.renderThread->surface->create();
 
-    d.renderThread->moveToThread(d.renderThread);
+        d.renderThread->moveToThread(d.renderThread);
 
-    connect(d.window, SIGNAL(beforeRendering()), this, SLOT(prepareNodes()), Qt::DirectConnection);
-    connect(d.window, &QQuickWindow::sceneGraphInvalidated, d.renderThread, &RenderThread::shutDown, Qt::QueuedConnection);
+        connect(d.window, SIGNAL(sceneGraphInvalidated()), d.renderThread, SLOT(shutDown()), Qt::QueuedConnection);
 
-    d.renderThread->start();
+        d.renderThread->start();
 
-    QMetaObject::invokeMethod(d.window, "update", Qt::QueuedConnection);
+        QMetaObject::invokeMethod(d.renderThread, "renderNext", Qt::QueuedConnection);
+
+    } else {
+        d.frameTimer = startTimer(d.minFrameTime);
+    }
 }
 
 void Window::prepareNodes()
 {
-    std::cout << "Prepare\n"; std::cout.flush();
-    //qDebug() << "[osgQtQuick] Window::prepareNodes()";
-    for(std::set<osgViewer::ViewQtQuick::Index*>::iterator it = d.views.begin();
-        it != d.views.end(); ++it) {
-        (*it)->prepareNode();
+    if(d.newTexture) {
+        for(std::set<osgViewer::ViewQtQuick::Index*>::iterator it = d.views.begin();
+            it != d.views.end(); ++it) {
+            (*it)->prepareNode();
+        }
+        d.newTexture = false;
+        emit textureInUse();
     }
-    //std::cout << "Prepare Done\n"; std::cout.flush();
-    emit textureInUse();
+    emit pendingNewTexture();
 }
 
 void Window::deleteFbos()
 {
+    for(std::set<osgViewer::ViewQtQuick::Index*>::iterator it = d.views.begin();
+        it != d.views.end(); ++it) {
+        (*it)->deleteFrameBufferObjects();
+    }
+}
 
+void Window::newTexture()
+{
+    d.newTexture = true;
+}
+
+void Window::onSceneGraphAboutToStop()
+{
+    if(d.frameTimer != -1) {
+        killTimer(d.frameTimer);
+        d.frameTimer = -1;
+    }
 }
 
 bool Window::eventFilter(QObject *watched, QEvent *event)
@@ -215,7 +237,7 @@ bool Window::eventFilter(QObject *watched, QEvent *event)
 void Window::timerEvent(QTimerEvent *event)
 {
     if (event->timerId() == d.frameTimer) {
-        if (d.window) d.window->update();
+        frame();
     }
 
     QObject::timerEvent(event);
