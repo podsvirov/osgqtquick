@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- loader.cpp -->
@@ -15,15 +15,14 @@
         <ul>
 <li><a href="../osgdoc/index.html">osgQtQuick</a></li>
 <li><a href="osgdb-qmlmodule.html">osgDB</a></li>
-<li>Loader QML Type</li>
-<li id="buildversion">
-osgQtQuick 2.0 Reference Documentation</li>
+<li id="buildversion">osgQtQuick 2.0 Reference Documentation</li>
     </ul>
     </div>
 </div>
 <div class="content">
 <div class="line">
 <div class="content mainContent">
+<div class="sidebar">
 <div class="toc">
 <h3><a name="toc">Contents</a></h3>
 <ul>
@@ -31,18 +30,19 @@ osgQtQuick 2.0 Reference Documentation</li>
 <li class="level1"><a href="#details">Detailed Description</a></li>
 </ul>
 </div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
 <h1 class="title">Loader QML Type</h1>
 <span class="subtitle"></span>
 <!-- $$$Loader-brief -->
 <p>Loader of nodes <a href="#details">More...</a></p>
 <!-- @@@Loader -->
-<table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> </b><tt>import osgDB 2.0</tt></td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="../osg/qml-osg-group.html">Group</a></p>
-</td></tr></table><ul>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> import osgDB 2.0</td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="../osg/qml-osg-group.html">Group</a></p>
+</td></tr></table></div><ul>
 <li><a href="qml-osgdb-loader-members.html">List of all members, including inherited members</a></li>
 </ul>
 <a name="properties"></a>
-<h2>Properties</h2>
+<h2 id="properties">Properties</h2>
 <ul>
 <li class="fn"><b><b><a href="qml-osgdb-loader.html#node-prop">node</a></b></b> : osg::Node</li>
 <li class="fn"><b><b><a href="qml-osgdb-loader.html#source-prop">source</a></b></b> : url</li>
@@ -50,20 +50,39 @@ osgQtQuick 2.0 Reference Documentation</li>
 </ul>
 <!-- $$$Loader-description -->
 <a name="details"></a>
-<h2>Detailed Description</h2>
+<h2 id="details">Detailed Description</h2>
+</p>
 <p>The Loader item allows dynamically loading an <a href="../osg/qml-osg-node.html">Node</a>-based subtree from a URL</p>
 <!-- @@@Loader -->
 <h2>Property Documentation</h2>
 <!-- $$$node -->
-<div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="node-prop"></a><span class="name">node</span> : <span class="type"><a href="../osg/qml-osg-node.html">osg::Node</a></span></p></td></tr></table></div><div class="qmldoc"><p>Loaded <a href="../osg/qml-osg-node.html">node</a>.</p>
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="node-prop">
+<td class="tblQmlPropNode"><p>
+<a name="node-prop"></a><span class="name">node</span> : <span class="type"><a href="../osg/qml-osg-node.html">osg::Node</a></span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Loaded <a href="../osg/qml-osg-node.html">node</a>.</p>
 </div></div><!-- @@@node -->
 <br/>
 <!-- $$$source -->
-<div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="source-prop"></a><span class="name">source</span> : <span class="type">url</span></p></td></tr></table></div><div class="qmldoc"><p>This property holds the URL of the <a href="../osg/qml-osg-node.html">Node</a> to instantiate.</p>
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="source-prop">
+<td class="tblQmlPropNode"><p>
+<a name="source-prop"></a><span class="name">source</span> : <span class="type">url</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>This property holds the URL of the <a href="../osg/qml-osg-node.html">Node</a> to instantiate.</p>
 </div></div><!-- @@@source -->
 <br/>
 <!-- $$$status -->
-<div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="status-prop"></a><span class="name">status</span> : <span class="type">enumeration</span></p></td></tr></table></div><div class="qmldoc"><p>This property holds the status of Node loading. It can be one of:</p>
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="status-prop">
+<td class="tblQmlPropNode"><p>
+<a name="status-prop"></a><span class="name">status</span> : <span class="type">enumeration</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>This property holds the status of Node loading. It can be one of:</p>
 <ul>
 <li>Loader.Null - the node source has not been set</li>
 <li>Loader.Loading - the node source is currently being loaded</li>

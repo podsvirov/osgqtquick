@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- dragger.cpp -->
@@ -15,46 +15,103 @@
         <ul>
 <li><a href="../osgdoc/index.html">osgQtQuick</a></li>
 <li><a href="osgmanipulator-qmlmodule.html">osgManipulator</a></li>
-<li>Dragger QML Type</li>
-<li id="buildversion">
-osgQtQuick 2.0 Reference Documentation</li>
+<li id="buildversion">osgQtQuick 2.0 Reference Documentation</li>
     </ul>
     </div>
 </div>
 <div class="content">
 <div class="line">
 <div class="content mainContent">
+<div class="sidebar">
 <div class="toc">
 <h3><a name="toc">Contents</a></h3>
 <ul>
 <li class="level1"><a href="#properties">Properties</a></li>
+<li class="level1"><a href="#methods">Methods</a></li>
 <li class="level1"><a href="#details">Detailed Description</a></li>
 </ul>
 </div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
 <h1 class="title">Dragger QML Type</h1>
 <span class="subtitle"></span>
 <!-- $$$Dragger-brief -->
 <p>Base type for draggers <a href="#details">More...</a></p>
 <!-- @@@Dragger -->
-<table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> </b><tt>import osgManipulator 2.0</tt></td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="../osg/qml-osg-matrixtransform.html">MatrixTransform</a></p>
-</td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-osgmanipulator-rotatespheredragger.html">RotateSphereDragger</a>.</p>
-</td></tr></table><ul>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> import osgManipulator 2.0</td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <p><a href="../osg/qml-osg-matrixtransform.html">MatrixTransform</a></p>
+</td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qml-osgmanipulator-compositedragger.html">CompositeDragger</a> and <a href="qml-osgmanipulator-rotatespheredragger.html">RotateSphereDragger</a></p>
+</td></tr></table></div><ul>
 <li><a href="qml-osgmanipulator-dragger-members.html">List of all members, including inherited members</a></li>
 </ul>
 <a name="properties"></a>
-<h2>Properties</h2>
+<h2 id="properties">Properties</h2>
 <ul>
 <li class="fn"><b><b><a href="qml-osgmanipulator-dragger.html#draggerActive-prop">draggerActive</a></b></b> : bool</li>
+<li class="fn"><b><b><a href="qml-osgmanipulator-dragger.html#handleEvents-prop">handleEvents</a></b></b> : bool</li>
+</ul>
+<a name="methods"></a>
+<h2 id="methods">Methods</h2>
+<ul>
+<li class="fn">void <b><b><a href="qml-osgmanipulator-dragger.html#addTransformUpdating-method">addTransformUpdating</a></b></b>(osg::MatrixTransform <i>transform</i>)</li>
+<li class="fn">void <b><b><a href="qml-osgmanipulator-dragger.html#removeTransformUpdating-method">removeTransformUpdating</a></b></b>(osg::MatrixTransform <i>transform</i>)</li>
+<li class="fn">void <b><b><a href="qml-osgmanipulator-dragger.html#setupDefaultGeometry-method">setupDefaultGeometry</a></b></b>()</li>
 </ul>
 <!-- $$$Dragger-description -->
 <a name="details"></a>
-<h2>Detailed Description</h2>
+<h2 id="details">Detailed Description</h2>
+</p>
 <!-- @@@Dragger -->
 <h2>Property Documentation</h2>
 <!-- $$$draggerActive -->
-<div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="draggerActive-prop"></a><span class="name">draggerActive</span> : <span class="type">bool</span></p></td></tr></table></div><div class="qmldoc"><p>Dragger active</p>
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="draggerActive-prop">
+<td class="tblQmlPropNode"><p>
+<a name="draggerActive-prop"></a><span class="name">draggerActive</span> : <span class="type">bool</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Dragger active</p>
 </div></div><!-- @@@draggerActive -->
+<br/>
+<!-- $$$handleEvents -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="handleEvents-prop">
+<td class="tblQmlPropNode"><p>
+<a name="handleEvents-prop"></a><span class="name">handleEvents</span> : <span class="type">bool</span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Handle events</p>
+</div></div><!-- @@@handleEvents -->
+<br/>
+<h2>Method Documentation</h2>
+<!-- $$$addTransformUpdating -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="addTransformUpdating-method">
+<td class="tblQmlFuncNode"><p>
+<a name="addTransformUpdating-method"></a><span class="type">void</span> <span class="name">addTransformUpdating</span>(<span class="type"><a href="../osg/qml-osg-matrixtransform.html">osg::MatrixTransform</a></span> <i>transform</i>)</p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Add <i>transform</i> updating</p>
+</div></div><!-- @@@addTransformUpdating -->
+<br/>
+<!-- $$$removeTransformUpdating -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="removeTransformUpdating-method">
+<td class="tblQmlFuncNode"><p>
+<a name="removeTransformUpdating-method"></a><span class="type">void</span> <span class="name">removeTransformUpdating</span>(<span class="type"><a href="../osg/qml-osg-matrixtransform.html">osg::MatrixTransform</a></span> <i>transform</i>)</p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Remove <i>transform</i> updating</p>
+</div></div><!-- @@@removeTransformUpdating -->
+<br/>
+<!-- $$$setupDefaultGeometry -->
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="setupDefaultGeometry-method">
+<td class="tblQmlFuncNode"><p>
+<a name="setupDefaultGeometry-method"></a><span class="type">void</span> <span class="name">setupDefaultGeometry</span>()</p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Setup default geometry for dragger</p>
+</div></div><!-- @@@setupDefaultGeometry -->
 <br/>
 </body>
 </html>

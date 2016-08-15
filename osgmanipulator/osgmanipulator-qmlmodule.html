@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- osgmanipulator.qdoc -->
-  <title>osgManipulator | osgManipulator 2.0</title>
+  <title>osgManipulator 2.0</title>
   <link rel="stylesheet" type="text/css" href="style/offline.css" />
 </head>
 <body>
@@ -15,14 +15,14 @@
         <ul>
 <li><a href="../osgdoc/index.html">osgQtQuick</a></li>
 <li>osgManipulator</li>
-<li id="buildversion">
-osgQtQuick 2.0 Reference Documentation</li>
+<li id="buildversion">osgQtQuick 2.0 Reference Documentation</li>
     </ul>
     </div>
 </div>
 <div class="content">
 <div class="line">
 <div class="content mainContent">
+<div class="sidebar">
 <div class="toc">
 <h3><a name="toc">Contents</a></h3>
 <ul>
@@ -30,23 +30,28 @@ osgQtQuick 2.0 Reference Documentation</li>
 <li class="level1"><a href="#types">Types</a></li>
 </ul>
 </div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
 <h1 class="title">osgManipulator</h1>
 <span class="subtitle"></span>
 <!-- $$$osgManipulator-description -->
 <div class="descr"> <a name="details"></a>
-<p>The osgManipulator module extends the core scene graph to support 3D interactive manipulators</p>
+</p>
+<p>The <a href="osgmanipulator-qmlmodule.html">osgManipulator</a> module extends the core scene graph to support 3D interactive manipulators</p>
 <a name="importing"></a>
-<h2>Importing</h2>
+<h2 id="importing">Importing</h2>
 <p>To use the types in this module, import the module with the following line:</p>
 <pre class="qml">import osgManipulator 2.0</pre>
 <a name="types"></a>
-<h2>Types</h2>
+<h2 id="types">Types</h2>
 <p>The following types are provided:</p>
 </div>
 <!-- @@@osgManipulator -->
-<table class="annotated">
-<tr class="odd topAlign"><td class="tblName"><p><a href="qml-osgmanipulator-dragger.html">Dragger</a></p></td><td class="tblDescr"><p>Base type for draggers</p></td></tr>
-<tr class="even topAlign"><td class="tblName"><p><a href="qml-osgmanipulator-rotatespheredragger.html">RotateSphereDragger</a></p></td><td class="tblDescr"><p>Dragger for performing 3D rotation on a sphere</p></td></tr>
-</table>
+<div class="table"><table class="annotated">
+<tr class="odd topAlign"><td class="tblName"><p><a href="qml-osgmanipulator-compositedragger.html">CompositeDragger</a></p></td><td class="tblDescr"><p>Allows to create complex draggers</p></td></tr>
+<tr class="even topAlign"><td class="tblName"><p><a href="qml-osgmanipulator-dragger.html">Dragger</a></p></td><td class="tblDescr"><p>Base type for draggers</p></td></tr>
+<tr class="odd topAlign"><td class="tblName"><p><a href="qml-osgmanipulator-rotatespheredragger.html">RotateSphereDragger</a></p></td><td class="tblDescr"><p>Dragger for performing 3D rotation on a sphere</p></td></tr>
+<tr class="even topAlign"><td class="tblName"><p><a href="qml-osgmanipulator-tabboxdragger.html">TabBoxDragger</a></p></td><td class="tblDescr"><p>Consists of 6 TabPlaneDraggers to form a box dragger</p></td></tr>
+<tr class="odd topAlign"><td class="tblName"><p><a href="qml-osgmanipulator-tabplanedragger.html">TabPlaneDragger</a></p></td><td class="tblDescr"><p>Plane dragger consists of a plane with tabs</p></td></tr>
+</table></div>
 </body>
 </html>

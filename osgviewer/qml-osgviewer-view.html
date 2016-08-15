@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- view.cpp -->
@@ -15,15 +15,14 @@
         <ul>
 <li><a href="../osgdoc/index.html">osgQtQuick</a></li>
 <li><a href="osgviewer-qmlmodule.html">osgViewer</a></li>
-<li>View QML Type</li>
-<li id="buildversion">
-osgQtQuick 2.0 Reference Documentation</li>
+<li id="buildversion">osgQtQuick 2.0 Reference Documentation</li>
     </ul>
     </div>
 </div>
 <div class="content">
 <div class="line">
 <div class="content mainContent">
+<div class="sidebar">
 <div class="toc">
 <h3><a name="toc">Contents</a></h3>
 <ul>
@@ -31,17 +30,18 @@ osgQtQuick 2.0 Reference Documentation</li>
 <li class="level1"><a href="#details">Detailed Description</a></li>
 </ul>
 </div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
 <h1 class="title">View QML Type</h1>
 <span class="subtitle"></span>
 <!-- $$$View-brief -->
 <p>The View type holds a single view on a scene <a href="#details">More...</a></p>
 <!-- @@@View -->
-<table class="alignedsummary">
-<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> </b><tt>import osgViewer 2.0</tt></td></tr></table><ul>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Import Statement:</td><td class="memItemRight bottomAlign"> import osgViewer 2.0</td></tr></table></div><ul>
 <li><a href="qml-osgviewer-view-members.html">List of all members, including inherited members</a></li>
 </ul>
 <a name="properties"></a>
-<h2>Properties</h2>
+<h2 id="properties">Properties</h2>
 <ul>
 <li class="fn"><b><b><a href="qml-osgviewer-view.html#camera-prop">camera</a></b></b> : osg::Camera</li>
 <li class="fn"><b><b><a href="qml-osgviewer-view.html#cameraManipulator-prop">cameraManipulator</a></b></b> : CameraManipulator</li>
@@ -49,19 +49,38 @@ osgQtQuick 2.0 Reference Documentation</li>
 </ul>
 <!-- $$$View-description -->
 <a name="details"></a>
-<h2>Detailed Description</h2>
+<h2 id="details">Detailed Description</h2>
+</p>
 <!-- @@@View -->
 <h2>Property Documentation</h2>
 <!-- $$$camera -->
-<div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="camera-prop"></a><span class="name">camera</span> : <span class="type"><a href="../osg/qml-osg-camera.html">osg::Camera</a></span></p></td></tr></table></div><div class="qmldoc"><p>Master <a href="../osg/qml-osg-camera.html">camera</a> of the view.</p>
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="camera-prop">
+<td class="tblQmlPropNode"><p>
+<a name="camera-prop"></a><span class="name">camera</span> : <span class="type"><a href="../osg/qml-osg-camera.html">osg::Camera</a></span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>Master <a href="../osg/qml-osg-camera.html">camera</a> of the view.</p>
 </div></div><!-- @@@camera -->
 <br/>
 <!-- $$$cameraManipulator -->
-<div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="cameraManipulator-prop"></a><span class="name">cameraManipulator</span> : <span class="type"><a href="../osgga/qml-osgga-cameramanipulator.html">CameraManipulator</a></span></p></td></tr></table></div><div class="qmldoc"><p>The <a href="qml-osgviewer-view.html">View</a>'s <a href="../osgga/qml-osgga-cameramanipulator.html">CameraManipulator</a></p>
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="cameraManipulator-prop">
+<td class="tblQmlPropNode"><p>
+<a name="cameraManipulator-prop"></a><span class="name">cameraManipulator</span> : <span class="type"><a href="../osgga/qml-osgga-cameramanipulator.html">CameraManipulator</a></span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>The <a href="qml-osgviewer-view.html">View</a>'s <a href="../osgga/qml-osgga-cameramanipulator.html">CameraManipulator</a></p>
 </div></div><!-- @@@cameraManipulator -->
 <br/>
 <!-- $$$sceneData -->
-<div class="qmlitem"><div class="qmlproto"><table class="qmlname"><tr valign="top" class="odd"><td class="tblQmlPropNode"><p><a name="sceneData-prop"></a><span class="name">sceneData</span> : <span class="type"><a href="../osg/qml-osg-node.html">Node</a></span></p></td></tr></table></div><div class="qmldoc"><p>The <a href="qml-osgviewer-view.html">View</a>'s scene graph</p>
+<div class="qmlitem"><div class="qmlproto">
+<div class="table"><table class="qmlname">
+<tr valign="top" class="odd" id="sceneData-prop">
+<td class="tblQmlPropNode"><p>
+<a name="sceneData-prop"></a><span class="name">sceneData</span> : <span class="type"><a href="../osg/qml-osg-node.html">Node</a></span></p></td></tr>
+</table></div>
+</div><div class="qmldoc"><p>The <a href="qml-osgviewer-view.html">View</a>'s scene graph</p>
 </div></div><!-- @@@sceneData -->
 <br/>
 </body>
