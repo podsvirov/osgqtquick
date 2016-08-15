@@ -5,7 +5,7 @@ project(osgQtQuick CXX)
 set(osgQtQuick_VERSION_MAJOR 2)
 set(osgQtQuick_VERSION_MINOR 0)
 set(osgQtQuick_VERSION_PATCH 0)
-set(osgQtQuick_VERSION_TWEAK 7)
+set(osgQtQuick_VERSION_TWEAK 8)
 
 set(osgQtQuick_BUILD_IMPORTS ON
   CACHE BOOL "Set to ON to build plugins for imported modules (By default is ON)")
