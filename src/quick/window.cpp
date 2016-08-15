@@ -10,16 +10,24 @@
 #include <QOpenGLFunctions>
 #include <QTimerEvent>
 
+#ifdef OSGQTQUICK_WITH_QT_PRIVATE
+
 #include <private/qqmlglobal_p.h>
 #include <private/qguiapplication_p.h>
 #include <qpa/qplatformintegration.h>
+
+#endif // OSGQTQUICK_WITH_QT_PRIVATE
 
 #include <iostream>
 
 namespace osgQtQuick {
 
+#ifdef OSGQTQUICK_WITH_QT_PRIVATE
+
 DEFINE_BOOL_CONFIG_OPTION(qmlNoThreadedRenderer, QML_BAD_GUI_RENDER_LOOP);
 DEFINE_BOOL_CONFIG_OPTION(qmlForceThreadedRenderer, QML_FORCE_THREADED_RENDERER);
+
+#endif // OSGQTQUICK_WITH_QT_PRIVATE
 
 Window::Window(QQuickWindow *window) :
     QObject(window)
@@ -40,6 +48,8 @@ Window::Window(QQuickWindow *window) :
 
         RenderLoopType &renderLoopType = d.renderLoopType;
 
+#ifdef OSGQTQUICK_WITH_QT_PRIVATE
+
 #ifdef Q_OS_WIN
         // With desktop OpenGL (opengl32.dll), use threaded. Otherwise (ANGLE) use windows.
         if (QOpenGLContext::openGLModuleType() == QOpenGLContext::LibGL
@@ -55,6 +65,8 @@ Window::Window(QQuickWindow *window) :
             renderLoopType = BasicRenderLoop;
         else if (qmlForceThreadedRenderer())
             renderLoopType = ThreadedRenderLoop;
+
+#endif // OSGQTQUICK_WITH_QT_PRIVATE
 
         if (Q_UNLIKELY(qEnvironmentVariableIsSet("QSG_RENDER_LOOP"))) {
             const QByteArray loopName = qgetenv("QSG_RENDER_LOOP");

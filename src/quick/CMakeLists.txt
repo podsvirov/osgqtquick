@@ -4,7 +4,9 @@ else()
     add_definitions(-DOSGQTQUICK_LIBRARY_STATIC)
 endif()
 
-include_directories(${Qt5Quick_PRIVATE_INCLUDE_DIRS})
+if(osgQtQuick_WITH_QT_PRIVATE)
+  include_directories(${Qt5Quick_PRIVATE_INCLUDE_DIRS})
+endif()
 
 set(_srcs)
 set(_moc_hdrs)

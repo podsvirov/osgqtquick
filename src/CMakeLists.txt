@@ -19,8 +19,12 @@ find_package(OpenSceneGraph 3.0 REQUIRED
   osgText)
 
 # Qt
-find_package(Qt5Quick CONFIG REQUIRED
-  COMPONENTS Private)
+if(osgQtQuick_WITH_QT_PRIVATE)
+  find_package(Qt5Quick CONFIG REQUIRED
+    COMPONENTS Private)
+else()
+  find_package(Qt5Quick CONFIG REQUIRED)
+endif()
 
 if(osgQtQuick_WITH_EARTH)
   find_package(OsgEarth 2.0 MODULE REQUIRED)
