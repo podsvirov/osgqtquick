@@ -148,10 +148,10 @@ public: // static methods
 
 protected:
     template<typename T>
-    typename T::OType* o(T *p);
+    static typename T::OType* o(T *p);
 
     template<typename T>
-    typename T::QType* q(T *p);
+    static typename T::QType* q(T *p);
 
     void setQ(QObject *q);
     void setO(osg::Referenced *o);

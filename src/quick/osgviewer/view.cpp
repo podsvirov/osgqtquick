@@ -1,6 +1,8 @@
 #include "view.hpp"
 #include "viewindex.hpp"
 
+#include "../renderthread.hpp"
+
 #include <osgQtQuick/Window>
 
 #include <osgViewer/View>
@@ -26,8 +28,12 @@ ViewQtQuick::Index::PreDraw::PreDraw(Index *i) : i(i) {
 
 void ViewQtQuick::Index::PreDraw::operator ()(osg::RenderInfo &/*renderInfo*/) const
 {
-    if (!i->fbo) i->initFBO();
-    if (i->fbo) i->fbo->bind();
+    if(i->render.update)
+    {
+        i->prepareObject();
+        --i->render.update;
+    }
+    i->renderFbo->bind();
 }
 
 /* ------------------------------------------------------ struct PostDraw --- */
@@ -37,7 +43,14 @@ ViewQtQuick::Index::PostDraw::PostDraw(Index *i) : i(i) {
 
 void ViewQtQuick::Index::PostDraw::operator ()(osg::RenderInfo &/*renderInfo*/) const
 {
-    if (i->fbo) i->fbo->bindDefault();
+    if (i->renderFbo) {
+        if(i->window->renderLoopType() == osgQtQuick::ThreadedRenderLoop) {
+            i->window->renderThread()->context->functions()->glFlush();
+        }
+        i->renderFbo->bindDefault();
+        qSwap(i->renderFbo, i->displayFbo);
+        qSwap(i->renderTexture, i->displayTexture);
+    }
 }
 
 /* ---------------------------------------------------------- class Index --- */
@@ -46,9 +59,22 @@ ViewQtQuick::Index::Index(View *view) :
     osgQtQuick::Index(view)
 {
     window = 0;
-    fbo = 0;
-    texture = 0;
+    format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
+    renderFbo = 0;
+    displayFbo = 0;
+    renderTexture = 0;
+    displayTexture = 0;
     textureNode = 0;
+    display.update = 2;
+    render.update = 2;
+}
+
+ViewQtQuick::Index::~Index()
+{
+    if(window) {
+        window->removeView(this);
+        window = 0;
+    }
 }
 
 osg::NodeQtQml *ViewQtQuick::Index::getSceneData()
@@ -92,6 +118,26 @@ void ViewQtQuick::Index::setCameraManipulator(osgGA::CameraManipulatorQtQml *man
                                               : 0);
 }
 
+void ViewQtQuick::Index::prepareNode()
+{
+    if(!displayFbo)
+        return;
+
+    if(display.update) {
+        if(displayTexture)
+            delete displayTexture;
+        displayTexture = window->quickWindow()->createTextureFromId(displayFbo->texture(), display.size);
+        if(!textureNode) {
+            textureNode = new QSGSimpleTextureNode();
+            QMetaObject::invokeMethod(q(this), "update", Qt::QueuedConnection);
+        }
+        textureNode->setRect(0, q(this)->height(), q(this)->width(), -q(this)->height());
+        --display.update;
+    }
+
+    textureNode->setTexture(displayTexture);
+}
+
 void ViewQtQuick::Index::classBegin()
 {
     if(!o(this)) setO(new View);
@@ -110,7 +156,7 @@ void ViewQtQuick::Index::classBegin()
     postDraw = new PostDraw(this);
     o(this)->getCamera()->setPostDrawCallback(postDraw.get());
 
-    osgQtQml::Index::classBegin();
+    osgQtQuick::Index::classBegin();
 }
 
 void ViewQtQuick::Index::setKeyboardModifiers(QInputEvent *event)
@@ -177,41 +223,30 @@ void ViewQtQuick::Index::mouseDoubleButtonPress(QMouseEvent *event)
     o(this)->getEventQueue()->mouseDoubleButtonPress(pos.x(), pos.y(), button);
 }
 
-void ViewQtQuick::Index::initFBO()
+void ViewQtQuick::Index::prepareObject()
 {
-    QRectF rect = q(this)->mapRectToItem(0, q(this)->boundingRect());
-    QOpenGLFramebufferObjectFormat format;
-    format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
-    QSize size(rect.size().toSize());
-    fbo = new QOpenGLFramebufferObject(size, format);
-    texture = q(this)->window()->createTextureFromId(fbo->texture(), size);
-    textureNode = new QSGSimpleTextureNode();
-    textureNode->setRect(0, q(this)->height(), q(this)->width(), -q(this)->height());
-    textureNode->setTexture(texture);
-    q(this)->setFlag(QQuickItem::ItemHasContents, true);
-    updateViewport();
-    q(this)->update();
+    if(renderFbo)
+        delete renderFbo;
+    renderFbo = new QOpenGLFramebufferObject(render.size, format);
 }
 
-void ViewQtQuick::Index::updateFBO()
+void ViewQtQuick::Index::deleteFrameBufferObjects()
 {
-    if (fbo) delete fbo;
-    QRectF rect = q(this)->mapRectToItem(0, q(this)->boundingRect());
-    QOpenGLFramebufferObjectFormat format;
-    format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
-    QSize size(rect.size().toSize());
-    fbo = new QOpenGLFramebufferObject(size, format);
-    if (texture) delete texture;
-    texture = q(this)->window()->createTextureFromId(fbo->texture(), size);
-    textureNode = new QSGSimpleTextureNode();
-    textureNode->setRect(0, q(this)->height(), q(this)->width(), -q(this)->height());
-    textureNode->setTexture(texture);
-    q(this)->update();
+    if(renderFbo) {
+        delete renderFbo;
+        renderFbo = 0;
+    }
+    if(displayFbo) {
+        delete displayFbo;
+        displayFbo = 0;
+    }
 }
 
 void ViewQtQuick::Index::updateViewport()
 {
-    QSize size(q(this)->boundingRect().size().toSize());
+    //QRectF rect = q(this)->mapRectToItem(0, q(this)->boundingRect());
+    //QSize size = rect.size().toSize();
+    QSize size = q(this)->boundingRect().size().toSize();
     context->resizedImplementation(0, 0, size.width(), size.height());
     osgGA::GUIEventAdapter *ea = o(this)->getEventQueue()->getCurrentEventState();
     ea->setXmin(0);
@@ -220,17 +255,38 @@ void ViewQtQuick::Index::updateViewport()
     ea->setYmax(size.height());
     o(this)->getCamera()->setViewport(0, 0, size.width(), size.height());
     o(this)->getCamera()->setProjectionMatrixAsPerspective(30.0f, static_cast<double>(size.width())/static_cast<double>(size.height()), 1.0f, 10000.0f );
-    if (texture && texture->textureSize() != size) {
-        updateFBO();
+    if (textureNode) {
+        if(display.size != size) {
+            display.size = size;
+            display.update = display.update % 2 + 2;
+        }
+        if(render.size != size) {
+            if(window->renderLoopType() == osgQtQuick::ThreadedRenderLoop) {
+                window->acceptNewSize(this, size);
+            } else {
+                render.size = size;
+                render.update = render.update % 2 + 2;
+            }
+        }
     }
 }
 
 void ViewQtQuick::Index::acceptWindow(osgQtQuick::Window *window)
 {
+    if(this->window) {
+        // TODO: Clear window dependencies
+    }
+
+    this->window = window;
+
     o(this)->getCamera()->setGraphicsContext(context);
     o(this)->getEventQueue()->setGraphicsContext(context);
+
     updateViewport();
-    window->viewer()->addView(o(this));
+
+    window->addView(this);
+
+    q(this)->setFlag(ItemHasContents, true);
 }
 
 ViewQtQuick *ViewQtQuick::fromView(View *view, QQuickItem *parent)
@@ -294,17 +350,49 @@ void ViewQtQuick::keyReleaseEvent(QKeyEvent *event)
 
 void ViewQtQuick::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
-    osgQtQuick::Object::geometryChanged(newGeometry, oldGeometry);
+    QSize size = boundingRect().size().toSize();
 
     i(this)->updateViewport();
+
+    if(!i(this)->textureNode) {
+        i(this)->display.size = size;
+        i(this)->render.size = size;
+    }
+
+    osgQtQuick::Object::geometryChanged(newGeometry, oldGeometry);
 }
 
 QSGNode *ViewQtQuick::updatePaintNode(QSGNode *oldNode, QQuickItem::UpdatePaintNodeData *updatePaintNodeData)
 {
     if (oldNode && oldNode != i(this)->textureNode) {
+        qDebug() << "[osgQtQuick] ViewQtQuick::updatePaintNode delete old node" << oldNode;
         delete oldNode;
     }
     Q_UNUSED(updatePaintNodeData);
+
+    // Delay initialization
+    osgQtQuick::RenderThread *renderThread = i(this)->window->renderThread();
+    if (renderThread) {
+        if(!renderThread->context) {
+            QOpenGLContext *current = window()->openglContext();
+            current->doneCurrent();
+
+            renderThread->context = new QOpenGLContext();
+            renderThread->context->setFormat(current->format());
+            renderThread->context->setShareContext(current);
+            renderThread->context->create();
+            renderThread->context->moveToThread(renderThread);
+
+            current->makeCurrent(window());
+
+            QMetaObject::invokeMethod(i(this)->window, "ready");
+            return 0;
+        }
+    } else if (i(this)->window->d.frameTimer == -1) {
+        QMetaObject::invokeMethod(i(this)->window, "ready");
+    }
+
+    //i(this)->size = boundingRect().size().toSize();
 
     return i(this)->textureNode;
 }
@@ -381,11 +469,6 @@ void ViewQtQuick::classBegin()
     i(this)->setQ(this);
 
     osgQtQuick::Object::classBegin();
-}
-
-void ViewQtQuick::componentComplete()
-{
-    osgQtQuick::Object::componentComplete();
 }
 
 }

@@ -7,6 +7,9 @@ set(osgQtQuick_VERSION_MINOR 0)
 set(osgQtQuick_VERSION_PATCH 0)
 set(osgQtQuick_VERSION_TWEAK 7)
 
+set(osgQtQuick_BUILD_IMPORTS ON
+  CACHE BOOL "Set to ON to build plugins for imported modules (By default is ON)")
+
 set(osgQtQuick_BUILD_DOCS OFF
   CACHE BOOL "Set to ON to build reference documentation (By default is OFF)")
 
@@ -15,6 +18,9 @@ set(osgQtQuick_BUILD_DEBUGGER OFF
 
 set(osgQtQuick_WITH_EARTH OFF
   CACHE BOOL "Set to ON to build with osgEarth library support (By default is OFF)")
+
+set(osgQtQuick_WITH_QT_PRIVATE ON
+  CACHE BOOL "Set to OFF to build without using private Qt headers (By default is ON)")
 
 set(osgQtQuick_VERSION
   ${osgQtQuick_VERSION_MAJOR}

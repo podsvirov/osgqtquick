@@ -9,6 +9,12 @@
 
 #include <QOpenGLFramebufferObject>
 #include <QSGSimpleTextureNode>
+#include <QMutex>
+
+namespace osgQtQuick {
+class Window;
+class RenderThread;
+}
 
 namespace osgViewer {
 
@@ -39,6 +45,7 @@ public:
 
 public:
     Index(View *o = 0);
+    ~Index();
 
     osg::NodeQtQml* getSceneData();
     void setSceneData(osg::NodeQtQml *node);
@@ -48,6 +55,8 @@ public:
 
     osgGA::CameraManipulatorQtQml* getCameraManipulator();
     void setCameraManipulator(osgGA::CameraManipulatorQtQml *manipulator);
+
+    void prepareNode();
 
     void classBegin();
 
@@ -61,20 +70,31 @@ protected:
     void mouseButtonRelease(QMouseEvent *event);
     void mouseDoubleButtonPress(QMouseEvent *event);
 
-
-    void initFBO();
-    void updateFBO();
+    void prepareObject();
+    void deleteFrameBufferObjects();
     void updateViewport();
     void acceptWindow(osgQtQuick::Window *window);
 
 private:
+    friend class osgQtQuick::Window;
+    friend class osgQtQuick::RenderThread;
+
     osgQtQuick::Window *window;
-    QOpenGLFramebufferObject *fbo;
-    QSGTexture *texture;
+    QOpenGLFramebufferObjectFormat format;
+    QOpenGLFramebufferObject *renderFbo, *displayFbo;
+    QSGTexture *renderTexture, *displayTexture;
     QSGSimpleTextureNode *textureNode;
     osg::ref_ptr<osg::GraphicsContext> context;
     osg::ref_ptr<PreDraw> preDraw;
     osg::ref_ptr<PostDraw> postDraw;
+    struct {
+        int update;
+        QSize size;
+    } display;
+    struct {
+        int update;
+        QSize size;
+    } render;
 };
 
 }

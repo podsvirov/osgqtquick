@@ -52,7 +52,7 @@ public:
 
 protected:
     template<typename T>
-    typename T::OType* o(T *p);
+    static typename T::OType* o(T *p);
 
     void setO(osg::View *o);
 

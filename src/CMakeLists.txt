@@ -1,6 +1,9 @@
-cmake_policy(SET CMP0020 NEW)
-cmake_policy(SET CMP0022 NEW)
-cmake_policy(SET CMP0043 NEW)
+# New policies
+foreach(policy CMP0020 CMP0022 CMP0043)
+  if(POLICY ${policy})
+      cmake_policy(SET ${policy} NEW)
+  endif()
+endforeach()
 
 list(APPEND CMAKE_MODULE_PATH "${osgQtQuick_ROOT_DIR}/cmake")
 
@@ -16,8 +19,12 @@ find_package(OpenSceneGraph 3.0 REQUIRED
   osgText)
 
 # Qt
-find_package(Qt5 CONFIG REQUIRED
-  COMPONENTS Core Qml Quick)
+if(osgQtQuick_WITH_QT_PRIVATE)
+  find_package(Qt5Quick CONFIG REQUIRED
+    COMPONENTS Private)
+else()
+  find_package(Qt5Quick CONFIG REQUIRED)
+endif()
 
 if(osgQtQuick_WITH_EARTH)
   find_package(OsgEarth 2.0 MODULE REQUIRED)
@@ -53,7 +60,9 @@ include_directories(
 add_subdirectory(qml)
 add_subdirectory(quick)
 
-add_subdirectory(imports)
+if(osgQtQuick_BUILD_IMPORTS)
+  add_subdirectory(imports)
+endif()
 
 if(osgQtQuick_BUILD_DEBUGGER)
   add_subdirectory(debugger)

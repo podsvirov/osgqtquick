@@ -12,6 +12,9 @@ OSGViewer.View {
     // Default view size
     width: 640; height: 480
 
+    // Handle key events
+    focus: true
+
     // Set favorite camera manipulator
     cameraManipulator: OSGGA.TrackballManipulator {}
 
