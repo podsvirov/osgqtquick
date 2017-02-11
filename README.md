@@ -16,7 +16,6 @@ Actual development code avaliable in [develop](https://github.com/podsvirov/osgq
 
 #### DaD's Project
 
-
 You can find some binaries at [DaD's](http://dad.podsvirov.pro)  project.
 
 #### MSYS2 Project
@@ -35,11 +34,11 @@ or
 * Qt >= 5.0.0
 * OpenSceneGraph >= 3.3.2
 
-## Rendering Limitations
+## Threaded Rendering
 
-The osgQtQuick is now only supports single-threaded rendering.
-If your application crash on startup or resize the window,
-try to set a environment variable "QSG_RENDER_LOOP" to the value of "basic" or "windows".
+The osgQtQuick is now support all QtQuick render loop types.
+But if your application has problems on startup or resize the window,
+try to set a environment variable "QSG_RENDER_LOOP" to the value of "basic", "windows" or "threaded".
 
 ## Related Links
 
