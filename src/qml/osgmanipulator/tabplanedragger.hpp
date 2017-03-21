@@ -3,7 +3,7 @@
 
 #include <osgManipulator/CompositeDraggerQtQml>
 
-#include <QColor>
+#include <QtGui/QColor>
 
 namespace osgManipulator {
 
@@ -30,7 +30,7 @@ public:
 
   static TabPlaneDraggerQtQml* fromTabPlaneDragger(TabPlaneDragger *dragger, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void planeColorChanged(const QColor &color) const;
 };
 

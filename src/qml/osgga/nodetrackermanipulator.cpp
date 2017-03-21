@@ -5,7 +5,7 @@
 
 #include <osgGA/NodeTrackerManipulator>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype NodeTrackerManipulator

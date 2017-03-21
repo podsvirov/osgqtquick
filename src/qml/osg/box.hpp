@@ -2,8 +2,8 @@
 #define _OSG_BOX_QTQML_ 1
 
 #include <osg/ShapeQtQml>
-#include <QVector3D>
-#include <QQuaternion>
+#include <QtGui/QVector3D>
+#include <QtGui/QQuaternion>
 
 namespace osg {
 
@@ -38,7 +38,7 @@ public:
 
   static BoxQtQml* fromBox(Box *box, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void centerChanged(const QVector3D &center) const;
   void halfLengthsChanged(const QVector3D &halfLengths) const;
   void rotationChanged(const QQuaternion &quat) const;

@@ -3,7 +3,7 @@
 
 #include <osgManipulator/Dragger>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype Dragger

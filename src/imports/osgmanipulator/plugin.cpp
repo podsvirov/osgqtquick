@@ -1,4 +1,4 @@
-#include <QtQml>
+#include <QtQml/QtQml>
 
 #include <osgManipulator/ModuleQtQml>
 

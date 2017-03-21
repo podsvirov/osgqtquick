@@ -1,7 +1,7 @@
 #include "object.hpp"
 #include "index.hpp"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 osgQtQml::Object::Object(QObject *parent) :
   QObject(parent), _i_ptr(0),

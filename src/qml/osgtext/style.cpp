@@ -5,7 +5,7 @@
 
 #include <osgText/Style>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype Style

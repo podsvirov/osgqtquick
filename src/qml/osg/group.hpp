@@ -3,7 +3,7 @@
 
 #include <osg/NodeQtQml>
 
-#include <QQmlListProperty>
+#include <QtQml/QQmlListProperty>
 
 namespace osg {
 
@@ -40,7 +40,7 @@ public:
 
   static GroupQtQml* fromGroup(Group *group, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void numChildrenChanged(int num);
 
 protected:

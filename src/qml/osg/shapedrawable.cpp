@@ -5,7 +5,7 @@
 
 #include <osg/ShapeDrawable>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype ShapeDrawable

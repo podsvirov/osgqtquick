@@ -5,7 +5,7 @@
 
 #include <osgGA/TrackballManipulator>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype TrackballManipulator

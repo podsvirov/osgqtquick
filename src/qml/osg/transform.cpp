@@ -5,7 +5,7 @@
 
 #include <osg/Transform>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype Transform

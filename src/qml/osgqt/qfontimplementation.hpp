@@ -3,7 +3,7 @@
 
 #include <osgText/FontImplementationQtQml>
 
-#include <QFont>
+#include <QtGui/QFont>
 
 namespace osgQt {
 
@@ -30,7 +30,7 @@ public:
 
   static QFontImplementationQtQml* fromQFontImplementation(QFontImplementation *implementation, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void fontChanged(const QFont &font) const;
 };
 

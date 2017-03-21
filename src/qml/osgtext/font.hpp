@@ -34,7 +34,7 @@ public:
 
   static FontQtQml* fromFont(Font *font, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void implementationChanged(FontImplementationQtQml *implementation) const;
   void glyphImageMarginRatioChanged(qreal widthRatio) const;
 };

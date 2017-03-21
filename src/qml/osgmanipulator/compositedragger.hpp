@@ -3,7 +3,7 @@
 
 #include <osgManipulator/DraggerQtQml>
 
-#include <QColor>
+#include <QtGui/QColor>
 
 namespace osgManipulator {
 
@@ -37,7 +37,7 @@ public:
 
   static CompositeDraggerQtQml* fromCompositeDragger(CompositeDragger *dragger, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void numDraggersChanged(int num);
 
 protected:

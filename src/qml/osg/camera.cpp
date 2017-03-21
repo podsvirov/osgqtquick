@@ -3,7 +3,7 @@
 
 #include <osg/Camera>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype Camera

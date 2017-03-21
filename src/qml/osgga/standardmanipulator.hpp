@@ -30,7 +30,7 @@ public:
 
   static StandardManipulatorQtQml* fromStandardManipulator(StandardManipulator *manipulator, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void nodeChanged(osg::NodeQtQml *node);
 };
 

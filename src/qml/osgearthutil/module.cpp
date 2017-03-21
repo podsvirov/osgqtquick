@@ -3,9 +3,9 @@
 #include "earthmanipulatorindex.hpp"
 
 #include <osgQtQuick/Version>
-#include <QtQml>
+#include <QtQml/QtQml>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 namespace osgEarth { namespace Util {
 

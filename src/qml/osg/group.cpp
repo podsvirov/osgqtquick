@@ -5,7 +5,7 @@
 
 #include <osg/Group>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype Group

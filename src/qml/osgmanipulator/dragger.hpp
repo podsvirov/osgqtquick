@@ -3,7 +3,7 @@
 
 #include <osg/MatrixTransformQtQml>
 
-#include <QMatrix4x4>
+#include <QtGui/QMatrix4x4>
 
 namespace osgManipulator {
 
@@ -41,7 +41,7 @@ public:
 
   static DraggerQtQml* fromDragger(Dragger *dragger, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void handleEventsChanged(bool handleEvents) const;
   void draggerActiveChanged(bool draggerActive) const;
 };

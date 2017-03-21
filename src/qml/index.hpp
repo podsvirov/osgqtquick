@@ -11,12 +11,12 @@
 #include <osg/Quat>
 #include <osgText/String>
 
-#include <QObject>
-#include <QPointer>
-#include <QColor>
-#include <QVector3D>
-#include <QMatrix4x4>
-#include <QQuaternion>
+#include <QtCore/QObject>
+#include <QtCore/QPointer>
+#include <QtGui/QColor>
+#include <QtGui/QVector3D>
+#include <QtGui/QMatrix4x4>
+#include <QtGui/QQuaternion>
 
 #include <list>
 #include <set>

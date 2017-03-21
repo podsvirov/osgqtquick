@@ -2,7 +2,7 @@
 #define _OSG_SPHERE_QTQML_ 1
 
 #include <osg/ShapeQtQml>
-#include <QVector3D>
+#include <QtGui/QVector3D>
 
 namespace osg {
 
@@ -33,7 +33,7 @@ public:
 
   static SphereQtQml* fromSphere(Sphere *sphere, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void centerChanged(const QVector3D &center) const;
   void radiusChanged(float arg);
 };

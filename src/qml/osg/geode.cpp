@@ -5,7 +5,7 @@
 
 #include <osg/Geode>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype Geode

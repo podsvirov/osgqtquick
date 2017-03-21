@@ -3,7 +3,7 @@
 
 #include <osgQtQuick/Export>
 
-#include <QQuickWindow>
+#include <QtQuick/QQuickWindow>
 
 #include <osgViewer/CompositeViewer>
 #include <osgViewer/GraphicsWindow>
@@ -45,12 +45,12 @@ public:
 
     static Window * fromWindow(QQuickWindow *window);
 
-signals:
+Q_SIGNALS:
     void textureInUse();
     void acceptNewSize(osgViewer::ViewQtQuick::Index *view, QSize size);
     void pendingNewTexture();
 
-public slots:
+public Q_SLOTS:
     void frame();
     void ready(); // Context ready for rendering
     void prepareNodes();

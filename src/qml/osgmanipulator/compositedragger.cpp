@@ -3,7 +3,7 @@
 
 #include <osgManipulator/Dragger>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 // TODO: Add CompositeDragger type as base fo TabBoxDragger
 

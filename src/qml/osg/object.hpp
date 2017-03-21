@@ -28,7 +28,7 @@ public:
 
   static ObjectQtQml* fromObject(osg::Object *object, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void nameChanged(QString name) const;
 };
 

@@ -5,7 +5,7 @@
 
 #include <osgGA/FirstPersonManipulator>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype FirstPersonManipulator

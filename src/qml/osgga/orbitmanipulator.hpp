@@ -28,7 +28,7 @@ public:
 
   static OrbitManipulatorQtQml* fromOrbitManipulator(OrbitManipulator *orbitManipulator, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void wheelZoomFactorChanged(qreal wheelZoomFactor) const;
 };
 

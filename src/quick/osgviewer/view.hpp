@@ -37,7 +37,7 @@ public:
 
   static ViewQtQuick* fromView(View *view, QQuickItem *parent = 0);
 
-signals:
+Q_SIGNALS:
   void sceneDataChanged(osg::NodeQtQml *node);
   void cameraChanged(osg::CameraQtQml *camera);
   void cameraManipulatorChanged(osgGA::CameraManipulatorQtQml *manipulator);

@@ -3,7 +3,7 @@
 
 #include <osg/MatrixTransform>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype MatrixTransform

@@ -1,6 +1,6 @@
 #include "index.hpp"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 namespace osgQtQml {
 

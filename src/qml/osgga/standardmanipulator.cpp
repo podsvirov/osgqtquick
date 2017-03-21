@@ -5,7 +5,7 @@
 
 #include <osgGA/StandardManipulator>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype StandardManipulator

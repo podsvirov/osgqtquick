@@ -1,9 +1,9 @@
 // Qt headers
-#include <QGuiApplication>
-#include <QQuickView>
+#include <QtGui/QGuiApplication>
+#include <QtQuick/QQuickView>
 
-#include <QQmlContext>
-#include <QDateTime>
+#include <QtQml/QQmlContext>
+#include <QtCore/QDateTime>
 
 // osgQtQuick
 #include <osg/ModuleQtQml>

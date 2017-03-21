@@ -3,9 +3,9 @@
 #include "qfontimplementationindex.hpp"
 
 #include <osgQtQuick/Version>
-#include <QtQml>
+#include <QtQml/QtQml>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 namespace osgQt {
 

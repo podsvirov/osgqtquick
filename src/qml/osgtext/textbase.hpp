@@ -6,8 +6,8 @@
 #include <osgText/StyleQtQml>
 #include <osgText/FontQtQml>
 
-#include <QColor>
-#include <QUrl>
+#include <QtGui/QColor>
+#include <QtCore/QUrl>
 
 namespace osgText {
 
@@ -89,7 +89,7 @@ public:
 
   static TextBaseQtQml* fromTextBase(TextBase *textBase, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void styleChanged(StyleQtQml *shape) const;
   void fontChanged(FontQtQml *font) const;
   void fontSourceChanged(const QUrl &source);

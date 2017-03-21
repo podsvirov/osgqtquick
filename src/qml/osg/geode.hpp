@@ -4,7 +4,7 @@
 #include <osg/GroupQtQml>
 #include <osg/DrawableQtQml>
 
-#include <QQmlListProperty>
+#include <QtQml/QQmlListProperty>
 
 namespace osg {
 
@@ -40,7 +40,7 @@ public:
 
   static GeodeQtQml* fromGeode(Geode *geode, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void numDrawablesChanged(int num);
 
 protected:

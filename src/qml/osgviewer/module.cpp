@@ -3,7 +3,7 @@
 #include "compositeviewerindex.hpp"
 
 #include <osgQtQuick/Version>
-#include <QtQml>
+#include <QtQml/QtQml>
 
 namespace osgViewer {
 

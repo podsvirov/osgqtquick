@@ -5,7 +5,7 @@
 
 #include <osgText/Font>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype FontImplementation

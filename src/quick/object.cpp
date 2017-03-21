@@ -3,7 +3,7 @@
 
 #include <osgQtQml/Index>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 namespace osgQtQuick {
 
