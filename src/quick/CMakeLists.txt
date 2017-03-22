@@ -15,6 +15,7 @@ set(_moc_hdrs)
 macro(META_Node _library _class)
   string(TOLOWER ${_library} _library_l)
   string(TOLOWER ${_class} _class_l)
+  file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/include/${_library}")
   file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/${_library}/${_class}QtQuick"
     CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp\"\n")
   install(FILES "${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp"
