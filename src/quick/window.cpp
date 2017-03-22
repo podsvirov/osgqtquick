@@ -59,7 +59,7 @@ Window::Window(QQuickWindow *window) :
             renderLoopType = WindowsRenderLoop;
 #else
         if (QGuiApplicationPrivate::platformIntegration()->hasCapability(QPlatformIntegration::ThreadedOpenGL))
-            loopType = ThreadedRenderLoop;
+            renderLoopType = ThreadedRenderLoop;
 #endif
         if (qmlNoThreadedRenderer())
             renderLoopType = BasicRenderLoop;
