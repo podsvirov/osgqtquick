@@ -3,7 +3,7 @@
 
 #include <osgManipulator/TabPlaneDragger>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 // TODO: Add CompositeDragger type as base fo TabPlaneDragger
 

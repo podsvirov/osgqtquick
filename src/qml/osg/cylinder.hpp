@@ -2,7 +2,7 @@
 #define _OSG_CYLINDER_QTQML_ 1
 
 #include <osg/ShapeQtQml>
-#include <QVector3D>
+#include <QtGui/QVector3D>
 
 namespace osg {
 
@@ -37,7 +37,7 @@ public:
 
   static CylinderQtQml* fromCylinder(Cylinder *cylinder, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void centerChanged(const QVector3D &center) const;
   void radiusChanged(float radius);
   void heightChanged(float height);

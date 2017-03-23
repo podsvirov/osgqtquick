@@ -7,9 +7,9 @@
 #include <osg/Camera>
 #include <osgViewer/ViewQtQuick>
 
-#include <QOpenGLFramebufferObject>
-#include <QSGSimpleTextureNode>
-#include <QMutex>
+#include <QtGui/QOpenGLFramebufferObject>
+#include <QtQuick/QSGSimpleTextureNode>
+#include <QtCore/QMutex>
 
 namespace osgQtQuick {
 class Window;

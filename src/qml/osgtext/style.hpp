@@ -5,7 +5,7 @@
 
 #include <osg/ShapeQtQml>
 
-#include <QColor>
+#include <QtGui/QColor>
 
 namespace osgText {
 
@@ -37,7 +37,7 @@ public:
 
   static StyleQtQml* fromStyle(Style *style, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   //void shapeChanged(ShapeQtQml *shape) const;
   void widthRatioChanged(qreal widthRatio) const;
 };

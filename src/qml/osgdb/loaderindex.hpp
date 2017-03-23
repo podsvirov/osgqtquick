@@ -8,13 +8,13 @@
 #include <osgDB/ReadFile>
 #include <osgDB/FileUtils>
 
-#include <QThread>
+#include <QtCore/QThread>
 
-#include <QDebug>
-#include <QFileInfo>
+#include <QtCore/QDebug>
+#include <QtCore/QFileInfo>
 
 #include <cstdlib>
-#include <QDir>
+#include <QtCore/QDir>
 
 namespace osgDB {
 
@@ -78,7 +78,7 @@ public:
         emit loaded(url, node.get());
     }
 
-signals:
+Q_SIGNALS:
     void loaded(const QUrl& url, osg::Node *node);
 
 private:

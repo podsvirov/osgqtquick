@@ -3,7 +3,7 @@
 
 #include <osgManipulator/DraggerQtQml>
 
-#include <QColor>
+#include <QtGui/QColor>
 
 namespace osgManipulator {
 
@@ -34,7 +34,7 @@ public:
 
   static RotateSphereDraggerQtQml* fromRotateSphereDragger(RotateSphereDragger *dragger, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void colorChanged(const QColor &color) const;
   void pickColorChanged(const QColor &color) const;
 };

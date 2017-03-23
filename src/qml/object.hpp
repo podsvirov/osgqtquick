@@ -2,7 +2,7 @@
 #define _OSGQTQML_OBJECT_ 1
 
 #include <osgQtQml/Export>
-#include <QQmlParserStatus>
+#include <QtQml/QQmlParserStatus>
 
 namespace osgQtQml {
 

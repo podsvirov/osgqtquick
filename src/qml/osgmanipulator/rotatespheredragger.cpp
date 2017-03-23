@@ -3,7 +3,7 @@
 
 #include <osgManipulator/RotateSphereDragger>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype RotateSphereDragger

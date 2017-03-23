@@ -5,7 +5,7 @@
 
 #include <osgGA/OrbitManipulator>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype OrbitManipulator

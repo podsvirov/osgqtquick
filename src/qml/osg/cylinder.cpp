@@ -5,7 +5,7 @@
 
 #include <osg/Shape>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype Cylinder

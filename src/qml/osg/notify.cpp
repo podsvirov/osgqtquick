@@ -5,7 +5,7 @@
 
 #include <osg/Notify>
 
-#include <QLoggingCategory>
+#include <QtCore/QLoggingCategory>
 
 namespace osg {
 

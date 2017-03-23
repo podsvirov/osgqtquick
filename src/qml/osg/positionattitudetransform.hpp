@@ -3,8 +3,8 @@
 
 #include <osg/TransformQtQml>
 
-#include <QVector3D>
-#include <QQuaternion>
+#include <QtGui/QVector3D>
+#include <QtGui/QQuaternion>
 
 namespace osg {
 
@@ -43,7 +43,7 @@ public:
 
   static PositionAttitudeTransformQtQml* fromPositionAttitudeTransform(PositionAttitudeTransform *transform, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void positionChanged(const QVector3D &pos) const;
   void attitudeChanged(const QQuaternion &quat) const;
   void scaleChanged(const QVector3D &scale) const;

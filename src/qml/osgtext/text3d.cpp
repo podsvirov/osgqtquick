@@ -5,7 +5,7 @@
 
 #include <osgQt/QFontImplementation>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype Text3D

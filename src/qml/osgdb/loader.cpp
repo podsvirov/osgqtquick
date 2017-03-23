@@ -5,7 +5,7 @@
 
 #include <osgDB/ReadFile>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype Loader

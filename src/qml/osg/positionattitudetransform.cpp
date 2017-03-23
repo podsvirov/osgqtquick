@@ -3,7 +3,7 @@
 
 #include <osg/PositionAttitudeTransform>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype PositionAttitudeTransform

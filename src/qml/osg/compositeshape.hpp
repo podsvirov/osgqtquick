@@ -3,7 +3,7 @@
 
 #include <osg/ShapeQtQml>
 
-#include <QQmlListProperty>
+#include <QtQml/QQmlListProperty>
 
 namespace osg {
 
@@ -43,7 +43,7 @@ public:
 
   static CompositeShapeQtQml* fromCompositeShape(CompositeShape *compositeShape, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void shapeChanged(ShapeQtQml *shape) const;
   void numChildrenChanged(int num);
 

@@ -5,7 +5,7 @@
 
 #include <osgGA/FlightManipulator>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype FlightManipulator

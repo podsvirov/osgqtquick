@@ -2,7 +2,7 @@
 #define _OSGQTQUICK_OBJECT_ 1
 
 #include <osgQtQuick/Export>
-#include <QQuickItem>
+#include <QtQuick/QQuickItem>
 
 namespace osgQtQuick {
 

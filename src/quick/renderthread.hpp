@@ -5,12 +5,12 @@
 #include <osgViewer/ViewQtQuick>
 
 #include <QGuiApplication>
-#include <QThread>
-#include <QOpenGLContext>
-#include <QOpenGLFunctions>
-#include <QOffscreenSurface>
-#include <QOpenGLFramebufferObjectFormat>
-#include <QDateTime>
+#include <QtCore/QThread>
+#include <QtGui/QOpenGLContext>
+#include <QtGui/QOpenGLFunctions>
+#include <QtGui/QOffscreenSurface>
+#include <QtGui/QOpenGLFramebufferObjectFormat>
+#include <QtCore/QDateTime>
 
 namespace osgQtQuick {
 
@@ -29,14 +29,14 @@ public:
     QOffscreenSurface *surface;
     QOpenGLContext *context;
 
-public slots:
+public Q_SLOTS:
     void renderNext();
 
     void shutDown();
 
     void acceptNewSize(osgViewer::ViewQtQuick::Index *view, QSize size);
 
-signals:
+Q_SIGNALS:
     void textureReady();
 
 private:

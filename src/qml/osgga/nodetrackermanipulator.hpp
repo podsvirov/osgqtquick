@@ -52,7 +52,7 @@ public:
 
   static NodeTrackerManipulatorQtQml* fromNodeTrackerManipulator(NodeTrackerManipulator *manipulator, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void trackNodeChanged(osg::NodeQtQml *node);
   void trackerModeChanged(TrackerMode mode);
   void rotationModeChanged(RotationMode mode);

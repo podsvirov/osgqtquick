@@ -5,7 +5,7 @@
 
 #include <osg/ShapeQtQml>
 
-#include <QColor>
+#include <QtGui/QColor>
 
 namespace osg {
 
@@ -36,7 +36,7 @@ public:
 
   static ShapeDrawableQtQml* fromShapeDrawable(ShapeDrawable *drawable, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void shapeChanged(ShapeQtQml *shape) const;
   void colorChanged(const QColor &color) const;
 };

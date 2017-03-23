@@ -3,7 +3,7 @@
 
 #include <osg/TransformQtQml>
 
-#include <QMatrix4x4>
+#include <QtGui/QMatrix4x4>
 
 namespace osg {
 
@@ -30,7 +30,7 @@ public:
 
   static MatrixTransformQtQml* fromMatrixTransform(MatrixTransform *transform, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void matrixChanged(const QMatrix4x4 &mat) const;
 };
 

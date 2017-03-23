@@ -3,7 +3,7 @@
 
 #include <osg/ObjectQtQml>
 
-#include <QVector3D>
+#include <QtGui/QVector3D>
 
 namespace osgGA {
 

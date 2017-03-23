@@ -2,7 +2,7 @@
 #define _OSGDB_LOADER_QTQML_ 1
 
 #include <osg/GroupQtQml>
-#include <QUrl>
+#include <QtCore/QUrl>
 
 namespace osgDB {
 
@@ -42,12 +42,12 @@ public:
 
   static LoaderQtQml* fromGroup(osg::Group *group, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void nodeChanged(osg::NodeQtQml* node);
   void sourceChanged(const QUrl &source);
   void statusChanged(Status status);
 
-private slots:
+private Q_SLOTS:
   void nodeLoadingDone(const QUrl &url, osg::Node* node);
 };
 

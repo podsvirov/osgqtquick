@@ -8,11 +8,11 @@
 #include <osgDB/ReadFile>
 #include <osgDB/FileUtils>
 
-#include <QFileInfo>
-#include <QQmlContext>
-#include <QQmlEngine>
+#include <QtCore/QFileInfo>
+#include <QtQml/QQmlContext>
+#include <QtQml/QQmlEngine>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*!
    \qmltype TextBase

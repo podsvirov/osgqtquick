@@ -38,7 +38,7 @@ public:
   Q_INVOKABLE NotifyLevel getNotifyLevel() const;
   Q_INVOKABLE void setNotifyLevel(const NotifyLevel level);
 
-signals:
+Q_SIGNALS:
   void notifyLevelChanged(const NotifyLevel level) const;
 
   void notify(const QString& message) const;

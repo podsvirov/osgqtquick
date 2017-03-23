@@ -5,7 +5,7 @@
 
 #include <osgEarthUtil/EarthManipulator>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 namespace osgEarth { namespace Util {
 

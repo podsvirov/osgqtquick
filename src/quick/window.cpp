@@ -6,9 +6,9 @@
 #include <osgViewer/CompositeViewerQtQml>
 #include <osgViewer/ViewQtQuickIndex>
 
-#include <QOpenGLContext>
-#include <QOpenGLFunctions>
-#include <QTimerEvent>
+#include <QtGui/QOpenGLContext>
+#include <QtGui/QOpenGLFunctions>
+#include <QtCore/QTimerEvent>
 
 #ifdef OSGQTQUICK_WITH_QT_PRIVATE
 
@@ -59,7 +59,7 @@ Window::Window(QQuickWindow *window) :
             renderLoopType = WindowsRenderLoop;
 #else
         if (QGuiApplicationPrivate::platformIntegration()->hasCapability(QPlatformIntegration::ThreadedOpenGL))
-            loopType = ThreadedRenderLoop;
+            renderLoopType = ThreadedRenderLoop;
 #endif
         if (qmlNoThreadedRenderer())
             renderLoopType = BasicRenderLoop;

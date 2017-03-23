@@ -3,7 +3,7 @@
 
 #include <osg/TransformQtQml>
 
-#include <QColor>
+#include <QtGui/QColor>
 
 namespace osg {
 
@@ -34,7 +34,7 @@ public:
 
   static CameraQtQml* fromCamera(Camera *camera, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void clearColorChanged(const QColor &color) const;
   void nearFarRatioChanged(const double ratio) const;
 };

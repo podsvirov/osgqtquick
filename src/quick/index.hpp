@@ -7,9 +7,9 @@
 
 #include <osg/View>
 
-#include <QQuickItem>
-#include <QQuickWindow>
-#include <QKeyEvent>
+#include <QtQuick/QQuickItem>
+#include <QtQuick/QQuickWindow>
+#include <QtGui/QKeyEvent>
 
 #include <map>
 

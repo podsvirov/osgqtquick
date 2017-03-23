@@ -3,7 +3,7 @@
 
 #include <osgText/TextBaseQtQml>
 
-#include <QColor>
+#include <QtGui/QColor>
 
 namespace osgText {
 
@@ -30,7 +30,7 @@ public:
 
   static Text3DQtQml* fromText3D(Text3D *text3D, QObject *parent = 0);
 
-signals:
+Q_SIGNALS:
   void characterDepthChanged(qreal depth) const;
 };
 

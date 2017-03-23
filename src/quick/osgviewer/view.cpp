@@ -10,8 +10,8 @@
 #include <osgViewer/ViewerEventHandlers>
 #include <osgGA/TrackballManipulator>
 
-#include <QMouseEvent>
-#include <QKeyEvent>
+#include <QtGui/QMouseEvent>
+#include <QtGui/QKeyEvent>
 
 /*!
    \qmltype View

@@ -11,6 +11,7 @@ set(_moc_hdrs)
 macro(META_Node _library _class)
   string(TOLOWER ${_library} _library_l)
   string(TOLOWER ${_class} _class_l)
+  file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/include/${_library}")
   file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/${_library}/${_class}QtQml"
     CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp\"\n")
   install(FILES "${CMAKE_CURRENT_LIST_DIR}/${_library_l}/${_class_l}.hpp"
@@ -156,6 +157,8 @@ target_link_libraries(osgQtQml
   ${OSGEARTHUTIL_LIBRARY}
   Qt5::Gui
   Qt5::Qml)
+
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/include/osgQtQml")
 
 file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/include/osgQtQml/Export"
   CONTENT "#include \"${CMAKE_CURRENT_LIST_DIR}/export.hpp\"\n")
