@@ -105,6 +105,8 @@ osg::CameraQtQml *ViewQtQuick::Index::getCamera()
 void ViewQtQuick::Index::setCamera(osg::CameraQtQml *camera)
 {
     o(this)->setCamera(camera->camera());
+    o(this)->getCamera()->setPreDrawCallback(preDraw.get());
+    o(this)->getCamera()->setPostDrawCallback(postDraw.get());
 }
 
 osgGA::CameraManipulatorQtQml *ViewQtQuick::Index::getCameraManipulator()
