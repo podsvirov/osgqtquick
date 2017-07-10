@@ -26,6 +26,7 @@ endmacro(META_Node)
 
 META_Node(osg Object)
 META_Node(osg Node)
+META_Node(osg StateSet)
 META_Node(osg Group)
 META_Node(osg Geode)
 META_Node(osg Shape)
