@@ -1,7 +1,7 @@
 #ifndef _OSG_NODE_QTQML_
 #define _OSG_NODE_QTQML_ 1
 
-#include <osg/ObjectQtQml>
+#include <osg/StateSetQtQml>
 
 namespace osg {
 
@@ -18,6 +18,8 @@ public:
   NodeQtQml(Index *index, QObject *parent = 0);
 
   void classBegin();
+
+  Q_INVOKABLE osg::StateSetQtQml* getOrCreateStateSet();
 
   Node* node();
 

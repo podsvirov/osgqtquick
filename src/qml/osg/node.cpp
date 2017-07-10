@@ -45,6 +45,18 @@ void NodeQtQml::classBegin()
     ObjectQtQml::classBegin();
 }
 
+/*!
+   \qmlmethod StateSet osg::Node::getOrCreateStateSet()
+
+   Return the node's StateSet, if one does not already exist
+   create it set the node and return the newly created StateSet.
+ */
+
+StateSetQtQml *NodeQtQml::getOrCreateStateSet()
+{
+    return osg::StateSetQtQml::fromStateSet(o(this)->getOrCreateStateSet(), this);
+}
+
 Node *NodeQtQml::node()
 {
     return o(this);
