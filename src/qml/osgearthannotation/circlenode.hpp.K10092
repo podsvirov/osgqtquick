@@ -1,0 +1,74 @@
+
+
+#ifndef _OSGEARTH_ANNO_CIRCLE_NODE_QTQML_
+#define _OSGEARTH_ANNO_CIRCLE_NODE_QTQML_ 1
+
+#include <QColor>
+#include <QVector3D>
+#include <osg/GroupQtQml>
+#include <osg/NodeQtQml>
+#include <osgEarthAnnotation/CircleNode>
+#include <osgEarthAnnotation/GeoPositionNodeQtQml>
+
+namespace osgEarth {
+namespace Annotation {
+
+    class OSGQTQML_EXPORT CircleNodeQtQml : public GeoPositionNodeQtQml {
+        Q_OBJECT
+
+    public:
+        Q_PROPERTY(osg::GroupQtQml* parent READ parent WRITE setParent NOTIFY parentChanged)
+        Q_PROPERTY(osg::GroupQtQml* mapNode READ mapNode WRITE setMapNode NOTIFY mapNodeChanged)
+        Q_PROPERTY(QColor styleColor READ styleColor WRITE setStyleColor NOTIFY styleColorChanged)
+        Q_PROPERTY(QVector3D position READ position WRITE setPosition NOTIFY positionChanged)
+        Q_PROPERTY(double radius READ radius WRITE setRadius NOTIFY radiusChanged)
+        Q_PROPERTY(double arcStart READ arcStart WRITE setArcStart NOTIFY arcStartChanged)
+        Q_PROPERTY(double arcEnd READ arcEnd WRITE setArcEnd NOTIFY arcEndChanged)
+
+    public:
+        class Index;
+        CircleNodeQtQml();
+
+        virtual void classBegin();
+        virtual void componentComplete();
+
+        osg::GroupQtQml* parent() const;
+        osg::GroupQtQml* mapNode() const;
+        QColor styleColor() const;
+        QVector3D position() const;
+        double radius() const;
+        double arcStart() const;
+        double arcEnd() const;
+
+    public slots:
+        void setParent(osg::GroupQtQml* parent);
+        void setMapNode(osg::GroupQtQml* mapNode);
+        void setStyleColor(QColor styleColor);
+        void setPosition(QVector3D position);
+        void setRadius(double radius);
+        void setArcStart(double arcStart);
+        void setArcEnd(double arcEnd);
+
+    signals:
+        void parentChanged(osg::GroupQtQml* parent);
+        void mapNodeChanged(osg::GroupQtQml* mapNode);
+        void styleColorChanged(QColor styleColor);
+        void positionChanged(QVector3D position);
+        void radiusChanged(double radius);
+        void arcStartChanged(double arcStart);
+        void arcEndChanged(double arcEnd);
+
+    private:
+        CircleNode* m_circleNode;
+        osg::GroupQtQml* m_parent;
+        osg::GroupQtQml* m_mapNode;
+        double m_arcEnd;
+        QColor m_styleColor;
+        QVector3D m_position;
+        double m_radius;
+        double m_arcStart;
+    };
+}
+} // namespace osgEarth::Annotation
+
+#endif
