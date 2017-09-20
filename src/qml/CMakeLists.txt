@@ -65,7 +65,9 @@ META_Node(osgText FontImplementation)
 META_Node(osgText TextBase)
 META_Node(osgText Text3D)
 
-META_Node(osgQt QFontImplementation)
+if(osgQtQuick_WITH_OSGQT)
+  META_Node(osgQt QFontImplementation)
+endif()
 
 META_Node(osgViewer CompositeViewer)
 
@@ -114,12 +116,16 @@ list(APPEND _srcs
   osgmanipulator/module.cpp
 # osgText
   osgtext/module.cpp
-# osgQt
-  osgqt/module.cpp
 # osgViewer
   osgviewer/compositeviewer.cpp
   osgviewer/module.cpp
 )
+
+if(osgQtQuick_WITH_OSGQT)
+  list(APPEND _srcs
+    # osgQt
+    osgqt/module.cpp)
+endif()
 
 if(osgQtQuick_WITH_EARTH)
   list(APPEND _moc_hdrs
@@ -149,7 +155,6 @@ osgqtquick_library(osgQtQml)
 target_link_libraries(osgQtQml
   ${OPENTHREADS_LIBRARIES}
   ${OSG_LIBRARIES}
-  ${OSGQT_LIBRARIES}
   ${OSGDB_LIBRARIES}
   ${OSGGA_LIBRARIES}
   ${OSGMANIPULATOR_LIBRARIES}
@@ -158,6 +163,12 @@ target_link_libraries(osgQtQml
   ${OSGEARTHUTIL_LIBRARY}
   Qt5::Gui
   Qt5::Qml)
+
+if(osgQtQuick_WITH_OSGQT)
+  target_link_libraries(osgQtQml ${OSGQT_LIBRARIES})
+  target_compile_definitions(osgQtQml
+    PUBLIC "OSGQTQUICK_WITH_OSGQT=1")
+endif()
 
 file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/include/osgQtQml")
 

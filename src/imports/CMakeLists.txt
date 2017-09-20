@@ -5,6 +5,10 @@ add_subdirectory(osgmanipulator)
 add_subdirectory(osgtext)
 add_subdirectory(osgviewer)
 
+if(osgQtQuick_WITH_OSGQT)
+  add_subdirectory(osgqt)
+endif()
+
 if(osgQtQuick_WITH_EARTH)
   add_subdirectory(osgearthutil)
 endif()

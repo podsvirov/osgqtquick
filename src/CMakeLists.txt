@@ -10,13 +10,17 @@ list(APPEND CMAKE_MODULE_PATH "${osgQtQuick_ROOT_DIR}/cmake")
 # OpenSceneGraph
 find_package(OpenSceneGraph 3.0 REQUIRED
   osg
-  osgQt
   osgDB
   osgGA
   osgManipulator
   osgUtil
   osgViewer
   osgText)
+
+# osgQt
+if(osgQtQuick_WITH_OSGQT)
+  find_package(osgQt 3.0 REQUIRED)
+endif()
 
 # Qt
 if(osgQtQuick_WITH_QT_PRIVATE)
