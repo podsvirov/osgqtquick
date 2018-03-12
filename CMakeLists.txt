@@ -16,6 +16,9 @@ set(osgQtQuick_BUILD_DOCS OFF
 set(osgQtQuick_BUILD_DEBUGGER OFF
   CACHE BOOL "Set to ON to build debugger application (By default is OFF)")
 
+set(osgQtQuick_WITH_OSGQT ON
+  CACHE BOOL "Set to OFF to build without osgQt library support (By default is ON)")
+
 set(osgQtQuick_WITH_EARTH OFF
   CACHE BOOL "Set to ON to build with osgEarth library support (By default is OFF)")
 

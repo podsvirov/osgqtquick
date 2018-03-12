@@ -1,6 +1,7 @@
 #include "module.hpp"
 
 #include "objectindex.hpp"
+#include "statesetindex.hpp"
 #include "nodeindex.hpp"
 #include "notifyindex.hpp"
 #include "groupindex.hpp"
@@ -35,6 +36,10 @@ void registerQtQmlTypes(const char *uri)
     qmlRegisterUncreatableType<ObjectQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Object", "[osgQtQuick] Object is Uncreatable");
+
+    qmlRegisterType<StateSetQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "StateSet");
 
     qmlRegisterType<NodeQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
