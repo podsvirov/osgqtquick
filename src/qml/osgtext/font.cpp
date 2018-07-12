@@ -87,10 +87,13 @@ void FontQtQml::setImplementation(FontImplementationQtQml *implementation)
     }
 }
 
+#if OSG_VERSION_LESS_THAN(3, 6, 0)
 /*!
    \qmlproperty real osgText::Font::glyphImageMarginRatio
 
    The text glyph image margin ratio
+
+   \note This property was removed since OSG 3.6.0.
  */
 
 qreal FontQtQml::getGlyphImageMarginRatio() const
@@ -106,6 +109,7 @@ void FontQtQml::setGlyphImageMarginRatio(qreal widthRation)
 
     emit glyphImageMarginRatioChanged(widthRation);
 }
+#endif // OSG_VERSION_LESS_THAN(3, 6, 0)
 
 Font *FontQtQml::font()
 {
