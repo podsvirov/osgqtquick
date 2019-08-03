@@ -18,16 +18,25 @@ OSG.Group {
             color: "green"
             shape: OSG.Box {
                 halfLengths: Qt.vector3d(0.2, 0.1, 0.3)
-                center: Qt.vector3d(0.15, -0.2, 0.3)
+                center: Qt.vector3d(0.2, 0.3, 0.3)
             }
         }
 
         OSG.ShapeDrawable {
             color: "blue"
             shape: OSG.Cylinder {
-                center: Qt.vector3d(0.25, 0.15, 0.2)
+                center: Qt.vector3d(0.25, -0.05, 0.2)
                 radius: 0.2
                 height: 0.4
+            }
+        }
+
+        OSG.ShapeDrawable {
+            color: "magenta"
+            shape: OSG.Cone {
+                center: Qt.vector3d(-0.1, -0.2, 0.075)
+                radius: 0.15
+                height: 0.3
             }
         }
     }
