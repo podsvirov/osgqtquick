@@ -17,6 +17,7 @@
 #include "compositeshapeindex.hpp"
 #include "boxindex.hpp"
 #include "sphereindex.hpp"
+#include "coneindex.hpp"
 #include "cylinderindex.hpp"
 #include "geodeindex.hpp"
 
@@ -100,6 +101,10 @@ void registerQtQmlTypes(const char *uri)
     qmlRegisterType<SphereQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
                 "Sphere");
+
+    qmlRegisterType<ConeQtQml>(
+                uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
+                "Cone");
 
     qmlRegisterType<CylinderQtQml>(
                 uri, osgQtQuick_VERSION_MAJOR, osgQtQuick_VERSION_MINOR,
