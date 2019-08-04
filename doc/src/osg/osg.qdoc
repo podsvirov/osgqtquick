@@ -7,7 +7,7 @@
    The core osg module provides the basic scene graph types such as Nodes, State
    and Drawables, and maths and general helper types
 
-   \chapter Importing
+   \section1 Importing
 
    To use the types in this module, import the module with the following line:
 
@@ -15,7 +15,7 @@
         import osg 2.0
    \endqml
 
-   \chapter Types
+   \section1 Types
 
    The following types are provided:
  */

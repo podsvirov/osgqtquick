@@ -6,7 +6,7 @@
 
    The osgText module extends the core scene graph to support high quality text
 
-   \chapter Importing
+   \section1 Importing
 
    To use the types in this module, import the module with the following line:
 
@@ -14,7 +14,7 @@
    import osgText 2.0
    \endqml
 
-   \chapter Types
+   \section1 Types
 
    The following types are provided:
  */

@@ -9,7 +9,7 @@
    embedded in existing windows via SimpleViewer, through to highly scalable and
    flexible Viewer and Composite types
 
-   \chapter Importing
+   \section1 Importing
 
    To use the types in this module, import the module with the following line:
 
@@ -17,7 +17,7 @@
    import osgViewer 2.0
    \endqml
 
-   \chapter Types
+   \section1 Types
 
    The following types are provided:
  */

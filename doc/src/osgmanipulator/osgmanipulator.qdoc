@@ -7,7 +7,7 @@
    The osgManipulator module extends the core scene graph to support 3D
    interactive manipulators
 
-   \chapter Importing
+   \section1 Importing
 
    To use the types in this module, import the module with the following line:
 
@@ -15,7 +15,7 @@
    import osgManipulator 2.0
    \endqml
 
-   \chapter Types
+   \section1 Types
 
    The following types are provided:
  */

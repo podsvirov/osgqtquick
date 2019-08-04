@@ -5,11 +5,11 @@
 
    Integration \OSG library to \QTQ.
 
-   \chapter Structure
+   \section1 Structure
 
    This project provides one QML module for each \OSG library.
 
-   \chapter OpenSceneGraph QML modules
+   \section1 OpenSceneGraph QML modules
 
    \annotatedlist osgqmlmodules
  */
