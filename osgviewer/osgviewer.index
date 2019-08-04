@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QDOCINDEX>
-<INDEX url="" title="osgViewer Module" version="2.0" project="osgViewer" indexTitle="osgViewer">
+<INDEX url="../osgviewer" title="osgViewer Module" version="2.0" project="osgViewer" indexTitle="osgViewer">
     <namespace threadsafety="unspecified" name="" status="active" access="public" module="osgviewer">
         <namespace threadsafety="unspecified" name="osgViewer" href="osgviewer.html" status="internal" access="private" location="compositeviewer.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgviewer/compositeviewer.hpp" lineno="6">
             <class threadsafety="unspecified" name="CompositeViewerQtQml" fullname="osgViewer::CompositeViewerQtQml" href="osgviewer-compositeviewerqtqml.html" status="active" access="public" location="compositeviewer.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgviewer/compositeviewer.hpp" lineno="10" bases="osg::ObjectQtQml">

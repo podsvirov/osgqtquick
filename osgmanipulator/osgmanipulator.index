@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QDOCINDEX>
-<INDEX url="" title="osgManipulator Module" version="2.0" project="osgManipulator" indexTitle="osgManipulator">
+<INDEX url="../osgmanipulator" title="osgManipulator Module" version="2.0" project="osgManipulator" indexTitle="osgManipulator">
     <namespace threadsafety="unspecified" name="" status="active" access="public" module="osgmanipulator">
         <qmlclass threadsafety="unspecified" name="CompositeDragger" qml-module-name="osgManipulator" qml-base-type="osgManipulator::Dragger" fullname="osgManipulator.CompositeDragger" href="qml-osgmanipulator-compositedragger.html" status="active" access="public" title="CompositeDragger" fulltitle="CompositeDragger" subtitle="" brief="Allows to create complex draggers">
             <qmlproperty threadsafety="unspecified" name="draggers" fullname="osgManipulator.CompositeDragger.draggers" href="qml-osgmanipulator-compositedragger.html#draggers-prop" status="active" access="public" type="list&lt;osgManipulator::Dragger&gt;" attached="false" writable="true"/>

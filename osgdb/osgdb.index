@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QDOCINDEX>
-<INDEX url="" title="osgDB Module" version="2.0" project="osgDB" indexTitle="osgDB">
+<INDEX url="../osgdb" title="osgDB Module" version="2.0" project="osgDB" indexTitle="osgDB">
     <namespace threadsafety="unspecified" name="" status="active" access="public" module="osgdb">
         <qmlclass threadsafety="unspecified" name="Loader" qml-module-name="osgDB" qml-base-type="osg::Group" fullname="osgDB.Loader" href="qml-osgdb-loader.html" status="active" access="public" title="Loader" fulltitle="Loader" subtitle="" brief="Of nodes">
             <qmlproperty threadsafety="unspecified" name="node" fullname="osgDB.Loader.node" href="qml-osgdb-loader.html#node-prop" status="active" access="public" type="osg::Node" attached="false" writable="true"/>

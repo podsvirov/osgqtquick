@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QDOCINDEX>
-<INDEX url="" title="osgGA Module" version="2.0" project="osgGA" indexTitle="osgGA">
+<INDEX url="../osgga" title="osgGA Module" version="2.0" project="osgGA" indexTitle="osgGA">
     <namespace threadsafety="unspecified" name="" status="active" access="public" module="osgga">
         <qmlclass threadsafety="unspecified" name="CameraManipulator" qml-module-name="osgGA" qml-base-type="osg::Object" fullname="osgGA.CameraManipulator" href="qml-osgga-cameramanipulator.html" status="active" access="public" title="CameraManipulator" fulltitle="CameraManipulator" subtitle="" brief="Uncreatable base type for all camera manipulators"/>
         <namespace threadsafety="unspecified" name="osgGA" href="osgga.html" status="internal" access="private" location="cameramanipulator.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osgga/cameramanipulator.hpp" lineno="8">

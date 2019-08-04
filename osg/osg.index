@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QDOCINDEX>
-<INDEX url="" title="osg Module" version="2.0" project="osg" indexTitle="osg">
+<INDEX url="../osg" title="osg Module" version="2.0" project="osg" indexTitle="osg">
     <namespace threadsafety="unspecified" name="" status="active" access="public" module="osg">
         <qmlclass threadsafety="unspecified" name="Box" qml-module-name="osg" qml-base-type="osg::Shape" fullname="osg.Box" href="qml-osg-box.html" status="active" access="public" title="Box" fulltitle="Box" subtitle="" brief="Shape">
             <qmlproperty threadsafety="unspecified" name="center" fullname="osg.Box.center" href="qml-osg-box.html#center-prop" status="active" access="public" type="vector3d" attached="false" writable="true"/>
@@ -152,6 +152,56 @@
                 </class>
             </class>
             <function threadsafety="unspecified" name="info" fullname="osg::info" href="osg.html#info" status="active" access="public" location="compositeshapeindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/compositeshapeindex.hpp" lineno="35" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="CompositeShapeQtQml::Index::CompleteInfo *" signature="CompositeShapeQtQml::Index::CompleteInfo * info()"/>
+            <class threadsafety="unspecified" name="ConeQtQml" fullname="osg::ConeQtQml" href="osg-coneqtqml.html" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="11" bases="osg::ShapeQtQml">
+                <function threadsafety="unspecified" name="ConeQtQml" fullname="osg::ConeQtQml::ConeQtQml" href="osg-coneqtqml.html#ConeQtQml-1" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="23" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" type="" signature="ConeQtQml(Index *, QObject *parent)">
+                    <parameter left="Index *" right="" name="" default=""/>
+                    <parameter left="QObject *" right="" name="parent" default="0"/>
+                </function>
+                <function threadsafety="unspecified" name="ConeQtQml" fullname="osg::ConeQtQml::ConeQtQml" href="osg-coneqtqml.html#ConeQtQml" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="22" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" type="" signature="ConeQtQml(QObject *parent)">
+                    <parameter left="QObject *" right="" name="parent" default="0"/>
+                </function>
+                <function threadsafety="unspecified" name="centerChanged" fullname="osg::ConeQtQml::centerChanged" href="osg-coneqtqml.html#center-prop" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="41" virtual="non" meta="signal" const="true" static="false" overload="false" delete="false" default="false" final="false" associated-property="center" type="void" signature="void centerChanged(const QVector3D &amp;center) const">
+                    <parameter left="const QVector3D &amp;" right="" name="center" default=""/>
+                </function>
+                <function threadsafety="unspecified" name="classBegin" fullname="osg::ConeQtQml::classBegin" href="osg-coneqtqml.html#classBegin" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="25" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="void" signature="void classBegin()"/>
+                <function threadsafety="unspecified" name="cone" fullname="osg::ConeQtQml::cone" href="osg-coneqtqml.html#cone" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="36" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="Cone *" signature="Cone * cone()"/>
+                <function threadsafety="unspecified" name="fromCone" fullname="osg::ConeQtQml::fromCone" href="osg-coneqtqml.html#fromCone" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="38" virtual="non" meta="plain" const="false" static="true" overload="false" delete="false" default="false" final="false" type="ConeQtQml *" signature="ConeQtQml * fromCone(Cone *cone, QObject *parent)">
+                    <parameter left="Cone *" right="" name="cone" default=""/>
+                    <parameter left="QObject *" right="" name="parent" default="0"/>
+                </function>
+                <function threadsafety="unspecified" name="heightChanged" fullname="osg::ConeQtQml::heightChanged" href="osg-coneqtqml.html#height-prop" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="43" virtual="non" meta="signal" const="false" static="false" overload="false" delete="false" default="false" final="false" associated-property="height" type="void" signature="void heightChanged(float height)">
+                    <parameter left="float" right="" name="height" default=""/>
+                </function>
+                <function threadsafety="unspecified" name="radiusChanged" fullname="osg::ConeQtQml::radiusChanged" href="osg-coneqtqml.html#radius-prop" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="42" virtual="non" meta="signal" const="false" static="false" overload="false" delete="false" default="false" final="false" associated-property="radius" type="void" signature="void radiusChanged(float radius)">
+                    <parameter left="float" right="" name="radius" default=""/>
+                </function>
+                <property threadsafety="unspecified" name="center" fullname="osg::ConeQtQml::center" href="osg-coneqtqml.html#center-prop" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="15" type="QVector3D">
+                    <notifier name="centerChanged"/>
+                </property>
+                <property threadsafety="unspecified" name="height" fullname="osg::ConeQtQml::height" href="osg-coneqtqml.html#height-prop" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="17" type="float">
+                    <notifier name="heightChanged"/>
+                </property>
+                <property threadsafety="unspecified" name="radius" fullname="osg::ConeQtQml::radius" href="osg-coneqtqml.html#radius-prop" status="active" access="public" location="cone.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cone.hpp" lineno="16" type="float">
+                    <notifier name="radiusChanged"/>
+                </property>
+                <class threadsafety="unspecified" name="Index" fullname="osg::ConeQtQml::Index" href="osg-coneqtqml-index.html" status="active" access="public" location="coneindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/coneindex.hpp" lineno="10">
+                    <typedef threadsafety="unspecified" name="OType" fullname="osg::ConeQtQml::Index::OType" href="osg-coneqtqml-index.html#OType-typedef" status="active" access="public" location="coneindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/coneindex.hpp" lineno="13"/>
+                    <typedef threadsafety="unspecified" name="QType" fullname="osg::ConeQtQml::Index::QType" href="osg-coneqtqml-index.html#QType-typedef" status="active" access="public" location="coneindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/coneindex.hpp" lineno="14"/>
+                    <function threadsafety="unspecified" name="Index" fullname="osg::ConeQtQml::Index::Index" href="osg-coneqtqml-index.html#Index" status="active" access="public" location="coneindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/coneindex.hpp" lineno="18" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" type="" signature="Index(Cone *o)">
+                        <parameter left="Cone *" right="" name="o" default="0"/>
+                    </function>
+                    <function threadsafety="unspecified" name="classBegin" fullname="osg::ConeQtQml::Index::classBegin" href="osg-coneqtqml-index.html#classBegin" status="active" access="public" location="coneindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/coneindex.hpp" lineno="20" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="void" signature="void classBegin()"/>
+                    <function threadsafety="unspecified" name="setCenter" fullname="osg::ConeQtQml::Index::setCenter" href="osg-coneqtqml-index.html#setCenter" status="active" access="public" location="coneindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/coneindex.hpp" lineno="22" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="void" signature="void setCenter(const QVector3D &amp;center)">
+                        <parameter left="const QVector3D &amp;" right="" name="center" default=""/>
+                    </function>
+                    <function threadsafety="unspecified" name="setHeight" fullname="osg::ConeQtQml::Index::setHeight" href="osg-coneqtqml-index.html#setHeight" status="active" access="public" location="coneindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/coneindex.hpp" lineno="24" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="void" signature="void setHeight(float height)">
+                        <parameter left="float" right="" name="height" default=""/>
+                    </function>
+                    <function threadsafety="unspecified" name="setRadius" fullname="osg::ConeQtQml::Index::setRadius" href="osg-coneqtqml-index.html#setRadius" status="active" access="public" location="coneindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/coneindex.hpp" lineno="23" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="void" signature="void setRadius(float radius)">
+                        <parameter left="float" right="" name="radius" default=""/>
+                    </function>
+                </class>
+            </class>
             <class threadsafety="unspecified" name="CylinderQtQml" fullname="osg::CylinderQtQml" href="osg-cylinderqtqml.html" status="active" access="public" location="cylinder.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cylinder.hpp" lineno="11" bases="osg::ShapeQtQml">
                 <function threadsafety="unspecified" name="CylinderQtQml" fullname="osg::CylinderQtQml::CylinderQtQml" href="osg-cylinderqtqml.html#CylinderQtQml-1" status="active" access="public" location="cylinder.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/cylinder.hpp" lineno="23" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" type="" signature="CylinderQtQml(Index *, QObject *parent)">
                     <parameter left="Index *" right="" name="" default=""/>
@@ -391,11 +441,11 @@
                     <parameter left="QObject *" right="" name="parent" default="0"/>
                 </function>
                 <function threadsafety="unspecified" name="classBegin" fullname="osg::NodeQtQml::classBegin" href="osg-nodeqtqml.html#classBegin" status="active" access="public" location="node.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/node.hpp" lineno="20" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="void" signature="void classBegin()"/>
-                <function threadsafety="unspecified" name="fromNode" fullname="osg::NodeQtQml::fromNode" href="osg-nodeqtqml.html#fromNode" status="active" access="public" location="node.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/node.hpp" lineno="24" virtual="non" meta="plain" const="false" static="true" overload="false" delete="false" default="false" final="false" type="NodeQtQml *" signature="NodeQtQml * fromNode(Node *node, QObject *parent)">
+                <function threadsafety="unspecified" name="fromNode" fullname="osg::NodeQtQml::fromNode" href="osg-nodeqtqml.html#fromNode" status="active" access="public" location="node.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/node.hpp" lineno="26" virtual="non" meta="plain" const="false" static="true" overload="false" delete="false" default="false" final="false" type="NodeQtQml *" signature="NodeQtQml * fromNode(Node *node, QObject *parent)">
                     <parameter left="Node *" right="" name="node" default=""/>
                     <parameter left="QObject *" right="" name="parent" default="0"/>
                 </function>
-                <function threadsafety="unspecified" name="node" fullname="osg::NodeQtQml::node" href="osg-nodeqtqml.html#node" status="active" access="public" location="node.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/node.hpp" lineno="22" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="Node *" signature="Node * node()"/>
+                <function threadsafety="unspecified" name="node" fullname="osg::NodeQtQml::node" href="osg-nodeqtqml.html#node" status="active" access="public" location="node.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/node.hpp" lineno="24" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="Node *" signature="Node * node()"/>
                 <class threadsafety="unspecified" name="Index" fullname="osg::NodeQtQml::Index" href="osg-nodeqtqml-index.html" status="active" access="public" location="nodeindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/nodeindex.hpp" lineno="10">
                     <typedef threadsafety="unspecified" name="OType" fullname="osg::NodeQtQml::Index::OType" href="osg-nodeqtqml-index.html#OType-typedef" status="active" access="public" location="nodeindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/nodeindex.hpp" lineno="13"/>
                     <typedef threadsafety="unspecified" name="QType" fullname="osg::NodeQtQml::Index::QType" href="osg-nodeqtqml-index.html#QType-typedef" status="active" access="public" location="nodeindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/nodeindex.hpp" lineno="14"/>
@@ -636,6 +686,29 @@
                     </function>
                 </class>
             </class>
+            <class threadsafety="unspecified" name="StateSetQtQml" fullname="osg::StateSetQtQml" href="osg-statesetqtqml.html" status="active" access="public" location="stateset.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/stateset.hpp" lineno="10" bases="osg::ObjectQtQml">
+                <function threadsafety="unspecified" name="StateSetQtQml" fullname="osg::StateSetQtQml::StateSetQtQml" href="osg-statesetqtqml.html#StateSetQtQml-1" status="active" access="public" location="stateset.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/stateset.hpp" lineno="18" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" type="" signature="StateSetQtQml(Index *index, QObject *parent)">
+                    <parameter left="Index *" right="" name="index" default=""/>
+                    <parameter left="QObject *" right="" name="parent" default="0"/>
+                </function>
+                <function threadsafety="unspecified" name="StateSetQtQml" fullname="osg::StateSetQtQml::StateSetQtQml" href="osg-statesetqtqml.html#StateSetQtQml" status="active" access="public" location="stateset.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/stateset.hpp" lineno="17" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" type="" signature="StateSetQtQml(QObject *parent)">
+                    <parameter left="QObject *" right="" name="parent" default="0"/>
+                </function>
+                <function threadsafety="unspecified" name="classBegin" fullname="osg::StateSetQtQml::classBegin" href="osg-statesetqtqml.html#classBegin" status="active" access="public" location="stateset.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/stateset.hpp" lineno="20" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="void" signature="void classBegin()"/>
+                <function threadsafety="unspecified" name="fromStateSet" fullname="osg::StateSetQtQml::fromStateSet" href="osg-statesetqtqml.html#fromStateSet" status="active" access="public" location="stateset.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/stateset.hpp" lineno="26" virtual="non" meta="plain" const="false" static="true" overload="false" delete="false" default="false" final="false" type="StateSetQtQml *" signature="StateSetQtQml * fromStateSet(StateSet *stateSet, QObject *parent)">
+                    <parameter left="StateSet *" right="" name="stateSet" default=""/>
+                    <parameter left="QObject *" right="" name="parent" default="0"/>
+                </function>
+                <function threadsafety="unspecified" name="stateSet" fullname="osg::StateSetQtQml::stateSet" href="osg-statesetqtqml.html#stateSet" status="active" access="public" location="stateset.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/stateset.hpp" lineno="24" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="StateSet *" signature="StateSet * stateSet()"/>
+                <class threadsafety="unspecified" name="Index" fullname="osg::StateSetQtQml::Index" href="osg-statesetqtqml-index.html" status="active" access="public" location="statesetindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/statesetindex.hpp" lineno="10">
+                    <typedef threadsafety="unspecified" name="OType" fullname="osg::StateSetQtQml::Index::OType" href="osg-statesetqtqml-index.html#OType-typedef" status="active" access="public" location="statesetindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/statesetindex.hpp" lineno="13"/>
+                    <typedef threadsafety="unspecified" name="QType" fullname="osg::StateSetQtQml::Index::QType" href="osg-statesetqtqml-index.html#QType-typedef" status="active" access="public" location="statesetindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/statesetindex.hpp" lineno="14"/>
+                    <function threadsafety="unspecified" name="Index" fullname="osg::StateSetQtQml::Index::Index" href="osg-statesetqtqml-index.html#Index" status="active" access="public" location="statesetindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/statesetindex.hpp" lineno="18" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" type="" signature="Index(StateSet *o)">
+                        <parameter left="StateSet *" right="" name="o" default="0"/>
+                    </function>
+                    <function threadsafety="unspecified" name="classBegin" fullname="osg::StateSetQtQml::Index::classBegin" href="osg-statesetqtqml-index.html#classBegin" status="active" access="public" location="statesetindex.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/statesetindex.hpp" lineno="19" virtual="non" meta="plain" const="false" static="false" overload="false" delete="false" default="false" final="false" type="void" signature="void classBegin()"/>
+                </class>
+            </class>
             <class threadsafety="unspecified" name="TransformQtQml" fullname="osg::TransformQtQml" href="osg-transformqtqml.html" status="active" access="public" location="transform.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/transform.hpp" lineno="10" bases="osg::GroupQtQml">
                 <function threadsafety="unspecified" name="TransformQtQml" fullname="osg::TransformQtQml::TransformQtQml" href="osg-transformqtqml.html#TransformQtQml-1" status="active" access="public" location="transform.hpp" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/src/qml/osg/transform.hpp" lineno="18" virtual="non" meta="constructor" const="false" static="false" overload="false" delete="false" default="false" final="false" type="" signature="TransformQtQml(Index *, QObject *parent)">
                     <parameter left="Index *" right="" name="" default=""/>
@@ -669,6 +742,11 @@
             <qmlmethod threadsafety="unspecified" name="addChild" fullname="osg.CompositeShape.addChild" href="qml-osg-compositeshape.html#addChild-method" status="active" access="public"/>
             <qmlmethod threadsafety="unspecified" name="removeChild" fullname="osg.CompositeShape.removeChild" href="qml-osg-compositeshape.html#removeChild-method" status="active" access="public"/>
         </qmlclass>
+        <qmlclass threadsafety="unspecified" name="Cone" qml-module-name="osg" qml-base-type="osg::Shape" fullname="osg.Cone" href="qml-osg-cone.html" status="active" access="public" title="Cone" fulltitle="Cone" subtitle="" brief="Shape">
+            <qmlproperty threadsafety="unspecified" name="center" fullname="osg.Cone.center" href="qml-osg-cone.html#center-prop" status="active" access="public" type="vector3d" attached="false" writable="true"/>
+            <qmlproperty threadsafety="unspecified" name="height" fullname="osg.Cone.height" href="qml-osg-cone.html#height-prop" status="active" access="public" type="float" attached="false" writable="true"/>
+            <qmlproperty threadsafety="unspecified" name="radius" fullname="osg.Cone.radius" href="qml-osg-cone.html#radius-prop" status="active" access="public" type="float" attached="false" writable="true"/>
+        </qmlclass>
         <qmlclass threadsafety="unspecified" name="Cylinder" qml-module-name="osg" qml-base-type="osg::Shape" fullname="osg.Cylinder" href="qml-osg-cylinder.html" status="active" access="public" title="Cylinder" fulltitle="Cylinder" subtitle="" brief="Shape">
             <qmlproperty threadsafety="unspecified" name="center" fullname="osg.Cylinder.center" href="qml-osg-cylinder.html#center-prop" status="active" access="public" type="vector3d" attached="false" writable="true"/>
             <qmlproperty threadsafety="unspecified" name="height" fullname="osg.Cylinder.height" href="qml-osg-cylinder.html#height-prop" status="active" access="public" type="float" attached="false" writable="true"/>
@@ -687,7 +765,9 @@
         <qmlclass threadsafety="unspecified" name="MatrixTransform" qml-module-name="osg" qml-base-type="osg::Transform" fullname="osg.MatrixTransform" href="qml-osg-matrixtransform.html" status="active" access="public" title="MatrixTransform" fulltitle="MatrixTransform" subtitle="" brief="Transform via matrix 4x4">
             <qmlproperty threadsafety="unspecified" name="matrix" fullname="osg.MatrixTransform.matrix" href="qml-osg-matrixtransform.html#matrix-prop" status="active" access="public" type="matrix4x4" attached="false" writable="true"/>
         </qmlclass>
-        <qmlclass threadsafety="unspecified" name="Node" qml-module-name="osg" qml-base-type="osg::Object" fullname="osg.Node" href="qml-osg-node.html" status="active" access="public" title="Node" fulltitle="Node" subtitle="" brief="Base type for all internal nodes in the scene graph"/>
+        <qmlclass threadsafety="unspecified" name="Node" qml-module-name="osg" qml-base-type="osg::Object" fullname="osg.Node" href="qml-osg-node.html" status="active" access="public" title="Node" fulltitle="Node" subtitle="" brief="Base type for all internal nodes in the scene graph">
+            <qmlmethod threadsafety="unspecified" name="getOrCreateStateSet" fullname="osg.Node.getOrCreateStateSet" href="qml-osg-node.html#getOrCreateStateSet-method" status="active" access="public"/>
+        </qmlclass>
         <qmlclass threadsafety="unspecified" name="Object" qml-module-name="osg" fullname="osg.Object" href="qml-osg-object.html" status="active" access="public" title="Object" fulltitle="Object" subtitle="" brief="Base type">
             <qmlproperty threadsafety="unspecified" name="name" fullname="osg.Object.name" href="qml-osg-object.html#name-prop" status="active" access="public" type="string" attached="false" writable="true"/>
         </qmlclass>
@@ -706,9 +786,12 @@
             <qmlproperty threadsafety="unspecified" name="center" fullname="osg.Sphere.center" href="qml-osg-sphere.html#center-prop" status="active" access="public" type="vector3d" attached="false" writable="true"/>
             <qmlproperty threadsafety="unspecified" name="radius" fullname="osg.Sphere.radius" href="qml-osg-sphere.html#radius-prop" status="active" access="public" type="float" attached="false" writable="true"/>
         </qmlclass>
+        <qmlclass threadsafety="unspecified" name="StateSet" qml-module-name="osg" qml-base-type="osg::Object" fullname="osg.StateSet" href="qml-osg-stateset.html" status="active" access="public" title="StateSet" fulltitle="StateSet" subtitle="" brief="Stores a set of modes and attributes which represent a set of OpenGL state">
+            <qmlmethod threadsafety="unspecified" name="setGlobalDefaults" fullname="osg.StateSet.setGlobalDefaults" href="qml-osg-stateset.html#setGlobalDefaults-method" status="active" access="public"/>
+        </qmlclass>
         <qmlclass threadsafety="unspecified" name="Transform" qml-module-name="osg" qml-base-type="osg::Group" fullname="osg.Transform" href="qml-osg-transform.html" status="active" access="public" title="Transform" fulltitle="Transform" subtitle="" brief="Transformation group"/>
         <group name="osgqmlmodules" href="osgqmlmodules.html" status="internal" seen="false" title="" members="osg"/>
-        <qmlmodule name="osg" qml-module-name="osg" qml-module-version="2.0" href="osg-qmlmodule.html" status="active" location="osg.qdoc" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/doc/src/osg/osg.qdoc" lineno="1" seen="true" title="osg" module="osg" groups="osgqmlmodules" members="Box,Camera,CompositeShape,Cylinder,Drawable,Geode,Group,MatrixTransform,Node,Object,PositionAttitudeTransform,Shape,ShapeDrawable,Sphere,Transform" brief="Contains QML types for osg library">
+        <qmlmodule name="osg" qml-module-name="osg" qml-module-version="2.0" href="osg-qmlmodule.html" status="active" location="osg.qdoc" filepath="D:/Sources/podsvirov.pro/openscenegraph/osgqtquick/doc/src/osg/osg.qdoc" lineno="1" seen="true" title="osg" module="osg" groups="osgqmlmodules" members="Box,Camera,CompositeShape,Cone,Cylinder,Drawable,Geode,Group,MatrixTransform,Node,Object,PositionAttitudeTransform,Shape,ShapeDrawable,Sphere,StateSet,Transform" brief="Contains QML types for osg library">
             <contents name="importing" title="Importing" level="1"/>
             <contents name="types" title="Types" level="1"/>
         </qmlmodule>
