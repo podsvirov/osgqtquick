@@ -3,6 +3,7 @@ include(config.qdocconf)
 project                 = osgDoc
 description             = Intergation OSG to Qt Quick
 
+url         = ../osgdoc
 outputdir   = html/osgdoc
 sourcedirs  = src/osgdoc
 

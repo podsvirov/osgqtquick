@@ -9,6 +9,7 @@ headerdirs = ../src/qml/osgga
 sourcedirs = src/osgga \
              ../src/qml/osgga
 
+url       = ../osgga
 outputdir = html/osgga
 
 indexes   = html/osgdoc/osgdoc.index \

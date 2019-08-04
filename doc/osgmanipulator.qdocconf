@@ -9,6 +9,7 @@ headerdirs = ../src/qml/osgmanipulator
 sourcedirs = src/osgmanipulator \
              ../src/qml/osgmanipulator
 
+url       = ../osgmanipulator
 outputdir = html/osgmanipulator
 
 indexes   = html/osgdoc/osgdoc.index \

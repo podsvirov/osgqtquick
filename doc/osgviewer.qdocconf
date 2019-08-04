@@ -11,6 +11,7 @@ sourcedirs = src/osgviewer \
              ../src/qml/osgviewer \
              ../src/quick/osgviewer
 
+url       = ../osgviewer
 outputdir = html/osgviewer
 
 indexes   = html/osgdoc/osgdoc.index \
