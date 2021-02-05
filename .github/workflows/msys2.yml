@@ -1,0 +1,40 @@
+name: msys2
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: [
+          { msystem: MINGW64, arch: x86_64 },
+          { msystem: MINGW32, arch: i686   }
+        ]
+    steps:
+      - name: "Set git to use LF"
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MSYS
+          install: git base-devel binutils mingw-w64-${{ matrix.arch }}-toolchain
+          update: true
+      - name: CI-Build
+        shell: msys2 {0}
+        run: |
+          cd $GITHUB_WORKSPACE/packaging/msys2/mingw-w64-osgqtquick-git
+          MINGW_INSTALLS=${{ matrix.msystem }} makepkg-mingw -si --noconfirm
+      - name: "Upload binaries"
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.msystem }}-packages-dev
+          path: ${{ github.workspace }}\packaging\msys2\mingw-w64-osgqtquick-git\*.pkg.tar.*
+
