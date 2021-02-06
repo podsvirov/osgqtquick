@@ -1,5 +1,7 @@
 # osgQtQuick - OpenSceneGraph QML Modules
 
+[![msys2](https://github.com/podsvirov/osgqtquick/workflows/msys2/badge.svg?branch=develop)](https://github.com/podsvirov/osgqtquick/actions?query=workflow%3Amsys2+branch%3Adevelop)
+
 ![Hello from osgQtQuick 2.0!](https://github.com/podsvirov/osgqtquick/blob/gh-repos/images/text3d.png)
 
 Intergation [OpenSceneGraph](http://openscenegraph.org) to [Qt Quick](http://doc.qt.io/qt-5/qtquick-index.html).
