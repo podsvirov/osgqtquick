@@ -19,7 +19,7 @@ Actual development code avaliable in [develop](https://github.com/podsvirov/osgq
 #### MSYS2 Project
 
 Now it's distributed as [package](https://packages.msys2.org/base/mingw-w64-osgQtQuick-git)
-of [MSYS2](http://sourceforge.net/p/msys2/wiki/Home) project.
+of [MSYS2](https://www.msys2.org) distro.
 Type in the appropriate shell:
 
     pacman -S mingw-w64-i686-osgQtQuick
