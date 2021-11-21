@@ -16,13 +16,10 @@ Actual development code avaliable in [develop](https://github.com/podsvirov/osgq
 
 ## Prebuilt Binaries
 
-#### DaD's Project
-
-You can find some binaries at [DaD's](http://dad.podsvirov.pro)  project.
-
 #### MSYS2 Project
 
-Now it's distributed as package of [MSYS2](http://sourceforge.net/p/msys2/wiki/Home) project.
+Now it's distributed as [package](https://packages.msys2.org/base/mingw-w64-osgQtQuick-git)
+of [MSYS2](http://sourceforge.net/p/msys2/wiki/Home) project.
 Type in the appropriate shell:
 
     pacman -S mingw-w64-i686-osgQtQuick
@@ -30,6 +27,10 @@ Type in the appropriate shell:
 or
 
     pacman -S mingw-w64-x86_64-osgQtQuick
+    
+or
+
+    pacman -S mingw-w64-ucrt-x86_64-osgQtQuick
 
 ## Dependencies
 
